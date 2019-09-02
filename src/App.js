@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 //import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from './components/Login';  
+import Login from './components/login';  
 
 
 class App extends Component {
