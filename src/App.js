@@ -1,9 +1,22 @@
 import React,{Component} from "react";
 //import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Login from './components/Login';  
 
 
 class App extends Component {
+
+  constructor(props){  
+    super(props);  
+    this.state = { showLogin: false };  
+  }  
+    
+  toggleLogin() {  
+    this.setState({  
+         showLogin: !this.state.showLogin  
+    });  
+  } 
+
   render() {
     return (
          <div>
@@ -22,7 +35,15 @@ class App extends Component {
               How it works
             </a>
             <div>
-            <button type="button" class="btn btn-outline-primary">Login</button>
+            <button type="button" class="btn btn-outline-primary" onClick={this.toggleLogin.bind(this)}>Login</button>
+              {this.state.showLogin ?  
+                <Login  
+                          text='Click "Close Button" to hide login'  
+                          closeLogin={this.toggleLogin.bind(this)}  
+                />  
+                : null
+              }
+
             </div>
           </nav>
 
