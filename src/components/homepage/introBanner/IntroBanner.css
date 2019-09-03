@@ -1,0 +1,33 @@
+.max-height {
+    min-height: calc(100vh - 76px);
+    background: url("../../../asserts/images/introbanner.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  .banner {
+    color: #fff;
+    margin-top: -64px;
+    margin-top: -4rem;
+  }
+  .banner-title {
+    color: #3D3F73;
+    font-size: 50px;
+    font-size: 4rem;
+    text-align: left;
+    margin-left: 1px;
+  }
+  .banner-link {
+    font-size: 24px;
+    font-size: 1.5rem;
+    color: #000;
+    border: 3.2px solid #000;
+    border: 0.2rem solid #000;
+  }
+
+  .banner-link:hover {
+    background: #3D3F73;
+    color: #7cc1f0;
+  }
