@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Navigationbar from '../homepage/navigationbar/Navigationbar';
 
 class LoginForm extends Component {
     state = {
@@ -15,10 +16,13 @@ class LoginForm extends Component {
     
     render (){
       return (
+        <div><Navigationbar/>
         <form>
+                <h1>Login</h1>
                 <input
                 name="email" 
-                placeholder = "Email address" 
+                placeholder = "Email address"
+                // type = "email" 
                 value={this.state.email} 
                 on onChange= {e=> this.change(e)}
                 />
@@ -33,6 +37,7 @@ class LoginForm extends Component {
                 <br/>
                 <button class="btn btn-outline-primary" onClick= {e => this.onSubmit(e)}>Login</button>
             </form>
+            </div>
       );
     }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Navigationbar from '../../homepage/navigationbar/Navigationbar';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 class ValidateForm extends Component {
@@ -18,38 +19,43 @@ class ValidateForm extends Component {
     
     render (){
       return (
-        <form>
-                <input
-                name="firstName" 
-                placeholder = "Enter your first name here" 
-                value={this.state.firstName} 
-                on onChange= {e=> this.change(e)}
-                />
-                <br/>
-                <input
-                name="lastName" 
-                placeholder = "Enter your last name here" 
-                value={this.state.lastName} 
-                on onChange= {e=> this.change(e)}
-                />
-                <br/>
-                <input
-                name="NIC" 
-                placeholder = "Enter NIC Number" 
-                value={this.state.NIC} 
-                on onChange= {e=> this.change(e)}
-                />
-                <br/>
-                <input
-                name="regNo" 
-                placeholder = "Enter your Nurses Counsil Registration Number" 
-                value={this.state.NIC} 
-                on onChange= {e=> this.change(e)}
-                />
-                <br/><Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link>
-                {/* <button class="btn btn-outline-primary" onClick= {e => this.onSubmit(e)}>Request Membership</button> */}
-            </form>
-      );
+            <div>
+                <Navigationbar/>
+                <form>
+                    <h1>Request Membership</h1>
+                    <input
+                        name="firstName" 
+                        placeholder = "Enter first name" 
+                        value={this.state.firstName} 
+                        on onChange= {e=> this.change(e)}
+                    />
+                    <br/>
+                    <input
+                        name="lastName" 
+                        placeholder = "Enter last name" 
+                        value={this.state.lastName} 
+                        on onChange= {e=> this.change(e)}
+                    />
+                    <br/>
+                    <input
+                        name="NIC" 
+                        placeholder = "Enter NIC Number" 
+                        value={this.state.NIC} 
+                        on onChange= {e=> this.change(e)}
+                    />
+                    <br/>
+                    <input
+                        name="regNo" 
+                        placeholder = "Enter Nurses Counsil Registration Number" 
+                        value={this.state.regNo} 
+                        on onChange= {e=> this.change(e)}
+                    />
+                    <br/>
+                        <Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link>
+                        {/* <button class="btn btn-outline-primary" onClick= {e => this.onSubmit(e)}>Request Membership</button> */}
+                </form>
+            </div>
+        );
     }
 }
 
