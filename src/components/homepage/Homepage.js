@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navigationbar from './navigationbar/Navigationbar';
 import IntroBanner from './introBanner/IntroBanner';
 
-class Homepage extends Component{
+class HomePage extends Component{
     render(){
         return(
            <div>
@@ -14,4 +14,4 @@ class Homepage extends Component{
     }
 }
 
-export default Homepage;
+export default HomePage;

@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
-import classes from './IntroBanner.css';
+import classes from "./IntroBanner.css";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 class IntroBanner extends Component{
     render(){
@@ -11,11 +12,12 @@ class IntroBanner extends Component{
                             <h1 class="text-capitalize">
                                 <strong class="banner-title">Book Appointment with Expert Nurse in your Area</strong>
                             </h1>
+
                             <div>
-                               <span> <a href="#" class="btn banner-link my-2">I WANT A NURSE</a> </span>
-                               <span> <a href="#" class="btn banner-link my-2">I WANT A CLIENT</a> </span>
+                                <span> <Link to={"/clientForm"} class="btn banner-link my-2">I WANT A NURSE</Link> </span>
+                                <span> <Link to={"/infoForm"} class="btn banner-link my-2">I WANT A CLIENT</Link></span>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
         );
