@@ -14,7 +14,7 @@ class IntroBanner extends Component{
                             </h1>
 
                             <div>
-                                <span> <Link to={"/infoForm"} class="btn banner-link my-2">I WANT A NURSE</Link> </span>
+                                <span> <Link to={"/validateForm"} class="btn banner-link my-2">I WANT A NURSE</Link> </span>
                                 <span> <Link to={"/clientForm"} class="btn banner-link my-2">I WANT A CLIENT</Link></span>
                             </div>
                         </div>
