@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import  './Navigationbar.css';
 import mainlogo from '../../../asserts/images/logo.jpeg';
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 
 class Navigationbar extends Component{
@@ -28,7 +29,8 @@ class Navigationbar extends Component{
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
                             <a>
-                                <button type="button" class="btn btn-outline-primary" href="#"> Login</button>
+                            {/* <span> <Link to={"/infoForm"} class="btn banner-link my-2">I WANT A NURSE</Link> </span> */}
+                                <Link to={"/LoginForm"} class="btn btn-outline-primary" > Login</Link>
                             </a>
                         </li>
                     </ul>
