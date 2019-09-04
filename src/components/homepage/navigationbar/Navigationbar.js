@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import classes from './Navigationbar.css';
+import  './Navigationbar.css';
 import mainlogo from '../../../asserts/images/logo.jpeg';
 
 
@@ -27,7 +27,9 @@ class Navigationbar extends Component{
 
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"> Login </a>
+                            <a>
+                                <button type="button" class="btn btn-outline-primary" href="#"> Login</button>
+                            </a>
                         </li>
                     </ul>
 
