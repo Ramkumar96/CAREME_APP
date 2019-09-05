@@ -9,17 +9,6 @@ import ClientForm from './components/registerPage/clientRegister/clientForm';
 import LoginForm from './components/loginPage/LoginForm';
 
 class App extends Component {
-  constructor (props){
-    super(props);
-    this.state = {showInfoForm:false};
-  }
-
-  toggleInfoForm(){
-    this.setState({
-        showInfoForm: !this.state.showInfoForm
-    });
-  }
-
   render() {
     return (
       <Router>

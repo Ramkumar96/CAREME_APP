@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navigationbar from '../../homepage/navigationbar/Navigationbar';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import InfoForm from "./infoForm";
+import Popup from 'reactjs-popup';
 
 class ValidateForm extends Component {
     state = {
@@ -52,16 +53,12 @@ class ValidateForm extends Component {
                         on onChange= {e=> this.change(e)}
                     />
                     <br/>
-                        { /*<Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link> */}
-                        <button class="btn btn-outline-primary" onClick= {this.toggleInfoForm.bind(this)}>Request Membership</button>
-                        {this.state.showInfoForm ?
-                            <InfoForm
-                                text='Click "Register" to proceed'
-                                closeInfoForm={this.toggleInfoForm.bind(this)}                            
-                            />
-                            :null
-                        }
+                        { /* <Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link> */ }
                 </form>
+
+                        <Popup trigger={<button> Register </button>} position="right center">
+                            <div>Further Information Form here!</div>
+                        </Popup>
             </div>
         );
     }
