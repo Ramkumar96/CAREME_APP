@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import classes from "./IntroBanner.css";
+import classes from "./AboutBanner.css";
 //import ReactBootstrap, {Jumbotron, Button, Col,Row,Container,Grid, Panel, FormGroup} from 'react-bootstrap'
 
 
@@ -21,9 +21,9 @@ class AboutBanner extends Component{
                              </p>
                              <a href="#" class="btn btn-black text-uppercase">explore</a>
                         </div>   
-                        <div className="col-10">
-                            <div>
-                                <h1>Image Image</h1>
+                        <div className="col-10 mx-auto col-md-6 my-5 align-self-center">
+                            <div className="about-img__container">
+                                <img src= "/images/aboutus.jpg" className="img-fluid" alt="about us "/>
                             </div>
                         </div> 
                     </div>

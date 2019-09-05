@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import  './Navigationbar.css';
-import mainlogo from '../../../asserts/images/logo.jpeg';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 
@@ -15,7 +14,7 @@ class Navigationbar extends Component{
                 <nav class="navbar navbar-light bg-light">
                     
                     <a class="navbar-brand" href="#">
-                        <img src={mainlogo} width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
+                        <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
                         Care Me
                     </a>
 

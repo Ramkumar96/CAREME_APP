@@ -1,6 +1,6 @@
 .max-height {
     min-height: calc(100vh - 76px);
-    background: url("../../../asserts/images/introbanner.jpg");
+    background: url("/images/introbanner.jpg");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
