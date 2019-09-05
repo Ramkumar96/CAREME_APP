@@ -57,7 +57,9 @@ class ValidateForm extends Component {
                 </form>
 
                         <Popup trigger={<button> Register </button>} position="right center">
-                            <div>Further Information Form here!</div>
+                            <div>Further Information Form here!
+                                <button>Register</button>                                
+                            </div>
                         </Popup>
             </div>
         );
