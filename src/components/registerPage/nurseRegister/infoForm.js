@@ -5,6 +5,7 @@ class InfoForm extends Component {
       return (
         <div>
           <p>This is the information form for nurse</p>
+          <button onClick={this.props.closeInfoForm}>Register</button>
         </div>
       );
     }

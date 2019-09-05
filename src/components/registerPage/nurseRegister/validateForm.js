@@ -1,8 +1,20 @@
 import React, { Component } from "react";
 import Navigationbar from '../../homepage/navigationbar/Navigationbar';
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import InfoForm from "./infoForm";
 
 class ValidateForm extends Component {
+    constructor (props){
+        super(props);
+        this.state = {showInfoForm:false};
+    }
+
+    toggleInfoForm(){
+        this.setState({
+            showInfoForm: !this.state.showInfoForm
+        });
+    }
+
     state = {
         firstName: "",
         lastName: "",
@@ -51,8 +63,15 @@ class ValidateForm extends Component {
                         on onChange= {e=> this.change(e)}
                     />
                     <br/>
-                        <Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link>
-                        {/* <button class="btn btn-outline-primary" onClick= {e => this.onSubmit(e)}>Request Membership</button> */}
+                        { /*<Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link> */}
+                        <button class="btn btn-outline-primary" onClick= {this.toggleInfoForm.bind(this)}>Request Membership</button>
+                        {this.state.showInfoForm ?
+                            <InfoForm
+                                text='Click "Close button" to hide popup'
+                                closeInfoForm={this.toggleInfoForm.bind(this)}                            
+                            />
+                            :null
+                        }
                 </form>
             </div>
         );
