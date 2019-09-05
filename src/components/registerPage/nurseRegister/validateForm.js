@@ -4,17 +4,6 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import InfoForm from "./infoForm";
 
 class ValidateForm extends Component {
-    constructor (props){
-        super(props);
-        this.state = {showInfoForm:false};
-    }
-
-    toggleInfoForm(){
-        this.setState({
-            showInfoForm: !this.state.showInfoForm
-        });
-    }
-
     state = {
         firstName: "",
         lastName: "",
@@ -67,7 +56,7 @@ class ValidateForm extends Component {
                         <button class="btn btn-outline-primary" onClick= {this.toggleInfoForm.bind(this)}>Request Membership</button>
                         {this.state.showInfoForm ?
                             <InfoForm
-                                text='Click "Close button" to hide popup'
+                                text='Click "Register" to proceed'
                                 closeInfoForm={this.toggleInfoForm.bind(this)}                            
                             />
                             :null
