@@ -21,6 +21,7 @@ class AboutBanner extends Component{
                              </p>
                              <a href="#" class="btn btn-black text-uppercase">explore</a>
                         </div>   
+                       
                         <div className="col-10 mx-auto col-md-6 my-5 align-self-center">
                             <div className="about-img__container">
                                 <img src= "/images/aboutus.jpg" className="img-fluid" alt="about us "/>
