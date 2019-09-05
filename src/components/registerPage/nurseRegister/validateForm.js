@@ -23,44 +23,48 @@ class ValidateForm extends Component {
       return (
             <div>
                 <Navigationbar/>
+                <center>
                 <form>
+                    <br/>
                     <h1>Request Membership</h1>
+                    <br/>
                     <input
                         name="firstName" 
                         placeholder = "Enter first name" 
                         value={this.state.firstName} 
                         on onChange= {e=> this.change(e)}
                     />
-                    <br/>
+                    <br/><br/>
                     <input
                         name="lastName" 
                         placeholder = "Enter last name" 
                         value={this.state.lastName} 
                         on onChange= {e=> this.change(e)}
                     />
-                    <br/>
+                    <br/><br/>
                     <input
                         name="NIC" 
                         placeholder = "Enter NIC Number" 
                         value={this.state.NIC} 
                         on onChange= {e=> this.change(e)}
                     />
-                    <br/>
+                    <br/><br/>
                     <input
                         name="regNo" 
                         placeholder = "Enter Nurses Counsil Registration Number" 
                         value={this.state.regNo} 
                         on onChange= {e=> this.change(e)}
                     />
-                    <br/>
+                    <br/><br/>
                         { /* <Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link> */ }
                 </form>
 
-                        <Popup trigger={<button> Register </button>} position="right center">
+                        <Popup trigger={<button class="btn btn-outline-primary"> Request Membership </button>} position="right center">
                             <div>Further Information Form here!
                                 <button>Register</button>                                
                             </div>
                         </Popup>
+                </center>
             </div>
         );
     }
