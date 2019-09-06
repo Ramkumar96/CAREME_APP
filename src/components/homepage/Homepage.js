@@ -4,7 +4,7 @@ import Navigationbar from './navigationbar/Navigationbar';
 import IntroBanner from './introBanner/IntroBanner';
 import AboutBanner from './aboutBanner/AboutBanner';
 import FeaturesBanner from './featuresBanner/FeaturesBanner';
-
+import Footer from './footer/Footer';
 
 class HomePage extends Component{
     render(){
@@ -14,6 +14,7 @@ class HomePage extends Component{
                <IntroBanner/>
                <AboutBanner/>
                <FeaturesBanner/>
+               <Footer/>
            </div>
         );
     }
