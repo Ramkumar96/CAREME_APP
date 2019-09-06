@@ -56,14 +56,8 @@ class ValidateForm extends Component {
                         on onChange= {e=> this.change(e)}
                     />
                     <br/><br/>
-                        { /* <Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link> */ }
+                        <Link to={"/infoForm"} class="btn btn-outline-primary"> Request Membership</Link>
                 </form>
-
-                        <Popup trigger={<button class="btn btn-outline-primary"> Request Membership </button>} position="right center">
-                            <div>Further Information Form here!
-                                <button>Register</button>                                
-                            </div>
-                        </Popup>
                 </center>
             </div>
         );
