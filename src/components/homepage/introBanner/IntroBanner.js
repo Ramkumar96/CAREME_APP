@@ -54,12 +54,12 @@ class IntroBanner extends Component{
                                 
                                 <span>
                                     <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
-                                    <Modal visible={this.state.visible} width="50%" height="88%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                        <h1>Topic</h1>
+                                    <Modal visible={this.state.visible} width="50%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                        <h1>Register Here</h1>
                                         <Form>
                                             
                                         <Form.Group controlId="test">
-                                        <p>hello</p>
+                                        <p>Fill the Form</p>
                                             <hr/>
                                             </Form.Group>
 
@@ -115,12 +115,12 @@ class IntroBanner extends Component{
 
                                 <span>
                                     <input type="button" class="btn btn-primary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
-                                    <Modal visible={this.state.visible1} width="50%" height="68%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
-                                        
+                                    <Modal visible={this.state.visible1} width="50%" height="78%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                                    <h1>Register Here</h1>
                                         <Form>
                                             
                                         <Form.Group controlId="test">
-                                        <h1>Topic</h1>
+                                            <p>Fill the Blanks Here</p>
                                             <hr/>
                                             </Form.Group>
 
