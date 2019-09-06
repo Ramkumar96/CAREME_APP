@@ -46,11 +46,10 @@ class Navigationbar extends Component{
                     </ul>
               
                     <a>                            
-                        {/* <Link to={"/LoginForm"} class="btn btn-outline-primary" > Login</Link> */}
                         <span>
                             <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openModal()} />
                             <Modal visible={this.state.visible} width="50%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                <h1>Login</h1>
+                                <h1 align="center">Login</h1>
                                 <Form>
                                     <Form.Group controlId="emailAd">
                                         <Form.Label>E-mail Address</Form.Label>
