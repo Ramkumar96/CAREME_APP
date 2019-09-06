@@ -49,9 +49,6 @@ class IntroBanner extends Component{
                             </h1>
 
                             <div>
-                                {/* <span> <Link to={"/validateForm"} class="btn btn-primary btn-lg">I WANT A CLIENT</Link> </span>
-                                <span> <Link to={"/clientForm"} class="btn btn-secondary btn-lg">I WANT A NURSE</Link></span> */}
-                                
                                 <span>
                                     <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
                                     <Modal visible={this.state.visible} width="50%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
@@ -74,7 +71,6 @@ class IntroBanner extends Component{
                                             <Form.Control type="text" placeholder="Enter Last Name" /> 
                                             </Form.Group>
                                         </Form.Row>
-
                     
                                         <Form.Group controlId="nurseid">
                                             <Form.Label>Nurse Council Registration Number</Form.Label>
@@ -136,8 +132,6 @@ class IntroBanner extends Component{
                                             </Form.Group>
                                         </Form.Row>
 
-                    
- 
                                         <Form.Group controlId="emailAd">
                                             <Form.Label>E-mail Address</Form.Label>
                                             <Form.Control type="email" placeholder="janedoe@example.com" />

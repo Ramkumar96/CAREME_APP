@@ -2,8 +2,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import classes from "./AboutBanner.css";
-//import ReactBootstrap, {Jumbotron, Button, Col,Row,Container,Grid, Panel, FormGroup} from 'react-bootstrap'
-
 
 class AboutBanner extends Component{
     render(){
