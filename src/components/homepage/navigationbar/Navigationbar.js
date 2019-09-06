@@ -3,9 +3,30 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import  './Navigationbar.css';
 import { BrowserRouter as Router, Link } from "react-router-dom";
-
+import Modal from 'react-awesome-modal';
+import { Button, Form } from 'react-bootstrap';
 
 class Navigationbar extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible : false,
+            visible1 : false
+        }
+    }
+    
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
+
     render(){
         return(
             
@@ -25,7 +46,26 @@ class Navigationbar extends Component{
                     </ul>
               
                     <a>                            
-                        <Link to={"/LoginForm"} class="btn btn-outline-primary" > Login</Link>
+                        {/* <Link to={"/LoginForm"} class="btn btn-outline-primary" > Login</Link> */}
+                        <span>
+                            <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openModal()} />
+                            <Modal visible={this.state.visible} width="50%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                <h1>Login</h1>
+                                <Form>
+                                    <Form.Group controlId="emailAd">
+                                        <Form.Label>E-mail Address</Form.Label>
+                                        <Form.Control type="email" placeholder="janedoe@example.com" />
+                                    </Form.Group>
+
+                                    <Form.Group controlId="Password">
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control type="password" placeholder="Enter Your Password Here"/> 
+                                    </Form.Group>
+                                    <Button variant="btn btn-success" type="submit">Submit</Button>
+                                </Form>
+                            </Modal>
+                        </span>
+
                     </a>
                     
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">FIND A NURSE</button>  
