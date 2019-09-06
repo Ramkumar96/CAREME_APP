@@ -110,7 +110,7 @@ class IntroBanner extends Component{
                                 </span>
 
                                 <span>
-                                    <input type="button" class="btn btn-primary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
+                                    <input type="button" class="btn btn-secondary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
                                     <Modal visible={this.state.visible1} width="50%" height="78%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
                                     <h1>Register Here</h1>
                                         <Form>
