@@ -8,7 +8,7 @@
     position: relative;
   }
   .banner {
-    color: #fff;
+    color: black;
     margin-top: -64px;
     margin-top: -4rem;
   }
@@ -31,3 +31,5 @@
     background: #3D3F73;
     color: #7cc1f0;
   }
+
+  

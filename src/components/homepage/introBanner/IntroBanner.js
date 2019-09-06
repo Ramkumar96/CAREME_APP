@@ -9,7 +9,8 @@ class IntroBanner extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            visible : false
+            visible : false,
+            visible1 : false
         }
       }
     
@@ -24,6 +25,19 @@ class IntroBanner extends Component{
               visible : false
           });
       }
+
+
+      openModal1() {
+        this.setState({
+            visible1 : true
+        });
+    }
+  
+    closeModal1() {
+        this.setState({
+            visible1 : false
+        });
+    }
 
     render(){
         return(
@@ -100,8 +114,8 @@ class IntroBanner extends Component{
                                 </span>
 
                                 <span>
-                                    <input type="button" class="btn btn-primary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal()} />
-                                    <Modal visible={this.state.visible} width="50%" height="68%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                    <input type="button" class="btn btn-primary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
+                                    <Modal visible={this.state.visible1} width="50%" height="68%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
                                         
                                         <Form>
                                             
