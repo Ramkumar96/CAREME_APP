@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Navigationbar from '../../homepage/navigationbar/Navigationbar';
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import InfoForm from "./infoForm";
-import Popup from 'reactjs-popup';
 
 class ValidateForm extends Component {
     state = {

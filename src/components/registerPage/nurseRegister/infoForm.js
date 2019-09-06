@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Modal from 'react-awesome-modal';
+import { Button, Form, Col } from 'react-bootstrap';
 
 class InfoForm extends Component {
   constructor(props) {
@@ -26,54 +27,49 @@ class InfoForm extends Component {
       <section>
           <h1>React-Modal Examples</h1>
           <input type="button" value="Open" onClick={() => this.openModal()} />
-          <Modal visible={this.state.visible} width="30%" height="50%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-            <div class="content">
-            <h1>Register Here</h1>
+          <Modal visible={this.state.visible} width="50%" height="68%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+            <Form>
+              <Form.Row>
+                <Form.Group as={Col} controlId="FirstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control type="text" placeholder="Enter First Name" /> 
+                </Form.Group>
 
-            <form action="/" method="post">
-              
-                <div class="field">
-                  <label>
-                    First Name
-                  </label>
-                  <input type="text" />
-                </div>
+                <Form.Group as={Col} controlId="LastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control type="text" placeholder="Enter Last Name" /> 
+                </Form.Group>
+              </Form.Row>
 
-                <div class="field">
-                  <label>
-                    Last Name
-                  </label>
-                  <input type="text"/>
-                </div>
-              
+              <Form.Group controlId="emailAd">
+                <Form.Label>E-mail Address</Form.Label>
+                <Form.Control type="email" placeholder="janedoe@example.com" />
+              </Form.Group>
 
-              <div field="field">
-                  <label>
-                    Address
-                  </label>
-                  <input type="text"/>
-              </div>
+              <Form.Row>
+                <Form.Group as={Col} controlId="Password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" /> 
+                </Form.Group>
 
-              <div field="field">
-                  <label>
-                    Email
-                  </label>
-                  <input type="email"/>
-              </div>
+                <Form.Group as={Col} controlId="ConfirmPW">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control type="password" /> 
+                </Form.Group>
+              </Form.Row>
 
-              <div field="field">
-              <label>
-                    Telephone No
-                  </label>
-                  <input type="text"/>
-              </div>
+              <Form.Group controlId="homeAd">
+                <Form.Label>Address</Form.Label>
+                <Form.Control type="textarea" />
+              </Form.Group>
 
-              <button type="submit" class="button button-block">
-                Submit
-              </button>
-            </form>
+              <Form.Group controlId="telNo">
+                <Form.Label>Telephone Number</Form.Label>
+                <Form.Control type="text" />
+              </Form.Group>
 
-          </div>
+              <Button variant="primary" type="submit">Submit</Button>
+            </Form>
           </Modal>
       </section>
     );
