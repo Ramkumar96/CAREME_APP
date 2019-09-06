@@ -39,13 +39,16 @@ class IntroBanner extends Component{
                                 <span> <Link to={"/clientForm"} class="btn btn-secondary btn-lg">I WANT A NURSE</Link></span> */}
                                 
                                 <span>
-                                    <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" />
-                                </span>
-
-                                <span>
-                                    <input type="button" class="btn btn-primary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal()} />
-                                    <Modal visible={this.state.visible} width="50%" height="68%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                    <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
+                                    <Modal visible={this.state.visible} width="50%" height="88%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                        <h1>Topic</h1>
                                         <Form>
+                                            
+                                        <Form.Group controlId="test">
+                                        <p>hello</p>
+                                            <hr/>
+                                            </Form.Group>
+
                                         <Form.Row>
                                             <Form.Group as={Col} controlId="FirstName">
                                             <Form.Label>First Name</Form.Label>
@@ -58,6 +61,12 @@ class IntroBanner extends Component{
                                             </Form.Group>
                                         </Form.Row>
 
+                    
+                                        <Form.Group controlId="nurseid">
+                                            <Form.Label>Nurse Council Registration Number</Form.Label>
+                                            <Form.Control type="text" placeholder="Nurse Councile Number here*" />
+                                        </Form.Group>
+
                                         <Form.Group controlId="emailAd">
                                             <Form.Label>E-mail Address</Form.Label>
                                             <Form.Control type="email" placeholder="janedoe@example.com" />
@@ -66,23 +75,80 @@ class IntroBanner extends Component{
                                         <Form.Row>
                                             <Form.Group as={Col} controlId="Password">
                                             <Form.Label>Password</Form.Label>
-                                            <Form.Control type="password" /> 
+                                            <Form.Control type="password" placeholder="Enter Your Password Here"/> 
                                             </Form.Group>
 
                                             <Form.Group as={Col} controlId="ConfirmPW">
                                             <Form.Label>Confirm Password</Form.Label>
-                                            <Form.Control type="password" /> 
+                                            <Form.Control type="password" placeholder="Re-Enter Your Password Here" /> 
                                             </Form.Group>
                                         </Form.Row>
 
                                         <Form.Group controlId="homeAd">
                                             <Form.Label>Address</Form.Label>
-                                            <Form.Control type="textarea" />
+                                            <Form.Control type="textarea" placeholder="Address"/>
                                         </Form.Group>
 
                                         <Form.Group controlId="telNo">
                                             <Form.Label>Telephone Number</Form.Label>
-                                            <Form.Control type="text" />
+                                            <Form.Control type="text" placeholder="07########" />
+                                        </Form.Group>
+
+                                        <Button variant="primary" type="submit">Submit</Button>
+                                        </Form>
+                                    </Modal>
+                                </span>
+
+                                <span>
+                                    <input type="button" class="btn btn-primary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal()} />
+                                    <Modal visible={this.state.visible} width="50%" height="68%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                        
+                                        <Form>
+                                            
+                                        <Form.Group controlId="test">
+                                        <h1>Topic</h1>
+                                            <hr/>
+                                            </Form.Group>
+
+                                        <Form.Row>
+                                            <Form.Group as={Col} controlId="FirstName">
+                                            <Form.Label>First Name</Form.Label>
+                                            <Form.Control type="text" placeholder="Enter First Name" /> 
+                                            </Form.Group>
+
+                                            <Form.Group as={Col} controlId="LastName">
+                                            <Form.Label>Last Name</Form.Label>
+                                            <Form.Control type="text" placeholder="Enter Last Name" /> 
+                                            </Form.Group>
+                                        </Form.Row>
+
+                    
+ 
+                                        <Form.Group controlId="emailAd">
+                                            <Form.Label>E-mail Address</Form.Label>
+                                            <Form.Control type="email" placeholder="janedoe@example.com" />
+                                        </Form.Group>
+
+                                        <Form.Row>
+                                            <Form.Group as={Col} controlId="Password">
+                                            <Form.Label>Password</Form.Label>
+                                            <Form.Control type="password" placeholder="Enter Your Password Here"/> 
+                                            </Form.Group>
+
+                                            <Form.Group as={Col} controlId="ConfirmPW">
+                                            <Form.Label>Confirm Password</Form.Label>
+                                            <Form.Control type="password" placeholder="Re-Enter Your Password Here" /> 
+                                            </Form.Group>
+                                        </Form.Row>
+
+                                        <Form.Group controlId="homeAd">
+                                            <Form.Label>Address</Form.Label>
+                                            <Form.Control type="textarea" placeholder="Address"/>
+                                        </Form.Group>
+
+                                        <Form.Group controlId="telNo">
+                                            <Form.Label>Telephone Number</Form.Label>
+                                            <Form.Control type="text" placeholder="07########" />
                                         </Form.Group>
 
                                         <Button variant="primary" type="submit">Submit</Button>
