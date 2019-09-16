@@ -48,7 +48,7 @@ class Navigationbar extends Component{
                     <a>                            
                         <span>
                             <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openModal()} />
-                            <Modal visible={this.state.visible} width="50%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                            <Modal visible={this.state.visible} width="25%" height="45%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                 <h1 align="center">Login</h1>
                                 <Form>
                                     <Form.Group controlId="emailAd">

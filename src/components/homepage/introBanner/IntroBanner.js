@@ -53,16 +53,11 @@ class IntroBanner extends Component{
                                     <tr><td>
                                         <span>
                                             <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
-                                            <Modal visible={this.state.visible} width="50%" height="90%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                            <Modal visible={this.state.visible} width="50%" height="98%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <h1>Register Here</h1>
                                                 <Form>
                                                     
-                                                <Form.Group controlId="test">
-                                                <p>Fill the Form</p>
-                                                    <hr/>
-                                                    </Form.Group>
-
-                                                <Form.Row>
+                                                 <Form.Row>
                                                     <Form.Group as={Col} controlId="FirstName">
                                                     <Form.Label>First Name</Form.Label>
                                                     <Form.Control type="text" placeholder="Enter First Name" /> 
@@ -115,15 +110,9 @@ class IntroBanner extends Component{
                                     <td>
                                         <span>
                                             <input type="button" class="btn btn-secondary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
-                                            <Modal visible={this.state.visible1} width="50%" height="78%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                                            <Modal visible={this.state.visible1} width="50%" height="85%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
                                             <h1>Register Here</h1>
                                                 <Form>
-                                                    
-                                                <Form.Group controlId="test">
-                                                    <p>Fill the Blanks Here</p>
-                                                    <hr/>
-                                                    </Form.Group>
-
                                                 <Form.Row>
                                                     <Form.Group as={Col} controlId="FirstName">
                                                     <Form.Label>First Name</Form.Label>
