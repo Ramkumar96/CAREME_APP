@@ -60,7 +60,7 @@ class Navigationbar extends Component{
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control type="password" placeholder="Enter Your Password Here"/> 
                                     </Form.Group>
-                                    <Button variant="btn btn-success" type="submit">Submit</Button>
+                                    <center><Button variant="btn btn-success" type="submit">Login</Button></center>
                                 </Form>
                             </Modal>
                         </span>
