@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import classes from "./IntroBanner.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
@@ -8,26 +7,91 @@ import { Button, Form, Col } from 'react-bootstrap';
 class IntroBanner extends Component{
     constructor(props) {
         super(props);
+
+        this.onChangeNurseFirstName = this.onChangeNurseFirstName.bind(this);
+        this.onChangeNurseLastName = this.onChangeNurseLastName.bind(this);
+        this.onChangeNurseID = this.onChangeNurseID.bind(this);
+        this.onChangeNurseEmail = this.onChangeNurseEmail.bind(this);
+        this.onChangeNursePW = this.onChangeNursePW.bind(this);
+        this.onChangeNurseCPW = this.onChangeNurseCPW.bind(this);
+        this.onChangeNurseHome = this.onChangeNurseHome.bind(this);
+        this.onChangeNurseTel = this.onChangeNurseTel.bind(this);
+        this.onSubmitNurse = this.onSubmitNurse.bind(this);
+
         this.state = {
             visible : false,
             visible1 : false
         }
-      }
-    
-      openModal() {
-          this.setState({
-              visible : true
-          });
-      }
-    
-      closeModal() {
-          this.setState({
-              visible : false
-          });
-      }
+    }
 
+    onChangeNurseFirstName(e){
+        this.setState({
+            nurseFirstName = e.target.value
+        });
+    }
 
-      openModal1() {
+    onChangeNurseLastName(e){
+        this.setState({
+            nurseLastName = e.target.value
+        });
+    }
+
+    onChangeNurseID(e){
+        this.setState({
+            nurseID = e.target.value
+        });
+    }
+
+    onChangeNurseEmail(e){
+        this.setState({
+            nurseEmail = e.target.value
+        });
+    }
+
+    onChangeNursePW(e){
+        this.setState({
+            nursePW = e.target.value
+        });
+    }
+
+    onChangeNurseCPW(e){
+        this.setState({
+            nurseCPW = e.target.value
+        });
+    }
+
+    onChangeNurseHome(e){
+        this.setState({
+            nurseHome = e.target.value
+        });
+    }
+
+    onChangeNurseTel(e){
+        this.setState({
+            nurseTel = e.target.value
+        });
+    }
+
+    onSubmitNurse(e){
+        e.preventDefault();
+        this.setState({
+            visible : false
+        });
+    }
+    
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+    
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
+
+    openModal1() {
         this.setState({
             visible1 : true
         });
@@ -60,48 +124,48 @@ class IntroBanner extends Component{
                                                  <Form.Row>
                                                     <Form.Group as={Col} controlId="FirstName">
                                                     <Form.Label>First Name</Form.Label>
-                                                    <Form.Control type="text" placeholder="Enter First Name" /> 
+                                                    <Form.Control type="text" value={this.state.nurseFirstName} onChange={this.onChangeNurseFirstName} /> 
                                                     </Form.Group>
 
                                                     <Form.Group as={Col} controlId="LastName">
                                                     <Form.Label>Last Name</Form.Label>
-                                                    <Form.Control type="text" placeholder="Enter Last Name" /> 
+                                                    <Form.Control type="text" value={this.state.nurseLastName} onChange={this.onChangeNurseLastName} /> 
                                                     </Form.Group>
                                                 </Form.Row>
                             
                                                 <Form.Group controlId="nurseid">
                                                     <Form.Label>Nurse Council Registration Number</Form.Label>
-                                                    <Form.Control type="text" placeholder="Nurse Councile Number here*" />
+                                                    <Form.Control type="text" value={this.state.nurseID} onChange={this.onChangeNurseID} placeholder="Enter Sri Lanka Nurse Council Registration Number" />
                                                 </Form.Group>
 
                                                 <Form.Group controlId="emailAd">
                                                     <Form.Label>E-mail Address</Form.Label>
-                                                    <Form.Control type="email" placeholder="janedoe@example.com" />
+                                                    <Form.Control type="email" value={this.state.nurseEmail} onChange={this.onChangeNurseEmail} placeholder="janedoe@example.com" />
                                                 </Form.Group>
 
                                                 <Form.Row>
                                                     <Form.Group as={Col} controlId="Password">
                                                     <Form.Label>Password</Form.Label>
-                                                    <Form.Control type="password" placeholder="Enter Your Password Here"/> 
+                                                    <Form.Control type="password" value={this.state.nursePW} onChange={this.onChangeNursePW} /> 
                                                     </Form.Group>
 
                                                     <Form.Group as={Col} controlId="ConfirmPW">
                                                     <Form.Label>Confirm Password</Form.Label>
-                                                    <Form.Control type="password" placeholder="Re-Enter Your Password Here" /> 
+                                                    <Form.Control type="password" value={this.state.nurseCPW} onChange={this.onChangeNurseCPW} placeholder="Re-Enter Your Password Here" /> 
                                                     </Form.Group>
                                                 </Form.Row>
 
                                                 <Form.Group controlId="homeAd">
                                                     <Form.Label>Address</Form.Label>
-                                                    <Form.Control type="textarea" placeholder="Address"/>
+                                                    <Form.Control type="textarea" value={this.state.nurseHome} onChange={this.onChangeNurseHome} />
                                                 </Form.Group>
 
                                                 <Form.Group controlId="telNo">
                                                     <Form.Label>Telephone Number</Form.Label>
-                                                    <Form.Control type="text" placeholder="07########" />
+                                                    <Form.Control type="text" value={this.state.nurseTel} onChange={this.onChangeNurseTel} />
                                                 </Form.Group>
 
-                                                <Button variant="primary" type="submit">Submit</Button>
+                                                <Button variant="primary" onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
                                                 </Form>
                                             </Modal>
                                         </span>
