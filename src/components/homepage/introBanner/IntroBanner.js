@@ -3,6 +3,7 @@ import classes from "./IntroBanner.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
+import axios from './../../../../backend/node_modules/axios';
 
 class IntroBanner extends Component{
     constructor(props) {
@@ -26,54 +27,67 @@ class IntroBanner extends Component{
 
     onChangeNurseFirstName(e){
         this.setState({
-            nurseFirstName = e.target.value
+            nurseFirstName : e.target.value
         });
     }
 
     onChangeNurseLastName(e){
         this.setState({
-            nurseLastName = e.target.value
+            nurseLastName : e.target.value
         });
     }
 
     onChangeNurseID(e){
         this.setState({
-            nurseID = e.target.value
+            nurseID : e.target.value
         });
     }
 
     onChangeNurseEmail(e){
         this.setState({
-            nurseEmail = e.target.value
+            nurseEmail : e.target.value
         });
     }
 
     onChangeNursePW(e){
         this.setState({
-            nursePW = e.target.value
+            nursePW : e.target.value
         });
     }
 
     onChangeNurseCPW(e){
         this.setState({
-            nurseCPW = e.target.value
+            nurseCPW : e.target.value
         });
     }
 
     onChangeNurseHome(e){
         this.setState({
-            nurseHome = e.target.value
+            nurseHome : e.target.value
         });
     }
 
     onChangeNurseTel(e){
         this.setState({
-            nurseTel = e.target.value
+            nurseTel : e.target.value
         });
     }
 
     onSubmitNurse(e){
         e.preventDefault();
+        const obj = {
+            nurseFirstName: this.state.nurseFirstName,
+            nurseLastName: this.state.nurseLastName,
+            nurseID: this.state.nurseID,
+            nurseEmail: this.state.nurseEmail,
+            nursePW: this.state.nursePW,
+            nurseCPW: this.state.nurseCPW,
+            nurseHome: this.state.nurseHome,
+            nurseTel: this.state.nurseTel
+          };
+          axios.post('http://localhost:4000/nurseReg/add', obj)
+              .then(res => console.log(res.data));
+
         this.setState({
             visible : false
         });
