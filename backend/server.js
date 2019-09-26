@@ -6,6 +6,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./Database.js');
 const NurseRegRoutes = require('./nurseReg.route');
+const ClientRegRoutes = require('./clientReg.route');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/NurseReg', NurseRegRoutes);
+app.use('/ClientReg', ClientRegRoutes);
 
 app.listen(PORT, function(){
   console.log('Server is running on Port:',PORT);

@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5d8cae723ec4a3095c6cf2be"},"clientFirstName":"saroj","clientLastName":"udyama","clientEmail":"saroj.tac@gmail.com","clientPW":"123","clientCPW":"123","clientHome":"jgjk","clientTel":{"$numberInt":"698"},"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5d8caf0c3ec4a3095c6cf2c4"},"clientFirstName":"sumayya","clientLastName":"ziad","clientEmail":"sum@gmail.com","clientPW":"12","clientCPW":"12","clientHome":"colombo","clientTel":{"$numberInt":"123"},"__v":{"$numberInt":"0"}}

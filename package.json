@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.19.0",
     "boostrap": "^2.0.0",
     "bootstrap": "^4.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1",
     "react": "^16.9.0",
     "react-awesome-modal": "^2.0.5",
     "react-bootstrap": "^1.0.0-beta.12",
@@ -36,5 +40,21 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "Care me is a web based system that aims to improve the lives of Sri Lankans through home health nursing. Although home health nursing is a majorly sought out service island-wide, up to date there has been no organized platform in Sri Lanka to facilitate the home health nurses and those in need of the services.Care me connects clients who need medical assistance and the nurses who would like to work extra.",
+  "main": "index.js",
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ramkumar96/CAREME_APP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ramkumar96/CAREME_APP/issues"
+  },
+  "homepage": "https://github.com/Ramkumar96/CAREME_APP#readme"
 }

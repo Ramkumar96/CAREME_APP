@@ -19,6 +19,15 @@ class IntroBanner extends Component{
         this.onChangeNurseTel = this.onChangeNurseTel.bind(this);
         this.onSubmitNurse = this.onSubmitNurse.bind(this);
 
+        this.onChangeClientFirstName = this.onChangeClientFirstName.bind(this);
+        this.onChangeClientLastName = this.onChangeClientLastName.bind(this);
+        this.onChangeClientEmail = this.onChangeClientEmail.bind(this);
+        this.onChangeClientPW = this.onChangeClientPW.bind(this);
+        this.onChangeClientCPW = this.onChangeClientCPW.bind(this);
+        this.onChangeClientHome = this.onChangeClientHome.bind(this);
+        this.onChangeClientTel = this.onChangeClientTel.bind(this);
+        this.onSubmitClient = this.onSubmitClient.bind(this);
+
         this.state = {
             visible : false,
             visible1 : false
@@ -93,6 +102,73 @@ class IntroBanner extends Component{
         });
     }
     
+    //nurse details
+
+    onChangeClientFirstName(e){
+        this.setState({
+            clientFirstName : e.target.value
+        });
+    }
+
+    onChangeClientLastName(e){
+        this.setState({
+            clientLastName : e.target.value
+        });
+    }
+
+    onChangeClientEmail(e){
+        this.setState({
+            clientEmail : e.target.value
+        });
+    }
+
+    onChangeClientPW(e){
+        this.setState({
+            clientPW : e.target.value
+        });
+    }
+
+    onChangeClientCPW(e){
+        this.setState({
+            clientCPW : e.target.value
+        });
+    }
+
+    onChangeClientHome(e){
+        this.setState({
+            clientHome : e.target.value
+        });
+    }
+
+    onChangeClientTel(e){
+        this.setState({
+            clientTel : e.target.value
+        });
+    }
+
+    onSubmitClient(e){
+        e.preventDefault();
+        const obj = {
+            clientFirstName: this.state.clientFirstName,
+            clientLastName: this.state.clientLastName,
+            clientEmail: this.state.clientEmail,
+            clientPW: this.state.clientPW,
+            clientCPW: this.state.clientCPW,
+            clientHome: this.state.clientHome,
+            clientTel: this.state.clientTel
+          };
+          axios.post('http://localhost:4000/clientReg/add', obj)
+              .then(res => console.log(res.data));
+
+        this.setState({
+            visible1 : false
+        });
+    }
+
+
+
+
+
     openModal() {
         this.setState({
             visible : true
@@ -190,59 +266,59 @@ class IntroBanner extends Component{
                                             <input type="button" class="btn btn-secondary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
                                             <Modal visible={this.state.visible1} width="50%" height="85%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
                                            
-                                                <Form className="form-margin">
+                                                <Form className="form-margin"> 
                                                     <h4>Create a CareMe account</h4>
                                                     <br/>
                                                     <div class="form-group row">
                                                         <label for="firstname" class="col-sm-2 col-form-label">Frist Name</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="firstname"/>
+                                                                <input type="text" class="form-control" id="firstname" value={this.state.clientFirstName} onChange={this.onChangeClientFirstName}/>
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="lastname"/>
+                                                                <input type="text" class="form-control" id="lastname" value={this.state.clientLastName} onChange={this.onChangeClientLastName}/>
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="emailaddress" class="col-sm-2 col-form-label">E-mail</label>
                                                             <div class="col-sm-10">
-                                                                <input type="email" class="form-control" id="emailaddress"/>
+                                                                <input type="email" class="form-control" id="emailaddress" value={this.state.clientEmail} onChange={this.onChangeClientEmail}/>
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="password" class="col-sm-2 col-form-label">Password</label>
                                                             <div class="col-sm-10">
-                                                                <input type="password" class="form-control" id="password"/>
+                                                                <input type="password" class="form-control" id="password" value={this.state.clientPW} onChange={this.onChangeClientPW}/>
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="re-enter password" class="col-sm-2 col-form-label">Re-enter Password</label>
                                                             <div class="col-sm-10">
-                                                                <input type="password" class="form-control" id="repassword"/>
+                                                                <input type="password" class="form-control" id="repassword" value={this.state.clientCPW} onChange={this.onChangeClientCPW}/>
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="address" class="col-sm-2 col-form-label">Address</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="address"/>
+                                                                <input type="text" class="form-control" id="address" value={this.state.clientHome} onChange={this.onChangeClientHome}/>
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="telephone" class="col-sm-2 col-form-label">Telephone</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="telephone"/>
+                                                                <input type="text" class="form-control" id="telephone" value={this.state.clientTel} onChange={this.onChangeClientTel}/>
                                                             </div>
                                                     </div>
 
-                                                    <Button variant="primary" type="submit">Submit</Button>
+                                                    <Button variant="primary" type="submit" onClick={this.onSubmitClient.bind(this)}>Submit</Button>
 
                                                     
                                                 </Form>
