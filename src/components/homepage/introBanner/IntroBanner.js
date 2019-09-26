@@ -102,7 +102,7 @@ class IntroBanner extends Component{
         });
     }
     
-    //nurse details
+    //client details
 
     onChangeClientFirstName(e){
         this.setState({
@@ -164,10 +164,6 @@ class IntroBanner extends Component{
             visible1 : false
         });
     }
-
-
-
-
 
     openModal() {
         this.setState({
