@@ -72,7 +72,7 @@ class ProfileNavbar extends Component{
                                         <h1 align="center">LogOut</h1>
                                         <p>Do you really want to Logout?</p>
                                             <center>
-                                                <Button variant="btn btn-danger" type="submit">LogOut</Button>
+                                                <Button variant="btn btn-danger" type="submit" onClick={() => this.closeModal()}>LogOut</Button>
                                                 <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
                                             </center>
                                         
