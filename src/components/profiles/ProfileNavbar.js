@@ -20,10 +20,13 @@ class ProfileNavbar extends Component{
 
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"> How it Works </a>
+                            <a class="nav-link" href="#">profile nav bars</a>
                         </li>
                     </ul>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">FIND A NURSE</button>  
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">PR</button>  
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">MSG</button>  
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">NOT</button>  
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">LO</button>  
                 </nav>
 
              </React.Fragment>     

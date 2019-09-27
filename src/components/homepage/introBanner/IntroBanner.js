@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import classes from "./IntroBanner.css";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import "./IntroBanner.css";
+//import { BrowserRouter as Router, Link } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';

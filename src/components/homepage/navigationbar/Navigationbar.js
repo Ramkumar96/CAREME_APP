@@ -41,7 +41,7 @@ class Navigationbar extends Component{
 
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#"> How it Works </a>
+                        <Link to="/profile" >client profile</Link>
                         </li>
                     </ul>
               
