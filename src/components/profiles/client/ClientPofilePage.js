@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import './ClientProfilePage.css'
+import '../ProfilePageStyle.css'
 
 
 class ClientProfilePage extends Component{
