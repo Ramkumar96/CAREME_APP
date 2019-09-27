@@ -1,37 +1,16 @@
-
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-//import  './Navigationbar.css';
-import Modal from 'react-awesome-modal';
-import { Button, Form } from 'react-bootstrap';
+
+import Menu from '@material-ui/icons/Menu';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import ForumIcon from '@material-ui/icons/Forum';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 class ProfileNavbar extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            visible : false,
-            visible1 : false
-        }
-    }
-    
-    openModal() {
-        this.setState({
-            visible : true
-        });
-    }
-
-    closeModal() {
-        this.setState({
-            visible : false
-        });
-    }
-
-    render(){
-        return(
-            
+    render(){        
+        return(            
             <React.Fragment>
-
-<nav class="navbar navbar-light bg-light">
+                    <nav class="navbar navbar-light bg-light">
                     
                     <a class="navbar-brand" href="#">
                         <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
@@ -43,27 +22,16 @@ class ProfileNavbar extends Component{
                             <a class="nav-link" href="#"> Help </a>
                         </li>
                     </ul>
-                    <a class="nav-link" href="#"> User1234 </a>
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Edit Profile</button>  
-                    <a>                            
-                        <span>
-                            <input type="button" class="btn btn-info" value="LogOut" onClick={() => this.openModal()} />
-                            <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                <h1 align="center">LogOut</h1>
-                                <Form>
-                                    <p>Do you really want to Logout?</p>
-                                    <center>
-                                        <Button variant="btn btn-danger" type="submit">LogOut</Button>
-                                        <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
-                                    </center>
-                                </Form>
-                            </Modal>
-                        </span>
-                    </a>                    
-                </nav>
 
-             </React.Fragment>     
-      
+                    <AccountCircleIcon fontSize="large" />
+
+                    <ForumIcon fontSize="large" />
+
+                    <NotificationsActiveIcon fontSize="large" />
+
+                    <Menu fontSize="large" />                    
+                </nav>
+            </React.Fragment> 
         );
     }
 }
