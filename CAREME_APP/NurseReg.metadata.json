@@ -1,1 +1,2 @@
-{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"CAREME_APP.NurseReg"}],"uuid":"bbcedeeff70d43daacb860dec1638a20"}
+{"_id":{"$oid":"5d8f2d08fd86ff25f8bbbb98"},"nurseFirstName":"siva","nurseLastName":"Ram","nurseID":{"$numberInt":"784512"},"nurseEmail":"siva@gmail.com","nursePW":"123","nurseCPW":"123","nurseHome":"abc lane colombo","nurseTel":{"$numberLong":"947756231478"},"__v":{"$numberInt":"0"}}
+{"_id":{"$oid":"5d909856e27951390cbdd909"},"nurseFirstName":"shaan","nurseLastName":"perera","nurseID":{"$numberInt":"456123"},"nurseEmail":"abc@gnma","nursePW":"123","nurseCPW":"123","nurseHome":"12 ghad ","nurseTel":{"$numberInt":"123456"},"__v":{"$numberInt":"0"}}
