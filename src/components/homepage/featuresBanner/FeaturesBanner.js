@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import classes from "./FeaturesBanner.css";
+import "./FeaturesBanner.css";
 
 class FeaturesBanner extends Component{
     render(){

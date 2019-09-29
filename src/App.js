@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from './components/homepage/Homepage';
 import ClientMainPage from './components/profiles/client/ClientMainPage';
 import ClientList from './components/profiles/admin/ClientList';
+import NurseList from './components/profiles/admin/NurseList';
 
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
         <Route path="/" exact component={HomePage} />
         <Route path="/profile" exact component={ClientMainPage} />
         <Route path="/clientlist" exact component={ClientList} />
+        <Route path="/nurselist" exact component={NurseList} />
       </Router>
     );
   }

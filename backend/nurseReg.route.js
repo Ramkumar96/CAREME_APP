@@ -15,4 +15,15 @@ NurseRegRoutes.route('/add').post(function (req, res) {
     });
 });
 
+
+NurseRegRoutes.route('/').get(function(req, res) {
+ NurseReg.find(function(err, CAREME_APP) {
+      if (err) {
+          console.log(err);
+      } else {
+          res.json(CAREME_APP);
+      }
+  });
+});
+
 module.exports = NurseRegRoutes;

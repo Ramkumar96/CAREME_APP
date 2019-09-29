@@ -1,7 +1,7 @@
 
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import classes from "./AboutBanner.css";
+import  "./AboutBanner.css";
 
 class AboutBanner extends Component{
     render(){

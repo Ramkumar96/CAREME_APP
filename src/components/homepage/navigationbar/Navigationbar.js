@@ -39,14 +39,17 @@ class Navigationbar extends Component{
                         Care Me
                     </a>
 
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    {/* <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> */}
                         <li class="nav-item active">
                         <Link to="/profile" >client profile</Link>
                         </li>
                         <li class="nav-item active">
                             <Link to="/clientlist" >client List</Link>
                         </li>
-                    </ul>
+                        <li class="nav-item active">
+                            <Link to="/nurselist">Nurse List</Link>
+                        </li>
+                    {/* </ul> */}
               
                     <a>                            
                         <span>
