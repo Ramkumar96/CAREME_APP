@@ -7,7 +7,7 @@ class Footer extends Component{
         return(
             <div>
                 <div className="mt-5 pt-5 pb-5 footer"> 
-                   <div classNAme="container">
+                   <div className="container">
                        <div className="row mx-1"> 
                             <div className="col-lg-5 col-xs-12 about-company">
                                 <h3>Care Me</h3>

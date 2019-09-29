@@ -43,6 +43,9 @@ class Navigationbar extends Component{
                         <li class="nav-item active">
                         <Link to="/profile" >client profile</Link>
                         </li>
+                        <li class="nav-item active">
+                            <Link to="/clientlist" >client List</Link>
+                        </li>
                     </ul>
               
                     <a>                            

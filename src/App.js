@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from './components/homepage/Homepage';
 import ClientMainPage from './components/profiles/client/ClientMainPage';
+import ClientList from './components/profiles/admin/ClientList';
 
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
       <Router>
         <Route path="/" exact component={HomePage} />
         <Route path="/profile" exact component={ClientMainPage} />
+        <Route path="/clientlist" exact component={ClientList} />
       </Router>
     );
   }

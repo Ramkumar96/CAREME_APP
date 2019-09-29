@@ -15,4 +15,15 @@ ClientRegRoutes.route('/add').post(function (req, res) {
     });
 });
 
+
+ClientRegRoutes.route('/').get(function(req, res) {
+  ClientReg.find(function(err, CAREME_APP) {
+      if (err) {
+          console.log(err);
+      } else {
+          res.json(CAREME_APP);
+      }
+  });
+});
+
 module.exports = ClientRegRoutes;

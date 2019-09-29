@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 app.use('/NurseReg', NurseRegRoutes);
 app.use('/ClientReg', ClientRegRoutes);
 
+
 app.listen(PORT, function(){
   console.log('Server is running on Port:',PORT);
 });
