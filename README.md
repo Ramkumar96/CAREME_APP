@@ -20,5 +20,5 @@ Our product CareMe is a web based application that aims to connect home health n
 The clients can select the most preferred candidate out of the suggestions he receives based on the criteria and reviews, and send the nurses a request for service. The system would also facilitate communication between the two parties to ensure that both the client and the nurse are satisfied by the offers.
 
 #### Deliverables
-An online web application that allows clients in need to find nurses and vice versa
-A user guide that helps our users move through the system
+* An online web application that allows clients in need to find nurses and vice versa
+* A user guide that helps our users move through the system
