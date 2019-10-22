@@ -37,7 +37,7 @@ class ProfileNavbar extends Component{
     render(){        
         return(            
             <React.Fragment>
-                    <nav class="navbar navbar-expand navbar-light fixed-top">
+                    <nav class="navbar navbar-expand navbar-light">
                     
                         <a class="navbar-brand" href="#">
                             <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
