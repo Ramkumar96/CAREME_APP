@@ -37,50 +37,50 @@ class ProfileNavbar extends Component{
     render(){        
         return(            
             <React.Fragment>
-                    <nav class="navbar navbar-light bg-light">
+                    <nav class="navbar navbar-expand navbar-light fixed-top">
                     
-                    <a class="navbar-brand" href="#">
-                        <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
-                        Care Me
-                    </a>
+                        <a class="navbar-brand" href="#">
+                            <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
+                            Care Me
+                        </a>
 
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#"> Help </a>
-                        </li>
-                    </ul>
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#"> Help </a>
+                            </li>
+                        </ul>
 
-                    <AccountCircleIcon fontSize="large" />
+                        <AccountCircleIcon fontSize="large" />
 
-                    <ForumIcon fontSize="large" />
+                        <ForumIcon fontSize="large" />
 
-                    <NotificationsActiveIcon fontSize="large" />
+                        <NotificationsActiveIcon fontSize="large" />
 
-                    <PopupState variant="popover" popupId="demo-popup-menu">
-                        {popupState => (
-                            <React.Fragment>
-                                <MenuIcon fontSize="large" {...bindTrigger(popupState)}/>
-                                
-                                <Menu {...bindMenu(popupState)} onClickAway={popupState.close}>
-                                    <MenuItem onClick={popupState.close}>Cake</MenuItem>
-                                    <MenuItem onClick={popupState.close}>Brownies</MenuItem>
-                                    <MenuItem onClick={popupState.close}>French-Fries</MenuItem>
-                                    <MenuItem onClick={popupState.close}>Death</MenuItem>
+                        <PopupState variant="popover" popupId="demo-popup-menu">
+                            {popupState => (
+                                <React.Fragment>
+                                    <MenuIcon fontSize="large" {...bindTrigger(popupState)}/>
+                                    
+                                    <Menu {...bindMenu(popupState)} onClickAway={popupState.close}>
+                                        <MenuItem onClick={popupState.close}>Cake</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Brownies</MenuItem>
+                                        <MenuItem onClick={popupState.close}>French-Fries</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Death</MenuItem>
 
-                                    <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
-                                    <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                        <h1 align="center">LogOut</h1>
-                                        <p>Do you really want to Logout?</p>
-                                            <center>
-                                                <Button variant="btn btn-danger" type="submit" onClick={() => this.closeModal()}>LogOut</Button>
-                                                <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
-                                            </center>
-                                        
-                                    </Modal>
-                                </Menu>
-                            </React.Fragment>
-                        )}
-                    </PopupState>                  
+                                        <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
+                                        <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                            <h1 align="center">LogOut</h1>
+                                            <p>Do you really want to Logout?</p>
+                                                <center>
+                                                    <Button variant="btn btn-danger" type="submit" onClick={() => this.closeModal()}>LogOut</Button>
+                                                    <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
+                                                </center>
+                                            
+                                        </Modal>
+                                    </Menu>
+                                </React.Fragment>
+                            )}
+                        </PopupState>                  
                 </nav>
             </React.Fragment> 
         );

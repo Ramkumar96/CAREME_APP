@@ -32,7 +32,7 @@ class Navigationbar extends Component{
             
             <React.Fragment>
 
-                <nav class="navbar navbar-light bg-light">
+                <nav class="navbar navbar-light bg-light fixed-top">
                     
                     <a class="navbar-brand" href="#">
                         <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
