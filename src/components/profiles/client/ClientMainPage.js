@@ -1,14 +1,16 @@
 import React, {Component} from "react";
 import ProfileNavbar from '../ProfileNavbar';
-import ClientProfilePage from './ClientPofilePage';
+//import ClientProfilePage from './ClientPofilePage';
+import ProfilePic from "../ProfilePic";
 
 class ClientMainPage extends Component{
     render(){
         return(
             <div>
+                <div class="wrapper">
                 <ProfileNavbar/>
-                <ClientProfilePage/>
-                
+                <ProfilePic/>
+                </div>
              </div>
         );
     }
