@@ -4,10 +4,6 @@ class ProfilePic extends Component {
     render() {
         return (
             <div>
-        <div className="container-fluid">
-            <div className="row">
-
-            <div className="col-md-3">
                 {/* Profile Image */}
                 <div className="card card-primary card-outline">
                 <div className="card-body box-profile">
@@ -26,8 +22,7 @@ class ProfilePic extends Component {
                     <li className="list-group-item">
                         <b>Friends</b> <a className="float-right">13,287</a>
                     </li>
-                    </ul>
-                    <a href="#" className="btn btn-primary btn-block"><b>Follow</b></a>
+                    </ul>                   
                 </div>
                 {/* /.card-body */}
                 </div>
@@ -63,9 +58,6 @@ class ProfilePic extends Component {
                 {/* /.card-body */}
                 </div>
                 {/* /.card */}
-        </div>
-            </div>
-        </div>
     </div> 
         );
     }

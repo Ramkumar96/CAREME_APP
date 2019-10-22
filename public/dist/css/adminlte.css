@@ -4610,9 +4610,6 @@ input[type="button"].btn-block {
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
-.pad{
-  padding: top 100;px;
-}
 
 .card > hr {
   margin-right: 0;
