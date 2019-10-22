@@ -8,6 +8,7 @@ import Footer from './footer/Footer';
 
 class HomePage extends Component{
     render(){
+        
         return(
            <div>
                <Navigationbar/>
