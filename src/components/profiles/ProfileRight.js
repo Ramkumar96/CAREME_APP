@@ -33,33 +33,20 @@ class ProfileRight extends Component {
                 {/* /.card */}
 
 
-                {/*First Card in Right Side*/}
+                {/*Seoond Card in Right Side*/}
                 <div className="card card-primary">
-                    {/* <div className="card-header">
-                    <h3 className="card-title">About Me</h3>
+                    <div className="card-header text-center">
+                    <h3 className="card-title text-center"><strong>Verifications</strong></h3>
                     </div>
-                    /.card-header */}
-
+                    {/* /.card-header */}
                     <div className="card-body">
-                    <strong><i className="fas fa-book mr-1" /> Education</strong>
-                    <p className="text-muted">
-                        B.S. in Computer Science from the University of Tennessee at Knoxville
-                    </p>
+                    <strong><i className="fas fa-email mr-1" /> Email</strong>
                     <hr />
-                    <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                    <p className="text-muted">Malibu, California</p>
+                    <strong><i className="fas fa-mobile mr-1" /> Phone</strong>
                     <hr />
-                    <strong><i className="fas fa-pencil-alt mr-1" /> Skills</strong>
-                    <p className="text-muted">
-                        <span className="tag tag-danger">UI Design</span>
-                        <span className="tag tag-success">Coding</span>
-                        <span className="tag tag-info">Javascript</span>
-                        <span className="tag tag-warning">PHP</span>
-                        <span className="tag tag-primary">Node.js</span>
-                    </p>
+                    <strong><i className="fas fa-pencil-alt mr-1" />NIC</strong>
                     <hr />
-                    <strong><i className="far fa-file-alt mr-1" /> Notes</strong>
-                    <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                    <strong><i className="far fa-file-alt mr-1" />Reg No</strong>
                     </div>
                     {/* /.card-body */}
                 </div>
