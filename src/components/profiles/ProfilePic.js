@@ -4,30 +4,26 @@ class ProfilePic extends Component {
     render() {
         return (
             <div>
-        <div className="container-fluid">
-            <div className="row">
-
-            <div className="col-md-3">
                 {/* Profile Image */}
                 <div className="card card-primary card-outline">
                 <div className="card-body box-profile">
                     <div className="text-center">
                     <img className="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture" />
                     </div>
-                    <h3 className="profile-username text-center">Nina Mcintire</h3>
-                    <p className="text-muted text-center">Software Engineer</p>
-                    <ul className="list-group list-group-unbordered mb-3">
+                    <h3 className="profile-username text-center">kushal Mendis</h3>
+                    {/* <p className="text-muted text-center">Software Engineer</p> */}
+
+                    <ul className="list-group list-group-unbordered mb-3 text-center">
                     <li className="list-group-item">
-                        <b>Followers</b> <a className="float-right">1,322</a>
+                        <h6 className="text-center">@username</h6>
                     </li>
                     <li className="list-group-item">
-                        <b>Following</b> <a className="float-right">543</a>
+                        <h6 className="text-center">Member since 2015</h6>
                     </li>
-                    <li className="list-group-item">
-                        <b>Friends</b> <a className="float-right">13,287</a>
+                    <li className="list-group-item text-center">
+                        <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
                     </li>
-                    </ul>
-                    <a href="#" className="btn btn-primary btn-block"><b>Follow</b></a>
+                    </ul>                   
                 </div>
                 {/* /.card-body */}
                 </div>
@@ -42,19 +38,17 @@ class ProfilePic extends Component {
                 <div className="card-body">
                     <strong><i className="fas fa-book mr-1" /> Education</strong>
                     <p className="text-muted">
-                    B.S. in Computer Science from the University of Tennessee at Knoxville
+                    B.S. in Nursing from the University of Peradeniya
                     </p>
                     <hr />
                     <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                    <p className="text-muted">Malibu, California</p>
+                    <p className="text-muted">Nugegoda,Colombo</p>
                     <hr />
                     <strong><i className="fas fa-pencil-alt mr-1" /> Skills</strong>
                     <p className="text-muted">
-                    <span className="tag tag-danger">UI Design</span>
-                    <span className="tag tag-success">Coding</span>
-                    <span className="tag tag-info">Javascript</span>
-                    <span className="tag tag-warning">PHP</span>
-                    <span className="tag tag-primary">Node.js</span>
+                    <span className="tag tag-primary">care</span>
+                    <span className="tag tag-primary">injection</span>
+                    <span className="tag tag-primary">medicine</span>
                     </p>
                     <hr />
                     <strong><i className="far fa-file-alt mr-1" /> Notes</strong>
@@ -63,9 +57,6 @@ class ProfilePic extends Component {
                 {/* /.card-body */}
                 </div>
                 {/* /.card */}
-        </div>
-            </div>
-        </div>
     </div> 
         );
     }
