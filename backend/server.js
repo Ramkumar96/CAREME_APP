@@ -1,7 +1,3 @@
-// creating an Express server,
-//  attaching the cors and body-parser middleware and 
-//  making the server listening on port 4000
-
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
