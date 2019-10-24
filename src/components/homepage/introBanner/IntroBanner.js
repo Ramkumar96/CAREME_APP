@@ -92,9 +92,10 @@ class IntroBanner extends Component{
             nursePW: this.state.nursePW,
             nurseCPW: this.state.nurseCPW,
             nurseHome: this.state.nurseHome,
-            nurseTel: this.state.nurseTel
+            nurseTel: this.state.nurseTel,
+            userID : 0
           };
-          axios.post('http://localhost:4000/nurseReg/add', obj)
+          axios.post('http://localhost:4000/user/add', obj)
               .then(res => console.log(res.data));
 
         this.setState({
@@ -163,9 +164,10 @@ class IntroBanner extends Component{
             clientPW: this.state.clientPW,
             clientCPW: this.state.clientCPW,
             clientHome: this.state.clientHome,
-            clientTel: this.state.clientTel
+            clientTel: this.state.clientTel,
+            userID: 1
           };
-          axios.post('http://localhost:4000/clientReg/add', obj)
+          axios.post('http://localhost:4000/user/add', obj)
               .then(res => console.log(res.data));
 
         this.setState({

@@ -5,8 +5,7 @@ const PORT = 4000;
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./Database.js');
-const NurseRegRoutes = require('./nurseReg.route');
-const ClientRegRoutes = require('./clientReg.route');
+const userRoute = require('./user.route');
 
 //connecting database
 mongoose.Promise = global.Promise;
@@ -20,9 +19,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.use('/NurseReg', NurseRegRoutes);
-app.use('/ClientReg', ClientRegRoutes);
-
+app.use('/user',userRoute);
 
 app.listen(PORT, function(){
   console.log('Server is running on Port:',PORT);
