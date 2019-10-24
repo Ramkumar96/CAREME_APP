@@ -98,6 +98,14 @@ class IntroBanner extends Component{
               .then(res => console.log(res.data));
 
         this.setState({
+            nurseFirstName: '',
+            nurseLastName: '',
+            nurseID: '',
+            nurseEmail: '',
+            nursePW: '',
+            nurseCPW: '',
+            nurseHome: '',
+            nurseTel: '',
             visible : false
         });
     }
@@ -161,6 +169,13 @@ class IntroBanner extends Component{
               .then(res => console.log(res.data));
 
         this.setState({
+            clientFirstName: '',
+            clientLastName: '',
+            clientEmail: '',
+            clientPW: '',
+            clientCPW: '',
+            clientHome: '',
+            clientTel: '',
             visible1 : false
         });
     }
