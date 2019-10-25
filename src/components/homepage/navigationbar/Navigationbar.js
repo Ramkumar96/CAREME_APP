@@ -28,12 +28,9 @@ class Navigationbar extends Component{
     }
 
     render(){
-        return(
-            
+        return(            
             <React.Fragment>
-
                 <nav class="navbar navbar-light bg-light">
-                    
                     <a class="navbar-brand" href="#">
                         <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/>
                         Care Me
@@ -70,15 +67,10 @@ class Navigationbar extends Component{
                                 </Form>
                             </Modal>
                         </span>
-
                     </a>
-                    
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">FIND A NURSE</button>  
                 </nav>
-
-             </React.Fragment>     
-            
-            
+            </React.Fragment>     
         );
     }
 }
