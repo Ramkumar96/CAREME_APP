@@ -1,6 +1,7 @@
-
 import React, { Component } from "react";
 import "./Footer.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin, faGithub, faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
 
 class Footer extends Component{
     render(){
@@ -40,12 +41,11 @@ class Footer extends Component{
                             <div class="col-lg-4 col-xs-12 location">
                             <h4 class="mt-lg-0 mt-sm-4">Follow Care Me</h4>
                             <ul>
-                                <li> <a href="#"><i class="fa fa-facebook-square mr-1"></i></a></li>
-                                <li> <a href="#"><i class="fa fa-linkedin-square"></i></a> </li>
-                                <li> <a href="#"><i class="fa fa-instagram"></i></a></li>
-                                <p> Cool  </p>
-                                <p>facebook</p>
-                                <p>instragm</p>
+                            <a href="https://www.linkedin.com/"><FontAwesomeIcon icon={faLinkedin} size="4x"/></a>
+                            <a href="https://github.com/"><FontAwesomeIcon icon={faGithub} size="4x"/></a>
+                            <a href="https://facebook.com/"><FontAwesomeIcon icon={faFacebookSquare} size="4x" /></a>
+
+        
 
                                     
                             </ul>
