@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-const ClientReg = props => (
+const UserReg = props => (
     <tr>
         <td>{props.clientlist.clientFirstName}</td>
         <td>{props.clientlist.clientLastName}</td>
@@ -25,7 +25,7 @@ export default class ClientList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/clientReg/')
+        axios.get('http://localhost:4000/User/')
             .then(response => {
                 this.setState({ CAREME_APP: response.data });
             })
@@ -36,7 +36,7 @@ export default class ClientList extends Component {
 
     Clients() {
         return this.state.CAREME_APP.map(function( currentlist, i){
-            return <ClientReg clientlist={currentlist} key={i} />;
+            return <UserReg clientlist={currentlist} key={i} />;
         })
     }
 
