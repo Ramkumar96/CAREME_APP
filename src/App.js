@@ -7,6 +7,9 @@ import ClientMainPage from './components/profiles/client/ClientMainPage';
 import ClientList from './components/profiles/admin/ClientList';
 import NurseList from './components/profiles/admin/NurseList';
 import NurseListMain from "./components/list/NurseListMain";
+import nurseEditMain from './components/profiles/edit/nurseEditMain';
+
+
 
 
 class App extends Component {
@@ -18,6 +21,7 @@ class App extends Component {
         <Route path="/clientlist" exact component={ClientList} />
         <Route path="/nurselist" exact component={NurseList} />
         <Route path="/nursemainlist" exact component={NurseListMain}/>
+        <Route path="/nursemainedit" exact component={nurseEditMain}/>
       </Router>
     );
   }

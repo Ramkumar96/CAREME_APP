@@ -3,6 +3,7 @@ import Navigationbar from '../homepage/navigationbar/Navigationbar';
 import NurseListProfile from './NurseListProfile';
 import axios from 'axios';
 
+
 /*import NurseProfilePage from './NursePofilePage';
 */
 
@@ -38,6 +39,7 @@ class NurseListMain extends Component{
         return(
             <div>
                 <Navigationbar/>
+                
 
         
                     {nurse}
