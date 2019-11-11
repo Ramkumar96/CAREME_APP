@@ -20,7 +20,7 @@ return (
                 <div className="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                 <div className="card bg-light">
                     <div className="card-header text-muted border-bottom-0">
-                    <b>Nurse ID</b> {this.props.nurse_id}
+                    
                     </div>
                     <div className="card-body pt-0">
                     <div className="row">
