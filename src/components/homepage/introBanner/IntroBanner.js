@@ -4,6 +4,7 @@ import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
+import classnames from 'classnames';
 
 class IntroBanner extends Component{
     constructor(props) {
@@ -29,6 +30,7 @@ class IntroBanner extends Component{
         this.onSubmitClient = this.onSubmitClient.bind(this);
 
         this.state = {
+            errors: {},
             visible : false,
             visible1 : false
         }
@@ -95,8 +97,12 @@ class IntroBanner extends Component{
             nurseTel: this.state.nurseTel,
             userID : 0
           };
+
           axios.post('http://localhost:4000/user/add', obj)
-              .then(res => console.log(res.data));
+          .then(
+            () => {},
+            ({ data }) => this.setState({ errors: data})
+        );
 
         this.setState({
             nurseFirstName: '',
@@ -107,6 +113,7 @@ class IntroBanner extends Component{
             nurseCPW: '',
             nurseHome: '',
             nurseTel: '',
+            errors: {},
             visible : false
         });
     }
@@ -207,6 +214,7 @@ class IntroBanner extends Component{
     }
 
     render(){
+        const { errors } = this.state;
         return(
                 <div class="container-fluid">
                     <div class="row max-height justify-content-center align-items-center">
@@ -226,8 +234,11 @@ class IntroBanner extends Component{
                                                     
                                                  <Form.Row>
                                                     <Form.Group as={Col} controlId="FirstName">
+                                                    <div className={classnames("form-group", { 'has-error': errors.nurseFirstName })}>
                                                     <Form.Label>First Name</Form.Label>
-                                                    <Form.Control type="text" value={this.state.nurseFirstName} onChange={this.onChangeNurseFirstName} /> 
+                                                    <Form.Control type="text" value={this.state.nurseFirstName} onChange={this.onChangeNurseFirstName} />
+                                                    {errors.nurseFirstName && <span className="help-block">{errors.nurseFirstName}</span>}
+                                                    </div>
                                                     </Form.Group>
 
                                                     <Form.Group as={Col} controlId="LastName">
