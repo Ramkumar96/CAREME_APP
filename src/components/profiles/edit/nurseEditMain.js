@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navigationbar from '../../homepage/navigationbar/Navigationbar';
-import nurseEditform from './nurseEditform';
+import NurseEditform from './nurseEditform';
 import { BrowserRouter as Router, Link } from "react-router-dom";
 
 class nurseEditMain extends Component {
@@ -8,7 +8,7 @@ class nurseEditMain extends Component {
         return (
             <div>
                 <Navigationbar />
-                <nurseEditform />                
+                <NurseEditform />                
             </div>
         );
     }
