@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 
-
-
-
-
-
 class nurseEditform extends Component {
     render() {
         return (
@@ -71,10 +66,6 @@ class nurseEditform extends Component {
                       <option>Over 10+ Years</option>
                     </select>
                   </div>
-
-
-          
-
 
             <form role="form">
                 <label>Skill Category</label>
