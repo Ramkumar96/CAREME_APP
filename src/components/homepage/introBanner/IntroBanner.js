@@ -207,6 +207,7 @@ class IntroBanner extends Component{
     }
 
     render(){
+        
         return(
                 <div class="container-fluid">
                     <div class="row max-height justify-content-center align-items-center">
@@ -222,53 +223,102 @@ class IntroBanner extends Component{
                                             <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
                                             <Modal visible={this.state.visible} width="50%" height="98%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <h1>Register Here</h1>
-                                                <Form>
-                                                    
+                                                <Form >                                                    
                                                  <Form.Row>
-                                                    <Form.Group as={Col} controlId="FirstName">
+                                                    <Form.Group as={Col} controlId="validationCustom01">
                                                     <Form.Label>First Name</Form.Label>
-                                                    <Form.Control type="text" value={this.state.nurseFirstName} onChange={this.onChangeNurseFirstName} /> 
+                                                    <Form.Control
+                                                        required 
+                                                        type="text" 
+                                                        value={this.state.nurseFirstName} 
+                                                        onChange={this.onChangeNurseFirstName} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
 
-                                                    <Form.Group as={Col} controlId="LastName">
+                                                    <Form.Group as={Col} controlId="validationCustom02">
                                                     <Form.Label>Last Name</Form.Label>
-                                                    <Form.Control type="text" value={this.state.nurseLastName} onChange={this.onChangeNurseLastName} /> 
+                                                    <Form.Control 
+                                                        required
+                                                        type="text" 
+                                                        value={this.state.nurseLastName} 
+                                                        onChange={this.onChangeNurseLastName} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
                                                 </Form.Row>
                             
-                                                <Form.Group controlId="nurseid">
+                                                <Form.Group controlId="validationCustom03">
                                                     <Form.Label>Nurse Council Registration Number</Form.Label>
-                                                    <Form.Control type="text" value={this.state.nurseID} onChange={this.onChangeNurseID} placeholder="Enter Sri Lanka Nurse Council Registration Number" />
+                                                    <Form.Control 
+                                                        required
+                                                        type="text" 
+                                                        value={this.state.nurseID} 
+                                                        onChange={this.onChangeNurseID} 
+                                                        placeholder="Enter Sri Lanka Nurse Council Registration Number" 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
-                                                <Form.Group controlId="emailAd">
+                                                <Form.Group controlId="formGridEmail">
                                                     <Form.Label>E-mail Address</Form.Label>
-                                                    <Form.Control type="email" value={this.state.nurseEmail} onChange={this.onChangeNurseEmail} placeholder="janedoe@example.com" />
+                                                    <Form.Control 
+                                                        required
+                                                        type="email" 
+                                                        value={this.state.nurseEmail} 
+                                                        onChange={this.onChangeNurseEmail} 
+                                                        placeholder="janedoe@example.com" 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
                                                 <Form.Row>
-                                                    <Form.Group as={Col} controlId="Password">
+                                                    <Form.Group as={Col} controlId="formGridPassword01">
                                                     <Form.Label>Password</Form.Label>
-                                                    <Form.Control type="password" value={this.state.nursePW} onChange={this.onChangeNursePW} /> 
+                                                    <Form.Control 
+                                                        required
+                                                        type="password" 
+                                                        value={this.state.nursePW} 
+                                                        onChange={this.onChangeNursePW} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
 
-                                                    <Form.Group as={Col} controlId="ConfirmPW">
+                                                    <Form.Group as={Col} controlId="formGridPassword02">
                                                     <Form.Label>Confirm Password</Form.Label>
-                                                    <Form.Control type="password" value={this.state.nurseCPW} onChange={this.onChangeNurseCPW} placeholder="Re-Enter Your Password Here" /> 
+                                                    <Form.Control 
+                                                        required
+                                                        type="password" 
+                                                        value={this.state.nurseCPW} 
+                                                        onChange={this.onChangeNurseCPW} 
+                                                        placeholder="Re-Enter Your Password Here" 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
                                                 </Form.Row>
 
-                                                <Form.Group controlId="homeAd">
+                                                <Form.Group controlId="validationCustom04">
                                                     <Form.Label>Address</Form.Label>
-                                                    <Form.Control type="textarea" value={this.state.nurseHome} onChange={this.onChangeNurseHome} />
+                                                    <Form.Control required
+                                                        type="textarea" 
+                                                        value={this.state.nurseHome} 
+                                                        onChange={this.onChangeNurseHome} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
-                                                <Form.Group controlId="telNo">
+                                                <Form.Group controlId="validationCustom05">
                                                     <Form.Label>Telephone Number</Form.Label>
-                                                    <Form.Control type="text" value={this.state.nurseTel} onChange={this.onChangeNurseTel} />
+                                                    <Form.Control 
+                                                        required
+                                                        type="text" 
+                                                        value={this.state.nurseTel} 
+                                                        onChange={this.onChangeNurseTel} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
-                                                <Button variant="primary" onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
+                                                <Button type="submit" variant="primary" onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
                                                 </Form>
                                             </Modal>
                                         </span>
@@ -345,6 +395,7 @@ class IntroBanner extends Component{
                 </div>
         );
     }
-}
-
+       
+    }
+    
 export default IntroBanner;
