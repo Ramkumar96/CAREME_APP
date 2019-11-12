@@ -8,7 +8,7 @@ import NurseMainPage from './components/profiles/nurse/NurseMainPage';
 import ClientList from './components/profiles/admin/ClientList';
 import NurseList from './components/profiles/admin/NurseList';
 import NurseListMain from "./components/list/NurseListMain";
-import nurseEditMain from './components/profiles/edit/nurseEditMain';
+import nurseEditMain from "./components/profiles/edit/nurseEditMain"
 
 
 

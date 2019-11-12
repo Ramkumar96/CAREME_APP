@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import NurseMainPage from '../nurse/NurseMainPage'
+
 
 class nurseEditform extends Component {
     render() {
@@ -15,7 +17,7 @@ class nurseEditform extends Component {
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a href="#">Home</a></li>
+              <li className="breadcrumb-item"><a href="/nurseprofile">Profile</a></li>
               <li className="breadcrumb-item active">General Form</li>
             </ol>
           </div>

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ProfileNavbar from '../ProfileNavbar';
 import ProfilePic from "../ProfilePic";
-import ProfileInfo from "../ProfileInfo";
+import NurseProfileInfo from "./nurseProfileInfo";
 import ProfileRight from "../ProfileRight";
 
 class NurseMainPage extends Component{
@@ -18,7 +18,7 @@ class NurseMainPage extends Component{
                             <ProfilePic/>
                         </div>
                         <div className="col-lg-6">
-                            <ProfileInfo/>
+                            <NurseProfileInfo/>
                         </div>
                         <div className="col-lg-3">
                             <ProfileRight/>
