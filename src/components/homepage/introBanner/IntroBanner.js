@@ -156,8 +156,6 @@ class IntroBanner extends Component{
     }
 
     render(){
-        const isValidnursePW = this.state.nursePW > 6;
-        
         return(
                 <div class="container-fluid">
                     <div class="row max-height justify-content-center align-items-center">
