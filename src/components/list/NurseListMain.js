@@ -30,8 +30,8 @@ class NurseListMain extends Component{
 
     render(){
         let nurse = this.state.CAREME_APP.map(nurse => {
-            return <NurseListProfile fname={nurse.nurseFirstName}
-            lname={nurse.nurseLastName} 
+            return <NurseListProfile fname={nurse.FirstName}
+            lname={nurse.LastName} 
             nurse_id={nurse.nurseID}
             key={nurse._id}
         />})
