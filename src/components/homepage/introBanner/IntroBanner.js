@@ -4,6 +4,7 @@ import { BrowserRouter as Router,Link,Redirect } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
+import validateAll from 'indicative/validator';
 
 class IntroBanner extends Component{
     constructor(props) {
@@ -86,10 +87,30 @@ class IntroBanner extends Component{
             Home: this.state.Home,
             Tel: this.state.Tel,
             userID : 0
-          };
-          axios.post('http://localhost:4000/user/add', obj)
-              .then(res => console.log(res.data));
+        };
 
+        const data = this.state;
+        const rules = {
+            FirstName: 'required|string',
+            LastName: 'required|string',
+            nurseID: 'required|number',
+            Email: 'required|email',
+            PW: 'required|string|min:6|confirmed',
+            Home: 'required|string',
+            Tel: 'required|number'
+        };
+        
+        validateAll ( data, rules )
+            .then(() => {
+                console.log('success')
+            })
+            .catch(errors => {
+                console.log(errors);
+            })
+
+        axios.post('http://localhost:4000/user/add', obj)
+            .then(res => console.log(res.data));
+              
         this.setState({
             FirstName: '',
             LastName: '',
