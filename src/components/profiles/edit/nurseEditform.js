@@ -1,88 +1,8 @@
 import React, { Component } from 'react';
 import NurseMainPage from '../nurse/NurseMainPage'
-import { Button, Form, Col } from 'react-bootstrap';
-import axios from 'axios';
 
 
 class nurseEditform extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.onChangeNurseLocation = this.onChangeNurseLocation.bind(this);
-    this.onChangeNurseUni      = this.onChangeNurseUni.bind(this);
-    this.onChangeNurseExp     = this.onChangeNurseExp.bind(this);
-    this.onChangeNurseSkill      = this.onChangeNurseSkill.bind(this);
-    this.onSubmitNurse = this.onSubmitNurse.bind(this);
-
-
-
-    this.state = {
-        NurseLocation: '',
-        NurseUni: '',
-        NurseExp: '',
-        NurseSkill: ''
-    }
-}
-
-/*componentDidMount() {
-  axios.get('http://localhost:4000/nurse_edit/'+this.props.match.params.id)
-      .then(response => {
-          this.setState({ 
-        NurseLocation: response.data.NurseLocation,
-        NurseUni: response.data.NurseUni,
-        NurseExp: response.data.NurseExp,
-        NurseSkill: response.data.NurseSkill });
-
-        
-      })
-      .catch(function (error) {
-          console.log(error);
-      })
-}
-*/
-
-
-
-onChangeNurseLocation(e){
-  this.setState({
-      NurseLocation : e.target.value
-  });
-}
-
-onChangeNurseUni(e){
-  this.setState({
-      NurseUni : e.target.value
-  });
-}
-
-onChangeNurseExp(e){
-  this.setState({
-      NurseExp : e.target.value
-  });
-}
-
-onChangeNurseSkill(e){
-  this.setState({
-      NurseSkill : e.target.value
-  });
-}
-
-onSubmitNurse(e) {
-  e.preventDefault();
-  const obj = {
-    NurseLocation: this.state.NurseLocation,
-    NurseUni: this.state.NurseUni,
-    NurseExp: this.state.NurseExp,
-    NurseSkill: this.state.NurseSkill
-  };
-
-  axios.post('http://localhost:4000/nurse_edit'+this.props.match.params.id, obj)
-  .then(res => console.log(res.data));
-
-this.props.history.push('/index');
-}
-
     render() {
         return (
       <div>
@@ -109,7 +29,7 @@ this.props.history.push('/index');
   <div className="container-fluid">
     <div className="row">
       {/* left column */}
-      <div className="col-md-9">
+      <div className="col-md-6">
         {/* general form elements */}
         <div className="card card-primary">
           <div className="card-header">
@@ -117,23 +37,15 @@ this.props.history.push('/index');
           </div>
           {/* /.card-header */}
           {/* form start */}
-          <form className="form-margin">
+          <form role="form">
             <div className="card-body">
-            <div className="form-group">
-                    <label>Select Your Location</label>
-                    <select title="location" className="form-control" value={this.state.NurseLocation} onChange={this.onChangeNurseLocation}>
-                      <option value="Colombo">Colombo</option>
-                      <option value="Gampaha">Gampaha</option>
-                      <option value="Kaluthara">Kaluthara</option>
-                      <option value="Kandy">Kandy</option>
-                      <option value="Galle">Galle</option>
-                      <option value="Mathara">Mathara</option>
-                      <option value="Kurunegala">Kurunegala</option>
-                    </select>
-                  </div>
               <div className="form-group">
-                <label>Studied At</label>
-                <input type="text" title="University name" class="form-control" id="uni" value={this.state.NurseUni} onChange={this.onChangeNurseUni} placeholder="University of ######" />
+                <label htmlFor="exampleInputEmail1">Email address</label>
+                <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1">Studied At</label>
+                <input type="text" className="form-control" id="exampleInputPassword1" placeholder="University of Colombo" />
               </div>
               <div className="form-group">
                 <label htmlFor="exampleInputFile">Update your Profile Picture</label>
@@ -149,17 +61,17 @@ this.props.history.push('/index');
 
                 <div className="form-group">
                     <label>Carrier Experience</label>
-                    <select className="form-control" value={this.state.NurseExp} onChange={this.onChangeNurseExp}>
-                      <option value="1-2">1-2 Years</option>
-                      <option value="3-4">3-4 Year</option>
-                      <option value="5-10">5-10 Year</option>
-                      <option value="10+">Over 10+ Years</option>
+                    <select multiple className="form-control">
+                      <option>1-2 Years</option>
+                      <option>3-4 Year</option>
+                      <option>5-10 Year</option>
+                      <option>Over 10+ Years</option>
                     </select>
                   </div>
 
             <form role="form">
                 <label>Skill Category</label>
-              <div className="row" value={this.state.NurseSkill} onChange={this.onChangeNurseSkill}>
+              <div className="row">
                 <div className="col-sm-6">
                   {/* checkbox */}
                   <div className="form-group">
@@ -200,7 +112,7 @@ this.props.history.push('/index');
             </div>
             {/* /.card-body */}
             <div className="card-footer">
-              <button type="submit" className="btn btn-primary"  onClick={this.onSubmitNurse.bind(this)}>Submit</button>
+              <button type="submit" className="btn btn-primary">Submit</button>
             </div>
           </form>
         </div>

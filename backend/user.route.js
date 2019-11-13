@@ -16,12 +16,6 @@ UserRegRoutes.route('/add').post(function (req, res) {
     });
 });
 
-
-UserRegRoutes.route('/').get(function(req, res) {
- UserReg.find({userID:0 },function(err, CAREME_APP) {
-      if (err) {
-          console.log(err);
-
 //Login
 UserRegRoutes.route('/login').post(function (req, res) {
   console.log(req.body)
