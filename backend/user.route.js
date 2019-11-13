@@ -17,7 +17,7 @@ UserRegRoutes.route('/add').post(function (req, res) {
 
 
 UserRegRoutes.route('/').get(function(req, res) {
- UserReg.find(function(err, CAREME_APP) {
+ UserReg.find({userID:0 },function(err, CAREME_APP) {
       if (err) {
           console.log(err);
       } else {

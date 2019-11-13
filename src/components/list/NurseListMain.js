@@ -26,24 +26,48 @@ class NurseListMain extends Component{
             })
     }
 
+    nursesort = (event) =>{
+       let ab = this.state.CAREME_APP;
+       const selector = event.target.value;
+
+       if(selector === "1"){
+           ab.sort((a,b) => (a.nurseID < b.nurseID) ? 1 : -1);
+           this.setState({CAREME_APP: ab});
+       }
+
+       else if(selector === "2"){
+        ab.sort((a,b) => (a.age > b.age) ? -1 : 1);
+        this.setState({CAREME_APP: ab});
+    }
+    }
 
 
     render(){
+        
         let nurse = this.state.CAREME_APP.map(nurse => {
             return <NurseListProfile fname={nurse.nurseFirstName}
             lname={nurse.nurseLastName} 
             nurse_id={nurse.nurseID}
             key={nurse._id}
+            type={nurse.userID}
         />})
 
         return(
-            <div>
+            <div align="justify">
                 <Navigationbar/>
-                
 
-        
-                    {nurse}
-            
+                <div className="form-group">
+                    <label>Select Your Location</label>
+                    <select onChange={(event)=>this.nursesort(event)} title="location" className="form-control" value={this.state.NurseLocation} onChange={this.onChangeNurseLocation}>
+                    <option value={2}>Age</option>
+                      <option value={1}>NurseID</option>
+                      
+                    </select>
+                  </div>
+                
+               
+                {nurse}
+    
                 
                  
                 
