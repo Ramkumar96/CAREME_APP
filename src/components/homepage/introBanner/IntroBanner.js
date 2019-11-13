@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./IntroBanner.css";
-//import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router,Link,Redirect } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
@@ -61,6 +61,8 @@ class IntroBanner extends Component{
     onChangeNursePW(e){
         this.setState({
             nursePW : e.target.value
+        }, () => {
+            this.validateNursePW();
         });
     }
 
@@ -79,6 +81,15 @@ class IntroBanner extends Component{
     onChangeNurseTel(e){
         this.setState({
             nurseTel : e.target.value
+        });
+    }
+
+    validateNursePW = () => {
+        const {nursePW} = this.state;
+
+        this.setState({
+            nursePWError:
+                nursePW.length > 6 ? null : 'Password must contain atleast 6 characters'
         });
     }
 
@@ -112,7 +123,6 @@ class IntroBanner extends Component{
     }
     
     //client details
-
     onChangeClientFirstName(e){
         this.setState({
             clientFirstName : e.target.value
@@ -207,6 +217,7 @@ class IntroBanner extends Component{
     }
 
     render(){
+        const isValidnursePW = this.state.nursePW > 6;
         
         return(
                 <div class="container-fluid">
@@ -277,11 +288,12 @@ class IntroBanner extends Component{
                                                     <Form.Label>Password</Form.Label>
                                                     <Form.Control 
                                                         required
+                                                        className={`form-control ${this.state.nursePWError ? 'is-invalid' : ''}`}
                                                         type="password" 
                                                         value={this.state.nursePW} 
                                                         onChange={this.onChangeNursePW} 
+                                                        onBlur={this.validateNursePW}
                                                     />
-                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
 
                                                     <Form.Group as={Col} controlId="formGridPassword02">

@@ -1,8 +1,12 @@
 import React, {Component} from "react";
 import '../ProfilePageStyle.css'
+import axios from "../../../../backend/node_modules/axios";
 
 
 class ClientProfilePage extends Component{
+
+
+    
     render(){
         return(
             <div>  

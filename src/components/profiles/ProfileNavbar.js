@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-awesome-modal';
 import { Button} from 'react-bootstrap';
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ForumIcon from '@material-ui/icons/Forum';
@@ -18,7 +19,8 @@ class ProfileNavbar extends Component{
         super(props);
         this.state = {
             visible : false,
-            visible1 : false
+            visible1 : false,
+            redirect_home: false,
         }
     }
     
@@ -34,8 +36,25 @@ class ProfileNavbar extends Component{
         });
     }
 
-    render(){        
-        return(            
+    logout=()=>{
+        localStorage.clear()
+        this.setState({
+            redirect_home:true
+        })
+    }
+
+    render(){    
+        
+        if(this.state.redirect_home)
+            {
+                return(
+                    <Redirect to='/'/>
+                )
+
+            }
+
+        return(  
+
             <React.Fragment>
                     <nav class="navbar navbar-expand navbar-light">
                     
@@ -72,7 +91,7 @@ class ProfileNavbar extends Component{
                                             <h1 align="center">LogOut</h1>
                                             <p>Do you really want to Logout?</p>
                                                 <center>
-                                                    <Button variant="btn btn-danger" type="submit" onClick={() => this.closeModal()}>LogOut</Button>
+                                                    <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button>
                                                     <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
                                                 </center>
                                             
