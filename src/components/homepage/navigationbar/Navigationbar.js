@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form } from 'react-bootstrap';
 import axios from "../../../../backend/node_modules/axios";
+import NurseListMain from '../../list/NurseListMain';
 
 class Navigationbar extends Component {
     constructor(props) {
@@ -119,7 +120,9 @@ class Navigationbar extends Component {
                             </Modal>
                         </span>
                     </a>
+                    <Link to="/nursemainlist">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">FIND A NURSE</button>
+                    </Link>
                 </nav>
             </React.Fragment>
         );
