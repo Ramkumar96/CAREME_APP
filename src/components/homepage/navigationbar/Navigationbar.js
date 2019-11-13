@@ -39,7 +39,6 @@ class Navigationbar extends Component {
         this.setState({
             [name]: e.target.value
         });
-        //console.log(this.state)
     }
 
     onLogin = () => {
@@ -56,7 +55,7 @@ class Navigationbar extends Component {
                     console.log(response.data.user_data)
                     localStorage.setItem("id",response.data.user_data._id)
                     localStorage.setItem("user_id",response.data.user_data.userID)
-                    localStorage.setItem("user_name",response.data.user_data.clientFirstName)
+                    localStorage.setItem("user_name",response.data.user_data.FirstName)
                     this.setState({
                         redirect_profile: true
                     })

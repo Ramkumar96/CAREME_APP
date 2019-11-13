@@ -20,9 +20,9 @@ UserRegRoutes.route('/add').post(function (req, res) {
 UserRegRoutes.route('/login').post(function (req, res) {
   console.log(req.body)
   var req_password = req.body.password;
-  UserReg.findOne({ clientEmail: req.body.email })
+  UserReg.findOne({Email: req.body.email })
     .then(response => {
-      var res_password = response.clientPW;
+      var res_password = response.PW;
       console.log(req_password, res_password)
       console.log(req_password == res_password)
       if (req_password == res_password) {
@@ -38,9 +38,10 @@ UserRegRoutes.route('/login').post(function (req, res) {
 });
 
 
+
 //userdata
 UserRegRoutes.route('/userdata/:id').get(function (req, res) {
-  console.log(req.params.id)
+  //console.log(req.params.id)
   UserReg.findById(req.params.id)
   .then(response=>{
     console.log(response)
@@ -53,14 +54,15 @@ UserRegRoutes.route('/userdata/:id').get(function (req, res) {
 });
 
 
-UserRegRoutes.route('/').get(function (req, res) {
-  UserReg.find({userID:0},function (err, CAREME_APP) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(CAREME_APP);
-    }
-  });
-});
+
+// UserRegRoutes.route('/').get(function (req, res) {
+//   UserReg.find({userID:0},function (err, CAREME_APP) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.json(CAREME_APP);
+//     }
+//   });
+// });
 
 module.exports = UserRegRoutes;
