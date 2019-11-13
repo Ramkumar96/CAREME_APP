@@ -9,23 +9,15 @@ class IntroBanner extends Component{
     constructor(props) {
         super(props);
 
-        this.onChangeNurseFirstName = this.onChangeNurseFirstName.bind(this);
-        this.onChangeNurseLastName = this.onChangeNurseLastName.bind(this);
+        this.onChangeFirstName = this.onChangeFirstName.bind(this);
+        this.onChangeLastName = this.onChangeLastName.bind(this);
         this.onChangeNurseID = this.onChangeNurseID.bind(this);
-        this.onChangeNurseEmail = this.onChangeNurseEmail.bind(this);
-        this.onChangeNursePW = this.onChangeNursePW.bind(this);
-        this.onChangeNurseCPW = this.onChangeNurseCPW.bind(this);
-        this.onChangeNurseHome = this.onChangeNurseHome.bind(this);
-        this.onChangeNurseTel = this.onChangeNurseTel.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePW = this.onChangePW.bind(this);
+        this.onChangeCPW = this.onChangeCPW.bind(this);
+        this.onChangeHome = this.onChangeHome.bind(this);
+        this.onChangeTel = this.onChangeTel.bind(this);
         this.onSubmitNurse = this.onSubmitNurse.bind(this);
-
-        this.onChangeClientFirstName = this.onChangeClientFirstName.bind(this);
-        this.onChangeClientLastName = this.onChangeClientLastName.bind(this);
-        this.onChangeClientEmail = this.onChangeClientEmail.bind(this);
-        this.onChangeClientPW = this.onChangeClientPW.bind(this);
-        this.onChangeClientCPW = this.onChangeClientCPW.bind(this);
-        this.onChangeClientHome = this.onChangeClientHome.bind(this);
-        this.onChangeClientTel = this.onChangeClientTel.bind(this);
         this.onSubmitClient = this.onSubmitClient.bind(this);
 
         this.state = {
@@ -34,15 +26,15 @@ class IntroBanner extends Component{
         }
     }
 
-    onChangeNurseFirstName(e){
+    onChangeFirstName(e){
         this.setState({
-            nurseFirstName : e.target.value
+            FirstName : e.target.value
         });
     }
 
-    onChangeNurseLastName(e){
+    onChangeLastName(e){
         this.setState({
-            nurseLastName : e.target.value
+            LastName : e.target.value
         });
     }
 
@@ -52,142 +44,89 @@ class IntroBanner extends Component{
         });
     }
 
-    onChangeNurseEmail(e){
+    onChangeEmail(e){
         this.setState({
-            nurseEmail : e.target.value
+            Email : e.target.value
         });
     }
 
-    onChangeNursePW(e){
+    onChangePW(e){
         this.setState({
-            nursePW : e.target.value
-        }, () => {
-            this.validateNursePW();
+            PW : e.target.value
         });
     }
 
-    onChangeNurseCPW(e){
+    onChangeCPW(e){
         this.setState({
-            nurseCPW : e.target.value
+            CPW : e.target.value
         });
     }
 
-    onChangeNurseHome(e){
+    onChangeHome(e){
         this.setState({
-            nurseHome : e.target.value
+            Home : e.target.value
         });
     }
 
-    onChangeNurseTel(e){
+    onChangeTel(e){
         this.setState({
-            nurseTel : e.target.value
-        });
-    }
-
-    validateNursePW = () => {
-        const {nursePW} = this.state;
-
-        this.setState({
-            nursePWError:
-                nursePW.length > 6 ? null : 'Password must contain atleast 6 characters'
+            Tel : e.target.value
         });
     }
 
     onSubmitNurse(e){
         e.preventDefault();
         const obj = {
-            nurseFirstName: this.state.nurseFirstName,
-            nurseLastName: this.state.nurseLastName,
+            FirstName: this.state.FirstName,
+            LastName: this.state.LastName,
             nurseID: this.state.nurseID,
-            nurseEmail: this.state.nurseEmail,
-            nursePW: this.state.nursePW,
-            nurseCPW: this.state.nurseCPW,
-            nurseHome: this.state.nurseHome,
-            nurseTel: this.state.nurseTel,
+            Email: this.state.Email,
+            PW: this.state.PW,
+            CPW: this.state.CPW,
+            Home: this.state.Home,
+            Tel: this.state.Tel,
             userID : 0
           };
           axios.post('http://localhost:4000/user/add', obj)
               .then(res => console.log(res.data));
 
         this.setState({
-            nurseFirstName: '',
-            nurseLastName: '',
+            FirstName: '',
+            LastName: '',
             nurseID: '',
-            nurseEmail: '',
-            nursePW: '',
-            nurseCPW: '',
-            nurseHome: '',
-            nurseTel: '',
+            Email: '',
+            PW: '',
+            CPW: '',
+            Home: '',
+            Tel: '',
             visible : false
         });
     }
     
     //client details
-    onChangeClientFirstName(e){
-        this.setState({
-            clientFirstName : e.target.value
-        });
-    }
-
-    onChangeClientLastName(e){
-        this.setState({
-            clientLastName : e.target.value
-        });
-    }
-
-    onChangeClientEmail(e){
-        this.setState({
-            clientEmail : e.target.value
-        });
-    }
-
-    onChangeClientPW(e){
-        this.setState({
-            clientPW : e.target.value
-        });
-    }
-
-    onChangeClientCPW(e){
-        this.setState({
-            clientCPW : e.target.value
-        });
-    }
-
-    onChangeClientHome(e){
-        this.setState({
-            clientHome : e.target.value
-        });
-    }
-
-    onChangeClientTel(e){
-        this.setState({
-            clientTel : e.target.value
-        });
-    }
-
     onSubmitClient(e){
         e.preventDefault();
         const obj = {
-            clientFirstName: this.state.clientFirstName,
-            clientLastName: this.state.clientLastName,
-            clientEmail: this.state.clientEmail,
-            clientPW: this.state.clientPW,
-            clientCPW: this.state.clientCPW,
-            clientHome: this.state.clientHome,
-            clientTel: this.state.clientTel,
+            FirstName: this.state.FirstName,
+            LastName: this.state.LastName,
+            Email: this.state.Email,
+            PW: this.state.PW,
+            CPW: this.state.CPW,
+            Home: this.state.Home,
+            Tel: this.state.Tel,
             userID: 1
           };
           axios.post('http://localhost:4000/user/add', obj)
               .then(res => console.log(res.data));
 
         this.setState({
-            clientFirstName: '',
-            clientLastName: '',
-            clientEmail: '',
-            clientPW: '',
-            clientCPW: '',
-            clientHome: '',
-            clientTel: '',
+            FirstName: '',
+            LastName: '',
+            Email: '',
+            PW: '',
+            CPW: '',
+            Home: '',
+            Tel: '',
             visible1 : false
         });
     }
@@ -236,30 +175,30 @@ class IntroBanner extends Component{
                                                 <h1>Register Here</h1>
                                                 <Form >                                                    
                                                  <Form.Row>
-                                                    <Form.Group as={Col} controlId="validationCustom01">
+                                                    <Form.Group as={Col}>
                                                     <Form.Label>First Name</Form.Label>
                                                     <Form.Control
                                                         required 
                                                         type="text" 
-                                                        value={this.state.nurseFirstName} 
-                                                        onChange={this.onChangeNurseFirstName} 
+                                                        value={this.state.FirstName} 
+                                                        onChange={this.onChangeFirstName} 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
 
-                                                    <Form.Group as={Col} controlId="validationCustom02">
+                                                    <Form.Group as={Col}>
                                                     <Form.Label>Last Name</Form.Label>
                                                     <Form.Control 
                                                         required
                                                         type="text" 
-                                                        value={this.state.nurseLastName} 
-                                                        onChange={this.onChangeNurseLastName} 
+                                                        value={this.state.LastName} 
+                                                        onChange={this.onChangeLastName} 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
                                                 </Form.Row>
                             
-                                                <Form.Group controlId="validationCustom03">
+                                                <Form.Group>
                                                     <Form.Label>Nurse Council Registration Number</Form.Label>
                                                     <Form.Control 
                                                         required
@@ -271,61 +210,59 @@ class IntroBanner extends Component{
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
-                                                <Form.Group controlId="formGridEmail">
+                                                <Form.Group>
                                                     <Form.Label>E-mail Address</Form.Label>
                                                     <Form.Control 
                                                         required
                                                         type="email" 
-                                                        value={this.state.nurseEmail} 
-                                                        onChange={this.onChangeNurseEmail} 
+                                                        value={this.state.Email} 
+                                                        onChange={this.onChangeEmail} 
                                                         placeholder="janedoe@example.com" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
                                                 <Form.Row>
-                                                    <Form.Group as={Col} controlId="formGridPassword01">
+                                                    <Form.Group as={Col}>
                                                     <Form.Label>Password</Form.Label>
                                                     <Form.Control 
                                                         required
-                                                        className={`form-control ${this.state.nursePWError ? 'is-invalid' : ''}`}
                                                         type="password" 
-                                                        value={this.state.nursePW} 
-                                                        onChange={this.onChangeNursePW} 
-                                                        onBlur={this.validateNursePW}
+                                                        value={this.state.PW} 
+                                                        onChange={this.onChangePW}
                                                     />
                                                     </Form.Group>
 
-                                                    <Form.Group as={Col} controlId="formGridPassword02">
+                                                    <Form.Group as={Col}>
                                                     <Form.Label>Confirm Password</Form.Label>
                                                     <Form.Control 
                                                         required
                                                         type="password" 
-                                                        value={this.state.nurseCPW} 
-                                                        onChange={this.onChangeNurseCPW} 
+                                                        value={this.state.CPW} 
+                                                        onChange={this.onChangeCPW} 
                                                         placeholder="Re-Enter Your Password Here" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
                                                 </Form.Row>
 
-                                                <Form.Group controlId="validationCustom04">
+                                                <Form.Group>
                                                     <Form.Label>Address</Form.Label>
                                                     <Form.Control required
                                                         type="textarea" 
-                                                        value={this.state.nurseHome} 
-                                                        onChange={this.onChangeNurseHome} 
+                                                        value={this.state.Home} 
+                                                        onChange={this.onChangeHome} 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
-                                                <Form.Group controlId="validationCustom05">
+                                                <Form.Group>
                                                     <Form.Label>Telephone Number</Form.Label>
                                                     <Form.Control 
                                                         required
                                                         type="text" 
-                                                        value={this.state.nurseTel} 
-                                                        onChange={this.onChangeNurseTel} 
+                                                        value={this.state.Tel} 
+                                                        onChange={this.onChangeTel} 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
@@ -347,55 +284,88 @@ class IntroBanner extends Component{
                                                     <div class="form-group row">
                                                         <label for="firstname" class="col-sm-2 col-form-label">Frist Name</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="firstname" value={this.state.clientFirstName} onChange={this.onChangeClientFirstName}/>
+                                                                <input 
+                                                                    type="text" 
+                                                                    class="form-control" 
+                                                                    value={this.state.FirstName} 
+                                                                    onChange={this.onChangeFirstName}
+                                                                />
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="lastname" value={this.state.clientLastName} onChange={this.onChangeClientLastName}/>
+                                                                <input 
+                                                                    type="text" 
+                                                                    class="form-control" 
+                                                                    value={this.state.LastName} 
+                                                                    onChange={this.onChangeLastName}
+                                                                />
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="emailaddress" class="col-sm-2 col-form-label">E-mail</label>
                                                             <div class="col-sm-10">
-                                                                <input type="email" class="form-control" id="emailaddress" value={this.state.clientEmail} onChange={this.onChangeClientEmail}/>
+                                                                <input 
+                                                                    type="email" 
+                                                                    class="form-control"
+                                                                    value={this.state.Email} 
+                                                                    onChange={this.onChangeEmail}
+                                                                />
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="password" class="col-sm-2 col-form-label">Password</label>
                                                             <div class="col-sm-10">
-                                                                <input type="password" class="form-control" id="password" value={this.state.clientPW} onChange={this.onChangeClientPW}/>
+                                                                <input 
+                                                                    type="password" 
+                                                                    class="form-control" 
+                                                                    value={this.state.PW} 
+                                                                    onChange={this.onChangePW}
+                                                                />
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="re-enter password" class="col-sm-2 col-form-label">Re-enter Password</label>
                                                             <div class="col-sm-10">
-                                                                <input type="password" class="form-control" id="repassword" value={this.state.clientCPW} onChange={this.onChangeClientCPW}/>
+                                                                <input 
+                                                                    type="password" 
+                                                                    class="form-control"
+                                                                    value={this.state.CPW} 
+                                                                    onChange={this.onChangeCPW}
+                                                                />
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="address" class="col-sm-2 col-form-label">Address</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="address" value={this.state.clientHome} onChange={this.onChangeClientHome}/>
+                                                                <input 
+                                                                    type="text" 
+                                                                    class="form-control"
+                                                                    value={this.state.Home} 
+                                                                    onChange={this.onChangeHome}
+                                                                />
                                                             </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="telephone" class="col-sm-2 col-form-label">Telephone</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" class="form-control" id="telephone" value={this.state.clientTel} onChange={this.onChangeClientTel}/>
+                                                                <input 
+                                                                    type="text" 
+                                                                    class="form-control"
+                                                                    value={this.state.Tel} 
+                                                                    onChange={this.onChangeTel}
+                                                                />
                                                             </div>
                                                     </div>
 
                                                     <Button variant="primary" type="submit" onClick={this.onSubmitClient.bind(this)}>Submit</Button>
-
-                                                    
                                                 </Form>
                                             </Modal>
                                         </span>

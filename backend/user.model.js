@@ -3,49 +3,35 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let UserReg = new Schema({
-  nurseFirstName: {
+  FirstName: {
     type: String
   },
-  nurseLastName: {
+  
+  LastName: {
     type: String
   },
+
   nurseID: {
     type: Number
   },
-  nurseEmail: {
+  
+  Email: {
     type: String
   },
-  nursePW: {
+  
+  PW: {
     type: String
   },
-  nurseCPW: {
+  
+  CPW: {
     type: String
   },
-  nurseHome: {
+  
+  Home: {
     type: String
   },
-  nurseTel: {
-    type: Number
-  },
-  clientFirstName: {
-    type: String
-  },
-  clientLastName: {
-    type: String
-  },
-  clientEmail: {
-    type: String
-  },
-  clientPW: {
-    type: String
-  },
-  clientCPW: {
-    type: String
-  },
-  clientHome: {
-    type: String
-  },
-  clientTel: {
+  
+  Tel: {
     type: Number
   },
   userID: {
