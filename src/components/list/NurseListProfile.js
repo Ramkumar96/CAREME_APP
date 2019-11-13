@@ -17,7 +17,7 @@ return (
         <div>
             <div className="card-body pb-0">
             <div className="row d-flex align-items-stretch">
-                <div className="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                <div className="d-flex align-items-stretch">
                 <div className="card bg-light">
                     <div className="card-header text-muted border-bottom-0">
                     

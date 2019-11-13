@@ -40,9 +40,14 @@ class NurseListMain extends Component{
             <div>
                 <Navigationbar/>
                 
-
-        
-                    {nurse}
+                <table cellspacing="200">
+                <tr>
+                    <td>{nurse}</td>
+                </tr> 
+                </table>
+                
+                
+                    
             
                 
                  
