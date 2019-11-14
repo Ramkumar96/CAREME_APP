@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <Router>
         <Route path="/" exact component={HomePage} />
-        <Route path="/profile" exact component={ClientMainPage} />
+        <Route path="/clientprofile" exact component={ClientMainPage} />
         <Route path="/nurseprofile" exact component={NurseMainPage} />
         <Route path="/clientlist" exact component={ClientList} />
         <Route path="/nurselist" exact component={NurseList} />

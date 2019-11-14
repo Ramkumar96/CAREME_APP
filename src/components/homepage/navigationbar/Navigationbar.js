@@ -66,7 +66,7 @@ class Navigationbar extends Component {
     render() {
         if (this.state.redirect_profile) {
             return (
-                <Redirect to="/profile" />
+                <Redirect to="/clientprofile" />
             )
         }
         return (
@@ -79,14 +79,8 @@ class Navigationbar extends Component {
 
                     {/* <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> */}
                     <li class="nav-item active">
-                        <Link to="/profile" >client profile</Link>
-                    </li>
-                    <li class="nav-item active">
-                        <Link to="/clientlist" >client List</Link>
-                    </li>
-                    <li class="nav-item active">
-                        <Link to="/nurselist">Nurse List</Link>
-                    </li>
+                        <Link to="/clientprofile" >client profile</Link>
+                    </li>                 
                     {/* </ul> */}
 
                     <a>
