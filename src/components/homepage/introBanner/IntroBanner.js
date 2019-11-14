@@ -225,7 +225,26 @@ class IntroBanner extends Component{
     
     closeModal() {
         this.setState({
-            visible : false
+            visible : false,
+            FirstName: '',
+            LastName: '',
+            nurseID: '',
+            Email: '',
+            PW: '',
+            CPW: '',
+            Home: '',
+            Tel: '',
+
+            touched : {
+                Email: false,
+                FirstName: false,
+                LastName:false,
+                nurseID: false,
+                PW: false,
+                CPW: false,
+                Home: false,
+                Tel: false
+            }
         });
     }
 
@@ -237,7 +256,24 @@ class IntroBanner extends Component{
   
     closeModal1() {
         this.setState({
-            visible1 : false
+            visible1 : false,
+            FirstName: '',
+            LastName: '',
+            Email: '',
+            PW: '',
+            CPW: '',
+            Home: '',
+            Tel: '',
+
+            touched : {
+                Email: false,
+                FirstName: false,
+                LastName:false,
+                PW: false,
+                CPW: false,
+                Home: false,
+                Tel: false
+            }
         });
     }
 
