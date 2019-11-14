@@ -18,6 +18,18 @@ function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel){
     };
 }
 
+function validate1 (Email, FirstName, LastName, PW, CPW, Home, Tel){
+    return {
+        Email: Email.length===0,
+        FirstName: FirstName.length===0,
+        LastName: LastName.length===0,
+        PW: PW.length===0,
+        CPW: CPW.length===0,
+        Home: Home.length===0,
+        Tel: Tel.length===0
+    };
+}
+
 class IntroBanner extends Component{
     constructor(props) {
         super(props);
@@ -157,7 +169,7 @@ class IntroBanner extends Component{
         const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
         return !isDisabled;
-      }
+    }
     
     //client details
     onSubmitClient(e){
@@ -175,6 +187,14 @@ class IntroBanner extends Component{
             Location : null,
             Age : null
           };
+
+          if (!this.canBeSubmitted1()) {
+            e.preventDefault();
+            return;
+          }
+          const { FirstName, LastName, Email, PW, CPW, Home, Tel } = this.state;
+          alert(`Succesfully Registered`); 
+
           axios.post('http://localhost:4000/user/add', obj)
               .then(res => console.log(res.data));
 
@@ -188,6 +208,12 @@ class IntroBanner extends Component{
             Tel: '',
             visible1 : false
         });
+    }
+
+    canBeSubmitted1() {
+        const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const isDisabled1 = Object.keys(errors1).some(x => errors1[x]);
+        return !isDisabled1;
     }
 
     openModal() {
@@ -217,6 +243,9 @@ class IntroBanner extends Component{
     render(){
         const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
+
+        const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const isDisabled1 = Object.keys(errors1).some(x => errors1[x]);
 
         const shouldMarkError = field => {
             const hasError = errors[field];
@@ -276,7 +305,7 @@ class IntroBanner extends Component{
                                                         type="text" 
                                                         value={this.state.nurseID} 
                                                         onChange={this.onChangeNurseID} 
-                                                        onBlur={this.handleBlur("LastName")}
+                                                        onBlur={this.handleBlur("nurseID")}
                                                         placeholder="Enter Sri Lanka Nurse Council Registration Number" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
@@ -358,96 +387,104 @@ class IntroBanner extends Component{
                                     <td>
                                         <span>
                                             <input type="button" class="btn btn-secondary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
-                                            <Modal visible={this.state.visible1} width="50%" height="85%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
-                                           
-                                                <Form className="form-margin"> 
-                                                    <h4>Create a CareMe account</h4>
-                                                    <br/>
-                                                    <div class="form-group row">
-                                                        <label for="firstname" class="col-sm-2 col-form-label">Frist Name</label>
-                                                            <div class="col-sm-10">
-                                                                <input 
-                                                                    type="text" 
-                                                                    class="form-control" 
-                                                                    value={this.state.FirstName} 
-                                                                    onChange={this.onChangeFirstName}
-                                                                />
-                                                            </div>
-                                                    </div>
+                                            <Modal visible={this.state.visible1} width="50%" height="87%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                                                <h1>Register Here</h1>
+                                                <Form>                                                    
+                                                 <Form.Row>
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>First Name</Form.Label>
+                                                    <Form.Control
+                                                        className={shouldMarkError("FirstName") ? "error" : ""}
+                                                        type="text" 
+                                                        value={this.state.FirstName} 
+                                                        onChange={this.onChangeFirstName} 
+                                                        onBlur={this.handleBlur("FirstName")}
+                                                        required
+                                                    />
+                                                    </Form.Group>
 
-                                                    <div class="form-group row">
-                                                        <label for="lastname" class="col-sm-2 col-form-label">Last Name</label>
-                                                            <div class="col-sm-10">
-                                                                <input 
-                                                                    type="text" 
-                                                                    class="form-control" 
-                                                                    value={this.state.LastName} 
-                                                                    onChange={this.onChangeLastName}
-                                                                />
-                                                            </div>
-                                                    </div>
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>Last Name</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("LastName") ? "error" : ""}
+                                                        required
+                                                        type="text" 
+                                                        value={this.state.LastName} 
+                                                        onChange={this.onChangeLastName} 
+                                                        onBlur={this.handleBlur("LastName")}
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
+                                                    </Form.Group>
+                                                </Form.Row>
+                            
+                                                <Form.Group>
+                                                    <Form.Label>E-mail Address</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Email") ? "error" : ""}
+                                                        type="email" 
+                                                        value={this.state.Email} 
+                                                        onChange={this.onChangeEmail} 
+                                                        onBlur={this.handleBlur("Email")}
+                                                        placeholder="janedoe@example.com" 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                </Form.Group>
 
-                                                    <div class="form-group row">
-                                                        <label for="emailaddress" class="col-sm-2 col-form-label">E-mail</label>
-                                                            <div class="col-sm-10">
-                                                                <input 
-                                                                    type="email" 
-                                                                    class="form-control"
-                                                                    value={this.state.Email} 
-                                                                    onChange={this.onChangeEmail}
-                                                                />
-                                                            </div>
-                                                    </div>
+                                                <Form.Row>
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Control
+                                                        className={shouldMarkError("PW") ? "error" : ""}
+                                                        required
+                                                        type="password" 
+                                                        value={this.state.PW} 
+                                                        onChange={this.onChangePW}
+                                                        onBlur={this.handleBlur("PW")}
+                                                    />
+                                                    </Form.Group>
 
-                                                    <div class="form-group row">
-                                                        <label for="password" class="col-sm-2 col-form-label">Password</label>
-                                                            <div class="col-sm-10">
-                                                                <input 
-                                                                    type="password" 
-                                                                    class="form-control" 
-                                                                    value={this.state.PW} 
-                                                                    onChange={this.onChangePW}
-                                                                />
-                                                            </div>
-                                                    </div>
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>Confirm Password</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("CPW") ? "error" : ""}
+                                                        required
+                                                        type="password" 
+                                                        value={this.state.CPW} 
+                                                        onChange={this.onChangeCPW} 
+                                                        onBlur={this.handleBlur("CPW")}
+                                                        placeholder="Re-Enter Your Password Here" 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
+                                                    </Form.Group>
+                                                </Form.Row>
 
-                                                    <div class="form-group row">
-                                                        <label for="re-enter password" class="col-sm-2 col-form-label">Re-enter Password</label>
-                                                            <div class="col-sm-10">
-                                                                <input 
-                                                                    type="password" 
-                                                                    class="form-control"
-                                                                    value={this.state.CPW} 
-                                                                    onChange={this.onChangeCPW}
-                                                                />
-                                                            </div>
-                                                    </div>
+                                                <Form.Group>
+                                                    <Form.Label>Address</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Address") ? "error" : ""}
+                                                        required
+                                                        type="textarea" 
+                                                        value={this.state.Home} 
+                                                        onChange={this.onChangeHome} 
+                                                        onBlur={this.handleBlur("Address")}
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                </Form.Group>
 
-                                                    <div class="form-group row">
-                                                        <label for="address" class="col-sm-2 col-form-label">Address</label>
-                                                            <div class="col-sm-10">
-                                                                <input 
-                                                                    type="text" 
-                                                                    class="form-control"
-                                                                    value={this.state.Home} 
-                                                                    onChange={this.onChangeHome}
-                                                                />
-                                                            </div>
-                                                    </div>
+                                                <Form.Group>
+                                                    <Form.Label>Telephone Number</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Tel") ? "error" : ""}
+                                                        required
+                                                        type="text" 
+                                                        value={this.state.Tel} 
+                                                        onChange={this.onChangeTel}
+                                                        onBlur={this.handleBlur("Tel")} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                </Form.Group>
 
-                                                    <div class="form-group row">
-                                                        <label for="telephone" class="col-sm-2 col-form-label">Telephone</label>
-                                                            <div class="col-sm-10">
-                                                                <input 
-                                                                    type="text" 
-                                                                    class="form-control"
-                                                                    value={this.state.Tel} 
-                                                                    onChange={this.onChangeTel}
-                                                                />
-                                                            </div>
-                                                    </div>
-
-                                                    <Button variant="primary" type="submit" onClick={this.onSubmitClient.bind(this)}>Submit</Button>
+                                                <Button type="submit" variant="primary" disabled={isDisabled1} onClick={this.onSubmitClient.bind(this)}>Submit</Button>
                                                 </Form>
                                             </Modal>
                                         </span>
