@@ -7,6 +7,9 @@
     background-repeat: no-repeat;
     position: relative;
   }
+  .error {
+    border: 1px solid red;
+  }
   .banner {
     color: black;
     margin-top: -64px;

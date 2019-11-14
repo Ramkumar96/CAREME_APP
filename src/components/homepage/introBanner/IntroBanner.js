@@ -5,6 +5,19 @@ import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 
+function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel){
+    return {
+        Email: Email.length===0,
+        FirstName: FirstName.length===0,
+        LastName: LastName.length===0,
+        nurseID: nurseID.length===0,
+        PW: PW.length===0,
+        CPW: CPW.length===0,
+        Home: Home.length===0,
+        Tel: Tel.length===0
+    };
+}
+
 class IntroBanner extends Component{
     constructor(props) {
         super(props);
@@ -22,8 +35,27 @@ class IntroBanner extends Component{
 
         this.state = {
             visible : false,
-            visible1 : false
-        }
+            visible1 : false,
+            Email: '',
+            FirstName: '',
+            LastName: '',
+            nurseID: '',
+            PW: '',
+            CPW: '',
+            Home: '',
+            Tel: '',
+
+            touched : {
+                Email: false,
+                FirstName: false,
+                LastName:false,
+                nurseID: false,
+                PW: false,
+                CPW: false,
+                Home: false,
+                Tel: false
+            }
+        };
     }
 
     onChangeFirstName(e){
@@ -74,8 +106,15 @@ class IntroBanner extends Component{
         });
     }
 
+    handleBlur = field => e => {
+        this.setState({
+          touched: { ...this.state.touched, [field]: true }
+        });
+    };
+
     onSubmitNurse(e){
         e.preventDefault();
+
         const obj = {
             FirstName: this.state.FirstName,
             LastName: this.state.LastName,
@@ -86,10 +125,18 @@ class IntroBanner extends Component{
             Home: this.state.Home,
             Tel: this.state.Tel,
             userID : 0
-          };
-          axios.post('http://localhost:4000/user/add', obj)
-              .then(res => console.log(res.data));
+        };
 
+        if (!this.canBeSubmitted()) {
+            e.preventDefault();
+            return;
+          }
+          const { FirstName, LastName, nurseID, Email, PW, CPW, Home, Tel } = this.state;
+          alert(`Succesfully Registered`);      
+        
+        axios.post('http://localhost:4000/user/add', obj)
+            .then(res => console.log(res.data));
+              
         this.setState({
             FirstName: '',
             LastName: '',
@@ -102,11 +149,18 @@ class IntroBanner extends Component{
             visible : false
         });
     }
+
+    canBeSubmitted() {
+        const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+        return !isDisabled;
+      }
     
     //client details
     onSubmitClient(e){
         e.preventDefault();
-        const obj = {
+
+           const obj = {
             FirstName: this.state.FirstName,
             LastName: this.state.LastName,
             Email: this.state.Email,
@@ -156,6 +210,16 @@ class IntroBanner extends Component{
     }
 
     render(){
+        const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+
+        const shouldMarkError = field => {
+            const hasError = errors[field];
+            const shouldShow = this.state.touched[field];
+      
+            return hasError ? shouldShow : false;
+        };      
+
         return(
                 <div class="container-fluid">
                     <div class="row max-height justify-content-center align-items-center">
@@ -171,22 +235,24 @@ class IntroBanner extends Component{
                                             <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
                                             <Modal visible={this.state.visible} width="50%" height="98%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <h1>Register Here</h1>
-                                                <Form >                                                    
+                                                <Form>                                                    
                                                  <Form.Row>
                                                     <Form.Group as={Col}>
                                                     <Form.Label>First Name</Form.Label>
                                                     <Form.Control
-                                                        required 
+                                                        className={shouldMarkError("FirstName") ? "error" : ""}
                                                         type="text" 
                                                         value={this.state.FirstName} 
                                                         onChange={this.onChangeFirstName} 
+                                                        onBlur={this.handleBlur("FirstName")}
+                                                        required
                                                     />
-                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
 
                                                     <Form.Group as={Col}>
                                                     <Form.Label>Last Name</Form.Label>
                                                     <Form.Control 
+                                                        className={shouldMarkError("LastName") ? "error" : ""}
                                                         required
                                                         type="text" 
                                                         value={this.state.LastName} 
@@ -198,11 +264,13 @@ class IntroBanner extends Component{
                             
                                                 <Form.Group>
                                                     <Form.Label>Nurse Council Registration Number</Form.Label>
-                                                    <Form.Control 
+                                                    <Form.Control
+                                                        className={shouldMarkError("nurseID") ? "error" : ""} 
                                                         required
                                                         type="text" 
                                                         value={this.state.nurseID} 
                                                         onChange={this.onChangeNurseID} 
+                                                        onBlur={this.handleBlur("LastName")}
                                                         placeholder="Enter Sri Lanka Nurse Council Registration Number" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
@@ -211,10 +279,12 @@ class IntroBanner extends Component{
                                                 <Form.Group>
                                                     <Form.Label>E-mail Address</Form.Label>
                                                     <Form.Control 
+                                                        className={shouldMarkError("Email") ? "error" : ""}
                                                         required
                                                         type="email" 
                                                         value={this.state.Email} 
                                                         onChange={this.onChangeEmail} 
+                                                        onBlur={this.handleBlur("Email")}
                                                         placeholder="janedoe@example.com" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
@@ -223,21 +293,25 @@ class IntroBanner extends Component{
                                                 <Form.Row>
                                                     <Form.Group as={Col}>
                                                     <Form.Label>Password</Form.Label>
-                                                    <Form.Control 
+                                                    <Form.Control
+                                                        className={shouldMarkError("PW") ? "error" : ""}
                                                         required
                                                         type="password" 
                                                         value={this.state.PW} 
                                                         onChange={this.onChangePW}
+                                                        onBlur={this.handleBlur("PW")}
                                                     />
                                                     </Form.Group>
 
                                                     <Form.Group as={Col}>
                                                     <Form.Label>Confirm Password</Form.Label>
                                                     <Form.Control 
+                                                        className={shouldMarkError("CPW") ? "error" : ""}
                                                         required
                                                         type="password" 
                                                         value={this.state.CPW} 
                                                         onChange={this.onChangeCPW} 
+                                                        onBlur={this.handleBlur("CPW")}
                                                         placeholder="Re-Enter Your Password Here" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
@@ -246,10 +320,13 @@ class IntroBanner extends Component{
 
                                                 <Form.Group>
                                                     <Form.Label>Address</Form.Label>
-                                                    <Form.Control required
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Address") ? "error" : ""}
+                                                        required
                                                         type="textarea" 
                                                         value={this.state.Home} 
                                                         onChange={this.onChangeHome} 
+                                                        onBlur={this.handleBlur("Address")}
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
@@ -257,15 +334,17 @@ class IntroBanner extends Component{
                                                 <Form.Group>
                                                     <Form.Label>Telephone Number</Form.Label>
                                                     <Form.Control 
+                                                        className={shouldMarkError("Tel") ? "error" : ""}
                                                         required
                                                         type="text" 
                                                         value={this.state.Tel} 
-                                                        onChange={this.onChangeTel} 
+                                                        onChange={this.onChangeTel}
+                                                        onBlur={this.handleBlur("Tel")} 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
-                                                <Button type="submit" variant="primary" onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
+                                                <Button type="submit" variant="primary" disabled={isDisabled} onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
                                                 </Form>
                                             </Modal>
                                         </span>
