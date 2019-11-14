@@ -46,7 +46,7 @@ let UserReg = new Schema({
     type: Number
   },
 
-  Exp: {
+  nurseExp: {
     type: String
   }
 },{

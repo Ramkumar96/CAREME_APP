@@ -124,7 +124,10 @@ class IntroBanner extends Component{
             CPW: this.state.CPW,
             Home: this.state.Home,
             Tel: this.state.Tel,
-            userID : 0
+            userID : 0,
+            Location : null,
+            Age : null,
+            nurseExp : null
         };
 
         if (!this.canBeSubmitted()) {
@@ -168,7 +171,9 @@ class IntroBanner extends Component{
             CPW: this.state.CPW,
             Home: this.state.Home,
             Tel: this.state.Tel,
-            userID: 1
+            userID: 1,
+            Location : null,
+            Age : null
           };
           axios.post('http://localhost:4000/user/add', obj)
               .then(res => console.log(res.data));
