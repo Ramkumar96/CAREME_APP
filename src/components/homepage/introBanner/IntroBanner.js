@@ -70,21 +70,24 @@ class IntroBanner extends Component{
     }
 
     onChangeFirstName(e){
-        this.setState({
-            FirstName : e.target.value
-        });
+        const re = /^[A-Za-z\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({FirstName: e.target.value})
+        }
     }
 
     onChangeLastName(e){
-        this.setState({
-            LastName : e.target.value
-        });
+        const re = /^[A-Za-z\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({LastName: e.target.value})
+        }
     }
 
     onChangeNurseID(e){
-        this.setState({
-            nurseID : e.target.value
-        });
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({nurseID: e.target.value})
+        }
     }
 
     onChangeEmail(e){
@@ -112,9 +115,10 @@ class IntroBanner extends Component{
     }
 
     onChangeTel(e){
-        this.setState({
-            Tel : e.target.value
-        });
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({Tel: e.target.value})
+        }
     }
 
     handleBlur = field => e => {
