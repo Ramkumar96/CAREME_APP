@@ -48,6 +48,10 @@ let UserReg = new Schema({
 
   nurseExp: {
     type: String
+  },
+
+  nurseType: {
+    type: String
   }
 },{
     collection: 'Users'
