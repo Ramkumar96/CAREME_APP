@@ -36,6 +36,18 @@ let UserReg = new Schema({
   },
   userID: {
     type: Number
+  },
+
+  Location: {
+    type: String
+  },
+
+  Age: {
+    type: Number
+  },
+
+  Exp: {
+    type: String
   }
 },{
     collection: 'Users'
