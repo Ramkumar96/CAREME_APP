@@ -28,8 +28,8 @@ return (
                         <h2 className="lead"><b>{this.props.fname} {this.props.lname}</b></h2>
                         <p className="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
                         <ul className="ml-4 mb-0 fa-ul text-muted">
-                            <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Address: Demo Street 123, Demo City 04312, NJ</li>
-                            <li className="small"><span className="fa-li"><i className="fas fa-lg fa-phone" /></span> Phone #: + 800 - 12 12 23 52</li>
+                            <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Age: {this.props.age}</li>
+<li className="small"><span className="fa-li"><i className="fas fa-lg fa-phone" /></span> Experience: {this.props.exp}</li>
                         </ul>
                         </div>
                         <div className="col-5 text-center">

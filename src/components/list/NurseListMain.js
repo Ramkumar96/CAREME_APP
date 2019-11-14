@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Navigationbar from '../homepage/navigationbar/Navigationbar';
 import NurseListProfile from './NurseListProfile';
 import axios from 'axios';
+import { placeholder } from "@babel/types";
 
 
 
@@ -41,7 +42,21 @@ class NurseListMain extends Component{
             })
     }
 
-    
+    //sorting age
+
+    nursesortage = (event) => {
+        let fil = this.state.CAREME_APP;
+        const selector = event.target.value;
+
+       if(selector ==="1"){
+           fil.sort((a,b) => (a.Age > b.Age) ? 1: -1);
+           this.setState({CAREME_APP: fil});
+       }
+
+    }
+
+
+  
 
 
     render(){
@@ -50,6 +65,8 @@ class NurseListMain extends Component{
             return <NurseListProfile fname={nurse.FirstName}
             lname={nurse.LastName} 
             nurse_id={nurse.nurseID}
+            age= {nurse.Age}
+            exp= {nurse.nurseExp}
             key={nurse._id}
         />})
 
@@ -59,6 +76,34 @@ class NurseListMain extends Component{
                 <form>
                     <input type="text" onChange={this.searchHandler} value={term}/>
                 </form>
+            <tr>
+                <td>
+                <div className="form-group">
+                    <label>Sort by </label>
+                    <select onChange={(event)=>this.nursesortage(event)}>
+                        <option>select here</option>
+                        <option value={1}>Age</option>
+                    </select>
+                </div>
+                </td>
+
+                <td>
+                <div className="form-group">
+                    <label>Sort by Experience </label>
+                    <select onChange={(event)=>this.nursesortexp(event)}>
+                        <option>select Experience</option>
+                        <option value={1}>1-2</option>
+                        <option value={2}>3-5</option>
+                        <option value={3}>5-10</option>
+                        <option value={4}>10+</option>
+                    </select>
+                </div>
+                </td>
+
+                <td>
+
+                </td>
+            </tr>
                     {nurse}
                
                 
