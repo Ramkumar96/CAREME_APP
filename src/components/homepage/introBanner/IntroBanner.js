@@ -257,6 +257,7 @@ class IntroBanner extends Component{
                                                         type="text" 
                                                         value={this.state.LastName} 
                                                         onChange={this.onChangeLastName} 
+                                                        onBlur={this.handleBlur("LastName")}
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
@@ -280,7 +281,6 @@ class IntroBanner extends Component{
                                                     <Form.Label>E-mail Address</Form.Label>
                                                     <Form.Control 
                                                         className={shouldMarkError("Email") ? "error" : ""}
-                                                        required
                                                         type="email" 
                                                         value={this.state.Email} 
                                                         onChange={this.onChangeEmail} 

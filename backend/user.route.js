@@ -37,8 +37,6 @@ UserRegRoutes.route('/login').post(function (req, res) {
     })
 });
 
-
-
 //userdata
 UserRegRoutes.route('/userdata/:id').get(function (req, res) {
   //console.log(req.params.id)
@@ -53,16 +51,14 @@ UserRegRoutes.route('/userdata/:id').get(function (req, res) {
   })
 });
 
-
-
-// UserRegRoutes.route('/').get(function (req, res) {
-//   UserReg.find({userID:0},function (err, CAREME_APP) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.json(CAREME_APP);
-//     }
-//   });
-// });
+UserRegRoutes.route('/').get(function (req, res) {
+ UserReg.find({userID:0},function (err, CAREME_APP) {
+    if (err) {
+       console.log(err);
+     } else {
+       res.json(CAREME_APP);
+     }
+   });
+ });
 
 module.exports = UserRegRoutes;
