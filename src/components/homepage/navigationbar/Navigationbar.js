@@ -73,9 +73,10 @@ class Navigationbar extends Component {
             <React.Fragment>
                 <nav class="navbar navbar-light bg-light">
                     <a class="navbar-brand" href="#">
-                        <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo" />
-                        Care Me
+                        {/* <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo" /> */}
+                        <img src="/images/careme.png" width="120" height="30" class="d-inline-block align-top" alt="mainlogo" />
                     </a>
+                    
 
                     {/* <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> */}
                     <li class="nav-item active">
