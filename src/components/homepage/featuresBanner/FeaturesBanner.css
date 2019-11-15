@@ -6,3 +6,13 @@
     word-spacing: 8px;
     word-spacing: 0.5rem;
   }
+
+  .skillsback{
+    min-height: calc(100vh - 76px);
+    background: url("/images/skills.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+  }
