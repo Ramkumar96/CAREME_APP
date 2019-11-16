@@ -18,6 +18,7 @@ return (
     <div class="col-md-6">
         {/* Default box */}
         
+        <div id={`${this.props.nType}`} className={`${this.props.nType}`}>
         <div id={`${this.props.loc}`} className={`${this.props.loc}`}>
         <div id={`${ this.props.expt}`} className={`${ this.props.expt}`} >
             <div className="card-body pb-0">
@@ -31,7 +32,7 @@ return (
                     <div className="row">
                         <div className="col-7">
                         <h2 className="lead"><b>{this.props.fname} {this.props.lname}</b></h2>
-                        <p className="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
+<p className="text-muted text-sm"><b>About      : </b> {this.props.nType} Nurse/ Graphic Artist / Coffee Lover </p>
                         <ul className="ml-4 mb-0 fa-ul text-muted">
                             <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Age: {this.props.age} Years</li>
                             <li className={`small ${ this.props.loct}` } id="loct"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Location: {this.props.loc}</li>
@@ -55,7 +56,7 @@ return (
                     </div>
                 </div>
                 </div>
-            </div></div></div></div>
+            </div></div></div></div></div>
             
     </div>
     

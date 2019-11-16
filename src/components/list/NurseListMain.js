@@ -243,6 +243,177 @@ class NurseListMain extends Component{
             }
         }
     }
+
+
+    nursesorttype = (event) => {
+        let fil = this.state.CAREME_APP;
+        const selector = event.target.value;
+        // outside render
+        var emerg = document.getElementsByClassName('Emergency');
+        var surg = document.getElementsByClassName('Surgical');
+        var geri = document.getElementsByClassName('Geriactic');
+        var mid = document.getElementsByClassName('Midwife');
+        var peri = document.getElementsByClassName('Periactric');
+        var ment = document.getElementsByClassName('Mental Health');
+
+        if(selector =="0"){
+            // alert('Hello 01');
+            for (var i=0;i<emerg.length;i+=1){
+                emerg[i].style.display = 'block';
+            }
+            for (var i=0;i<surg.length;i+=1){
+                surg[i].style.display = 'block';
+            }
+            for (var i=0;i<geri.length;i+=1){
+                geri[i].style.display = 'block';
+            }
+            for (var i=0;i<mid.length;i+=1){
+                mid[i].style.display = 'block';
+            }    
+            for (var i=0;i<peri.length;i+=1){
+                peri[i].style.display = 'block';
+            }        
+            for (var i=0;i<ment.length;i+=1){
+                ment[i].style.display = 'block';
+            }
+
+        }
+        
+        
+        if(selector =="1"){
+            // alert('Hello 01');
+            for (var i=0;i<emerg.length;i+=1){
+                emerg[i].style.display = 'block';
+            }
+            for (var i=0;i<surg.length;i+=1){
+                surg[i].style.display = 'none';
+            }
+            for (var i=0;i<geri.length;i+=1){
+                geri[i].style.display = 'none';
+            }
+            for (var i=0;i<mid.length;i+=1){
+                mid[i].style.display = 'none';
+            }    
+            for (var i=0;i<peri.length;i+=1){
+                peri[i].style.display = 'none';
+            }        
+            for (var i=0;i<ment.length;i+=1){
+                ment[i].style.display = 'none';
+            }
+
+        }
+        else if(selector =="2"){
+            // alert('Hello 02');
+            var elems1 = document.getElementById('colombo');
+            for (var i=0;i<emerg.length;i+=1){
+                emerg[i].style.display = 'none';
+            }
+            for (var i=0;i<surg.length;i+=1){
+                surg[i].style.display = 'block';
+            }
+            for (var i=0;i<geri.length;i+=1){
+                geri[i].style.display = 'none';
+            }
+            for (var i=0;i<mid.length;i+=1){
+                mid[i].style.display = 'none';
+            }    
+            for (var i=0;i<peri.length;i+=1){
+                peri[i].style.display = 'none';
+            }        
+            for (var i=0;i<ment.length;i+=1){
+                ment[i].style.display = 'none';
+            }
+
+        }
+        else if(selector =="3"){
+            // alert('Hello 03');
+            for (var i=0;i<emerg.length;i+=1){
+                emerg[i].style.display = 'none';
+            }
+            for (var i=0;i<surg.length;i+=1){
+                surg[i].style.display = 'none';
+            }
+            for (var i=0;i<geri.length;i+=1){
+                geri[i].style.display = 'block';
+            }
+            for (var i=0;i<mid.length;i+=1){
+                mid[i].style.display = 'none';
+            }    
+            for (var i=0;i<peri.length;i+=1){
+                peri[i].style.display = 'none';
+            }        
+            for (var i=0;i<ment.length;i+=1){
+                ment[i].style.display = 'none';
+            }
+
+        }
+        else if(selector =="4"){
+            // alert('Hello 04');
+            for (var i=0;i<emerg.length;i+=1){
+                emerg[i].style.display = 'none';
+            }
+            for (var i=0;i<surg.length;i+=1){
+                surg[i].style.display = 'none';
+            }
+            for (var i=0;i<geri.length;i+=1){
+                geri[i].style.display = 'none';
+            }
+            for (var i=0;i<mid.length;i+=1){
+                mid[i].style.display = 'block';
+            }    
+            for (var i=0;i<peri.length;i+=1){
+                peri[i].style.display = 'none';
+            }        
+            for (var i=0;i<ment.length;i+=1){
+                ment[i].style.display = 'none';
+            }
+
+        }
+        else if(selector =="5"){
+            // alert('Hello 04');
+            for (var i=0;i<emerg.length;i+=1){
+                emerg[i].style.display = 'none';
+            }
+            for (var i=0;i<surg.length;i+=1){
+                surg[i].style.display = 'none';
+            }
+            for (var i=0;i<geri.length;i+=1){
+                geri[i].style.display = 'none';
+            }
+            for (var i=0;i<mid.length;i+=1){
+                mid[i].style.display = 'none';
+            }    
+            for (var i=0;i<peri.length;i+=1){
+                peri[i].style.display = 'block';
+            }        
+            for (var i=0;i<ment.length;i+=1){
+                ment[i].style.display = 'none';
+            }
+            
+        }
+        else if(selector =="6"){
+            // alert('Hello 04');
+            for (var i=0;i<emerg.length;i+=1){
+                emerg[i].style.display = 'none';
+            }
+            for (var i=0;i<surg.length;i+=1){
+                surg[i].style.display = 'none';
+            }
+            for (var i=0;i<geri.length;i+=1){
+                geri[i].style.display = 'none';
+            }
+            for (var i=0;i<mid.length;i+=1){
+                mid[i].style.display = 'none';
+            }    
+            for (var i=0;i<peri.length;i+=1){
+                peri[i].style.display = 'none';
+            }        
+            for (var i=0;i<ment.length;i+=1){
+                ment[i].style.display = 'block';
+            }
+            
+        }
+    }
     
     
 
@@ -260,6 +431,7 @@ class NurseListMain extends Component{
             exp= {nurse.nurseExp}
             expt= {nurse.nurseExpT}
             loc= {nurse.Location}
+            nType= {nurse.nurseType}
             key={nurse._id}
         />})
 
@@ -299,7 +471,7 @@ class NurseListMain extends Component{
                         <option value={0}>select Experience Years</option>
                         <option value={1}>1-2</option>
                         <option value={2}>3-5</option>
-                        <option value={3}>5-10</option>
+                        <option value={3}>6-10</option>
                         <option value={4}>10+</option>
                     </select>
                 </div>
@@ -321,7 +493,7 @@ class NurseListMain extends Component{
             <div class="col">
                 <div className="form-group">
                     <label>Sort by Nurse Type </label>
-                    <select class="form-control" onChange={(event)=>this.nursesortloc(event)}>
+                    <select class="form-control" onChange={(event)=>this.nursesorttype(event)}>
                         <option value={0}>select type</option>
                         <option value={1}>Emergency Nurse</option>
                         <option value={2}>Surgical Nurse</option>
