@@ -15,10 +15,10 @@ class FeaturesBanner extends Component {
 
             {/* Right container with skill category */}
             <div className="col-sm-3 col-md-3">
-              <div className="wow fadeInRight" data-wow-delay="0.1s">
+              <div className="wow fadeInRight" data-wow-delay="0.1s" style={{marginTop:'4em'}}>
                 <div className="service-box">
                   <div className="service-icon">
-                    <span className="fa fa-stethoscope fa-3x" />
+                    <span className="fa fa-search fa-3x" />
                   </div>
                   <div className="service-desc">
                     <h5 className="h-light">Find Your Nurse</h5>
@@ -29,7 +29,7 @@ class FeaturesBanner extends Component {
               <div className="wow fadeInRight" data-wow-delay="0.2s">
                 <div className="service-box">
                   <div className="service-icon">
-                    <span className="fa fa-wheelchair fa-3x" />
+                    <span className="fa fa-star fa-3x" />
                   </div>
                   <div className="service-desc">
                     <h5 className="h-light">Check their reliability</h5>
@@ -40,7 +40,7 @@ class FeaturesBanner extends Component {
               <div className="wow fadeInRight" data-wow-delay="0.3s">
                 <div className="service-box">
                   <div className="service-icon">
-                    <span className="fa fa-plus-square fa-3x" />
+                    <span className="fa fa-envelope fa-3x" />
                   </div>
                   <div className="service-desc">
                     <h5 className="h-light">Talk to them</h5>
@@ -50,7 +50,7 @@ class FeaturesBanner extends Component {
               </div>
             </div>
             <div className="col-sm-3 col-md-3">
-              <div className="wow fadeInRight" data-wow-delay="0.1s">
+              <div className="wow fadeInRight" data-wow-delay="0.1s" style={{marginTop:'4em'}}>
                 <div className="service-box">
                   <div className="service-icon">
                     <span className="fa fa-h-square fa-3x" />
@@ -64,10 +64,10 @@ class FeaturesBanner extends Component {
               <div className="wow fadeInRight" data-wow-delay="0.2s">
                 <div className="service-box">
                   <div className="service-icon">
-                    <span className="fa fa-filter fa-3x" />
+                    <span className="fa fa-info-circle fa-3x" />
                   </div>
                   <div className="service-desc">
-                    <h5 className="h-light">Tell us if you need to</h5>
+                    <h5 className="h-light">Report to us</h5>
                     <p>Contact us directly if you have anything to report about</p>
                   </div>
                 </div>
@@ -75,7 +75,7 @@ class FeaturesBanner extends Component {
               <div className="wow fadeInRight" data-wow-delay="0.3s">
                 <div className="service-box">
                   <div className="service-icon">
-                    <span className="fa fa-user-md fa-3x" />
+                    <span className="fa fa-question fa-3x" />
                   </div>
                   <div className="service-desc">
                     <h5 className="h-light">Don't suit your needs?</h5>
