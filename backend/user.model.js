@@ -50,7 +50,7 @@ let UserReg = new Schema({
     type: String
   },
 
-  nurseType: {
+  nurseExpT:{
     type: String
   }
 },{
