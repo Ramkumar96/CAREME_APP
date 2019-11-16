@@ -10,7 +10,7 @@
     top: -1.5rem;
     left: -27.2px;
     left: -1.7rem;
-    width: 100%;;
+    width: 80%;;
     height: 100%;
     outline: 8px solid #3D3F73;
     outline: 0.5rem solid #3D3F73;
@@ -21,4 +21,36 @@
   .about-img__container:hover:before {
     top: 0;
     left: 0;
+  }
+
+  .img-fluid{
+    height: 80%;
+    width: 80%;
+  }
+
+  .back {
+    min-height: calc(100vh - 76px);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    padding-top: 80px;
+    padding-bottom:80px;
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+
+  .abouttext{
+    padding-left:40px;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-right: 10px;
+  }
+
+  .caremeimage{
+    padding-left:180px;
+  }
+
+  .aboutimg{
+    padding-left: 80px;
   }

@@ -52,6 +52,9 @@ let UserReg = new Schema({
 
   nurseExpT:{
     type: String
+  },
+  nurseEdu: {
+    type: String
   }
 },{
     collection: 'Users'

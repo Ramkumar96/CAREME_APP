@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./IntroBanner.css";
-import { BrowserRouter as Router,Link,Redirect } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
@@ -71,21 +70,24 @@ class IntroBanner extends Component{
     }
 
     onChangeFirstName(e){
-        this.setState({
-            FirstName : e.target.value
-        });
+        const re = /^[A-Za-z\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({FirstName: e.target.value})
+        }
     }
 
     onChangeLastName(e){
-        this.setState({
-            LastName : e.target.value
-        });
+        const re = /^[A-Za-z\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({LastName: e.target.value})
+        }
     }
 
     onChangeNurseID(e){
-        this.setState({
-            nurseID : e.target.value
-        });
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({nurseID: e.target.value})
+        }
     }
 
     onChangeEmail(e){
@@ -113,9 +115,10 @@ class IntroBanner extends Component{
     }
 
     onChangeTel(e){
-        this.setState({
-            Tel : e.target.value
-        });
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({Tel: e.target.value})
+        }
     }
 
     handleBlur = field => e => {
@@ -141,30 +144,43 @@ class IntroBanner extends Component{
             Age : null,
             nurseExp : null,
             nurseType : null,
+<<<<<<< HEAD
             nurseExpT: null
+=======
+            nurseEdu : null
+>>>>>>> 9847279a154b2b3887be55fdff64401a31832c49
         };
 
         if (!this.canBeSubmitted()) {
             e.preventDefault();
             return;
-          }
-          const { FirstName, LastName, nurseID, Email, PW, CPW, Home, Tel } = this.state;
-          alert(`Succesfully Registered`);      
+        }
         
-        axios.post('http://localhost:4000/user/add', obj)
-            .then(res => console.log(res.data));
-              
-        this.setState({
-            FirstName: '',
-            LastName: '',
-            nurseID: '',
-            Email: '',
-            PW: '',
-            CPW: '',
-            Home: '',
-            Tel: '',
-            visible : false
-        });
+        const { PW, CPW } = this.state;
+
+        if ( PW != CPW){
+            alert("Your passwords dont match");
+        }
+        
+        else {
+            const { FirstName, LastName, nurseID, Email, PW, CPW, Home, Tel } = this.state;
+            alert(`Succesfully Registered`);      
+            
+            axios.post('http://localhost:4000/user/add', obj)
+                .then(res => console.log(res.data));
+                
+            this.setState({
+                FirstName: '',
+                LastName: '',
+                nurseID: '',
+                Email: '',
+                PW: '',
+                CPW: '',
+                Home: '',
+                Tel: '',
+                visible : false
+            });
+        }
     }
 
     canBeSubmitted() {
@@ -177,7 +193,7 @@ class IntroBanner extends Component{
     onSubmitClient(e){
         e.preventDefault();
 
-           const obj = {
+        const obj = {
             FirstName: this.state.FirstName,
             LastName: this.state.LastName,
             Email: this.state.Email,
@@ -188,28 +204,37 @@ class IntroBanner extends Component{
             userID: 1,
             Location : null,
             Age : null
-          };
+        };
 
-          if (!this.canBeSubmitted1()) {
+        if (!this.canBeSubmitted1()) {
             e.preventDefault();
             return;
-          }
-          const { FirstName, LastName, Email, PW, CPW, Home, Tel } = this.state;
-          alert(`Succesfully Registered`); 
+        }
 
-          axios.post('http://localhost:4000/user/add', obj)
-              .then(res => console.log(res.data));
+        const { PW, CPW } = this.state;
 
-        this.setState({
-            FirstName: '',
-            LastName: '',
-            Email: '',
-            PW: '',
-            CPW: '',
-            Home: '',
-            Tel: '',
-            visible1 : false
-        });
+        if ( PW != CPW){
+            alert("Your passwords dont match");
+        }
+
+        else {
+            const { FirstName, LastName, Email, PW, CPW, Home, Tel } = this.state;
+            alert(`Succesfully Registered`); 
+
+            axios.post('http://localhost:4000/user/add', obj)
+                .then(res => console.log(res.data));
+
+            this.setState({
+                FirstName: '',
+                LastName: '',
+                Email: '',
+                PW: '',
+                CPW: '',
+                Home: '',
+                Tel: '',
+                visible1 : false
+            });
+        }
     }
 
     canBeSubmitted1() {

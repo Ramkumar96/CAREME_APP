@@ -53,9 +53,9 @@ class Navigationbar extends Component {
                 //console.log(response.data)
                 if (response.data.success) {
                     console.log(response.data.user_data)
-                    localStorage.setItem("id",response.data.user_data._id)
-                    localStorage.setItem("user_id",response.data.user_data.userID)
-                    localStorage.setItem("user_name",response.data.user_data.FirstName)
+                    localStorage.setItem("id", response.data.user_data._id)
+                    localStorage.setItem("user_id", response.data.user_data.userID)
+                    localStorage.setItem("user_name", response.data.user_data.FirstName)
                     this.setState({
                         redirect_profile: true
                     })
@@ -66,63 +66,62 @@ class Navigationbar extends Component {
     render() {
         if (this.state.redirect_profile) {
             return (
-                <Redirect to="/profile" />
+                <Redirect to="/clientprofile" />
             )
         }
         return (
             <React.Fragment>
                 <nav class="navbar navbar-light bg-light">
+
+                    {/* Nav Bar LOGO */}
                     <a class="navbar-brand" href="#">
-                        <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo" />
-                        Care Me
+                        <img src="/images/careme.png" width="120" height="30" class="d-inline-block align-top" alt="mainlogo" />
                     </a>
 
-                    {/* <ul class="navbar-nav mr-auto mt-2 mt-lg-0"> */}
-                    <li class="nav-item active">
-                        <Link to="/profile" >client profile</Link>
-                    </li>
-                    <li class="nav-item active">
-                        <Link to="/clientlist" >client List</Link>
-                    </li>
-                    <li class="nav-item active">
-                        <Link to="/nurselist">Nurse List</Link>
-                    </li>
-                    {/* </ul> */}
 
-                    <a>
-                        <span>
-                            <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openModal()} />
-                            <Modal visible={this.state.visible} width="25%" height="45%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                <h1 align="center">Login</h1>
-                                <Form>
-                                    <Form.Group controlId="emailAd">
-                                        <Form.Label>E-mail Address</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            placeholder="janedoe@example.com"
-                                            name="email"
-                                            value={this.state.email}
-                                            onChange={this.handleOnChange} />
-                                    </Form.Group>
+                    <div>
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    {/* Navbar login button */}
+                                    <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openModal()} />
+                                    <Modal visible={this.state.visible} width="25%" height="45%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                        <h1 align="center">Login</h1>
+                                        <Form>
+                                            <Form.Group controlId="emailAd">
+                                                <Form.Label>E-mail Address</Form.Label>
+                                                <Form.Control
+                                                    type="email"
+                                                    placeholder="janedoe@example.com"
+                                                    name="email"
+                                                    value={this.state.email}
+                                                    onChange={this.handleOnChange} />
+                                            </Form.Group>
 
-                                    <Form.Group controlId="Password">
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Enter Your Password Here"
-                                            name="password"
-                                            value={this.state.password}
-                                            onChange={this.handleOnChange} />
-                                    </Form.Group>
-                                    <center><Button variant="btn btn-success" onClick={this.onLogin} type="submit">Login</Button></center>
-                                </Form>
-                            </Modal>
-                        </span>
-                    </a>
-                    <Link to="/nursemainlist">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">FIND A NURSE</button>
-                    </Link>
-                </nav>
+                                            <Form.Group controlId="Password">
+                                                <Form.Label>Password</Form.Label>
+                                                <Form.Control
+                                                    type="password"
+                                                    placeholder="Enter Your Password Here"
+                                                    name="password"
+                                                    value={this.state.password}
+                                                    onChange={this.handleOnChange} />
+                                            </Form.Group>
+                                            <center><Button variant="btn btn-success" onClick={this.onLogin} type="submit">Login</Button></center>
+                                        </Form>
+                                    </Modal>
+
+                                </td>
+                                <td>
+                                    {/* navbar fin nurse button */}
+                                    <Link to="/nursemainlist">
+                                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">FIND A NURSE</button>
+                                    </Link>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            </nav>
             </React.Fragment>
         );
     }

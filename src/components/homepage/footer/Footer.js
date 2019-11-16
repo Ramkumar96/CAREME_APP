@@ -41,9 +41,9 @@ class Footer extends Component{
                             <div class="col-lg-4 col-xs-12 location">
                             <h4 class="mt-lg-0 mt-sm-4">Follow Care Me</h4>
                             <ul>
-                            <a href="https://www.linkedin.com/"><FontAwesomeIcon icon={faLinkedin} size="4x"/></a>
-                            <a href="https://github.com/"><FontAwesomeIcon icon={faGithub} size="4x"/></a>
-                            <a href="https://facebook.com/"><FontAwesomeIcon icon={faFacebookSquare} size="4x" /></a>
+                            <a href="https://www.linkedin.com/"><FontAwesomeIcon icon={faLinkedin} size="2x"/></a>
+                            <a href="https://github.com/"><FontAwesomeIcon icon={faGithub} size="2x"/></a>
+                            <a href="https://facebook.com/"><FontAwesomeIcon icon={faFacebookSquare} size="2x" /></a>
 
         
 

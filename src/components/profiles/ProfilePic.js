@@ -29,13 +29,13 @@ class ProfilePic extends Component {
 
     render() {
     
-        if(!this.state.profile_data){
-           return(
-           <div> <text>Loading</text> </div>
-           );
-        }
+        // if(!this.state.profile_data){
+        //    return(
+        //    <div> <text>Loading</text> </div>
+        //    );
+        // }
         
-        if(this.state.profile_data){
+        // if(this.state.profile_data){
             return (
                 <div>
                     {/* Profile Image */}
@@ -44,7 +44,8 @@ class ProfilePic extends Component {
                             <div className="text-center">
                                 <img className="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture" />
                             </div>
-                            <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
+                            <h3 className="profile-username text-center">name</h3>
+                            {/* {this.state.profile_data.FirstName} */}
                             {/* <p className="text-muted text-center">Software Engineer</p> */}
     
                             <ul className="list-group list-group-unbordered mb-3 text-center">
@@ -93,7 +94,7 @@ class ProfilePic extends Component {
                     {/* /.card */}
                 </div>
             );
-        }
+        // }
         
     }
 }
