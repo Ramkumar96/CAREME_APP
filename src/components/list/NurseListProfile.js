@@ -12,9 +12,12 @@ class NurseListProfile extends Component{
     render(){
 
 return (
-    <div>
+
+    
+    <div class="col-md-6">
         {/* Default box */}
-        <div>
+      
+        <div id={`${ this.props.expt}`} className={`${ this.props.expt}`} >
             <div className="card-body pb-0">
             <div className="row d-flex align-items-stretch">
                 <div className="d-flex align-items-stretch">
@@ -28,8 +31,8 @@ return (
                         <h2 className="lead"><b>{this.props.fname} {this.props.lname}</b></h2>
                         <p className="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
                         <ul className="ml-4 mb-0 fa-ul text-muted">
-                            <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Age: {this.props.age}</li>
-<li className="small"><span className="fa-li"><i className="fas fa-lg fa-phone" /></span> Experience: {this.props.exp}</li>
+                            <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Age: {this.props.age} Years</li>
+                            <li className={`small ${ this.props.expt}`}  id="exp"><span className="fa-li"><i className="fas fa-lg fa-phone" /></span> Experience: {this.props.exp} Years</li>
                         </ul>
                         </div>
                         <div className="col-5 text-center">
@@ -51,6 +54,7 @@ return (
                 </div>
             </div></div></div>
     </div>
+    
 
         
     )

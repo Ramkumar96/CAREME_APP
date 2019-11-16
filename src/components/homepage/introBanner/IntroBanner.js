@@ -143,10 +143,7 @@ class IntroBanner extends Component{
             Location : null,
             Age : null,
             nurseExp : null,
-            nurseType : null,
-            nurseEdu : null,
-            nurseUni : null
-        };
+            nurseType : null, };
 
         if (!this.canBeSubmitted()) {
             e.preventDefault();
