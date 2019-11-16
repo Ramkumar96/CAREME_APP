@@ -151,6 +151,7 @@ class NurseListMain extends Component{
             age= {nurse.Age}
             exp= {nurse.nurseExp}
             expt= {nurse.nurseExpT}
+            loc = {nurse.Location}
             key={nurse._id}
         />})
 

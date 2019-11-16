@@ -32,6 +32,7 @@ return (
                         <p className="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
                         <ul className="ml-4 mb-0 fa-ul text-muted">
                             <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Age: {this.props.age} Years</li>
+                            <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Location: {this.props.loc}</li>
                             <li className={`small ${ this.props.expt}`}  id="exp"><span className="fa-li"><i className="fas fa-lg fa-phone" /></span> Experience: {this.props.exp} Years</li>
                         </ul>
                         </div>
