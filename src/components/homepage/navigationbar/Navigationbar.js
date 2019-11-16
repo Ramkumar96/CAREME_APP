@@ -83,27 +83,36 @@ class Navigationbar extends Component {
                     </a>
 
 
-                    <div>
+                    <div >
                         <table align="center">
                             <tr>
                                 <td>
                                     {/* Navbar login button */}
                                     <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openModal()} />
                                     <Modal visible={this.state.visible} width="25%" height="45%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                        <div class="card-body login-card-body">
                                         <h1 align="center">Login</h1>
                                         <Form>
+                                            
                                             <Form.Group controlId="emailAd">
                                                 <Form.Label>E-mail Address</Form.Label>
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-envelope"></span>
+                                                </div>
                                                 <Form.Control
                                                     type="email"
                                                     placeholder="janedoe@example.com"
                                                     name="email"
                                                     value={this.state.email}
                                                     onChange={this.handleOnChange} />
+                                                    
                                             </Form.Group>
-
+                                            
                                             <Form.Group controlId="Password">
                                                 <Form.Label>Password</Form.Label>
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-lock"></span>
+                                                 </div>
                                                 <Form.Control
                                                     type="password"
                                                     placeholder="Enter Your Password Here"
@@ -113,6 +122,7 @@ class Navigationbar extends Component {
                                             </Form.Group>
                                             <center><Button variant="btn btn-success" onClick={this.onLogin} type="submit">Login</Button></center>
                                         </Form>
+                                        </div>
                                     </Modal>
 
                                 </td>
