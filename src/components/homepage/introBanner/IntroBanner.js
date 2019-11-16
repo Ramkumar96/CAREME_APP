@@ -3,6 +3,7 @@ import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
+import Navigationbar from '../navigationbar/Navigationbar'
 
 function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC){
     return {
@@ -475,6 +476,7 @@ class IntroBanner extends Component{
                                                 </Form.Group>
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled} onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
+                                                <a href="#" class="text-center" onClick={() => this.closeModal()}>I already have a membership</a>
                                                 </Form>
                                                 </div>
                                             </Modal>
@@ -597,6 +599,7 @@ class IntroBanner extends Component{
                                                 </Form.Group>
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled1} onClick={this.onSubmitClient.bind(this)}>Submit</Button>
+                                                <a href="#" class="text-center" onClick={() => this.closeModal1()}>I already have a membership</a>
                                                 </Form>
                                                 </div>
                                             </Modal>
