@@ -47,7 +47,10 @@ class Navigationbar extends Component {
             email: this.state.email,
             password: this.state.password
         };
+
+
         console.log(data)
+        
         axios.post('http://localhost:4000/user/login', data)
             .then(response => {
                 //console.log(response.data)

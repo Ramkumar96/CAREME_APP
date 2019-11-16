@@ -50,9 +50,14 @@ let UserReg = new Schema({
     type: String
   },
 
+  nurseUni:{
+    type: String
+  },
+
   nurseType: {
     type: String
   },
+
   nurseEdu: {
     type: String
   }
