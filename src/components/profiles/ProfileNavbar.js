@@ -81,15 +81,15 @@ class ProfileNavbar extends Component{
                                     <MenuIcon fontSize="large" {...bindTrigger(popupState)}/>
                                     
                                     <Menu {...bindMenu(popupState)} onClickAway={popupState.close}>
-                                        <MenuItem onClick={popupState.close}>Cake</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Brownies</MenuItem>
-                                        <MenuItem onClick={popupState.close}>French-Fries</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Death</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Home</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Settings</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Calander</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Preferences</MenuItem>
 
                                         <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                             <h1 align="center">LogOut</h1>
-                                            <p>Do you really want to Logout?</p>
+                                            <p align="center">Do you really want to Logout?</p>
                                                 <center>
                                                     <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button>
                                                     <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
