@@ -318,6 +318,20 @@ class NurseListMain extends Component{
                 </div>
             </div>
               
+            <div class="col">
+                <div className="form-group">
+                    <label>Sort by Nurse Type </label>
+                    <select class="form-control" onChange={(event)=>this.nursesortloc(event)}>
+                        <option value={0}>select type</option>
+                        <option value={1}>Emergency Nurse</option>
+                        <option value={2}>Surgical Nurse</option>
+                        <option value={3}>Geriactic Nurse</option>
+                        <option value={4}>Midwife Nurse</option>
+                        <option value={5}>Periactric Nurse</option>
+                        <option value={6}>Mental Health Nurse</option>
+                    </select>
+                </div>
+            </div>
 
             </div>
             </center>
