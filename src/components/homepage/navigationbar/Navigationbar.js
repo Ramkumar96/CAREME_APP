@@ -7,6 +7,7 @@ import Modal from 'react-awesome-modal';
 import { Button, Form } from 'react-bootstrap';
 import axios from "../../../../backend/node_modules/axios";
 import NurseListMain from '../../list/NurseListMain';
+import App from "../../../App"
 
 class Navigationbar extends Component {
     constructor(props) {
@@ -77,7 +78,7 @@ class Navigationbar extends Component {
                 <nav class="navbar navbar-light bg-light">
 
                     {/* Nav Bar LOGO */}
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <img src="/images/careme.png" width="120" height="30" class="d-inline-block align-top" alt="mainlogo" />
                     </a>
 
