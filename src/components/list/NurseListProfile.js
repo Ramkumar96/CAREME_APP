@@ -14,9 +14,11 @@ class NurseListProfile extends Component{
 return (
 
     
+    
     <div class="col-md-6">
         {/* Default box */}
-      
+        
+        <div id={`${this.props.loc}`} className={`${this.props.loc}`}>
         <div id={`${ this.props.expt}`} className={`${ this.props.expt}`} >
             <div className="card-body pb-0">
             <div className="row d-flex align-items-stretch">
@@ -32,7 +34,7 @@ return (
                         <p className="text-muted text-sm"><b>About: </b> Web Designer / UX / Graphic Artist / Coffee Lover </p>
                         <ul className="ml-4 mb-0 fa-ul text-muted">
                             <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Age: {this.props.age} Years</li>
-                            <li className="small"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Location: {this.props.loc}</li>
+                            <li className={`small ${ this.props.loct}` } id="loct"><span className="fa-li"><i className="fas fa-lg fa-building" /></span> Location: {this.props.loc}</li>
                             <li className={`small ${ this.props.expt}`}  id="exp"><span className="fa-li"><i className="fas fa-lg fa-phone" /></span> Experience: {this.props.exp} Years</li>
                         </ul>
                         </div>
@@ -53,7 +55,8 @@ return (
                     </div>
                 </div>
                 </div>
-            </div></div></div>
+            </div></div></div></div>
+            
     </div>
     
 

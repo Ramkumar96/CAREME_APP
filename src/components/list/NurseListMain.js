@@ -70,6 +70,23 @@ class NurseListMain extends Component{
         var threefive = document.getElementsByClassName('threefive');
         var onetwo = document.getElementsByClassName('onetwo');
 
+        if(selector =="0"){
+            // alert('Hello 01');
+            for (var i=0;i<tenplus.length;i+=1){
+                tenplus[i].style.display = 'block';
+            }
+            for (var i=0;i<fiveten.length;i+=1){
+                fiveten[i].style.display = 'block';
+            }
+            for (var i=0;i<threefive.length;i+=1){
+                threefive[i].style.display = 'block';
+            }
+            for (var i=0;i<onetwo.length;i+=1){
+                onetwo[i].style.display = 'block';
+            }
+
+        }
+        
         if(selector =="1"){
             // alert('Hello 01');
             for (var i=0;i<tenplus.length;i+=1){
@@ -135,6 +152,97 @@ class NurseListMain extends Component{
     }
 
 
+
+    nursesortloc = (event) => {
+        let fil = this.state.CAREME_APP;
+        const selector = event.target.value;
+        // outside render
+        var colombo = document.getElementsByClassName('Colombo');
+        var gampaha = document.getElementsByClassName('Gampaha');
+        var galle = document.getElementsByClassName('Galle');
+        var kurunegala = document.getElementsByClassName('Kurunegala');
+
+        if(selector =="0"){
+            // alert('Hello 01');
+            for (var i=0;i<colombo.length;i+=1){
+                colombo[i].style.display = 'block';
+            }
+            for (var i=0;i<gampaha.length;i+=1){
+                gampaha[i].style.display = 'block';
+            }
+            for (var i=0;i<galle.length;i+=1){
+                galle[i].style.display = 'block';
+            }
+            for (var i=0;i<kurunegala.length;i+=1){
+                kurunegala[i].style.display = 'block';
+            }
+
+        }
+        
+        
+        if(selector =="1"){
+            // alert('Hello 01');
+            for (var i=0;i<colombo.length;i+=1){
+                colombo[i].style.display = 'block';
+            }
+            for (var i=0;i<gampaha.length;i+=1){
+                gampaha[i].style.display = 'none';
+            }
+            for (var i=0;i<galle.length;i+=1){
+                galle[i].style.display = 'none';
+            }
+            for (var i=0;i<kurunegala.length;i+=1){
+                kurunegala[i].style.display = 'none';
+            }
+
+        }
+        else if(selector =="2"){
+            // alert('Hello 02');
+            var elems1 = document.getElementById('colombo');
+            for (var i=0;i<colombo.length;i+=1){
+                colombo[i].style.display = 'none';
+            }
+            for (var i=0;i<gampaha.length;i+=1){
+                gampaha[i].style.display = 'block';
+            }
+            for (var i=0;i<galle.length;i+=1){
+                galle[i].style.display = 'none';
+            }
+            for (var i=0;i<kurunegala.length;i+=1){
+                kurunegala[i].style.display = 'none';
+            }
+        }
+        else if(selector =="3"){
+            // alert('Hello 03');
+            for (var i=0;i<colombo.length;i+=1){
+                colombo[i].style.display = 'none';
+            }
+            for (var i=0;i<gampaha.length;i+=1){
+                gampaha[i].style.display = 'none';
+            }
+            for (var i=0;i<galle.length;i+=1){
+                galle[i].style.display = 'block';
+            }
+            for (var i=0;i<kurunegala.length;i+=1){
+                kurunegala[i].style.display = 'none';
+            }
+        }
+        else if(selector =="4"){
+            // alert('Hello 04');
+            for (var i=0;i<colombo.length;i+=1){
+                colombo[i].style.display = 'none';
+            }
+            for (var i=0;i<gampaha.length;i+=1){
+                gampaha[i].style.display = 'none';
+            }
+            for (var i=0;i<galle.length;i+=1){
+                galle[i].style.display = 'none';
+            }
+            for (var i=0;i<kurunegala.length;i+=1){
+                kurunegala[i].style.display = 'block';
+            }
+        }
+    }
     
     
 
@@ -151,7 +259,7 @@ class NurseListMain extends Component{
             age= {nurse.Age}
             exp= {nurse.nurseExp}
             expt= {nurse.nurseExpT}
-            loc = {nurse.Location}
+            loc= {nurse.Location}
             key={nurse._id}
         />})
 
@@ -188,11 +296,24 @@ class NurseListMain extends Component{
                 <div className="form-group">
                     <label>Sort by Experience </label>
                     <select class="form-control" onChange={(event)=>this.nursesortexp(event)}>
-                        <option>select Experience</option>
+                        <option value={0}>select Experience Years</option>
                         <option value={1}>1-2</option>
                         <option value={2}>3-5</option>
                         <option value={3}>5-10</option>
                         <option value={4}>10+</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div className="form-group">
+                    <label>Sort by Location </label>
+                    <select class="form-control" onChange={(event)=>this.nursesortloc(event)}>
+                        <option value={0}>select District</option>
+                        <option value={1}>Colombo</option>
+                        <option value={2}>Gampaha</option>
+                        <option value={3}>Galle</option>
+                        <option value={4}>Kurunegala</option>
                     </select>
                 </div>
             </div>
