@@ -27,6 +27,7 @@ let UserReg = new Schema({
     type: String
   },
   
+  //home address
   Home: {
     type: String
   },
@@ -34,10 +35,13 @@ let UserReg = new Schema({
   Tel: {
     type: Number
   },
+
+  //nurse is 0 client is 1
   userID: {
     type: Number
   },
 
+  //categorized according to districts
   Location: {
     type: String
   },
@@ -46,19 +50,28 @@ let UserReg = new Schema({
     type: Number
   },
 
+  //number of years
   nurseExp: {
     type: String
   },
 
+  //Education institute (eg: Pera, Col)
   nurseUni:{
     type: String
   },
 
+  //degree or diploma and stuff like that
+  nurseEdu:{
+    type: String
+  },
+
+  //category such as emergency and peadiatric
   nurseType: {
     type: String
   },
 
-  nurseEdu: {
+  //nurse experience years in text for easier filtering
+  nurseExpT: {
     type: String
   }
 },{
