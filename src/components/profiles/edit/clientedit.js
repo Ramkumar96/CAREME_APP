@@ -31,20 +31,31 @@ class ClientEdit extends Component {
                             </div>
                             <div className="form-group"> 
                                     <select id="inputState" className="form-control">
-                                        <option selected>Colombo 01</option>
-                                        <option selected>Colombo 02</option>
-                                        <option selected>Colombo 03</option>
-                                        <option selected>Colombo 04</option>
-                                        <option selected>Colombo 05</option>
-                                        <option selected>Colombo 06</option>
-                                        <option selected>Colombo 07</option>
-                                        <option selected>Colombo 08</option>
-                                        <option selected>Colombo 09</option>
-                                        <option selected>Colombo 10</option>
-                                        <option selected>Colombo 11</option>
-                                        <option selected>Colombo 12</option>
-                                        <option selected>Colombo 13</option>
-                                        <option selected>Colombo 14</option>       
+                                        <option selected>Ampara</option>
+                                        <option selected>Anuradhapura</option>
+                                        <option selected>Badulla</option>
+                                        <option selected>Batticaloa</option>
+                                        <option selected>Colombo</option>
+                                        <option selected>Galle</option>
+                                        <option selected>Gampaha</option>
+                                        <option selected>Hambantota</option>
+                                        <option selected>Jaffna</option>
+                                        <option selected>Kalutara</option>
+                                        <option selected>Kandy</option>
+                                        <option selected>Kegalle</option>
+                                        <option selected>Kilinochchi</option>
+                                        <option selected>Kurunegala</option>
+                                        <option selected>Mannar</option>
+                                        <option selected>Matale</option>
+                                        <option selected>Matara</option>
+                                        <option selected>Monaragala</option>
+                                        <option selected>Mullaitivu</option>
+                                        <option selected>Nuwara Eliya</option>
+                                        <option selected>Polonnaruwa</option>
+                                        <option selected>Puttalam</option>
+                                        <option selected>Ratnapura</option>
+                                        <option selected>Trincomalee</option>
+                                        <option selected>Vavuniya</option>       
                                     </select>
                             </div>
                         </div>
