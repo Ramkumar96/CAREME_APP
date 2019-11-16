@@ -343,12 +343,13 @@ class IntroBanner extends Component{
                                 <strong class="banner-title">Book Appointment with Expert Nurse in your Area</strong>
                             </h1>
 
-                            <div>
+                            <div >
                                 <table align = "center">
                                     <tr><td>
                                         <span>
                                             <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
                                             <Modal visible={this.state.visible} width="50%" height="98%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                                <div class="card-body register-card-body">
                                                 <h1>Register Here</h1>
                                                 <Form>                                                    
                                                  <Form.Row>
@@ -475,6 +476,7 @@ class IntroBanner extends Component{
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled} onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
                                                 </Form>
+                                                </div>
                                             </Modal>
                                         </span>
                                     </td>
@@ -483,6 +485,7 @@ class IntroBanner extends Component{
                                         <span>
                                             <input type="button" class="btn btn-secondary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
                                             <Modal visible={this.state.visible1} width="50%" height="87%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                                            <div class="card-body register-card-body">
                                                 <h1>Register Here</h1>
                                                 <Form>                                                    
                                                  <Form.Row>
@@ -595,6 +598,7 @@ class IntroBanner extends Component{
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled1} onClick={this.onSubmitClient.bind(this)}>Submit</Button>
                                                 </Form>
+                                                </div>
                                             </Modal>
                                         </span>
                                     </td></tr>
