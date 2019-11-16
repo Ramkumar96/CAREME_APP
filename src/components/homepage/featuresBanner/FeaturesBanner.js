@@ -21,8 +21,8 @@ class FeaturesBanner extends Component {
                     <span className="fa fa-stethoscope fa-3x" />
                   </div>
                   <div className="service-desc">
-                    <h5 className="h-light">Medical checkup</h5>
-                    <p>Vestibulum tincidunt enim in pharetra malesuada.</p>
+                    <h5 className="h-light">Find Your Nurse</h5>
+                    <p>Find a number of nurses who fit your necessities</p>
                   </div>
                 </div>
               </div>
@@ -32,8 +32,8 @@ class FeaturesBanner extends Component {
                     <span className="fa fa-wheelchair fa-3x" />
                   </div>
                   <div className="service-desc">
-                    <h5 className="h-light">Nursing Services</h5>
-                    <p>Vestibulum tincidunt enim in pharetra malesuada.</p>
+                    <h5 className="h-light">Check their reliability</h5>
+                    <p>Analyse your choices based on what others had to say about their service</p>
                   </div>
                 </div>
               </div>
@@ -43,8 +43,8 @@ class FeaturesBanner extends Component {
                     <span className="fa fa-plus-square fa-3x" />
                   </div>
                   <div className="service-desc">
-                    <h5 className="h-light">Pharmacy</h5>
-                    <p>Vestibulum tincidunt enim in pharetra malesuada.</p>
+                    <h5 className="h-light">Talk to them</h5>
+                    <p>Talk to them and see whether they're your real match</p>
                   </div>
                 </div>
               </div>
@@ -56,8 +56,8 @@ class FeaturesBanner extends Component {
                     <span className="fa fa-h-square fa-3x" />
                   </div>
                   <div className="service-desc">
-                    <h5 className="h-light">Gyn Care</h5>
-                    <p>Vestibulum tincidunt enim in pharetra malesuada.</p>
+                    <h5 className="h-light">Support the others</h5>
+                    <p>Help the others by rating your experience with the nurse you hired</p>
                   </div>
                 </div>
               </div>
@@ -67,8 +67,8 @@ class FeaturesBanner extends Component {
                     <span className="fa fa-filter fa-3x" />
                   </div>
                   <div className="service-desc">
-                    <h5 className="h-light">Neurology</h5>
-                    <p>Vestibulum tincidunt enim in pharetra malesuada.</p>
+                    <h5 className="h-light">Tell us if you need to</h5>
+                    <p>Contact us directly if you have anything to report about</p>
                   </div>
                 </div>
               </div>
@@ -78,8 +78,8 @@ class FeaturesBanner extends Component {
                     <span className="fa fa-user-md fa-3x" />
                   </div>
                   <div className="service-desc">
-                    <h5 className="h-light">Sleep Center</h5>
-                    <p>Vestibulum tincidunt enim in pharetra malesuada.</p>
+                    <h5 className="h-light">Don't suit your needs?</h5>
+                    <p>Tell us how we can improve. We aim to improve your lifestyle</p>
                   </div>
                 </div>
               </div>

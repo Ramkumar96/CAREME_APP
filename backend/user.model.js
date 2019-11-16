@@ -19,6 +19,10 @@ let UserReg = new Schema({
     type: String
   },
   
+  NIC: {
+    type: String
+  },
+
   PW: {
     type: String
   },
@@ -73,8 +77,11 @@ let UserReg = new Schema({
   //nurse experience years in text for easier filtering
   nurseExpT: {
     type: String
+  },
+  
+  nurseGender: {
+    type: String
   }
-
 },{
     collection: 'Users'
 });

@@ -4,7 +4,7 @@ import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 
-function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel){
+function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC){
     return {
         Email: Email.length===0,
         FirstName: FirstName.length===0,
@@ -13,11 +13,12 @@ function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel){
         PW: PW.length===0,
         CPW: CPW.length===0,
         Home: Home.length===0,
-        Tel: Tel.length===0
+        Tel: Tel.length===0,
+        NIC: NIC.length===0
     };
 }
 
-function validate1 (Email, FirstName, LastName, PW, CPW, Home, Tel){
+function validate1 (Email, FirstName, LastName, PW, CPW, Home, Tel, NIC){
     return {
         Email: Email.length===0,
         FirstName: FirstName.length===0,
@@ -25,7 +26,8 @@ function validate1 (Email, FirstName, LastName, PW, CPW, Home, Tel){
         PW: PW.length===0,
         CPW: CPW.length===0,
         Home: Home.length===0,
-        Tel: Tel.length===0
+        Tel: Tel.length===0,
+        NIC: NIC.length===0
     };
 }
 
@@ -41,6 +43,7 @@ class IntroBanner extends Component{
         this.onChangeCPW = this.onChangeCPW.bind(this);
         this.onChangeHome = this.onChangeHome.bind(this);
         this.onChangeTel = this.onChangeTel.bind(this);
+        this.onChangeNIC = this.onChangeNIC.bind(this);
         this.onSubmitNurse = this.onSubmitNurse.bind(this);
         this.onSubmitClient = this.onSubmitClient.bind(this);
 
@@ -55,6 +58,7 @@ class IntroBanner extends Component{
             CPW: '',
             Home: '',
             Tel: '',
+            NIC: '',
 
             touched : {
                 Email: false,
@@ -64,7 +68,8 @@ class IntroBanner extends Component{
                 PW: false,
                 CPW: false,
                 Home: false,
-                Tel: false
+                Tel: false,
+                NIC: false
             }
         };
     }
@@ -93,6 +98,12 @@ class IntroBanner extends Component{
     onChangeEmail(e){
         this.setState({
             Email : e.target.value
+        });
+    }
+
+    onChangeNIC(e){
+        this.setState({
+            NIC : e.target.value
         });
     }
 
@@ -135,6 +146,7 @@ class IntroBanner extends Component{
             LastName: this.state.LastName,
             nurseID: this.state.nurseID,
             Email: this.state.Email,
+            NIC: this.state.NIC,
             PW: this.state.PW,
             CPW: this.state.CPW,
             Home: this.state.Home,
@@ -147,7 +159,7 @@ class IntroBanner extends Component{
             nurseEdu : null,
             nurseUni : null,
             nurseExpT : null,
-           
+            nurseGender : null           
         };
 
         if (!this.canBeSubmitted()) {
@@ -162,7 +174,7 @@ class IntroBanner extends Component{
         }
         
         else {
-            const { FirstName, LastName, nurseID, Email, PW, CPW, Home, Tel } = this.state;
+            const { FirstName, LastName, nurseID, Email, PW, CPW, Home, Tel, NIC } = this.state;
             alert(`Succesfully Registered`);      
             
             axios.post('http://localhost:4000/user/add', obj)
@@ -173,6 +185,7 @@ class IntroBanner extends Component{
                 LastName: '',
                 nurseID: '',
                 Email: '',
+                NIC: '',
                 PW: '',
                 CPW: '',
                 Home: '',
@@ -183,7 +196,7 @@ class IntroBanner extends Component{
     }
 
     canBeSubmitted() {
-        const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
         return !isDisabled;
     }
@@ -200,6 +213,7 @@ class IntroBanner extends Component{
             CPW: this.state.CPW,
             Home: this.state.Home,
             Tel: this.state.Tel,
+            NIC: this.state.NIC,
             userID: 1,
             Location : null,
             Age : null
@@ -217,7 +231,7 @@ class IntroBanner extends Component{
         }
 
         else {
-            const { FirstName, LastName, Email, PW, CPW, Home, Tel } = this.state;
+            const { FirstName, LastName, Email, PW, CPW, Home, Tel, NIC } = this.state;
             alert(`Succesfully Registered`); 
 
             axios.post('http://localhost:4000/user/add', obj)
@@ -227,6 +241,7 @@ class IntroBanner extends Component{
                 FirstName: '',
                 LastName: '',
                 Email: '',
+                NIC: '',
                 PW: '',
                 CPW: '',
                 Home: '',
@@ -237,7 +252,7 @@ class IntroBanner extends Component{
     }
 
     canBeSubmitted1() {
-        const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
         const isDisabled1 = Object.keys(errors1).some(x => errors1[x]);
         return !isDisabled1;
     }
@@ -255,6 +270,7 @@ class IntroBanner extends Component{
             LastName: '',
             nurseID: '',
             Email: '',
+            NIC: '',
             PW: '',
             CPW: '',
             Home: '',
@@ -268,7 +284,8 @@ class IntroBanner extends Component{
                 PW: false,
                 CPW: false,
                 Home: false,
-                Tel: false
+                Tel: false,
+                NIC: false
             }
         });
     }
@@ -289,6 +306,7 @@ class IntroBanner extends Component{
             CPW: '',
             Home: '',
             Tel: '',
+            NIC: '',
 
             touched : {
                 Email: false,
@@ -297,16 +315,17 @@ class IntroBanner extends Component{
                 PW: false,
                 CPW: false,
                 Home: false,
-                Tel: false
+                Tel: false,
+                NIC: false
             }
         });
     }
 
     render(){
-        const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
 
-        const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel);
+        const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
         const isDisabled1 = Object.keys(errors1).some(x => errors1[x]);
 
         const shouldMarkError = field => {
@@ -373,7 +392,8 @@ class IntroBanner extends Component{
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
 
-                                                <Form.Group>
+                                                <Form.Row>
+                                                    <Form.Group as={Col}>
                                                     <Form.Label>E-mail Address</Form.Label>
                                                     <Form.Control 
                                                         className={shouldMarkError("Email") ? "error" : ""}
@@ -384,7 +404,20 @@ class IntroBanner extends Component{
                                                         placeholder="janedoe@example.com" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                </Form.Group>
+                                                    </Form.Group>
+
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>NIC Number</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("NIC") ? "error" : ""}
+                                                        type="text" 
+                                                        value={this.state.NIC} 
+                                                        onChange={this.onChangeNIC} 
+                                                        onBlur={this.handleBlur("NIC")} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                    </Form.Group>
+                                                </Form.Row>
 
                                                 <Form.Row>
                                                     <Form.Group as={Col}>
@@ -479,7 +512,8 @@ class IntroBanner extends Component{
                                                     </Form.Group>
                                                 </Form.Row>
                             
-                                                <Form.Group>
+                                                <Form.Row>
+                                                    <Form.Group as={Col}>
                                                     <Form.Label>E-mail Address</Form.Label>
                                                     <Form.Control 
                                                         className={shouldMarkError("Email") ? "error" : ""}
@@ -490,7 +524,20 @@ class IntroBanner extends Component{
                                                         placeholder="janedoe@example.com" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                </Form.Group>
+                                                    </Form.Group>
+
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>NIC Number</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("NIC") ? "error" : ""}
+                                                        type="text" 
+                                                        value={this.state.NIC} 
+                                                        onChange={this.onChangeNIC} 
+                                                        onBlur={this.handleBlur("NIC")} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                    </Form.Group>
+                                                </Form.Row>
 
                                                 <Form.Row>
                                                     <Form.Group as={Col}>

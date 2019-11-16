@@ -18,10 +18,9 @@ class AboutBanner extends Component {
                             </div>
                             <div className="row abouttext">
                                 <p className="text-muted">
-                                    Care me is a web based system that aims to improve the
-                                    lives of Sri Lankans through home health nursing.Care me connects
-                                    clients who need medical
-                                    assistance and the nurses who would like to work extra.
+                                    CareMe is a web based system that aims to improve the
+                                    lives of Sri Lankans through home health nursing. CareMe helps connect
+                                    clients in need of medical assistance with nurses who are capable to provide the necessary care.
                                 </p>
                             </div>
                             <div className="row abouttext">
