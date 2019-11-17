@@ -1,7 +1,110 @@
 import React, { Component } from 'react'
+import axios from '../../../../backend/node_modules/axios';
 
 class ClientEdit extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            profile_data: null,
+            Email: '',
+            Tel: '',
+            Location: '',
+            Home:''
+          
+        }
+
+
+    }
+
+    componentDidMount() {
+        this.getData()
+    }
+
+
+    getData = () => {
+        var token = localStorage.getItem('id');
+        axios.get('http://localhost:4000/user/userdata/' + token)
+            .then(response => {
+                console.log(response.data.profile_data)
+                this.setState({
+                    profile_data: response.data.profile_data,
+                    Email: response.data.profile_data.Email,
+                    Tel: response.data.profile_data.Tel,
+                    Home:response.data.profile_data.Home
+                })
+            })
+
+    }
+
+
+
+    onChangeEmail = (e) => {
+
+        this.setState({
+            Email: e.target.value
+
+        });
+
+    }
+
+    onChangeTel = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            Tel: e.target.value
+        });
+    }
+
+    onChangeLocation = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            Location: e.target.value
+        });
+    }
+
+    onChangeAddress = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            Home: e.target.value
+        });
+    }
+
+    onUpdate = (e) => {
+        e.preventDefault();
+
+        const nurseobj = {
+            Email: this.state.Email,
+            Tel: this.state.Tel,
+            Location: this.state.Location,
+            Home:this.state.Home
+         
+        };
+        const headers = {
+            'Content-Type': 'application/json'
+        }
+        var token = localStorage.getItem('id');
+        console.log(nurseobj);
+        axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
+            .then(response => {
+                if (response.data.success) {
+                    this.getData()
+                    this.props.loadData()
+                }
+            });
+
+       
+    }
+
     render() {
+
+        if (!this.state.profile_data) {
+            return (
+                <div> <text>Loading</text> </div>
+            );
+        }
+
+
         return (
             <div>
 
@@ -10,52 +113,62 @@ class ClientEdit extends Component {
                     <div className="card-body">
                         {/* Edit Email Address */}
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+                            <label htmlFor="exampleInputEmail">Email address</label>
+                            <input type="email" className="form-control" 
+                            id="exampleInputEmail1" 
+                            value={this.state.Email}
+                            onChange={this.onChangeEmail}
+                            placeholder="Enter email" />
                         </div>
 
                         {/* Edit Telephone Number */}
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Telephone</label>
-                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" />
+                            <input type="text" className="form-control"
+                            value={this.state.Tel}
+                            onChange={this.onChangeTel}
+                            placeholder="Enter Telephone" />
                         </div>
 
                         {/* Edit Location */} 
                         <div>
                             <div className="form-group">
-                                <label htmlFor="inputAddress">Address</label>
-                                <input type="text" className="form-control" id="inputAddress" placeholder="Apartment Number" />
-                            </div>
-                            <div className="form-group">            
-                                <input type="text" className="form-control" id="inputAddress2" placeholder="Street Name" />
-                            </div>
+                                <label htmlFor="inputlocation">Address</label>
+                                <input type="text" className="form-control"
+                                 value={this.state.Home}
+                                onChange={this.onChangeAddress}
+                                placeholder="Address"/>
+                            </div>                
                             <div className="form-group"> 
-                                    <select id="inputState" className="form-control">
-                                        <option selected>Ampara</option>
-                                        <option selected>Anuradhapura</option>
-                                        <option selected>Badulla</option>
-                                        <option selected>Batticaloa</option>
-                                        <option selected>Colombo</option>
-                                        <option selected>Galle</option>
-                                        <option selected>Gampaha</option>
-                                        <option selected>Hambantota</option>
-                                        <option selected>Jaffna</option>
-                                        <option selected>Kalutara</option>
-                                        <option selected>Kandy</option>
-                                        <option selected>Kegalle</option>
-                                        <option selected>Kilinochchi</option>
-                                        <option selected>Kurunegala</option>
-                                        <option selected>Mannar</option>
-                                        <option selected>Matale</option>
-                                        <option selected>Matara</option>
-                                        <option selected>Monaragala</option>
-                                        <option selected>Mullaitivu</option>
-                                        <option selected>Nuwara Eliya</option>
-                                        <option selected>Polonnaruwa</option>
-                                        <option selected>Puttalam</option>
-                                        <option selected>Ratnapura</option>
-                                        <option selected>Trincomalee</option>
-                                        <option selected>Vavuniya</option>       
+                                    <select id="inputState" 
+                                    className="form-control"
+                                    onChange={this.onChangeLocation}
+                                    >
+                                        <option selected value="Ampara">Ampara</option>
+                                        <option value="Anuradhapura">Anuradhapura</option>
+                                        <option value="Badulla">Badulla</option>
+                                        <option value="Batticaloa">Batticaloa</option>
+                                        <option value="Colombo">Colombo</option>
+                                        <option value="Galle">Galle</option>
+                                        <option value="AGampaha">Gampaha</option>
+                                        <option value="Hambantota">Hambantota</option>
+                                        <option value="Jaffna">Jaffna</option>
+                                        <option value="Kalutara">Kalutara</option>
+                                        <option value="Kandy">Kandy</option>
+                                        <option value="Kegalle">Kegalle</option>
+                                        <option value="Kilinochchi">Kilinochchi</option>
+                                        <option value="Kurunegala">Kurunegala</option>
+                                        <option value="Mannar">Mannar</option>
+                                        <option value="Matale">Matale</option>
+                                        <option value="Matara">Matara</option>
+                                        <option value="Monaragala">Monaragala</option>
+                                        <option value="Mullaitivu">Mullaitivu</option>
+                                        <option value="Nuwara Eliya">Nuwara Eliya</option>
+                                        <option value="Polonnaruwa">Polonnaruwa</option>
+                                        <option value="Puttalam">Puttalam</option>
+                                        <option value="Ratnapura">Ratnapura</option>
+                                        <option value="Trincomalee">Trincomalee</option>
+                                        <option value="Vavuniya">Vavuniya</option>       
                                     </select>
                             </div>
                         </div>
@@ -99,7 +212,10 @@ class ClientEdit extends Component {
 
                     {/* /.card-body */}
                     <div className="card-footer">
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit"
+                        className="btn btn-primary"
+                        onClick={this.onUpdate}>
+                            Submit</button>
                     </div>
                 </form>
 

@@ -5,11 +5,43 @@ import ProfilePic from "../ProfilePic";
 import ProfileInfo from "../ProfileInfo";
 import ProfileRight from "../ProfileRight";
 import ClientEdit from "../edit/clientedit";
+import axios from "../../../../backend/node_modules/axios";
 
 
 
 class ClientMainPage extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile_data: null
+        }
+    }
+
+    componentDidMount() {
+        this.getData()
+
+    }
+
+    getData = () => {
+        var token = localStorage.getItem('id');
+        axios.get('http://localhost:4000/user/userdata/' + token)
+            .then(response => {
+                console.log(response.data.profile_data)
+                this.setState({
+                    profile_data: response.data.profile_data
+                })
+            })
+    }
     render() {
+
+        if(!this.state.profile_data){
+            return(
+            <div> <text>Loading</text> </div>
+            );
+         }
+
         return (
             <div>
                 <div class="wrapper">
@@ -26,13 +58,12 @@ class ClientMainPage extends Component {
                                         <div className="text-center">
                                             <img className="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture" />
                                         </div>
-                                        <h3 className="profile-username text-center">name</h3>
-                                        {/* {this.state.profile_data.FirstName} */}
-                                        {/* <p className="text-muted text-center">Software Engineer</p> */}
+                                        <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
+                                       
 
                                         <ul className="list-group list-group-unbordered mb-3 text-center">
                                             <li className="list-group-item">
-                                                <h6 className="text-center">@username</h6>
+                                                <h6 className="text-center">{this.state.profile_data.FirstName}</h6>
                                             </li>
                                             <li className="list-group-item">
                                                 <h6 className="text-center">Member since 2015</h6>
@@ -58,15 +89,8 @@ class ClientMainPage extends Component {
                                             B.S. in Nursing from the University of Peradeniya
                         </p>
                                         <hr />
-                                        <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
+                                        <strong><i className="fas fa-map-marker-alt mr-1" /> {this.state.profile_data.FirstName}</strong>
                                         <p className="text-muted">Nugegoda,Colombo</p>
-                                        <hr />
-                                        <strong><i className="fas fa-pencil-alt mr-1" /> Skills</strong>
-                                        <p className="text-muted">
-                                            <span className="tag tag-primary">care</span>
-                                            <span className="tag tag-primary">injection</span>
-                                            <span className="tag tag-primary">medicine</span>
-                                        </p>
                                         <hr />
                                         <strong><i className="far fa-file-alt mr-1" /> Notes</strong>
                                         <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
@@ -98,32 +122,32 @@ class ClientMainPage extends Component {
                                                     {/* timeline item */}
                                                     <div>
                                                         <div className="timeline-item">
-                                                            <h3 className="timeline-header border-0"> <strong>First Name:  </strong>Ramkumar</h3>
+                                                            <h3 className="timeline-header border-0"> <strong>First Name:  </strong>{this.state.profile_data.FirstName}</h3>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <div className="timeline-item">
-                                                            <h3 className="timeline-header border-0"> <strong>Last Name:  </strong>Ramkumar</h3>
+                                                            <h3 className="timeline-header border-0"> <strong>Last Name:  </strong>{this.state.profile_data.LastName}</h3>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <div className="timeline-item">
-                                                            <h3 className="timeline-header border-0"> <strong>Email:  </strong>Ramkumar</h3>
+                                                            <h3 className="timeline-header border-0"> <strong>Email:  </strong>{this.state.profile_data.Email}</h3>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <div className="timeline-item">
-                                                            <h3 className="timeline-header border-0"> <strong>Address:  </strong>Ramkumar</h3>
+                                                            <h3 className="timeline-header border-0"> <strong>Address:  </strong>{this.state.profile_data.Home}</h3>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <div className="timeline-item">
-                                                            <h3 className="timeline-header border-0"> <strong>Telephone:  </strong>Ramkumar</h3>
+                                                            <h3 className="timeline-header border-0"> <strong>Telephone:  </strong>{this.state.profile_data.Tel}</h3>
                                                         </div>
                                                     </div>
                                                     <div>
                                                         <div className="timeline-item">
-                                                            <h3 className="timeline-header border-0"> <strong>otherss:  </strong>Ramkumar</h3>
+                                                            <h3 className="timeline-header border-0"> <strong>otherss:  </strong>{this.state.profile_data.FirstName}</h3>
                                                         </div>
                                                     </div>
 
@@ -136,7 +160,8 @@ class ClientMainPage extends Component {
                                             {/* Update Profile Form container */}
                                             <div className="tab-pane" id="settings">
 
-                                                <ClientEdit/>
+                                                <ClientEdit
+                                                loadData={this.getData}/>
                                             </div>
                                             {/* /.tab-pane */}
                                         </div>

@@ -33,6 +33,7 @@ UserRegRoutes.route('/login').post(function (req, res) {
           user_data: response
         })
       } else {
+        //erorrr res
       }
     })
 });
@@ -50,6 +51,24 @@ UserRegRoutes.route('/userdata/:id').get(function (req, res) {
     })
   })
 });
+
+
+//userUpdate
+UserRegRoutes.route('/userdata/update/:id').put(function(req,res){
+  //console.log(req.body)
+  UserReg.findOneAndUpdate({_id:req.params.id},req.body)
+  .then(response=>{
+    res.status(200).send({
+      success:true,
+      message:"User Data Update success",
+    })
+  })
+})
+
+
+
+
+
 
 UserRegRoutes.route('/').get(function (req, res) {
  UserReg.find({userID:0},function (err, CAREME_APP) {

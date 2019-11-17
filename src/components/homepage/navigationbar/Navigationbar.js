@@ -15,6 +15,7 @@ class Navigationbar extends Component {
             email: null,
             password: null,
             redirect_profile: false,
+            user_type: null
         }
     }
 
@@ -39,7 +40,8 @@ class Navigationbar extends Component {
         });
     }
 
-    onLogin = () => {
+    onLogin = (e) => {
+        e.preventDefault();
         console.log(this.state)
         const data = {
             email: this.state.email,
@@ -48,8 +50,11 @@ class Navigationbar extends Component {
 
 
         console.log(data)
-        
-        axios.post('http://localhost:4000/user/login', data)
+        const headers = {
+            'Content-Type': 'application/json'
+          }
+
+        axios.post('http://localhost:4000/user/login', data,{headers:headers})
             .then(response => {
                 //console.log(response.data)
                 if (response.data.success) {
@@ -58,17 +63,29 @@ class Navigationbar extends Component {
                     localStorage.setItem("user_id", response.data.user_data.userID)
                     localStorage.setItem("user_name", response.data.user_data.FirstName)
                     this.setState({
-                        redirect_profile: true
+                        redirect_profile: true,
+                        user_type:response.data.user_data.userID
                     })
                 }
             })
     }
 
     render() {
-        if (this.state.redirect_profile) {
-            return (
-                <Redirect to="/clientprofile" />
-            )
+        if (this.state.redirect_profile==true) {
+            if(this.state.user_type===0){
+                return (
+               
+                    <Redirect to="/nurseprofile" />
+                )
+            }
+            if(this.state.user_type===1){
+                return (
+               
+                    <Redirect to="/clientprofile" />
+                )
+            }
+           
+   
         }
         return (
             <React.Fragment>
