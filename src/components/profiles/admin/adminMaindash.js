@@ -3,15 +3,22 @@ import Admindashleftnav from './admindashleftnav'
 import Navigationbar from '../../homepage/navigationbar/Navigationbar'
 import Adminup from './adminup'
 
+ 
+
 
 class adminMaindash extends Component {
     render() {
         return (
             <div>
                 <Navigationbar />
-                <Admindashleftnav/>
                 <Adminup/>
-                gota 2020
+                <Admindashleftnav/>
+               
+                
+ 
+ 
+                
+                
             </div>
         )
     }
