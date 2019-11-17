@@ -12,7 +12,7 @@ import { NONAME } from "dns";
 */
 function searchingFor(term){
     return function(x){
-        return x.FirstName.toLowerCase().includes(term.toLowerCase()) || !term;
+        return (x.FirstName.toLowerCase().includes(term.toLowerCase()) || x.LastName.toLowerCase().includes(term.toLowerCase()))  || !term;
     }
 }
 
@@ -450,8 +450,8 @@ class NurseListMain extends Component{
                 </div>
 
                 <center>
-<br></br>
-                <div class="row">   
+    <br></br>
+            <div class="row">   
 
             <div class="col">
                 <div className="form-group">
@@ -510,13 +510,20 @@ class NurseListMain extends Component{
 
             </div>
             <div class="container">
-            <div class="row">
-                    {nurse}
-                    </div>
-                    </div>
-                    
-            
+                <div class="row">
+                        {nurse}
+                </div>
             </div>
+
+
+
+
+   
+
+       
+            
+    </div>
+            
 
         );
     }
