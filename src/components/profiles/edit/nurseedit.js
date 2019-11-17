@@ -165,20 +165,11 @@ class NurseEdit extends Component {
                                 <select id="dropDownLocation"
                                     className="form-control"
                                     onChange={this.onChangeLocation}>
-                                    <option location="Colombo 01">Colombo 01</option>
-                                    <option location="Colombo 02">Colombo 02</option>
-                                    <option location="Colombo 03">Colombo 03</option>
-                                    <option location="Colombo 04">Colombo 04</option>
-                                    <option location="Colombo 05">Colombo 05</option>
-                                    <option location="Colombo 06">Colombo 06</option>
-                                    <option location="Colombo 07">Colombo 07</option>
-                                    <option location="Colombo 08">Colombo 08</option>
-                                    <option location="Colombo 09">Colombo 09</option>
-                                    <option location="Colombo 10">Colombo 10</option>
-                                    <option location="Colombo 11">Colombo 11</option>
-                                    <option location="Colombo 12">Colombo 12</option>
-                                    <option location="Colombo 13">Colombo 13</option>
-                                    <option location="Colombo 14">Colombo 14</option>
+                                    <option location="Colombo">Colombo</option>
+                                    <option location="Gampaha">Gampaha</option>
+                                    <option location="Kurunegala">Kurunegala</option>
+                                    <option location="Galle">Galle</option>
+                                 
                                 </select>
                             </div>
 
@@ -303,7 +294,7 @@ class NurseEdit extends Component {
                                             value="perdiactric Nurse"
                                             checked={this.state.nurseType === "perdiactric Nurse"}
                                             onChange={this.onChangeType} />
-                                        <label htmlFor="customRadio5" className="custom-control-label">perdiactric Nurse</label>
+                                        <label htmlFor="customRadio5" className="custom-control-label">pediatric Nurse</label>
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio6" name="customRadio"
