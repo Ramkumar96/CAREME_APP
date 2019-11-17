@@ -3,7 +3,6 @@ import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
-import Navigationbar from '../navigationbar/Navigationbar';
 
 function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC){
     return {
@@ -30,6 +29,11 @@ function validate1 (Email, FirstName, LastName, PW, CPW, Home, Tel, NIC){
         Tel: Tel.length===0,
         NIC: NIC.length===0
     };
+}
+
+function validateEmail (email) {
+    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regexp.test(email);
 }
 
 class IntroBanner extends Component{
@@ -171,7 +175,11 @@ class IntroBanner extends Component{
         
         const { PW, CPW } = this.state;
 
-        if ( PW != CPW){
+        if (!validateEmail(this.state.Email)){
+            alert("Enter valid email address");
+        }
+
+        else if ( PW != CPW){
             alert("Your passwords dont match");
         }
         
@@ -229,7 +237,11 @@ class IntroBanner extends Component{
 
         const { PW, CPW } = this.state;
 
-        if ( PW != CPW){
+        if (!validateEmail(this.state.Email)){
+            alert("Enter valid email address");
+        }
+
+        else if ( PW != CPW){
             alert("Your passwords dont match");
         }
 
@@ -262,12 +274,10 @@ class IntroBanner extends Component{
 
     onClickNurse(){
         this.closeModal();
-        Navigationbar.openLoginModal();
     }
 
     onClickClient(){
         this.closeModal1();
-        Navigationbar.openLoginModal();
     }
 
     openModal() {
