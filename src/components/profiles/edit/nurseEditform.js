@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import NurseMainPage from '../nurse/NurseMainPage'
-
 
 class nurseEditform extends Component {
     render() {
@@ -93,11 +91,11 @@ class nurseEditform extends Component {
                   {/* radio */}
                   <div className="custom-control custom-radio">
                       <input className="custom-control-input" type="radio" id="customRadio4" name="customRadio" />
-                      <label htmlFor="customRadio4" className="custom-control-label">Midwife Nurse</label>
+                      <label htmlFor="customRadio4" className="custom-control-label">Midwife</label>
                     </div>
                     <div className="custom-control custom-radio">
                       <input className="custom-control-input" type="radio" id="customRadio5" name="customRadio" defaultChecked />
-                      <label htmlFor="customRadio5" className="custom-control-label">perdiactric Nurse</label>
+                      <label htmlFor="customRadio5" className="custom-control-label">Pediatric Nurse</label>
                     </div>
                     <div className="custom-control custom-radio">
                       <input className="custom-control-input" type="radio" id="customRadio6" name="customRadio" defaultChecked />
