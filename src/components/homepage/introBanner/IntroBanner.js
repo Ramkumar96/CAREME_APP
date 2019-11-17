@@ -3,7 +3,7 @@ import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
-import Navigationbar from '../navigationbar/Navigationbar'
+import Navigationbar from '../navigationbar/Navigationbar';
 
 function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC){
     return {
@@ -260,6 +260,16 @@ class IntroBanner extends Component{
         return !isDisabled1;
     }
 
+    onClickNurse(){
+        this.closeModal();
+        Navigationbar.openLoginModal();
+    }
+
+    onClickClient(){
+        this.closeModal1();
+        Navigationbar.openLoginModal();
+    }
+
     openModal() {
         this.setState({
             visible : true
@@ -324,7 +334,7 @@ class IntroBanner extends Component{
         });
     }
 
-    render(){
+    render(){ 
         const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
 
@@ -352,8 +362,8 @@ class IntroBanner extends Component{
                                         <span>
                                             <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
                                             <Modal visible={this.state.visible} width="50%" height="99.5%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                            <h3> Register Here </h3>
                                                 <div class="card-body register-card-body">
-                                                <h3>Register Here</h3>
                                                 <Form>                                                    
                                                  <Form.Row>
                                                     <Form.Group as={Col}>
@@ -478,7 +488,7 @@ class IntroBanner extends Component{
                                                 </Form.Group>
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled} onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
-                                                <a href="#" class="text-center" onClick={() => this.closeModal()}>I already have membership</a>
+                                                <a href="#" class="text-center" onClick={() => this.onClickNurse()}>I already have membership</a>
                                                 </Form>
                                                 </div>
                                             </Modal>
@@ -601,7 +611,7 @@ class IntroBanner extends Component{
                                                 </Form.Group>
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled1} onClick={this.onSubmitClient.bind(this)}>Submit</Button>
-                                                <a href="#" class="text-center" onClick={() => this.closeModal1()}>I already have a membership</a>
+                                                <a href="#" class="text-center" onClick={() => this.onClickClient()}>I already have a membership</a>
                                                 </Form>
                                                 </div>
                                             </Modal>
@@ -614,7 +624,6 @@ class IntroBanner extends Component{
                 </div>
         );
     }
-       
     }
     
 export default IntroBanner;

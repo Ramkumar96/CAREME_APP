@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Navigationbar.css';
@@ -6,22 +5,20 @@ import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form } from 'react-bootstrap';
 import axios from "../../../../backend/node_modules/axios";
-import NurseListMain from '../../list/NurseListMain';
-import App from "../../../App"
 
 class Navigationbar extends Component {
     constructor(props) {
         super(props);
+        this.openLoginModal = this.openLoginModal.bind(this);
         this.state = {
             visible: false,
-            visible1: false,
             email: null,
             password: null,
             redirect_profile: false,
         }
     }
 
-    openModal() {
+    openLoginModal() {
         this.setState({
             visible: true
         });
@@ -88,7 +85,7 @@ class Navigationbar extends Component {
                             <tr>
                                 <td>
                                     {/* Navbar login button */}
-                                    <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openModal()} />
+                                    <input type="button" class="btn btn-outline-primary" value="Login" onClick={() => this.openLoginModal()} />
                                     <Modal visible={this.state.visible} width="25%" height="45%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                         <div class="card-body login-card-body">
                                         <h1 align="center">Login</h1>
