@@ -200,7 +200,19 @@ class IntroBanner extends Component{
                 CPW: '',
                 Home: '',
                 Tel: '',
-                visible : false
+                visible : false,
+
+                touched : {
+                    Email: false,
+                    FirstName: false,
+                    LastName:false,
+                    nurseID: false,
+                    PW: false,
+                    CPW: false,
+                    Home: false,
+                    Tel: false,
+                    NIC: false
+                }
             });
         }
     }
@@ -235,14 +247,10 @@ class IntroBanner extends Component{
             return;
         }
 
-        const { PW, CPW } = this.state;
-
+        const { PW, CPW, Email } = this.state;
+        
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
-        }
-
-        else if ( PW != CPW){
-            alert("Your passwords dont match");
         }
 
         else {
@@ -261,7 +269,18 @@ class IntroBanner extends Component{
                 CPW: '',
                 Home: '',
                 Tel: '',
-                visible1 : false
+                visible1 : false,
+                touched : {
+                    Email: false,
+                    FirstName: false,
+                    LastName:false,
+                    nurseID: false,
+                    PW: false,
+                    CPW: false,
+                    Home: false,
+                    Tel: false,
+                    NIC: false
+                }
             });
         }
     }
