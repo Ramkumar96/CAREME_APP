@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
+import DefaultImg from './avatar/avatar2.png';
+// base api url 
+const API_URL = "http://localhost:9890";
+
 
 class NurseEdit extends Component {
 
@@ -14,7 +18,8 @@ class NurseEdit extends Component {
             nurseUni: '',
             nurseEdu: '',
             nurseExp: '',
-            nurseType: ''
+            nurseType: '',
+            multerImage: null
         }
 
 
@@ -121,6 +126,44 @@ class NurseEdit extends Component {
        
     }
 
+    setDefaultImage(uploadType) {
+        if (uploadType === "multer")
+           this.setState({
+             multerImage: DefaultImg
+           });
+          
+    }
+
+    //upload image function
+    uploadImage(e, method) {
+        let imageObj = {};
+
+        if (method === "multer") {
+
+        let imageFormObj = new FormData();
+
+        //imageFormObj.append("imageName", "multer-image-" + Date.now());
+        imageFormObj.append("profilePic", e.target.files[0]);
+
+        // stores a readable instance of 
+        // the image being uploaded using multer
+        this.setState({
+            multerImage: URL.createObjectURL(e.target.files[0])
+        });
+
+        axios.post(`${API_URL}/image/uploadmulter`, imageFormObj)
+            .then((data) => {
+            if (data.data.success) {
+                alert("Image has been successfully Uploaded.");
+                this.setDefaultImage("multer");
+            }
+            })
+            .catch((err) => {
+            alert("Error while uploading Image");
+            this.setDefaultImage("multer");
+            });
+        } 
+    }
 
 
     render() {
@@ -134,7 +177,7 @@ class NurseEdit extends Component {
         return (
             <div>
 
-                <form role="form">
+                <form role="form" enctype="multipart/form-data">
                     <div className="card-body">
                         {/* Edit Email Address */}
                         <div className="form-group">
@@ -236,8 +279,9 @@ class NurseEdit extends Component {
                             <label htmlFor="exampleInputFile">Update your Profile Picture</label>
                             <div className="input-group">
                                 <div className="custom-file">
-                                    <input type="file" className="custom-file-input" id="exampleInputFile" />
-                                    <label className="custom-file-label" htmlFor="exampleInputFile">Choose file</label>
+                                    <input type="file" className="process__upload-btn" onChange={(e) =>this.uploadImage(e,"multer")} />
+                                    <img src={this.state.multerImage} alt="upload-image" className="process__image"/>
+                                    {/* <label className="custom-file-label" htmlFor="exampleInputFile">Choose file</label> */}
                                 </div>
                                 <div className="input-group-append">
                                     <span className="input-group-text" id>Upload</span>

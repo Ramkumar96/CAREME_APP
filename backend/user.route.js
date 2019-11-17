@@ -1,6 +1,6 @@
 const express = require('express');
 const UserRegRoutes = express.Router();
-
+const multer = require('multer');
 let UserReg = require('./user.model');
 
 // Defined store route
@@ -79,5 +79,74 @@ UserRegRoutes.route('/').get(function (req, res) {
      }
    });
  });
+
+ 
+ 
+ //profile pic update
+ const storage = multer.diskStorage({
+   destinationn:function(req,file,cb){
+     cb(null,'./uploads');
+   },
+   filename: function (req, file,cb){
+     cb(null,Date.now() + file.originalname);
+   }
+ });
+
+ const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+  } else {
+      // rejects storing a file
+      cb(null, false);
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  limits: {
+      fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
+
+//stores image in uploads folder using multer and creates a reference to the file
+
+UserRegRoutes.route("/uploadmulter")
+  .post(upload.single('profilePic'), (req, res, next) => {
+      console.log(req.body);
+      const newImage = new Image({
+          // imageName: req.body.imageName,
+          profilePic: req.file.path
+      });
+
+      newImage.save()
+          .then((result) => {
+              console.log(result);
+              res.status(200).json({
+                  success: true,
+                  document: result
+              });
+          })
+          .catch((err) => next(err));
+  });
+
+
+ // upload image ,store in mongodb database
+ UserRegRoutes.route("/uploadbase")
+  .post((req, res, next) => {
+      const newImage = new Image({
+          // imageName: req.body.imageName,
+          profilePic: req.body.profilePic
+      });
+
+      newImage.save()
+          .then((result) => {
+              res.status(200).json({
+                  success: true,
+                  document: result
+              });
+          })
+          .catch((err) => next(err));
+  });
 
 module.exports = UserRegRoutes;

@@ -18,7 +18,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }).then(
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
+app.use('/uploads', express.static('uploads'));
 app.use('/user',userRoute);
 
 app.listen(PORT, function(){
