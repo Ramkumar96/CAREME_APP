@@ -81,6 +81,10 @@ let UserReg = new Schema({
   
   nurseGender: {
     type: String
+  },
+
+  profilePic: {
+    type: String
   }
 },{
     collection: 'Users'

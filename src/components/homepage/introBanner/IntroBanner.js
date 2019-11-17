@@ -152,15 +152,16 @@ class IntroBanner extends Component{
             CPW: this.state.CPW,
             Home: this.state.Home,
             Tel: this.state.Tel,
-            userID : 0,
-            Location : null,
-            Age : null,
-            nurseExp : null,
-            nurseType : null, 
-            nurseEdu : null,
-            nurseUni : null,
-            nurseExpT : null,
-            nurseGender : null           
+            userID: 0,
+            Location: null,
+            Age: null,
+            nurseExp: null,
+            nurseType: null, 
+            nurseEdu: null,
+            nurseUni: null,
+            nurseExpT: null,
+            nurseGender: null,
+            profilePic: null           
         };
 
         if (!this.canBeSubmitted()) {
@@ -216,8 +217,9 @@ class IntroBanner extends Component{
             Tel: this.state.Tel,
             NIC: this.state.NIC,
             userID: 1,
-            Location : null,
-            Age : null
+            Location: null,
+            Age: null,
+            profilePic: null
         };
 
         if (!this.canBeSubmitted1()) {
@@ -476,7 +478,7 @@ class IntroBanner extends Component{
                                                 </Form.Group>
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled} onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
-                                                <a href="#" class="text-center" onClick={() => this.closeModal()}>I already have a membership</a>
+                                                <a href="#" class="text-center" onClick={() => this.closeModal()}>I already have membership</a>
                                                 </Form>
                                                 </div>
                                             </Modal>
