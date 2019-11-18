@@ -66,6 +66,7 @@ UserRegRoutes.route('/userdata/update/:id').put(function(req,res){
   })
 })
 
+//NurseprofileRetrieve
 UserRegRoutes.route('/').get(function (req, res) {
  UserReg.find({userID:0},function (err, CAREME_APP) {
     if (err) {

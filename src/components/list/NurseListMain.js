@@ -65,10 +65,11 @@ class NurseListMain extends Component{
         let fil = this.state.CAREME_APP;
         const selector = event.target.value;
         // outside render
-        var tenplus = document.getElementsByClassName('tenplus');
-        var fiveten = document.getElementsByClassName('fiveten');
-        var threefive = document.getElementsByClassName('threefive');
-        var onetwo = document.getElementsByClassName('onetwo');
+        var tenplus = document.getElementsByClassName('10+');
+        var fiveten = document.getElementsByClassName('5-10');
+        var threefive = document.getElementsByClassName('3-5');
+        var onetwo = document.getElementsByClassName('1-2');
+        var zero = document.getElementsByClassName('null');
 
         if(selector =="0"){
             // alert('Hello 01');
@@ -83,6 +84,9 @@ class NurseListMain extends Component{
             }
             for (var i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'block';
+            }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
             }
 
         }
@@ -100,6 +104,9 @@ class NurseListMain extends Component{
             }
             for (var i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'block';
+            }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
             }
 
         }
@@ -118,6 +125,9 @@ class NurseListMain extends Component{
             for (var i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
         }
         else if(selector =="3"){
             // alert('Hello 03');
@@ -132,6 +142,9 @@ class NurseListMain extends Component{
             }
             for (var i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'none';
+            }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
             }
         }
         else if(selector =="4"){
@@ -148,6 +161,9 @@ class NurseListMain extends Component{
             for (var i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
         }
     }
 
@@ -161,6 +177,7 @@ class NurseListMain extends Component{
         var gampaha = document.getElementsByClassName('Gampaha');
         var galle = document.getElementsByClassName('Galle');
         var kurunegala = document.getElementsByClassName('Kurunegala');
+        var zero = document.getElementsByClassName('null');
 
         if(selector =="0"){
             // alert('Hello 01');
@@ -175,6 +192,9 @@ class NurseListMain extends Component{
             }
             for (var i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'block';
+            }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
             }
 
         }
@@ -194,6 +214,9 @@ class NurseListMain extends Component{
             for (var i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
 
         }
         else if(selector =="2"){
@@ -211,6 +234,9 @@ class NurseListMain extends Component{
             for (var i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
         }
         else if(selector =="3"){
             // alert('Hello 03');
@@ -225,6 +251,9 @@ class NurseListMain extends Component{
             }
             for (var i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'none';
+            }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
             }
         }
         else if(selector =="4"){
@@ -241,6 +270,9 @@ class NurseListMain extends Component{
             for (var i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'block';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
         }
     }
 
@@ -255,6 +287,7 @@ class NurseListMain extends Component{
         var mid = document.getElementsByClassName('Midwife');
         var peri = document.getElementsByClassName('Periactric');
         var ment = document.getElementsByClassName('Mental Health');
+        var zero = document.getElementsByClassName('null');
 
         if(selector =="0"){
             // alert('Hello 01');
@@ -276,6 +309,9 @@ class NurseListMain extends Component{
             for (var i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'block';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
 
         }
         
@@ -300,6 +336,9 @@ class NurseListMain extends Component{
             for (var i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
 
         }
         else if(selector =="2"){
@@ -323,6 +362,9 @@ class NurseListMain extends Component{
             for (var i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
 
         }
         else if(selector =="3"){
@@ -345,6 +387,9 @@ class NurseListMain extends Component{
             for (var i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
 
         }
         else if(selector =="4"){
@@ -366,6 +411,9 @@ class NurseListMain extends Component{
             }        
             for (var i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
+            }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
             }
 
         }
@@ -389,6 +437,9 @@ class NurseListMain extends Component{
             for (var i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
             
         }
         else if(selector =="6"){
@@ -411,6 +462,9 @@ class NurseListMain extends Component{
             for (var i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'block';
             }
+            for (var i=0;i<zero.length;i+=1){
+                zero[i].style.display = 'none';
+            }
             
         }
     }
@@ -423,7 +477,15 @@ class NurseListMain extends Component{
 
     render(){
         const {term, CAREME_APP} = this.state;
-        let nurse = this.state.CAREME_APP.filter(searchingFor(this.state.term)).map(nurse => {
+        
+        let nurse ='';
+        
+
+        if(this.state != null){
+            nurse = this.state.CAREME_APP.filter(searchingFor(this.state.term)).map(nurse => {
+             
+                
+        
             return <NurseListProfile fname={nurse.FirstName}
             lname={nurse.LastName} 
             nurse_id={nurse.nurseID}
@@ -433,7 +495,9 @@ class NurseListMain extends Component{
             loc= {nurse.Location}
             nType= {nurse.nurseType}
             key={nurse._id}
-        />})
+        />})}
+
+        
 
         return(
             <div>

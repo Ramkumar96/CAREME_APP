@@ -20,7 +20,7 @@ return (
         
         <div id={`${this.props.nType}`} className={`${this.props.nType}`}>
         <div id={`${this.props.loc}`} className={`${this.props.loc}`}>
-        <div id={`${ this.props.expt}`} className={`${ this.props.expt}`} >
+        <div id={`${ this.props.exp}`} className={`${ this.props.exp}`} >
             <div className="card-body pb-0">
             <div className="row d-flex align-items-stretch">
                 <div className="d-flex align-items-stretch">
