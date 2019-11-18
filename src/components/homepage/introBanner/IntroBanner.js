@@ -184,36 +184,57 @@ class IntroBanner extends Component{
         }
         
         else {
-            const { FirstName, LastName, nurseID, Email, PW, CPW, Home, Tel, NIC } = this.state;
-            alert(`Succesfully Registered`);      
-            
-            axios.post('http://localhost:4000/user/add', obj)
-                .then(res => console.log(res.data));
-                
-            this.setState({
-                FirstName: '',
-                LastName: '',
-                nurseID: '',
-                Email: '',
-                NIC: '',
-                PW: '',
-                CPW: '',
-                Home: '',
-                Tel: '',
-                visible : false,
+            const headers = {
+                'Content-Type': 'application/json'
+             }
 
-                touched : {
-                    Email: false,
-                    FirstName: false,
-                    LastName:false,
-                    nurseID: false,
-                    PW: false,
-                    CPW: false,
-                    Home: false,
-                    Tel: false,
-                    NIC: false
-                }
-            });
+            axios.post('http://localhost:4000/user/validEmail', obj, {headers:headers})
+                .then(res => {
+                    if(res.data.success){
+                        alert("Email already registered. Please use another Email Address");
+                    }
+
+                    else if(!res.data.success) {
+                        axios.post('http://localhost:4000/user/validNurseID', obj, {headers:headers})
+                            .then(response => {
+                                if(response.data.success){
+                                    alert("Your Nurse Council ID is already registered");
+                                }
+
+                                else if(!res.data.success) {
+                                    axios.post('http://localhost:4000/user/add', obj)
+                                        .then(res => {console.log(res.data)});
+                                        console.log("Registered");
+                                        alert(`Succesfully Registered`); 
+
+                                    this.setState({
+                                        FirstName: '',
+                                        LastName: '',
+                                        nurseID: '',
+                                        Email: '',
+                                        NIC: '',
+                                        PW: '',
+                                        CPW: '',
+                                        Home: '',
+                                        Tel: '',
+                                        visible : false,
+
+                                        touched : {
+                                            Email: false,
+                                            FirstName: false,
+                                            LastName:false,
+                                            nurseID: false,
+                                            PW: false,
+                                            CPW: false,
+                                            Home: false,
+                                            Tel: false,
+                                            NIC: false
+                                        }
+                                    });
+                                }
+                            });
+                    }
+                });
         }
     }
 
@@ -258,19 +279,21 @@ class IntroBanner extends Component{
         }
 
         else {
-            axios.post('http://localhost:4000/user/validEmail', obj)
-                .then(response => {
-                    console.log(response.data.success);
-                    if(response.data.success){
+            const headers = {
+                'Content-Type': 'application/json'
+              }
+
+            axios.post('http://localhost:4000/user/validEmail', obj, {headers:headers})
+                .then(res => {
+                    if(res.data.success){
                         console.log('hariii');
+                        alert("Email already registered. Please use another Email Address");
                     }
 
-                    else {
-                        const { FirstName, LastName, Email, PW, CPW, Home, Tel, NIC } = this.state;
-            
+                    else if(!res.data.success) {
                         axios.post('http://localhost:4000/user/add', obj)
                             .then(res => {console.log(res.data)});
-
+                            console.log("Registered");
                             alert(`Succesfully Registered`); 
 
                         this.setState({

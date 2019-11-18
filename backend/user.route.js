@@ -82,12 +82,34 @@ UserRegRoutes.route('/validEmail').post(function (req, res) {
      .then(response => {
       if (response) {
         console.log("existsss");
-        res.status(401).send({
+        res.status(200).send({
           success:true,
           message:"Email already exists",
-        })
+        });
       } else {
         console.log('not there');
+        res.status(200).send({
+          success:false,
+        });
+      } 
+    })
+});
+
+//validate nurseID
+UserRegRoutes.route('/validNurseID').post(function (req, res) {
+  UserReg.findOne({nurseID: req.body.nurseID })
+     .then(response => {
+      if (response) {
+        console.log("existsss");
+        res.status(200).send({
+          success:true,
+          message:"Registered nurse ID. try another.",
+        });
+      } else {
+        console.log('not there');
+        res.status(200).send({
+          success:false,
+        });
       } 
     })
 });
