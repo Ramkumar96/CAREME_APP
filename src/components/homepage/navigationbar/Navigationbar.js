@@ -84,6 +84,11 @@ class Navigationbar extends Component {
                
                     <Redirect to="/clientprofile" />
                 )
+            }if(this.state.user_type===2){
+                return (
+               
+                    <Redirect to="/adminmaindash" />
+                )
             }
            
    

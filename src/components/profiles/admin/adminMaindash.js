@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Admindashleftnav from './admindashleftnav'
 import Navigationbar from '../../homepage/navigationbar/Navigationbar'
 import Adminup from './adminup'
+import ProfileNavbar from '../ProfileNavbar'
 
  
 
@@ -10,7 +11,7 @@ class adminMaindash extends Component {
     render() {
         return (
             <div>
-                <Navigationbar />
+                <ProfileNavbar />
                 <Adminup/>
                 <Admindashleftnav/>
                
