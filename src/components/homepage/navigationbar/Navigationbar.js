@@ -83,9 +83,18 @@ class Navigationbar extends Component {
             e.preventDefault();
             return;
         }
-        
+
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
+            this.setState({
+                Email: '',
+                Password: '',
+                touched: {
+                    Email: false,
+                    Password: false
+                }
+            })
+            return;
         }
 
         const data = {
@@ -220,7 +229,7 @@ class Navigationbar extends Component {
                                                     type="Password"
                                                     placeholder="Enter Your Password Here"
                                                     name="Password"
-                                                    value={this.state.password}
+                                                    value={this.state.Password}
                                                     onChange={this.handleOnChange}
                                                     onBlur={this.handleBlur("Password")}
                                                 />
