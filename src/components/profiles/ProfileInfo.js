@@ -43,16 +43,7 @@ export default class ProfileInfo extends Component {
                                         <div className="timeline-item">
                                             <h3 className="timeline-header border-0"> <strong>Telephone:  </strong>Ramkumar</h3>
                                         </div>
-                                    </div>
-                                    <div>                           
-                                        <div className="timeline-item">
-                                            <h3 className="timeline-header border-0"> <strong>otherss:  </strong>Ramkumar</h3>
-                                        </div>
-                                    </div>
-
-
-
-                                    
+                                    </div>                            
                                     {/* END timeline item */}
                               
                                 </div>

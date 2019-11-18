@@ -495,7 +495,7 @@ class NurseListMain extends Component{
                 <div class="col-md-12">
                     <center>
                 <form>
-                    <input placeholder="Search to Find The Nurse" class="form-control text-center" width="100%" type="text" onChange={this.searchHandler} value={term}/>
+                    <input placeholder="Search by Name" class="form-control text-center" width="100%" type="text" onChange={this.searchHandler} value={term}/>
                 </form>
                 </center>
                 </div>
@@ -509,7 +509,7 @@ class NurseListMain extends Component{
                 <div className="form-group">
                     <label>Sort by </label>
                     <select class="form-control" onChange={(event)=>this.nursesortage(event)}>
-                        <option>Select the order</option>
+                        <option>Select by Age</option>
                         <option value={1}>Age: Low To High</option>
                         <option value={2}>Age: High - Low</option>
                     </select>
@@ -518,9 +518,9 @@ class NurseListMain extends Component{
 
             <div class="col">
                 <div className="form-group">
-                    <label>Filter by Experience </label>
+                    <label>Filter by years in experience </label>
                     <select class="form-control" onChange={(event)=>this.nursesortexp(event)}>
-                        <option value={0}>select Experience Years</option>
+                        <option value={0}>Select number of years</option>
                         <option value={1}>1-2</option>
                         <option value={2}>3-5</option>
                         <option value={3}>6-10</option>
@@ -533,7 +533,7 @@ class NurseListMain extends Component{
                 <div className="form-group">
                     <label>Sort by Location </label>
                     <select class="form-control" onChange={(event)=>this.nursesortloc(event)}>
-                        <option value={0}>select District</option>
+                        <option value={0}>Select district</option>
                         <option value={1}>Colombo</option>
                         <option value={2}>Gampaha</option>
                         <option value={3}>Galle</option>
@@ -546,7 +546,7 @@ class NurseListMain extends Component{
                 <div className="form-group">
                     <label>Sort by Nurse Type </label>
                     <select class="form-control" onChange={(event)=>this.nursesorttype(event)}>
-                        <option value={0}>select type</option>
+                        <option value={0}>Select Type</option>
                         <option value={1}>Emergency Nurse</option>
                         <option value={2}>Surgical Nurse</option>
                         <option value={3}>Geriatric Nurse</option>
