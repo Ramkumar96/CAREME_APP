@@ -466,7 +466,7 @@ class NurseListMain extends Component{
 
             <div class="col">
                 <div className="form-group">
-                    <label>Sort by Experience </label>
+                    <label>Filter by Experience </label>
                     <select class="form-control" onChange={(event)=>this.nursesortexp(event)}>
                         <option value={0}>select Experience Years</option>
                         <option value={1}>1-2</option>

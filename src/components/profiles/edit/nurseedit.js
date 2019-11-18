@@ -242,10 +242,10 @@ class NurseEdit extends Component {
                             <select multiple
                                 className="form-control"
                                 onChange={this.onChangeExperience}>
-                                <option experience="1-2 Years">1-2 Years</option>
-                                <option experience="3-4 Year">3-4 Year</option>
-                                <option experience="5-10 Year">5-10 Year</option>
-                                <option experience="Over 10+ Years">Over 10+ Years</option>
+                                <option experience="1-2">1-2 Years</option>
+                                <option experience="3-4">3-4 Year</option>
+                                <option experience="5-10">5-10 Year</option>
+                                <option experience="10+">10+ Years</option>
                             </select>
                         </div>
 
@@ -259,21 +259,21 @@ class NurseEdit extends Component {
                                         <div className="custom-control custom-radio">
                                             <input className="custom-control-input" type="radio" id="customRadio1" name="customRadio"
                                                 defaultChecked
-                                                value="Emergency Nurse"
+                                                value="Emergency"
                                                 checked={this.state.nurseType === "Emergency Nurse"}
                                                 onChange={this.onChangeType} />
                                             <label htmlFor="customRadio1" className="custom-control-label">Emergency Nurse</label>
                                         </div>
                                         <div className="custom-control custom-radio">
                                             <input className="custom-control-input" type="radio" id="customRadio2" name="customRadio"
-                                                value="Surgical Nurse"
+                                                value="Surgical"
                                                 checked={this.state.nurseType === "Surgical Nurse"}
                                                 onChange={this.onChangeType} />
                                             <label htmlFor="customRadio2" className="custom-control-label">Surgical Nurse</label>
                                         </div>
                                         <div className="custom-control custom-radio">
                                             <input className="custom-control-input" type="radio" id="customRadio3" name="customRadio"
-                                                value="Geriatric Nurse"
+                                                value="Geriatic"
                                                 checked={this.state.nurseType === "Geriatric Nurse"}
                                                 onChange={this.onChangeType} />
                                             <label htmlFor="customRadio3" className="custom-control-label">Geriatric Nurse</label>
@@ -284,21 +284,21 @@ class NurseEdit extends Component {
                                     {/* radio */}
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio4" name="customRadio"
-                                            value="Midwife Nurse"
+                                            value="Midwife"
                                             checked={this.state.nurseType === "Midwife Nurse"}
                                             onChange={this.onChangeType} />
                                         <label htmlFor="customRadio4" className="custom-control-label">Midwife Nurse</label>
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio5" name="customRadio"
-                                            value="perdiactric Nurse"
+                                            value="periactric"
                                             checked={this.state.nurseType === "perdiactric Nurse"}
                                             onChange={this.onChangeType} />
                                         <label htmlFor="customRadio5" className="custom-control-label">pediatric Nurse</label>
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio6" name="customRadio"
-                                            value="Mental Health Nurse"
+                                            value="Mental Health"
                                             checked={this.state.nurseType === "Mental Health Nurse"}
                                             onChange={this.onChangeType} />
                                         <label htmlFor="customRadio6" className="custom-control-label">Mental Health Nurse</label>
