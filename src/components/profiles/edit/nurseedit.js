@@ -122,6 +122,7 @@ class NurseEdit extends Component {
         console.log(nurseobj);
         axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
             .then(response => {
+                alert("Details updated successfully");
                 if (response.data.success) {
                     this.getData()
                     this.props.loadData()
@@ -248,7 +249,7 @@ class NurseEdit extends Component {
 
                         {/* Edit Experience */}
                         <div className="form-group">
-                            <label>Carrier Experience</label>
+                            <label>Carrier Experience (in years)</label>
                             <select multiple
                                 className="form-control"
                                 onChange={this.onChangeExperience}>
@@ -283,7 +284,7 @@ class NurseEdit extends Component {
                                         </div>
                                         <div className="custom-control custom-radio">
                                             <input className="custom-control-input" type="radio" id="customRadio3" name="customRadio"
-                                                value="Geriatic"
+                                                value="Geriatric" //i changed this
                                                 checked={this.state.nurseType === "Geriatric Nurse"}
                                                 onChange={this.onChangeType} />
                                             <label htmlFor="customRadio3" className="custom-control-label">Geriatric Nurse</label>
@@ -295,16 +296,16 @@ class NurseEdit extends Component {
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio4" name="customRadio"
                                             value="Midwife"
-                                            checked={this.state.nurseType === "Midwife Nurse"}
+                                            checked={this.state.nurseType === "Midwife"}
                                             onChange={this.onChangeType} />
-                                        <label htmlFor="customRadio4" className="custom-control-label">Midwife Nurse</label>
+                                        <label htmlFor="customRadio4" className="custom-control-label">Midwife</label>
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio5" name="customRadio"
-                                            value="periactric"
-                                            checked={this.state.nurseType === "perdiactric Nurse"}
+                                            value="Pediatric" //i changed this
+                                            checked={this.state.nurseType === "Pediatric Nurse"}
                                             onChange={this.onChangeType} />
-                                        <label htmlFor="customRadio5" className="custom-control-label">pediatric Nurse</label>
+                                        <label htmlFor="customRadio5" className="custom-control-label">Pediatric Nurse</label>
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio6" name="customRadio"
