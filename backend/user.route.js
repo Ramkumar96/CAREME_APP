@@ -21,7 +21,7 @@ UserRegRoutes.route('/add').post(function (req, res) {
 UserRegRoutes.route('/login').post(function (req, res) {
   console.log(req.body)
   var req_password = req.body.password;
-  UserReg.findOne({Email: req.body.email })
+  UserReg.findOne({Email: req.body.Email })
     .then(response => {
       var res_password = response.PW;
       console.log(req_password, res_password)
