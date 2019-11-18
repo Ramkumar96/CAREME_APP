@@ -281,9 +281,9 @@ class NurseListMain extends Component{
         // outside render
         var emerg = document.getElementsByClassName('Emergency');
         var surg = document.getElementsByClassName('Surgical');
-        var geri = document.getElementsByClassName('Geriactic');
+        var geri = document.getElementsByClassName('Geriatric');
         var mid = document.getElementsByClassName('Midwife');
-        var peri = document.getElementsByClassName('Periactric');
+        var peri = document.getElementsByClassName('Pediatric');
         var ment = document.getElementsByClassName('Mental Health');
         var zero = document.getElementsByClassName('null');
         
@@ -549,9 +549,9 @@ class NurseListMain extends Component{
                         <option value={0}>select type</option>
                         <option value={1}>Emergency Nurse</option>
                         <option value={2}>Surgical Nurse</option>
-                        <option value={3}>Geriactic Nurse</option>
+                        <option value={3}>Geriatric Nurse</option>
                         <option value={4}>Midwife Nurse</option>
-                        <option value={5}>Periactric Nurse</option>
+                        <option value={5}>Pediatric Nurse</option>
                         <option value={6}>Mental Health Nurse</option>
                     </select>
                 </div>
