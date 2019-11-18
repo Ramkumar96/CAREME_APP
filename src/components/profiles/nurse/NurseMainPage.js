@@ -66,10 +66,10 @@ class NurseMainPage extends Component {
 
                                                 <ul className="list-group list-group-unbordered mb-3 text-center">
                                                     <li className="list-group-item">
-                                                        <h6 className="text-center">{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
+                                                        <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        <h6 className="text-center">{this.state.profile_data.nurseExpT}</h6>
+                                                        <h6 className="text-center">Experience:{this.state.profile_data.nurseExp}</h6>
                                                     </li>
                                                     <li className="list-group-item text-center">
                                                         <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
@@ -213,13 +213,17 @@ class NurseMainPage extends Component {
                                         </div>
                                         {/* /.card-header */}
                                         <div className="card-body">
-                                            <strong><i className="fas fa-email mr-1" /> Email</strong>
+                                            <strong><i className="fas fa-email mr-1" /> Email </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
+                                    
                                             <hr />
-                                            <strong><i className="fas fa-mobile mr-1" /> Phone</strong>
+                                            <strong><i className="fas fa-mobile mr-1" /> Phone </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
+                                    
                                             <hr />
-                                            <strong><i className="fas fa-pencil-alt mr-1" />NIC</strong>
+                                            <strong><i className="fas fa-pencil-alt mr-1" />NIC </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
+                                    
                                             <hr />
-                                            <strong><i className="far fa-file-alt mr-1" />Reg No</strong>
+                                            <strong><i className="far fa-file-alt mr-1" />Reg No </strong><small class="badge badge-danger"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
+                                    
                                         </div>
                                         {/* /.card-body */}
                                     </div>

@@ -14,7 +14,8 @@ class NurseEdit extends Component {
             nurseUni: '',
             nurseEdu: '',
             nurseExp: '',
-            nurseType: ''
+            nurseType: '',
+            // nurseExpT:''
         }
 
 
@@ -85,6 +86,14 @@ class NurseEdit extends Component {
         })
     }
 
+    // onChangeExperienceT = (e) => {
+    //     console.log(e.target.value);
+    //     this.setState({
+    //         nurseExpT: e.target.value
+    //     })
+    // }
+
+
     onChangeType = (e) => {
         console.log(e.target.value);
         this.setState({
@@ -103,7 +112,8 @@ class NurseEdit extends Component {
             nurseUni: this.state.nurseUni,
             nurseEdu: this.state.nurseEdu,
             nurseExp: this.state.nurseExp,
-            nurseType: this.state.nurseType
+            nurseType: this.state.nurseType,
+            // nurseExpT:this.state.nurseExpT
         };
         const headers = {
             'Content-Type': 'application/json'
@@ -242,10 +252,10 @@ class NurseEdit extends Component {
                             <select multiple
                                 className="form-control"
                                 onChange={this.onChangeExperience}>
-                                <option experience="1-2">1-2 Years</option>
+                                <option  experience="1-2">1-2 Years</option>
                                 <option experience="3-4">3-4 Year</option>
                                 <option experience="5-10">5-10 Year</option>
-                                <option experience="10+">10+ Years</option>
+                                <option  experience="10+">10+ Years</option>
                             </select>
                         </div>
 

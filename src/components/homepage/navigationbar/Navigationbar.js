@@ -43,6 +43,7 @@ class Navigationbar extends Component {
     onLogin = (e) => {
         e.preventDefault();
         console.log(this.state)
+        
         const data = {
             email: this.state.email,
             password: this.state.password

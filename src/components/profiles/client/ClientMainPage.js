@@ -63,10 +63,10 @@ class ClientMainPage extends Component {
 
                                         <ul className="list-group list-group-unbordered mb-3 text-center">
                                             <li className="list-group-item">
-                                                <h6 className="text-center">{this.state.profile_data.FirstName}</h6>
+                                                <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
                                             </li>
                                             <li className="list-group-item">
-                                                <h6 className="text-center">Member since 2015</h6>
+                                                <h6 className="text-center">Member since 2018</h6>
                                             </li>
                                             <li className="list-group-item text-center">
                                                 <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
@@ -84,13 +84,13 @@ class ClientMainPage extends Component {
                                     </div>
                                     {/* /.card-header */}
                                     <div className="card-body">
-                                        <strong><i className="fas fa-book mr-1" /> Education</strong>
+                                        {/* <strong><i className="fas fa-book mr-1" /> Education</strong>
                                         <p className="text-muted">
                                             B.S. in Nursing from the University of Peradeniya
-                        </p>
-                                        <hr />
-                                        <strong><i className="fas fa-map-marker-alt mr-1" /> {this.state.profile_data.FirstName}</strong>
-                                        <p className="text-muted">Nugegoda,Colombo</p>
+                                        </p>
+                                        <hr /> */}
+                                       <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
+                                        <p className="text-muted">{this.state.profile_data.Location}</p>
                                         <hr />
                                         <strong><i className="far fa-file-alt mr-1" /> Notes</strong>
                                         <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
@@ -187,7 +187,7 @@ class ClientMainPage extends Component {
                                         </p>
                                         <hr />
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                        <p className="text-muted">Malibu, California</p>
+                                        <p className="text-muted">{this.state.profile_data.Location}</p>
 
                                         <hr />
                                         <a href="#" className="btn btn-warning btn-block"><b>Find A Nurse</b></a>
@@ -204,13 +204,13 @@ class ClientMainPage extends Component {
                                     </div>
                                     {/* /.card-header */}
                                     <div className="card-body">
-                                        <strong><i className="fas fa-email mr-1" /> Email</strong>
+                                        <strong><i className="fas fa-email mr-1" /> Email   </strong> <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
                                         <hr />
-                                        <strong><i className="fas fa-mobile mr-1" /> Phone</strong>
+                                        <strong><i className="fas fa-mobile mr-1" /> Phone</strong>  <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
                                         <hr />
-                                        <strong><i className="fas fa-pencil-alt mr-1" />NIC</strong>
+                                        <strong><i className="fas fa-pencil-alt mr-1" />NIC</strong> <small class="badge badge-danger"><i class="far fa-check-circle mr-2"></i>  Not Verified</small>
                                         <hr />
-                                        <strong><i className="far fa-file-alt mr-1" />Reg No</strong>
+                                        <strong><i className="far fa-file-alt mr-1" />Reg No</strong> <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
                                     </div>
                                     {/* /.card-body */}
                                 </div>
