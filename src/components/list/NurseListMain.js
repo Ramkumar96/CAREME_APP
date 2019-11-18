@@ -112,7 +112,7 @@ class NurseListMain extends Component{
         }
         else if(selector =="2"){
             // alert('Hello 02');
-            var elems1 = document.getElementById('onetwo');
+            
             for (var i=0;i<tenplus.length;i+=1){
                 tenplus[i].style.display = 'none';
             }
@@ -288,7 +288,7 @@ class NurseListMain extends Component{
         var peri = document.getElementsByClassName('Periactric');
         var ment = document.getElementsByClassName('Mental Health');
         var zero = document.getElementsByClassName('null');
-
+        
         if(selector =="0"){
             // alert('Hello 01');
             for (var i=0;i<emerg.length;i+=1){

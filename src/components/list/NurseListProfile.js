@@ -32,11 +32,11 @@ return (
                     <div className="row">
                         <div className="col-7">
                         <h2 className="lead"><b>{this.props.fname} {this.props.lname}</b></h2>
-<p className="text-muted text-sm"><b>About      : </b> {this.props.nType} Nurse/ Graphic Artist / Coffee Lover </p>
+                        <p className="text-muted text-sm"><b>About:</b> {this.props.nType} Nurse </p>
                         <ul className="ml-4 mb-0 fa-ul text-muted">
                             <li className="small"><span className="fa-li"><ion-icon name="person"></ion-icon></span> Age: {this.props.age} Years</li>
                             <li className={`small ${ this.props.loct}` } id="loct"><span className="fa-li"><ion-icon name="pin"></ion-icon></span> Location: {this.props.loc}</li>
-                            <li className={`small ${ this.props.expt}`}  id="exp"><span className="fa-li"><ion-icon name="calendar"></ion-icon></span> Experience: {this.props.exp} Years</li>
+                            <li className={`small ${ this.props.exp}`}  id="exp"><span className="fa-li"><ion-icon name="calendar"></ion-icon></span> Experience: {this.props.exp} Years</li>
                         </ul>
                         </div>
                         <div className="col-5 text-center">
