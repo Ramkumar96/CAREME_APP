@@ -174,10 +174,12 @@ class IntroBanner extends Component{
         
         const { PW, CPW } = this.state;
 
+        //email syntax validation
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
         }
 
+        //password and confirm password match verification
         else if ( PW != CPW){
             alert("Your passwords dont match");
         }
@@ -187,6 +189,7 @@ class IntroBanner extends Component{
                 'Content-Type': 'application/json'
              }
 
+            //verifying as unregistered email
             axios.post('http://localhost:4000/user/validEmail', obj, {headers:headers})
                 .then(res => {
                     if(res.data.success){
