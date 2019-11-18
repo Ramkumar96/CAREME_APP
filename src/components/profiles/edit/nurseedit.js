@@ -253,7 +253,7 @@ class NurseEdit extends Component {
                                 className="form-control"
                                 onChange={this.onChangeExperience}>
                                 <option  experience="1-2">1-2 Years</option>
-                                <option experience="3-4">3-4 Year</option>
+                                <option experience="3-5">3-5 Year</option>
                                 <option experience="5-10">5-10 Year</option>
                                 <option  experience="10+">10+ Years</option>
                             </select>

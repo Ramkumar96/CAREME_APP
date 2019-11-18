@@ -477,15 +477,7 @@ class NurseListMain extends Component{
 
     render(){
         const {term, CAREME_APP} = this.state;
-        
-        let nurse ='';
-        
-
-        if(this.state != null){
-            nurse = this.state.CAREME_APP.filter(searchingFor(this.state.term)).map(nurse => {
-             
-                
-        
+        let nurse = this.state.CAREME_APP.filter(searchingFor(this.state.term)).map(nurse => {
             return <NurseListProfile fname={nurse.FirstName}
             lname={nurse.LastName} 
             nurse_id={nurse.nurseID}
@@ -495,9 +487,7 @@ class NurseListMain extends Component{
             loc= {nurse.Location}
             nType= {nurse.nurseType}
             key={nurse._id}
-        />})}
-
-        
+        />})
 
         return(
             <div>
