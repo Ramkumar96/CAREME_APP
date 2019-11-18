@@ -247,41 +247,56 @@ class IntroBanner extends Component{
             return;
         }
 
-        const { PW, CPW, Email } = this.state;
+        const { PW, CPW } = this.state;
         
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
         }
 
+        else if ( PW != CPW){
+            alert("Your passwords dont match");
+        }
+
         else {
-            const { FirstName, LastName, Email, PW, CPW, Home, Tel, NIC } = this.state;
-            alert(`Succesfully Registered`); 
+            axios.post('http://localhost:4000/user/validEmail', obj)
+                .then(response => {
+                    console.log(response.data.success);
+                    if(response.data.success){
+                        console.log('hariii');
+                    }
 
-            axios.post('http://localhost:4000/user/add', obj)
-                .then(res => console.log(res.data));
+                    else {
+                        const { FirstName, LastName, Email, PW, CPW, Home, Tel, NIC } = this.state;
+            
+                        axios.post('http://localhost:4000/user/add', obj)
+                            .then(res => {console.log(res.data)});
 
-            this.setState({
-                FirstName: '',
-                LastName: '',
-                Email: '',
-                NIC: '',
-                PW: '',
-                CPW: '',
-                Home: '',
-                Tel: '',
-                visible1 : false,
-                touched : {
-                    Email: false,
-                    FirstName: false,
-                    LastName:false,
-                    nurseID: false,
-                    PW: false,
-                    CPW: false,
-                    Home: false,
-                    Tel: false,
-                    NIC: false
-                }
-            });
+                            alert(`Succesfully Registered`); 
+
+                        this.setState({
+                            FirstName: '',
+                            LastName: '',
+                            Email: '',
+                            NIC: '',
+                            PW: '',
+                            CPW: '',
+                            Home: '',
+                            Tel: '',
+                            visible1 : false,
+                            touched : {
+                                Email: false,
+                                FirstName: false,
+                                LastName:false,
+                                nurseID: false,
+                                PW: false,
+                                CPW: false,
+                                Home: false,
+                                Tel: false,
+                                NIC: false
+                            }
+                        });
+                    }
+                });
         }
     }
 

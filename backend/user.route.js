@@ -7,13 +7,14 @@ let UserReg = require('./user.model');
 UserRegRoutes.route('/add').post(function (req, res) {
   console.log(req.body)
   let userReg = new UserReg(req.body);
+
   userReg.save()
-    .then(userReg => {
-      res.status(200).json({ 'UserReg': 'User added successfully' });
-    })
-    .catch(err => {
-      res.status(400).send("unable to save to database");
-    });
+  .then(userReg => {
+    res.status(200).json({ 'UserReg': 'User added successfully' });
+  })
+  .catch(err => {
+    res.status(400).send("unable to save to database");
+  });
 });
 
 //Login
@@ -74,5 +75,21 @@ UserRegRoutes.route('/').get(function (req, res) {
      }
    });
  });
+
+//validate email
+UserRegRoutes.route('/validEmail').post(function (req, res) {
+  UserReg.findOne({Email: req.body.Email })
+     .then(response => {
+      if (response) {
+        console.log("existsss");
+        res.status(401).send({
+          success:true,
+          message:"Email already exists",
+        })
+      } else {
+        console.log('not there');
+      } 
+    })
+});
 
 module.exports = UserRegRoutes;
