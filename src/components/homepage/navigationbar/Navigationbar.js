@@ -6,16 +6,33 @@ import Modal from 'react-awesome-modal';
 import { Button, Form } from 'react-bootstrap';
 import axios from "../../../../backend/node_modules/axios";
 
+function validate (Email, Password){
+    return {
+        Email: Email.length==0,
+        Password: Password.length===0
+    };
+}
+
+function validateEmail (email) {
+    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regexp.test(email);
+}
+
 class Navigationbar extends Component {
     constructor(props) {
         super(props);
         this.openLoginModal = this.openLoginModal.bind(this);
         this.state = {
             visible: false,
-            email: null,
-            password: null,
+            Email: '',
+            Password: '',
             redirect_profile: false,
-            user_type: null
+            user_type: null,
+
+            touched: {
+                Email: false,
+                Password: false
+            }
         }
     }
 
@@ -27,10 +44,21 @@ class Navigationbar extends Component {
 
     closeModal() {
         this.setState({
-            visible: false
+            visible: false,
+            Email: '',
+            Password: '',
+            touched : {
+                Email: false,
+                Password: false
+            }
         });
     }
-
+    
+    canBeSubmitted() {
+        const errors = validate(this.state.Email, this.state.Password);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+        return !isDisabled;
+    }
 
     handleOnChange = (e) => {
         //console.log(e.target.name,e.target.value);
@@ -40,38 +68,90 @@ class Navigationbar extends Component {
         });
     }
 
+    handleBlur = field => e => {
+        this.setState({
+          touched: { ...this.state.touched, [field]: true }
+        });
+    };
+
+
     onLogin = (e) => {
         e.preventDefault();
         console.log(this.state)
-        
-        const data = {
-            email: this.state.email,
-            password: this.state.password
-        };
 
+        if (!this.canBeSubmitted()) {
+            e.preventDefault();
+            return;
+        }
+        
+        if (!validateEmail(this.state.Email)){
+            alert("Enter valid email address");
+        }
+
+        const data = {
+            Email: this.state.Email,
+            Password: this.state.Password
+        };
 
         console.log(data)
         const headers = {
             'Content-Type': 'application/json'
           }
 
-        axios.post('http://localhost:4000/user/login', data,{headers:headers})
-            .then(response => {
-                //console.log(response.data)
-                if (response.data.success) {
-                    console.log(response.data.user_data)
-                    localStorage.setItem("id", response.data.user_data._id)
-                    localStorage.setItem("user_id", response.data.user_data.userID)
-                    localStorage.setItem("user_name", response.data.user_data.FirstName)
-                    this.setState({
-                        redirect_profile: true,
-                        user_type:response.data.user_data.userID
+        axios.post('http://localhost:4000/user/validEmail', data, {headers:headers})
+        .then(res => {
+            if(res.data.success){
+                axios.post('http://localhost:4000/user/login', data,{headers:headers})
+                    .then(response => {
+                        //console.log(response.data)
+                        if (response.data.success) {
+                            console.log(response.data.user_data)
+                            localStorage.setItem("id", response.data.user_data._id)
+                            localStorage.setItem("user_id", response.data.user_data.userID)
+                            localStorage.setItem("user_name", response.data.user_data.FirstName)
+                            this.setState({
+                                redirect_profile: true,
+                                user_type:response.data.user_data.userID
+                            })
+                        }
+
+                        else if (!response.data.success) {
+                            alert("Invalid password");
+                            this.setState ({
+                                Password: '',
+                                touched: {
+                                    Password:false
+                                }
+                            });
+                        }
                     })
-                }
-            })
+            }
+
+            else if (!res.data.success){
+                alert("Email address not registered");
+                this.setState({
+                    Email: '',
+                    Password: '',
+                    touched: {
+                        Email: false,
+                        Password: false
+                    }
+                });
+            }
+        });        
     }
 
     render() {
+        const errors = validate(this.state.Email, this.state.Password);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+
+        const shouldMarkError = field => {
+            const hasError = errors[field];
+            const shouldShow = this.state.touched[field];
+      
+            return hasError ? shouldShow : false;
+        };      
+
         if (this.state.redirect_profile==true) {
             if(this.state.user_type===0){
                 return (
@@ -84,13 +164,13 @@ class Navigationbar extends Component {
                
                     <Redirect to="/clientprofile" />
                 )
-            }if(this.state.user_type===2){
+            }
+            if(this.state.user_type===2){
                 return (
                
                     <Redirect to="/adminmaindash" />
                 )
             }
-           
    
         }
         return (
@@ -120,12 +200,14 @@ class Navigationbar extends Component {
                                                     <span class="fas fa-envelope"></span>
                                                 </div>
                                                 <Form.Control
+                                                    className={shouldMarkError("Email") ? "error" : ""}
                                                     type="email"
                                                     placeholder="janedoe@example.com"
-                                                    name="email"
-                                                    value={this.state.email}
-                                                    onChange={this.handleOnChange} />
-                                                    
+                                                    name="Email"
+                                                    value={this.state.Email}
+                                                    onChange={this.handleOnChange} 
+                                                    onBlur={this.handleBlur("Email")}
+                                                />
                                             </Form.Group>
                                             
                                             <Form.Group controlId="Password">
@@ -134,13 +216,16 @@ class Navigationbar extends Component {
                                                     <span class="fas fa-lock"></span>
                                                  </div>
                                                 <Form.Control
-                                                    type="password"
+                                                    className={shouldMarkError("Password") ? "error" : ""}
+                                                    type="Password"
                                                     placeholder="Enter Your Password Here"
-                                                    name="password"
+                                                    name="Password"
                                                     value={this.state.password}
-                                                    onChange={this.handleOnChange} />
+                                                    onChange={this.handleOnChange}
+                                                    onBlur={this.handleBlur("Password")}
+                                                />
                                             </Form.Group>
-                                            <center><Button variant="btn btn-success" onClick={this.onLogin} type="submit">Login</Button></center>
+                                            <center><Button variant="btn btn-success" disabled={isDisabled} onClick={this.onLogin} type="submit">Login</Button></center>
                                         </Form>
                                         </div>
                                     </Modal>
