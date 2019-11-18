@@ -163,7 +163,6 @@ class IntroBanner extends Component{
             nurseType: null, 
             nurseEdu: null,
             nurseUni: null,
-            nurseExpT: null,
             nurseGender: null,
             profilePic: null           
         };

@@ -73,11 +73,6 @@ let UserReg = new Schema({
   nurseType: {
     type: String
   },
-
-  //nurse experience years in text for easier filtering
-  nurseExpT: {
-    type: String
-  },
   
   nurseGender: {
     type: String
