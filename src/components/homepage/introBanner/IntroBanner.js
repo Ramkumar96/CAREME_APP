@@ -4,6 +4,7 @@ import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 
+//validating empty fields for Nurse
 function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC){
     return {
         Email: Email.length===0,
@@ -18,6 +19,7 @@ function validate (Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC)
     };
 }
 
+//validating empty fields for client
 function validate1 (Email, FirstName, LastName, PW, CPW, Home, Tel, NIC){
     return {
         Email: Email.length===0,
@@ -31,11 +33,13 @@ function validate1 (Email, FirstName, LastName, PW, CPW, Home, Tel, NIC){
     };
 }
 
+//email syntax
 function validateEmail (email) {
     const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regexp.test(email);
 }
 
+//NIC syntax
 function validateNIC (nic){
     const regex = /^([0-9]{9})(V)$/;
     return regex.test(nic);
@@ -70,6 +74,7 @@ class IntroBanner extends Component{
             Tel: '',
             NIC: '',
 
+            //to check whether any fields have been clicked on and skipped wiithout filling
             touched : {
                 Email: false,
                 FirstName: false,
@@ -184,6 +189,7 @@ class IntroBanner extends Component{
             alert("Enter valid email address");
         }
 
+        //NIC regex validation
         else if (!validateNIC(this.state.NIC)){
             alert("Enter valid NIC number");
         }
@@ -205,6 +211,7 @@ class IntroBanner extends Component{
                         alert("Email already registered. Please use another Email Address");
                     }
 
+                    //verifying as unregistered nurse ID
                     else if(!res.data.success) {
                         axios.post('http://localhost:4000/user/validNurseID', obj, {headers:headers})
                             .then(response => {
@@ -212,6 +219,7 @@ class IntroBanner extends Component{
                                     alert("Your Nurse Council ID is already registered");
                                 }
 
+                                //adding new user to the database
                                 else if(!res.data.success) {
                                     axios.post('http://localhost:4000/user/add', obj)
                                         .then(res => {console.log(res.data)});
@@ -281,10 +289,17 @@ class IntroBanner extends Component{
 
         const { PW, CPW } = this.state;
         
+        //email syntax validation
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
         }
 
+        //NIC regex validation
+        else if (!validateNIC(this.state.NIC)){
+            alert("Enter valid NIC number");
+        }
+
+        //confirming both passwords
         else if ( PW != CPW){
             alert("Your passwords dont match");
         }
@@ -294,6 +309,7 @@ class IntroBanner extends Component{
                 'Content-Type': 'application/json'
               }
 
+            //verifying whether email has been previously registered
             axios.post('http://localhost:4000/user/validEmail', obj, {headers:headers})
                 .then(res => {
                     if(res.data.success){
@@ -301,6 +317,7 @@ class IntroBanner extends Component{
                         alert("Email already registered. Please use another Email Address");
                     }
 
+                    //adding new client to the database
                     else if(!res.data.success) {
                         axios.post('http://localhost:4000/user/add', obj)
                             .then(res => {console.log(res.data)});
@@ -413,12 +430,15 @@ class IntroBanner extends Component{
     }
 
     render(){ 
+        //validating the fields in the nurse form whether filled or not
         const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
 
+        //validating the fields in the nurse form whether filled or not
         const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
         const isDisabled1 = Object.keys(errors1).some(x => errors1[x]);
 
+        //marking the touched but unfilled fields in red
         const shouldMarkError = field => {
             const hasError = errors[field];
             const shouldShow = this.state.touched[field];
