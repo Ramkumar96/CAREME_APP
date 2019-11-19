@@ -41,7 +41,7 @@ function validateEmail (email) {
 
 //NIC syntax
 function validateNIC (nic){
-    const regex = /^([0-9]{9})(V)$/;
+    const regex = /^([0-9]{9})(V|v)$/;
     return regex.test(nic);
 }
 
