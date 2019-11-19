@@ -476,6 +476,8 @@ class NurseListMain extends Component{
     render(){
         const {term, CAREME_APP} = this.state;
         let nurse = this.state.CAREME_APP.filter(searchingFor(this.state.term)).map(nurse => {
+            if(!nurse.Age)
+            return;
             return <NurseListProfile fname={nurse.FirstName}
             lname={nurse.LastName} 
             nurse_id={nurse.nurseID}
