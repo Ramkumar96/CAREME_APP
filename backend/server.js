@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const PORT = 4000;
 const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./Database.js');
+
 const userRoute = require('./user.route');
 
 //connecting database
@@ -21,6 +21,21 @@ app.use(bodyParser.json());
 
 app.use('/user',userRoute);
 
-app.listen(PORT, function(){
-  console.log('Server is running on Port:',PORT);
+const port = process.env.PORT || 4000;
+const server = app.listen(port, () => {
+    console.log('Connected to port ' + port)
+})
+
+app.use('/public', express.static('public'));
+app.use((req, res, next) => {
+  // Error goes via `next()` method
+  setImmediate(() => {
+      next(new Error('Something went wrong'));
+  });
+});
+
+app.use(function (err, req, res, next) {
+  console.error(err.message);
+  if (!err.statusCode) err.statusCode = 500;
+  res.status(err.statusCode).send(err.message);
 });
