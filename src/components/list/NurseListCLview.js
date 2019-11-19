@@ -1,7 +1,8 @@
-import React, {Component} from "react";
+import React, { Component } from 'react'
 import Navigationbar from '../homepage/navigationbar/Navigationbar';
 import NurseListProfile from './NurseListProfile';
 import axios from 'axios';
+import ProfileNavbar from '../profiles/ProfileNavbar'
 
 
 
@@ -14,7 +15,8 @@ function searchingFor(term){
     }
 }
 
-class NurseListMain extends Component{
+class NurseListCLview extends Component{
+    
 
     constructor(props) {
         super(props);
@@ -489,9 +491,10 @@ class NurseListMain extends Component{
             key={nurse._id}
         />})
 
-        return(
+    
+        return (
             <div>
-                <Navigationbar/>
+                <ProfileNavbar/>
                 <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
@@ -577,10 +580,8 @@ class NurseListMain extends Component{
        
             
     </div>
-            
-
         );
     }
 }
 
-export default NurseListMain;
+export default NurseListCLview;

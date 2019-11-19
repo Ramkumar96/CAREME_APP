@@ -186,7 +186,7 @@ class ClientMainPage extends Component {
                                         <p className="text-muted">{this.state.profile_data.Location}</p>
 
                                         <hr />
-                                        <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b>
+                                        <a href="/nurslistclientview" className="btn btn-warning btn-block"><b>Find A Nurse</b>
                                         </a>
                                     </div>
                                     {/* /.card-body */}
