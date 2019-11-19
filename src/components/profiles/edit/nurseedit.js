@@ -33,8 +33,9 @@ class NurseEdit extends Component {
                 console.log(response.data.profile_data)
                 this.setState({
                     profile_data: response.data.profile_data,
-                    Email: response.data.profile_data.Email,
-                    Tel: response.data.profile_data.Tel
+                    Age: response.data.profile_data.Age,
+                    Tel: response.data.profile_data.Tel,
+                    nurseGender: response.data.profile_data.nurseGender
                 })
             })
 
@@ -49,8 +50,15 @@ class NurseEdit extends Component {
 
         });
 
-    }
+    } 
 
+
+    onChangeGender = (e) => {
+        console.log(e.target.value);
+        this.setState({
+            nurseGender: e.target.value
+        });
+    }
     onChangeTel = (e) => {
         console.log(e.target.value);
         this.setState({
@@ -106,7 +114,7 @@ class NurseEdit extends Component {
         e.preventDefault();
 
         const nurseobj = {
-            Email: this.state.Email,
+            Age: this.state.Age,
             Tel: this.state.Tel,
             Location: this.state.Location,
             nurseUni: this.state.nurseUni,
@@ -149,13 +157,25 @@ class NurseEdit extends Component {
                     <div className="card-body">
                         {/* Edit Email Address */}
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input type="email"
+                            <div class="row">
+                            <div className="col-5">
+                            <label htmlFor="exampleInputEmail1">Age</label>
+                            <input type="text"
                                 className="form-control"
-                                value={this.state.Email}
+                                value={this.state.Age}
                                 onChange={this.onChangeEmail}
                                 placeholderplaceholder="Enter email" />
+                            </div>
 
+                            <div className="col-5">
+                            <label htmlFor="exampleInputEmail1">Gender(M/F)</label>
+                            <input type="text"
+                                className="form-control"
+                                value={this.state.nurseGender}
+                                onChange={this.onChangeGender}
+                                placeholderplaceholder="Enter email" />
+                            </div>
+                            </div>
                         </div>
 
 
