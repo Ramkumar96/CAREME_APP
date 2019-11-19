@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
+import ProfilePicUpload from '../profilePicUpload';
 
 class ClientEdit extends Component {
 
@@ -218,8 +219,9 @@ class ClientEdit extends Component {
                             Submit</button>
                     </div>
                 </form>
-
-
+                
+                <div><ProfilePicUpload/></div>
+                
 
             </div>
         )
