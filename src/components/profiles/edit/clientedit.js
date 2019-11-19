@@ -220,7 +220,7 @@ class ClientEdit extends Component {
                     </div>
                 </form>
                 
-                <div><ProfilePicUpload/></div>
+                {/* <div><ProfilePicUpload/></div> */}
                 
 
             </div>
