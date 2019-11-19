@@ -15,7 +15,7 @@ return (
 
     
     
-    <div class="col-md-6">
+    <div class="col-md-6 profile-container">
         {/* Default box */}
         
         <div id={`${this.props.nType}`} className={`${this.props.nType}`}>
