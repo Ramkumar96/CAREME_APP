@@ -45,6 +45,12 @@ function validateNIC (nic){
     return regex.test(nic);
 }
 
+//validate tel
+function validateTel(tel){
+    const reg = /^(0)(7)([0-9]{8})$/;
+    return reg.test(tel);
+}
+
 class IntroBanner extends Component{
     constructor(props) {
         super(props);
@@ -198,6 +204,11 @@ class IntroBanner extends Component{
         else if ( PW != CPW){
             alert("Your passwords dont match");
         }
+
+        //validate telephone number
+        else if (!validateTel(this.state.Tel)){
+            alert("Enter valid telephone number");
+        }
         
         else {
             const headers = {
@@ -302,6 +313,11 @@ class IntroBanner extends Component{
         //confirming both passwords
         else if ( PW != CPW){
             alert("Your passwords dont match");
+        }
+
+        //validate telephone number
+        else if (!validateTel(this.state.Tel)){
+            alert("Enter valid telephone number");
         }
 
         else {
@@ -573,7 +589,7 @@ class IntroBanner extends Component{
                                                 </Form.Group>
 
                                                 <Form.Group>
-                                                    <Form.Label>Telephone Number</Form.Label>
+                                                    <Form.Label>Mobile Number</Form.Label>
                                                     <Form.Control 
                                                         className={shouldMarkError("Tel") ? "error" : ""}
                                                         required
@@ -696,7 +712,7 @@ class IntroBanner extends Component{
                                                 </Form.Group>
 
                                                 <Form.Group>
-                                                    <Form.Label>Telephone Number</Form.Label>
+                                                    <Form.Label>Mobile Number</Form.Label>
                                                     <Form.Control 
                                                         className={shouldMarkError("Tel") ? "error" : ""}
                                                         required
