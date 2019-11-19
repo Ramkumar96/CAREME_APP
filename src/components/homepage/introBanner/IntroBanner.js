@@ -42,7 +42,16 @@ function validateEmail (email) {
 //NIC syntax
 function validateNIC (nic){
     const regex = /^([0-9]{9})(V|v)$/;
-    return regex.test(nic);
+    const regex2 = /^([0-9]{12})$/;
+
+    if (regex.test(nic)){
+        return regex.test(nic);
+    }
+
+    else if (regex2.test(nic)){
+        return regex2.test(nic);
+    }
+    
 }
 
 //validate tel
@@ -507,6 +516,19 @@ class IntroBanner extends Component{
                                                 </Form.Row>
                             
                                                 <Form.Group>
+                                                    <Form.Label>E-mail Address</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Email") ? "error" : ""}
+                                                        type="email" 
+                                                        value={this.state.Email} 
+                                                        onChange={this.onChangeEmail} 
+                                                        onBlur={this.handleBlur("Email")}
+                                                        placeholder="janedoe@example.com" 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                </Form.Group>
+
+                                                <Form.Group>
                                                     <Form.Label>Nurse Council Registration Number</Form.Label>
                                                     <Form.Control
                                                         className={shouldMarkError("nurseID") ? "error" : ""} 
@@ -519,21 +541,8 @@ class IntroBanner extends Component{
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                 </Form.Group>
-
+                                                
                                                 <Form.Row>
-                                                    <Form.Group as={Col}>
-                                                    <Form.Label>E-mail Address</Form.Label>
-                                                    <Form.Control 
-                                                        className={shouldMarkError("Email") ? "error" : ""}
-                                                        type="email" 
-                                                        value={this.state.Email} 
-                                                        onChange={this.onChangeEmail} 
-                                                        onBlur={this.handleBlur("Email")}
-                                                        placeholder="janedoe@example.com" 
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                    </Form.Group>
-
                                                     <Form.Group as={Col}>
                                                     <Form.Label>NIC Number</Form.Label>
                                                     <Form.Control 
@@ -545,7 +554,33 @@ class IntroBanner extends Component{
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                     </Form.Group>
+
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>Mobile Number</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Tel") ? "error" : ""}
+                                                        required
+                                                        type="text" 
+                                                        value={this.state.Tel} 
+                                                        onChange={this.onChangeTel}
+                                                        onBlur={this.handleBlur("Tel")} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                    </Form.Group>
                                                 </Form.Row>
+
+                                                <Form.Group>
+                                                    <Form.Label>Address</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Address") ? "error" : ""}
+                                                        required
+                                                        type="textarea" 
+                                                        value={this.state.Home} 
+                                                        onChange={this.onChangeHome} 
+                                                        onBlur={this.handleBlur("Address")}
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                </Form.Group>
 
                                                 <Form.Row>
                                                     <Form.Group as={Col}>
@@ -574,32 +609,6 @@ class IntroBanner extends Component{
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
                                                 </Form.Row>
-
-                                                <Form.Group>
-                                                    <Form.Label>Address</Form.Label>
-                                                    <Form.Control 
-                                                        className={shouldMarkError("Address") ? "error" : ""}
-                                                        required
-                                                        type="textarea" 
-                                                        value={this.state.Home} 
-                                                        onChange={this.onChangeHome} 
-                                                        onBlur={this.handleBlur("Address")}
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                </Form.Group>
-
-                                                <Form.Group>
-                                                    <Form.Label>Mobile Number</Form.Label>
-                                                    <Form.Control 
-                                                        className={shouldMarkError("Tel") ? "error" : ""}
-                                                        required
-                                                        type="text" 
-                                                        value={this.state.Tel} 
-                                                        onChange={this.onChangeTel}
-                                                        onBlur={this.handleBlur("Tel")} 
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                </Form.Group>
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled} onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
                                                 <a href="#" class="text-center" onClick={() => this.onClickNurse()}>I already have membership</a>
@@ -643,8 +652,7 @@ class IntroBanner extends Component{
                                                     </Form.Group>
                                                 </Form.Row>
                             
-                                                <Form.Row>
-                                                    <Form.Group as={Col}>
+                                                <Form.Group as={Col}>
                                                     <Form.Label>E-mail Address</Form.Label>
                                                     <Form.Control 
                                                         className={shouldMarkError("Email") ? "error" : ""}
@@ -655,8 +663,9 @@ class IntroBanner extends Component{
                                                         placeholder="janedoe@example.com" 
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                    </Form.Group>
+                                                </Form.Group>
 
+                                                <Form.Row>
                                                     <Form.Group as={Col}>
                                                     <Form.Label>NIC Number</Form.Label>
                                                     <Form.Control 
@@ -668,7 +677,33 @@ class IntroBanner extends Component{
                                                     />
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
                                                     </Form.Group>
+
+                                                    <Form.Group as={Col}>
+                                                    <Form.Label>Mobile Number</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Tel") ? "error" : ""}
+                                                        required
+                                                        type="text" 
+                                                        value={this.state.Tel} 
+                                                        onChange={this.onChangeTel}
+                                                        onBlur={this.handleBlur("Tel")} 
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                    </Form.Group>
                                                 </Form.Row>
+
+                                                <Form.Group>
+                                                    <Form.Label>Address</Form.Label>
+                                                    <Form.Control 
+                                                        className={shouldMarkError("Address") ? "error" : ""}
+                                                        required
+                                                        type="textarea" 
+                                                        value={this.state.Home} 
+                                                        onChange={this.onChangeHome} 
+                                                        onBlur={this.handleBlur("Address")}
+                                                    />
+                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
+                                                </Form.Group>
 
                                                 <Form.Row>
                                                     <Form.Group as={Col}>
@@ -697,32 +732,6 @@ class IntroBanner extends Component{
                                                     <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback> 
                                                     </Form.Group>
                                                 </Form.Row>
-
-                                                <Form.Group>
-                                                    <Form.Label>Address</Form.Label>
-                                                    <Form.Control 
-                                                        className={shouldMarkError("Address") ? "error" : ""}
-                                                        required
-                                                        type="textarea" 
-                                                        value={this.state.Home} 
-                                                        onChange={this.onChangeHome} 
-                                                        onBlur={this.handleBlur("Address")}
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                </Form.Group>
-
-                                                <Form.Group>
-                                                    <Form.Label>Mobile Number</Form.Label>
-                                                    <Form.Control 
-                                                        className={shouldMarkError("Tel") ? "error" : ""}
-                                                        required
-                                                        type="text" 
-                                                        value={this.state.Tel} 
-                                                        onChange={this.onChangeTel}
-                                                        onBlur={this.handleBlur("Tel")} 
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">This field is required!</Form.Control.Feedback>
-                                                </Form.Group>
 
                                                 <Button type="submit" variant="primary" disabled={isDisabled1} onClick={this.onSubmitClient.bind(this)}>Submit</Button>
                                                 <a href="#" class="text-center" onClick={() => this.onClickClient()}>I already have a membership</a>
