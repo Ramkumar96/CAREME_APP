@@ -36,6 +36,11 @@ function validateEmail (email) {
     return regexp.test(email);
 }
 
+function validateNIC (nic){
+    const regex = /^([0-9]{9})(V)$/;
+    return regex.test(nic);
+}
+
 class IntroBanner extends Component{
     constructor(props) {
         super(props);
@@ -177,6 +182,10 @@ class IntroBanner extends Component{
         //email syntax validation
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
+        }
+
+        else if (!validateNIC(this.state.NIC)){
+            alert("Enter valid NIC number");
         }
 
         //password and confirm password match verification
