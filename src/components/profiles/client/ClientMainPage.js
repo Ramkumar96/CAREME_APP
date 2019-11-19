@@ -9,6 +9,7 @@ import axios from "../../../../backend/node_modules/axios";
 
 
 
+
 class ClientMainPage extends Component {
 
 
@@ -185,7 +186,8 @@ class ClientMainPage extends Component {
                                         <p className="text-muted">{this.state.profile_data.Location}</p>
 
                                         <hr />
-                                        <a href="#" className="btn btn-warning btn-block"><b>Find A Nurse</b></a>
+                                        <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b>
+                                        </a>
                                     </div>
                                     {/* /.card-body */}
                                 </div>
