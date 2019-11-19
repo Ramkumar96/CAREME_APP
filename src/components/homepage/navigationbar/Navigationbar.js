@@ -125,7 +125,7 @@ class Navigationbar extends Component {
                         }
 
                         else if (!response.data.success) {
-                            alert("Invalid password");
+                            alert("Email or password is invalid");
                             this.setState ({
                                 Password: '',
                                 touched: {
