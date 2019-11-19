@@ -33,7 +33,8 @@ class ClientEdit extends Component {
                     profile_data: response.data.profile_data,
                     Email: response.data.profile_data.Email,
                     Tel: response.data.profile_data.Tel,
-                    Home:response.data.profile_data.Home
+                    Home:response.data.profile_data.Home,
+                    Location:response.data.profile_data.Location
                 })
             })
 
@@ -114,7 +115,7 @@ class ClientEdit extends Component {
                     <div className="card-body">
                         {/* Edit Email Address */}
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail">Email address</label>
+                            <label htmlFor="exampleInputEmail">Email address:{this.state.Email}</label>
                             <input type="email" className="form-control" 
                             id="exampleInputEmail1" 
                             value={this.state.Email}
@@ -124,7 +125,7 @@ class ClientEdit extends Component {
 
                         {/* Edit Telephone Number */}
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Telephone</label>
+                             <label htmlFor="exampleInputEmail1">Telephone : {this.state.Tel}</label>
                             <input type="text" className="form-control"
                             value={this.state.Tel}
                             onChange={this.onChangeTel}
@@ -134,7 +135,7 @@ class ClientEdit extends Component {
                         {/* Edit Location */} 
                         <div>
                             <div className="form-group">
-                                <label htmlFor="inputlocation">Address</label>
+                                <label htmlFor="inputlocation">Address:{this.state.Home},{this.state.Location}</label>
                                 <input type="text" className="form-control"
                                  value={this.state.Home}
                                 onChange={this.onChangeAddress}

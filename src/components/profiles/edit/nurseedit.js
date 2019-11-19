@@ -15,10 +15,9 @@ class NurseEdit extends Component {
             nurseEdu: '',
             nurseExp: '',
             nurseType: '',
-            // nurseExpT:''
+            Age: '',
+            nurseGender: '',
         }
-
-
     }
 
     componentDidMount() {
@@ -30,28 +29,28 @@ class NurseEdit extends Component {
         var token = localStorage.getItem('id');
         axios.get('http://localhost:4000/user/userdata/' + token)
             .then(response => {
-                console.log(response.data.profile_data)
+                //console.log(response.data.profile_data)
                 this.setState({
                     profile_data: response.data.profile_data,
-                    Age: response.data.profile_data.Age,
+                    Email: response.data.profile_data.Email,
                     Tel: response.data.profile_data.Tel,
-                    nurseGender: response.data.profile_data.nurseGender
+                    Location: response.data.profile_data.Location,
+                    nurseUni: response.data.profile_data.nurseUni,
+                    nurseEdu: response.data.profile_data.nurseEdu,
+                    nurseExp: response.data.profile_data.nurseExp,
+                    nurseType: response.data.profile_data.nurseType,
+                    Age: response.data.profile_data.Age,
+                    nurseGender: response.data.profile_data.nurseGender,
                 })
             })
-
     }
 
-
-
-    onChangeEmail = (e) => {
-
+    onChangeAge = (e) => {
+        console.log(e.target.value);
         this.setState({
-            Email: e.target.value
-
-        });
-
-    } 
-
+            Age: e.target.value
+        })
+    }
 
     onChangeGender = (e) => {
         console.log(e.target.value);
@@ -59,6 +58,14 @@ class NurseEdit extends Component {
             nurseGender: e.target.value
         });
     }
+
+
+    onChangeEmail = (e) => {
+        this.setState({
+            Email: e.target.value
+        });
+    }
+
     onChangeTel = (e) => {
         console.log(e.target.value);
         this.setState({
@@ -94,14 +101,6 @@ class NurseEdit extends Component {
         })
     }
 
-    // onChangeExperienceT = (e) => {
-    //     console.log(e.target.value);
-    //     this.setState({
-    //         nurseExpT: e.target.value
-    //     })
-    // }
-
-
     onChangeType = (e) => {
         console.log(e.target.value);
         this.setState({
@@ -115,17 +114,19 @@ class NurseEdit extends Component {
 
         const nurseobj = {
             Age: this.state.Age,
+            nurseGender: this.state.nurseGender,
             Tel: this.state.Tel,
             Location: this.state.Location,
             nurseUni: this.state.nurseUni,
             nurseEdu: this.state.nurseEdu,
             nurseExp: this.state.nurseExp,
             nurseType: this.state.nurseType,
-            // nurseExpT:this.state.nurseExpT
         };
+
         const headers = {
             'Content-Type': 'application/json'
         }
+
         var token = localStorage.getItem('id');
         console.log(nurseobj);
         axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
@@ -137,9 +138,8 @@ class NurseEdit extends Component {
                 }
             });
 
-       
-    }
 
+    }
 
 
     render() {
@@ -149,7 +149,6 @@ class NurseEdit extends Component {
             );
         }
 
-
         return (
             <div>
 
@@ -158,30 +157,37 @@ class NurseEdit extends Component {
                         {/* Edit Email Address */}
                         <div className="form-group">
                             <div class="row">
-                            <div className="col-5">
-                            <label htmlFor="exampleInputEmail1">Age</label>
-                            <input type="text"
-                                className="form-control"
-                                value={this.state.Age}
-                                onChange={this.onChangeEmail}
-                                placeholderplaceholder="Enter email" />
-                            </div>
+                                <div className="col-5">
+                                    <label htmlFor="exampleInputEmail1">Age : {this.state.Age}</label>
+                                    <input type="text"
+                                        className="form-control"
+                                        value={this.state.Age}
+                                        onChange={this.onChangeAge}
+                                        placeholderplaceholder="Enter email" />
+                                </div>
 
-                            <div className="col-5">
-                            <label htmlFor="exampleInputEmail1">Gender(M/F)</label>
-                            <input type="text"
-                                className="form-control"
-                                value={this.state.nurseGender}
-                                onChange={this.onChangeGender}
-                                placeholderplaceholder="Enter email" />
-                            </div>
+                                <div className="col-5">
+                                    <label htmlFor="exampleInputEmail1">Gender : {this.state.nurseGender}</label>
+                                    <select
+                                        className="form-control"
+                                        onChange={this.onChangeGender}>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+
+                                    {/* <input type="text"
+                                        className="form-control"
+                                        value={this.state.nurseGender}
+                                        onChange={this.onChangeGender}
+                                        placeholderplaceholder="Enter email" /> */}
+                                </div>
                             </div>
                         </div>
 
 
                         {/* Edit Telephone Number */}
                         <div className="form-group">
-                            <label htmlFor="telephone">Telephone</label>
+                            <label htmlFor="telephone">Telephone : {this.state.Tel}</label>
                             <input type="text"
                                 className="form-control"
                                 value={this.state.Tel}
@@ -191,7 +197,7 @@ class NurseEdit extends Component {
 
                         {/* Edit Location */}
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Location</label>
+                            <label htmlFor="exampleInputEmail1">Location : {this.state.Location}</label>
                             <div className="form-group">
                                 <select id="dropDownLocation"
                                     className="form-control"
@@ -200,7 +206,7 @@ class NurseEdit extends Component {
                                     <option location="Gampaha">Gampaha</option>
                                     <option location="Kurunegala">Kurunegala</option>
                                     <option location="Galle">Galle</option>
-                                 
+
                                 </select>
                             </div>
 
@@ -209,7 +215,7 @@ class NurseEdit extends Component {
 
                         {/* Edit University */}
                         <div className="form-group">
-                            <label htmlFor="university">University</label>
+                            <label htmlFor="university">University : {this.state.nurseUni}</label>
                             <select id="dropDownUniversity"
                                 class="form-control "
                                 onChange={this.onChangeUniversity}>
@@ -228,7 +234,7 @@ class NurseEdit extends Component {
 
                         {/* Education Level */}
                         <div className="form-group">
-                            <label htmlFor="educationlevel">Education Level</label>
+                            <label htmlFor="educationlevel">Education Level : {this.state.nurseEdu}</label>
                             <select id="dropDownEdu"
                                 class="form-control"
                                 onChange={this.onChangeEducation}>
@@ -269,20 +275,20 @@ class NurseEdit extends Component {
 
                         {/* Edit Experience */}
                         <div className="form-group">
-                            <label>Carrier Experience (in years)</label>
+                            <label>Carrier Experience (in years) : {this.state.nurseExp}</label>
                             <select multiple
                                 className="form-control"
                                 onChange={this.onChangeExperience}>
-                                <option  experience="1-2">1-2</option>
+                                <option experience="1-2">1-2</option>
                                 <option experience="3-5">3-5</option>
                                 <option experience="5-10">5-10</option>
-                                <option  experience="10+">10+</option>
+                                <option experience="10+">10+</option>
                             </select>
                         </div>
 
                         {/* Edit Type category */}
                         <form role="form">
-                            <label>Type Category</label>
+                            <label>Type Category : {this.state.nurseType}</label>
                             <div className="row">
                                 <div className="col-sm-6">
                                     {/* checkbox */}
@@ -293,7 +299,7 @@ class NurseEdit extends Component {
                                                 value="Emergency"
                                                 checked={this.state.nurseType === "Emergency Nurse"}
                                                 onChange={this.onChangeType} />
-                                            <label htmlFor="customRadio1" className="custom-control-label">Emergency Nurse</label>
+                                            <label htmlFor="customRadio1" className="custom-control-label default">Emergency Nurse</label>
                                         </div>
                                         <div className="custom-control custom-radio">
                                             <input className="custom-control-input" type="radio" id="customRadio2" name="customRadio"

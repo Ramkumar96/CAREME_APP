@@ -57,7 +57,7 @@ class ClientMainPage extends Component {
                                 <div className="card card-primary card-outline">
                                     <div className="card-body box-profile">
                                         <div className="text-center">
-                                            <img className="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture" />
+                                            <img className="profile-user-img img-fluid img-circle" src="/images/client.jpg" alt="User profile picture" />
                                         </div>
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
                                        
@@ -183,7 +183,7 @@ class ClientMainPage extends Component {
                                         </p>
                                         <hr />
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                        <p className="text-muted">{this.state.profile_data.Location}</p>
+                                        <p className="text-muted text-center">{this.state.profile_data.Location}</p>
 
                                         <hr />
                                         <a href="/nurslistclientview" className="btn btn-warning btn-block"><b>Find A Nurse</b>

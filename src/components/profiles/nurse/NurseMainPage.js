@@ -58,19 +58,25 @@ class NurseMainPage extends Component {
                                         <div className="card card-primary card-outline">
                                             <div className="card-body box-profile">
                                                 <div className="text-center">
-                                                    <img className="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture" />
+                                                    <img className="profile-user-img img-fluid img-circle" src="/images/nur.jpg" alt="User profile picture" />
                                                 </div>
                                                 <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
-                                                {/* {this.state.profile_data.FirstName} */}
-                                                {/* <p className="text-muted text-center">Software Engineer</p> */}
+
 
                                                 <ul className="list-group list-group-unbordered mb-3 text-center">
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
                                                     </li>
                                                     <li className="list-group-item">
+                                                        <h6 className="text-center">Gender:{this.state.profile_data.nurseGender}</h6>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        <h6 className="text-center">Age:{this.state.profile_data.Age}</h6>
+                                                    </li>
+                                                    <li className="list-group-item">
                                                         <h6 className="text-center">Experience:{this.state.profile_data.nurseExp}</h6>
                                                     </li>
+                                                    
                                                     <li className="list-group-item text-center">
                                                         <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
                                                     </li>
@@ -92,6 +98,11 @@ class NurseMainPage extends Component {
                                                     {this.state.profile_data.nurseEdu}
                                                 </p>
                                                 <hr />
+                                                <strong><i className="fas fa-book mr-1" /> University</strong>
+                                                <p className="text-muted">
+                                                    {this.state.profile_data.nurseUni}
+                                                </p>
+                                                <hr />
                                                 <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                                 <p className="text-muted">{this.state.profile_data.Location}</p>
                                                 <hr />
@@ -99,9 +110,6 @@ class NurseMainPage extends Component {
                                                 <p className="text-muted">
                                                     {this.state.profile_data.nurseType}
                                                 </p>
-                                                <hr />
-                                                <strong><i className="far fa-file-alt mr-1" /> Notes</strong>
-                                                <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                                             </div>
                                             {/* /.card-body */}
                                         </div>
@@ -194,11 +202,10 @@ class NurseMainPage extends Component {
                                                 <i className="fas fa-star mr-1" />
                                                 <i className="fas fa-star mr-1" />
                                             </p>
-                                            <hr />
+                                            <hr/>
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                            <p className="text-muted">{this.state.profile_data.Location}</p>
-
-                                            <hr />
+                                            <p className="text-muted text-center">{this.state.profile_data.Location}</p>
+                                            <hr/>
                                             <a href="#" className="btn btn-danger btn-block"><b>Check Calender</b></a>
                                         </div>
                                         {/* /.card-body */}
