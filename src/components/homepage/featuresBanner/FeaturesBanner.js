@@ -91,28 +91,25 @@ class FeaturesBanner extends Component {
             <div class="row">
               <div class="col-md-4 text-center my-3">
 
-                <h6 class="text-uppercase my-3 service-title">User Friendly</h6>
-                <p class="w-75 mx-auto text-left service-text">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla rem quia expedita necessitatibus, tempore
-                  veritatis quod praesentium laboriosam nesciunt placeat.
-                                </p>
+                <h6 class="text-uppercase my-3 service-title">Pediatric Nurse</h6>
+                <p class="w-75 mx-auto service-text">
+                  Pediatric nursing is the medical care of neonates and children up to adolescence, usually in an in-patient hospital or day-clinic. Pediatrics comes from the Greek words 'paedia' which means child, 'iatrike' which means physician.
+                </p>
               </div>
 
               <div class="col-md-4 text-center my-3">
 
-                <h6 class="text-uppercase my-3 service-title">Cost Effective</h6>
-                <p class="w-75 mx-auto text-left service-text">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla rem quia expedita necessitatibus, tempore
-                  veritatis quod praesentium laboriosam nesciunt placeat.
-                                </p>
+                <h6 class="text-uppercase my-3 service-title">Geriatric Nurse</h6>
+                <p class="w-75 mx-auto service-text">
+                  A Geriatric Nurse assists doctors in taking care of the mental and physical health of older patients who are at greater risk of injuries and diseases. You’ll perform check-ups, administer medication, and help with pain management and rehabilitation.
+                </p>
               </div>
 
               <div class="col-md-4 text-center my-3">
-                <h6 class="text-uppercase my-3 service-title">Easy Accessible</h6>
-                <p class="w-75 mx-auto text-left service-text">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla rem quia expedita necessitatibus, tempore
-                  veritatis quod praesentium laboriosam nesciunt placeat.
-                          </p>
+                <h6 class="text-uppercase my-3 service-title">Midwife</h6>
+                <p class="w-75 mx-auto service-text">
+                A midwife is a trained health professional who helps healthy women during labor, delivery, and after the birth of their babies. Midwives may deliver babies at birthing centers or at home, but most can also deliver babies at a hospital.
+                </p>
               </div>
             </div>
 
@@ -120,29 +117,26 @@ class FeaturesBanner extends Component {
             <div class="row">
               <div class="col-md-4 text-center my-3">
 
-                <h6 class="text-uppercase my-3 service-title">Boring</h6>
-                <p class="w-75 mx-auto text-left service-text">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla rem quia expedita necessitatibus, tempore
-                  veritatis quod praesentium laboriosam nesciunt placeat.
-                              </p>
+                <h6 class="text-uppercase my-3 service-title">Emergency Nurse</h6>
+                <p class="w-75 mx-auto service-text">
+                  Emergency nursing is a specialty focusing on the care of patients who require prompt medical attention to avoid long-term disability or death. Emergency nurses increasingly care for people who are unwilling or unable to get primary medical care.
+                </p>
               </div>
 
               <div class="col-md-4 text-center my-3">
 
-                <h6 class="text-uppercase my-3 service-title">Time waste</h6>
-                <p class="w-75 mx-auto text-left service-text">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla rem quia expedita necessitatibus, tempore
-                  veritatis quod praesentium laboriosam nesciunt placeat.
-                              </p>
+                <h6 class="text-uppercase my-3 service-title">Surgical Nurse</h6>
+                <p class="w-75 mx-auto service-text">
+                  A surgical nurse, also referred to as a theatre nurse or scrub nurse, specializes in preoperative care, providing care to patients before, during and after surgery. To become a theatre nurse, Registered Nurses or Enrolled Nurses must complete extra training.
+                </p>
               </div>
 
               <div class="col-md-4 text-center my-3">
 
-                <h6 class="text-uppercase my-3 service-title">Useless</h6>
-                <p class="w-75 mx-auto text-left service-text">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla rem quia expedita necessitatibus, tempore
-                  veritatis quod praesentium laboriosam nesciunt placeat.
-                              </p>
+                <h6 class="text-uppercase my-3 service-title">Mental Health Nurse</h6>
+                <p class="w-75 mx-auto service-text">
+                  Mental health nurses are responsible for planning and providing support and medical and nursing care to people who have a range of mental health issues. Mental health nurses support issues ranging from anxiety and depression to personality and eating disorders.
+                </p>
               </div>
             </div>
           </div >

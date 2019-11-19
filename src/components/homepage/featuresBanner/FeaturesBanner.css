@@ -16,3 +16,8 @@
     background-repeat: no-repeat;
     position: relative;
   }
+
+  p {
+    text-align: justify;
+    text-justify: auto;
+  }
