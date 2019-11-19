@@ -284,7 +284,7 @@ class NurseListMain extends Component{
         var geri = document.getElementsByClassName('Geriatric');
         var mid = document.getElementsByClassName('Midwife');
         var peri = document.getElementsByClassName('Pediatric');
-        var ment = document.getElementsByClassName('Mental Health');
+        var ment = document.getElementsByClassName('Psychiatric');
         var zero = document.getElementsByClassName('null');
         
         if(selector ==="0"){
@@ -554,7 +554,7 @@ class NurseListMain extends Component{
                         <option value={3}>Geriatric Nurse</option>
                         <option value={4}>Midwife Nurse</option>
                         <option value={5}>Pediatric Nurse</option>
-                        <option value={6}>Mental Health Nurse</option>
+                        <option value={6}>Psychiatric Nurse</option>
                     </select>
                 </div>
             </div>

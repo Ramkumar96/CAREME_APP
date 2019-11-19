@@ -557,7 +557,7 @@ class NurseListCLview extends Component{
                         <option value={3}>Geriatric Nurse</option>
                         <option value={4}>Midwife Nurse</option>
                         <option value={5}>Pediatric Nurse</option>
-                        <option value={6}>Mental Health Nurse</option>
+                        <option value={6}>Psychiatric Nurse</option>
                     </select>
                 </div>
             </div>

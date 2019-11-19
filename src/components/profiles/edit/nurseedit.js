@@ -309,10 +309,10 @@ class NurseEdit extends Component {
                                     </div>
                                     <div className="custom-control custom-radio">
                                         <input className="custom-control-input" type="radio" id="customRadio6" name="customRadio"
-                                            value="Mental Health"
+                                            value="Psychiatric"
                                             checked={this.state.nurseType === "Mental Health Nurse"}
                                             onChange={this.onChangeType} />
-                                        <label htmlFor="customRadio6" className="custom-control-label">Mental Health Nurse</label>
+                                        <label htmlFor="customRadio6" className="custom-control-label">Psychiatric Nurse</label>
                                     </div>
                                 </div>
                             </div>
