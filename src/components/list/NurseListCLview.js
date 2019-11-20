@@ -72,41 +72,40 @@ class NurseListCLview extends Component{
         var zero = document.getElementsByClassName('null');
 
         if(selector ==="0"){
-            // alert('Hello 01');
+            //alert('Hello 01');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].style.display = 'block';
+                tenplus[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].style.display = 'block';
+                fiveten[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].style.display = 'block';
+                threefive[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].style.display = 'block';
+                onetwo[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
-
         }
         
         if(selector ==="1"){
             // alert('Hello 01');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].style.display = 'none';
+                tenplus[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].style.display = 'none';
+                fiveten[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].style.display = 'none';
+                threefive[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].style.display = 'block';
+                onetwo[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
@@ -114,55 +113,55 @@ class NurseListCLview extends Component{
             // alert('Hello 02');
             
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].style.display = 'none';
+                tenplus[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].style.display = 'none';
+                fiveten[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].style.display = 'block';
+                threefive[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].style.display = 'none';
+                onetwo[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
         }
         else if(selector ==="3"){
             // alert('Hello 03');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].style.display = 'none';
+                tenplus[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].style.display = 'block';
+                fiveten[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].style.display = 'none';
+                threefive[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].style.display = 'none';
+                onetwo[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
         }
         else if(selector ==="4"){
             // alert('Hello 04');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].style.display = 'block';
+                tenplus[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].style.display = 'none';
+                fiveten[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].style.display = 'none';
+                threefive[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].style.display = 'none';
+                onetwo[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
         }
     }
@@ -181,20 +180,21 @@ class NurseListCLview extends Component{
 
         if(selector ==="0"){
             // alert('Hello 01');
+            
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].style.display = 'block';
+                colombo[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].style.display = 'block';
+                gampaha[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].style.display = 'block';
+                galle[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].style.display = 'block';
+                kurunegala[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
@@ -202,20 +202,21 @@ class NurseListCLview extends Component{
         
         if(selector ==="1"){
             // alert('Hello 01');
+
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].style.display = 'block';
+                colombo[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].style.display = 'none';
+                gampaha[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].style.display = 'none';
+                galle[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].style.display = 'none';
+                kurunegala[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
@@ -223,55 +224,55 @@ class NurseListCLview extends Component{
             // alert('Hello 02');
             var elems1 = document.getElementById('colombo');
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].style.display = 'none';
+                colombo[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].style.display = 'block';
+                gampaha[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].style.display = 'none';
+                galle[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].style.display = 'none';
+                kurunegala[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
         }
         else if(selector ==="3"){
             // alert('Hello 03');
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].style.display = 'none';
+                colombo[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].style.display = 'none';
+                gampaha[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].style.display = 'block';
+                galle[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].style.display = 'none';
+                kurunegala[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
         }
         else if(selector ==="4"){
             // alert('Hello 04');
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].style.display = 'none';
+                colombo[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].style.display = 'none';
+                gampaha[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].style.display = 'none';
+                galle[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].style.display = 'block';
+                kurunegala[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
         }
     }
@@ -286,31 +287,31 @@ class NurseListCLview extends Component{
         var geri = document.getElementsByClassName('Geriatric');
         var mid = document.getElementsByClassName('Midwife');
         var peri = document.getElementsByClassName('Pediatric');
-        var ment = document.getElementsByClassName('Mental Health');
+        var ment = document.getElementsByClassName('Psychiatric');
         var zero = document.getElementsByClassName('null');
         
         if(selector ==="0"){
             // alert('Hello 01');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].style.display = 'block';
+                emerg[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].style.display = 'block';
+                surg[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].style.display = 'block';
+                geri[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].style.display = 'block';
+                mid[i].closest('.profile-container').style.display = 'block';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].style.display = 'block';
+                peri[i].closest('.profile-container').style.display = 'block';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].style.display = 'block';
+                ment[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
@@ -319,25 +320,25 @@ class NurseListCLview extends Component{
         if(selector ==="1"){
             // alert('Hello 01');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].style.display = 'block';
+                emerg[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].style.display = 'none';
+                surg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].style.display = 'none';
+                geri[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].style.display = 'none';
+                mid[i].closest('.profile-container').style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].style.display = 'none';
+                peri[i].closest('.profile-container').style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].style.display = 'none';
+                ment[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
@@ -345,125 +346,125 @@ class NurseListCLview extends Component{
             // alert('Hello 02');
             var elems1 = document.getElementById('colombo');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].style.display = 'none';
+                emerg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].style.display = 'block';
+                surg[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].style.display = 'none';
+                geri[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].style.display = 'none';
+                mid[i].closest('.profile-container').style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].style.display = 'none';
+                peri[i].closest('.profile-container').style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].style.display = 'none';
+                ment[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
         else if(selector ==="3"){
             // alert('Hello 03');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].style.display = 'none';
+                emerg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].style.display = 'none';
+                surg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].style.display = 'block';
+                geri[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].style.display = 'none';
+                mid[i].closest('.profile-container').style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].style.display = 'none';
+                peri[i].closest('.profile-container').style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].style.display = 'none';
+                ment[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
         else if(selector ==="4"){
             // alert('Hello 04');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].style.display = 'none';
+                emerg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].style.display = 'none';
+                surg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].style.display = 'none';
+                geri[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].style.display = 'block';
+                mid[i].closest('.profile-container').style.display = 'block';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].style.display = 'none';
+                peri[i].closest('.profile-container').style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].style.display = 'none';
+                ment[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
 
         }
         else if(selector ==="5"){
             // alert('Hello 04');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].style.display = 'none';
+                emerg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].style.display = 'none';
+                surg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].style.display = 'none';
+                geri[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].style.display = 'none';
+                mid[i].closest('.profile-container').style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].style.display = 'block';
+                peri[i].closest('.profile-container').style.display = 'block';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].style.display = 'none';
+                ment[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
             
         }
         else if(selector ==="6"){
             // alert('Hello 04');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].style.display = 'none';
+                emerg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].style.display = 'none';
+                surg[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].style.display = 'none';
+                geri[i].closest('.profile-container').style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].style.display = 'none';
+                mid[i].closest('.profile-container').style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].style.display = 'none';
+                peri[i].closest('.profile-container').style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].style.display = 'block';
+                ment[i].closest('.profile-container').style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].style.display = 'none';
+                zero[i].closest('.profile-container').style.display = 'none';
             }
             
         }
