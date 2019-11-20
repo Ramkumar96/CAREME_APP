@@ -159,15 +159,7 @@ class NurseMainPage extends Component {
                                                                 <h3 className="timeline-header border-0"> <strong>Telephone:  </strong>{this.state.profile_data.Tel}</h3>
                                                             </div>
                                                         </div>
-                                                        <div>
-                                                            <div className="timeline-item">
-                                                                <h3 className="timeline-header border-0"> <strong>otherss:  </strong>{this.state.profile_data.Location}</h3>
-                                                            </div>
-                                                        </div>
-
-
-
-
+                                                        
                                                         {/* END timeline item */}
 
                                                     </div>
