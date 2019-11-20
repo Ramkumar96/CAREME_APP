@@ -17,9 +17,9 @@ return (
     
     <div class="col-md-6 profile-container">
         {/* Default box */}
-        
-        <div id={`${this.props.nType}`} className={`${this.props.nType}`}>
         <div id={`${this.props.loc}`} className={`${this.props.loc}`}>
+        <div id={`${this.props.nType}`} className={`${this.props.nType}`}>
+        
         <div id={`${ this.props.exp}`} className={`${ this.props.exp}`} >
             <div className="card-body pb-0">
             <div className="row d-flex align-items-stretch">
