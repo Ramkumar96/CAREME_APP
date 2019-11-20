@@ -604,7 +604,7 @@ class IntroBanner extends Component {
                                                             <a tabindex="0" data-toggle="popover" data-trigger="focus"
                                                                 title="Password should atleast be of 6 characters
                                                                 should include atleast one simple letter, capital letter, special character and number" 
-                                                                data-content="And here's some amazing content. It's very engaging. Right?"> Password Policy</a>
+                                                                data-content="And here's some amazing content. It's very engaging. Right?"> Policy</a>
 
                                                             <Form.Control
                                                                 className={shouldMarkError("PW") ? "error" : ""}
@@ -733,7 +733,7 @@ class IntroBanner extends Component {
                                                                 <a tabindex="0" data-toggle="popover" data-trigger="focus"
                                                                 title="Password should atleast be of 6 characters
                                                                 should include atleast one simple letter, capital letter, special character and number" 
-                                                                data-content="And here's some amazing content. It's very engaging. Right?"> Password Policy</a>
+                                                                data-content="And here's some amazing content. It's very engaging. Right?">Policy</a>
                                                                 <Form.Control
                                                                     className={shouldMarkError("PW") ? "error" : ""}
                                                                     required
