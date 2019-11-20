@@ -68,13 +68,13 @@ class NurseMainPage extends Component {
                                                         <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        <h6 className="text-center">Gender:{this.state.profile_data.nurseGender}</h6>
+                                                        <h6 className="text-center">Gender : {this.state.profile_data.nurseGender}</h6>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        <h6 className="text-center">Age:{this.state.profile_data.Age}</h6>
+                                                        <h6 className="text-center">Age : {this.state.profile_data.Age}</h6>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        <h6 className="text-center">Experience:{this.state.profile_data.nurseExp}</h6>
+                                                        <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
                                                     </li>
                                                     
                                                     <li className="list-group-item text-center">
@@ -108,7 +108,7 @@ class NurseMainPage extends Component {
                                                 <hr />
                                                 <strong><i className="fas fa-pencil-alt mr-1" /> Skills</strong>
                                                 <p className="text-muted">
-                                                    {this.state.profile_data.nurseType}
+                                                    {this.state.profile_data.nurseType} Nurse
                                                 </p>
                                             </div>
                                             {/* /.card-body */}
