@@ -114,16 +114,6 @@ class ClientEdit extends Component {
 
                 <form role="form">
                     <div className="card-body">
-                        {/* Edit Email Address */}
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail">Email address : {this.state.Email}</label>
-                            <input type="email" className="form-control" 
-                            id="exampleInputEmail1" 
-                            value={this.state.Email}
-                            onChange={this.onChangeEmail}
-                            placeholder="Enter email" />
-                        </div>
-
                         {/* Edit Telephone Number */}
                         <div className="form-group">
                              <label htmlFor="exampleInputEmail1">Telephone : {this.state.Tel}</label>
