@@ -89,6 +89,7 @@ class ClientEdit extends Component {
         console.log(nurseobj);
         axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
             .then(response => {
+                alert("Details successfully updated");
                 if (response.data.success) {
                     this.getData()
                     this.props.loadData()
