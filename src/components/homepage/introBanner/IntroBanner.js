@@ -60,6 +60,12 @@ function validateTel(tel){
     return reg.test(tel);
 }
 
+//validate password (minimum 6 characters, atleast one caps and one simple letter, one special character and one number)
+function validatePassword(password){
+    const regpw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regpw.test(password);
+}
+
 class IntroBanner extends Component{
     constructor(props) {
         super(props);
@@ -204,6 +210,11 @@ class IntroBanner extends Component{
             alert("Enter valid email address");
         }
 
+        //Password regex validation
+        else if (!validatePassword(this.state.PW)){
+            alert("Enter valid password");
+        }
+
         //NIC regex validation
         else if (!validateNIC(this.state.NIC)){
             alert("Enter valid NIC number");
@@ -312,6 +323,11 @@ class IntroBanner extends Component{
         //email syntax validation
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
+        }
+
+        //Password regex validation
+        else if (!validatePassword(this.state.PW)){
+            alert("Enter valid password");
         }
 
         //NIC regex validation
@@ -584,10 +600,11 @@ class IntroBanner extends Component{
 
                                                 <Form.Row>
                                                     <Form.Group as={Col}>
-                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Label>Password (Atleast 6 characters)</Form.Label>
                                                     <Form.Control
                                                         className={shouldMarkError("PW") ? "error" : ""}
                                                         required
+                                                        placeholder="Atleast one number, special character, capital & simple letter"
                                                         type="password" 
                                                         value={this.state.PW} 
                                                         onChange={this.onChangePW}
@@ -707,7 +724,7 @@ class IntroBanner extends Component{
 
                                                 <Form.Row>
                                                     <Form.Group as={Col}>
-                                                    <Form.Label>Password</Form.Label>
+                                                    <Form.Label>Password (Atleast 6 characters)</Form.Label>
                                                     <Form.Control
                                                         className={shouldMarkError("PW") ? "error" : ""}
                                                         required
