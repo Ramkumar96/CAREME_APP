@@ -93,8 +93,6 @@ class ClientMainPage extends Component {
                                        <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted">{this.state.profile_data.Location}</p>
                                         <hr />
-                                        <strong><i className="far fa-file-alt mr-1" /> Notes</strong>
-                                        <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                                     </div>
                                     {/* /.card-body */}
                                 </div>

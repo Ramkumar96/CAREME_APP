@@ -115,7 +115,7 @@ class ClientEdit extends Component {
                     <div className="card-body">
                         {/* Edit Email Address */}
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail">Email address:{this.state.Email}</label>
+                            <label htmlFor="exampleInputEmail">Email address : {this.state.Email}</label>
                             <input type="email" className="form-control" 
                             id="exampleInputEmail1" 
                             value={this.state.Email}
@@ -135,42 +135,22 @@ class ClientEdit extends Component {
                         {/* Edit Location */} 
                         <div>
                             <div className="form-group">
-                                <label htmlFor="inputlocation">Address:{this.state.Home},{this.state.Location}</label>
+                                <label htmlFor="inputlocation">Address : {this.state.Home}</label>
                                 <input type="text" className="form-control"
                                  value={this.state.Home}
                                 onChange={this.onChangeAddress}
                                 placeholder="Address"/>
                             </div>                
                             <div className="form-group"> 
+                            <label htmlFor="inputlocation">District : {this.state.Location}</label>
                                     <select id="inputState" 
                                     className="form-control"
                                     onChange={this.onChangeLocation}
                                     >
-                                        <option selected value="Ampara">Ampara</option>
-                                        <option value="Anuradhapura">Anuradhapura</option>
-                                        <option value="Badulla">Badulla</option>
-                                        <option value="Batticaloa">Batticaloa</option>
                                         <option value="Colombo">Colombo</option>
                                         <option value="Galle">Galle</option>
                                         <option value="AGampaha">Gampaha</option>
-                                        <option value="Hambantota">Hambantota</option>
-                                        <option value="Jaffna">Jaffna</option>
-                                        <option value="Kalutara">Kalutara</option>
-                                        <option value="Kandy">Kandy</option>
-                                        <option value="Kegalle">Kegalle</option>
-                                        <option value="Kilinochchi">Kilinochchi</option>
                                         <option value="Kurunegala">Kurunegala</option>
-                                        <option value="Mannar">Mannar</option>
-                                        <option value="Matale">Matale</option>
-                                        <option value="Matara">Matara</option>
-                                        <option value="Monaragala">Monaragala</option>
-                                        <option value="Mullaitivu">Mullaitivu</option>
-                                        <option value="Nuwara Eliya">Nuwara Eliya</option>
-                                        <option value="Polonnaruwa">Polonnaruwa</option>
-                                        <option value="Puttalam">Puttalam</option>
-                                        <option value="Ratnapura">Ratnapura</option>
-                                        <option value="Trincomalee">Trincomalee</option>
-                                        <option value="Vavuniya">Vavuniya</option>       
                                     </select>
                             </div>
                         </div>
