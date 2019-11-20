@@ -140,7 +140,7 @@ class ClientEdit extends Component {
                                     >
                                         <option value="Colombo">Colombo</option>
                                         <option value="Galle">Galle</option>
-                                        <option value="AGampaha">Gampaha</option>
+                                        <option value="Gampaha">Gampaha</option>
                                         <option value="Kurunegala">Kurunegala</option>
                                     </select>
                             </div>
