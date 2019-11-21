@@ -500,7 +500,7 @@ class IntroBanner extends Component {
                                 <tr><td>
                                     <span>
                                         <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
-                                        <Modal visible={this.state.visible} width="50%" height="99.5%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                        <Modal visible={this.state.visible} width="50%" height="75.5%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                             <h3> Register Here </h3>
                                             <div class="card-body register-card-body">
                                                 <Form>
@@ -643,7 +643,7 @@ class IntroBanner extends Component {
                                     <td>
                                         <span>
                                             <input type="button" class="btn btn-secondary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
-                                            <Modal visible={this.state.visible1} width="50%" height="88%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                                            <Modal visible={this.state.visible1} width="50%" height="70%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
                                                 <div class="card-body register-card-body">
                                                     <h3>Register Here</h3>
                                                     <Form>
