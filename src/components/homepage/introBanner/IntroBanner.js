@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
-import { Button, Form, Col } from 'react-bootstrap';
+import { Button, Form, Col, ModalDialog } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 
 //validating empty fields for Nurse
@@ -51,7 +51,6 @@ function validateNIC(nic) {
     else if (regex2.test(nic)) {
         return regex2.test(nic);
     }
-
 }
 
 //validate tel
@@ -492,7 +491,7 @@ class IntroBanner extends Component {
                 <div class="row max-height justify-content-center align-items-center">
                     <div class="col-10 mx-auto banner text-center">
                         <h1 class="text-capitalize">
-                            <strong class="banner-title">Book Appointment with Expert Nurse in your Area</strong>
+                            <strong class="banner-title">Book an Appointment with an Expert Nurse in your Area</strong>
                         </h1>
 
                         <div >
@@ -500,7 +499,7 @@ class IntroBanner extends Component {
                                 <tr><td>
                                     <span>
                                         <input type="button" class="btn btn-primary btn-lg" value="I WANT A CLIENT" onClick={() => this.openModal()} />
-                                        <Modal visible={this.state.visible} width="50%" height="75.5%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                        <Modal visible={this.state.visible} width="50%" height="98%" effect="fadeInLeft" onClickAway={() => this.closeModal()}>
                                             <h3> Register Here </h3>
                                             <div class="card-body register-card-body">
                                                 <Form>
@@ -643,7 +642,7 @@ class IntroBanner extends Component {
                                     <td>
                                         <span>
                                             <input type="button" class="btn btn-secondary btn-lg" value="I WANT A NURSE" onClick={() => this.openModal1()} />
-                                            <Modal visible={this.state.visible1} width="50%" height="70%" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                                            <Modal visible={this.state.visible1} width="50%" height="70%" effect="fadeInRight" onClickAway={() => this.closeModal1()}>
                                                 <div class="card-body register-card-body">
                                                     <h3>Register Here</h3>
                                                     <Form>

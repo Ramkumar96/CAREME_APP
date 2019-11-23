@@ -2,6 +2,20 @@ import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
 import ProfilePicUpload from '../profilePicUpload';
 
+function validate (Tele, Address, District){
+    return {
+        Tele : Tele.length === 0,
+        Address : Address.length === 0,
+        District : District.length === 0
+    };
+}
+
+//validate tel
+function validateTel(tel) {
+    const reg = /^(0)(7)([0-9]{8})$/;
+    return reg.test(tel);
+}
+
 class ClientEdit extends Component {
 
     constructor(props) {
@@ -9,14 +23,16 @@ class ClientEdit extends Component {
 
         this.state = {
             profile_data: null,
-            Email: '',
             Tel: '',
             Location: '',
-            Home:''
-          
+            Home:'' ,
+             
+            touched : {
+                Tel: false,
+                Home: false,
+                Location: false
+            }
         }
-
-
     }
 
     componentDidMount() {
@@ -37,20 +53,8 @@ class ClientEdit extends Component {
                     Location:response.data.profile_data.Location
                 })
             })
-
     }
-
-
-
-    onChangeEmail = (e) => {
-
-        this.setState({
-            Email: e.target.value
-
-        });
-
-    }
-
+    
     onChangeTel = (e) => {
         console.log(e.target.value);
         this.setState({
@@ -72,46 +76,78 @@ class ClientEdit extends Component {
         });
     }
 
+    handleBlur = field => e => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        });
+    };
+
     onUpdate = (e) => {
         e.preventDefault();
 
         const nurseobj = {
-            Email: this.state.Email,
             Tel: this.state.Tel,
             Location: this.state.Location,
             Home:this.state.Home
-         
         };
-        const headers = {
-            'Content-Type': 'application/json'
+    
+        if (!this.canBeSubmitted()) {
+            e.preventDefault();
+            return;
         }
-        var token = localStorage.getItem('id');
-        console.log(nurseobj);
-        axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
-            .then(response => {
-                alert("Details successfully updated");
-                if (response.data.success) {
-                    this.getData()
-                    this.props.loadData()
-                }
-            });
 
-       
+        //validate telephone number
+        else if (!validateTel(this.state.Tel)) {
+            alert("Enter valid telephone number");
+        }
+
+        else {
+            const headers = {
+                'Content-Type': 'application/json'
+            }
+        
+            var token = localStorage.getItem('id');
+            console.log(nurseobj);
+            axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
+                .then(response => {
+                    alert("Details successfully updated");
+                    if (response.data.success) {
+                        this.getData()
+                        this.props.loadData()
+                    }
+                });
+        }
     }
 
-    render() {
+    canBeSubmitted() {
+        const errors = validate(this.state.Tel, this.state.Home, this.state.Location);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+        return !isDisabled;
+    }
 
+
+    render() {
         if (!this.state.profile_data) {
             return (
                 <div> <text>Loading</text> </div>
             );
         }
 
+        
+        //validating the fields in update form whether filled or not
+        const errors = validate(this.state.Tel, this.state.Home, this.state.Location);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+
+        //marking the touched but unfilled fields in red
+        const shouldMarkError = field => {
+            const hasError = errors[field];
+            const shouldShow = this.state.touched[field];
+
+            return hasError ? shouldShow : false;
+        }
 
         return (
             <div>
-
-
                 <form role="form">
                     <div className="card-body">
                         {/* Edit Telephone Number */}
@@ -120,6 +156,8 @@ class ClientEdit extends Component {
                             <input type="text" className="form-control"
                             value={this.state.Tel}
                             onChange={this.onChangeTel}
+                            className={shouldMarkError("Tel") ? "error" : ""}
+                            onBlur={this.handleBlur("Tel")}
                             placeholder="Enter Telephone" />
                         </div>
 
@@ -130,6 +168,8 @@ class ClientEdit extends Component {
                                 <input type="text" className="form-control"
                                  value={this.state.Home}
                                 onChange={this.onChangeAddress}
+                                className={shouldMarkError("Home") ? "error" : ""}
+                                onBlur={this.handleBlur("Home")}
                                 placeholder="Address"/>
                             </div>                
                             <div className="form-group"> 
@@ -137,6 +177,8 @@ class ClientEdit extends Component {
                                     <select id="inputState" 
                                     className="form-control"
                                     onChange={this.onChangeLocation}
+                                    className={shouldMarkError("Location") ? "error" : ""}
+                                    onBlur={this.handleBlur("Location")}
                                     >
                                         <option value="Colombo">Colombo</option>
                                         <option value="Galle">Galle</option>
@@ -145,12 +187,6 @@ class ClientEdit extends Component {
                                     </select>
                             </div>
                         </div>
-
-
-
-
-
-
 
                         {/* Upload NIC Picture */}
                         <div className="form-group">
@@ -166,7 +202,6 @@ class ClientEdit extends Component {
                             </div>
                         </div>
 
-
                         {/* Update Profile Picture */}
                         <div className="form-group">
                             <label htmlFor="exampleInputFile">Update your Profile Picture</label>
@@ -180,21 +215,19 @@ class ClientEdit extends Component {
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     {/* /.card-body */}
                     <div className="card-footer">
                         <button type="submit"
                         className="btn btn-primary"
+                        disabled={isDisabled}
                         onClick={this.onUpdate}>
                             Submit</button>
                     </div>
                 </form>
                 
                 {/* <div><ProfilePicUpload/></div> */}
-                
-
             </div>
         )
     }
