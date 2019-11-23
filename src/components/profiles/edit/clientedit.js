@@ -10,12 +10,6 @@ function validate (Tele, Address, District){
     };
 }
 
-//validate tel
-function validateTel(tel) {
-    const reg = /^(0)(7)([0-9]{8})$/;
-    return reg.test(tel);
-}
-
 class ClientEdit extends Component {
 
     constructor(props) {
@@ -96,11 +90,6 @@ class ClientEdit extends Component {
             return;
         }
 
-        //validate telephone number
-        else if (!validateTel(this.state.Tel)) {
-            alert("Enter valid telephone number");
-        }
-
         else {
             const headers = {
                 'Content-Type': 'application/json'
@@ -132,7 +121,6 @@ class ClientEdit extends Component {
                 <div> <text>Loading</text> </div>
             );
         }
-
         
         //validating the fields in update form whether filled or not
         const errors = validate(this.state.Tel, this.state.Home, this.state.Location);
@@ -180,6 +168,7 @@ class ClientEdit extends Component {
                                     className={shouldMarkError("Location") ? "error" : ""}
                                     onBlur={this.handleBlur("Location")}
                                     >
+                                        <option default>Update District</option>
                                         <option value="Colombo">Colombo</option>
                                         <option value="Galle">Galle</option>
                                         <option value="Gampaha">Gampaha</option>
