@@ -2,12 +2,24 @@ import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
 import ProfilePicUpload from '../profilePicUpload';
 
-function validate (Tele, Address, District){
+function validate (Tele, Address){
     return {
         Tele : Tele.length === 0,
         Address : Address.length === 0,
-        District : District.length === 0
     };
+}
+
+function validateTel (tel){
+    const reg = /^(0)(7)([0-9]{8})$/;
+    const reg2 = /^(7)([0-9]{8})$/;
+
+    if (reg.test(tel)){
+        return reg.test(tel);
+    }
+    
+    else if (reg2.test(tel)){
+        return reg2.test(tel);
+    }
 }
 
 class ClientEdit extends Component {
@@ -90,6 +102,10 @@ class ClientEdit extends Component {
             return;
         }
 
+        else if(!validateTel(this.state.Tel)){
+            alert("Enter valid telephone number");
+        }
+
         else {
             const headers = {
                 'Content-Type': 'application/json'
@@ -109,11 +125,10 @@ class ClientEdit extends Component {
     }
 
     canBeSubmitted() {
-        const errors = validate(this.state.Tel, this.state.Home, this.state.Location);
+        const errors = validate(this.state.Tel, this.state.Home);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
         return !isDisabled;
     }
-
 
     render() {
         if (!this.state.profile_data) {
@@ -123,7 +138,7 @@ class ClientEdit extends Component {
         }
         
         //validating the fields in update form whether filled or not
-        const errors = validate(this.state.Tel, this.state.Home, this.state.Location);
+        const errors = validate(this.state.Tel, this.state.Home);
         const isDisabled = Object.keys(errors).some(x => errors[x]);
 
         //marking the touched but unfilled fields in red

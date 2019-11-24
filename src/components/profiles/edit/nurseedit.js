@@ -1,6 +1,25 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
 
+function validate (Tele){
+    return {
+        Tele : Tele.length === 0
+    };
+}
+
+function validateTel (tel){
+    const reg = /^(0)(7)([0-9]{8})$/;
+    const reg2 = /^(7)([0-9]{8})$/;
+
+    if (reg.test(tel)){
+        return reg.test(tel);
+    }
+    
+    else if (reg2.test(tel)){
+        return reg2.test(tel);
+    }
+}
+
 class NurseEdit extends Component {
 
     constructor(props) {
@@ -8,7 +27,6 @@ class NurseEdit extends Component {
 
         this.state = {
             profile_data: null,
-            Email: '',
             Tel: '',
             Location: '',
             nurseUni: '',
@@ -17,6 +35,17 @@ class NurseEdit extends Component {
             nurseType: '',
             Age: '',
             nurseGender: '',
+
+            touched : {
+                Age: false,
+                nurseGender: false,
+                Tel: false,
+                Location: false,
+                nurseUni: false,
+                nurseEdu: false,
+                nurseExp: false,
+                nurseType: false
+            }
         }
     }
 
@@ -56,13 +85,6 @@ class NurseEdit extends Component {
         console.log(e.target.value);
         this.setState({
             nurseGender: e.target.value
-        });
-    }
-
-
-    onChangeEmail = (e) => {
-        this.setState({
-            Email: e.target.value
         });
     }
 
@@ -106,8 +128,13 @@ class NurseEdit extends Component {
         this.setState({
             nurseType: e.target.value
         })
-
     }
+
+    handleBlur = field => e => {
+        this.setState({
+            touched: { ...this.state.touched, [field]: true }
+        });
+    };
 
     onUpdate = (e) => {
         e.preventDefault();
@@ -122,31 +149,56 @@ class NurseEdit extends Component {
             nurseExp: this.state.nurseExp,
             nurseType: this.state.nurseType,
         };
-
-        const headers = {
-            'Content-Type': 'application/json'
+        if (!this.canBeSubmitted()) {
+            e.preventDefault();
+            return;
         }
+    
+        else if(!validateTel(this.state.Tel)){
+            alert("Enter valid telephone number");
+        }
+    
+        else {
+            const headers = {
+                'Content-Type': 'application/json'
+            }
 
-        var token = localStorage.getItem('id');
-        console.log(nurseobj);
-        axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
-            .then(response => {
-                alert("Details updated successfully");
-                if (response.data.success) {
-                    this.getData()
-                    this.props.loadData()
-                }
-            });
-
-
+            var token = localStorage.getItem('id');
+            console.log(nurseobj);
+            axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
+                .then(response => {
+                    alert("Details updated successfully");
+                    if (response.data.success) {
+                        this.getData()
+                        this.props.loadData()
+                    }
+                });
+        }
     }
 
+    canBeSubmitted() {
+        const errors = validate(this.state.Tel);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+        return !isDisabled;
+    }
 
     render() {
         if (!this.state.profile_data) {
             return (
                 <div> <text>Loading</text> </div>
             );
+        }
+
+        //validating the fields in update form whether filled or not
+        const errors = validate(this.state.Tel);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+
+        //marking the touched but unfilled fields in red
+        const shouldMarkError = field => {
+            const hasError = errors[field];
+            const shouldShow = this.state.touched[field];
+
+            return hasError ? shouldShow : false;
         }
 
         return (
@@ -163,6 +215,8 @@ class NurseEdit extends Component {
                                         className="form-control"
                                         value={this.state.Age}
                                         onChange={this.onChangeAge}
+                                        className={shouldMarkError("Age") ? "error" : ""}
+                                        onBlur={this.handleBlur("Age")}
                                         placeholderplaceholder="Enter email" />
                                 </div>
 
@@ -170,20 +224,17 @@ class NurseEdit extends Component {
                                     <label htmlFor="exampleInputEmail1">Gender : {this.state.nurseGender}</label>
                                     <select
                                         className="form-control"
-                                        onChange={this.onChangeGender}>
+                                        onChange={this.onChangeGender}
+                                        className={shouldMarkError("nurseGender") ? "error" : ""}
+                                        onBlur={this.handleBlur("nurseGender")}
+                                        >
+                                        <option defaultValue> Select Gender </option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
-
-                                    {/* <input type="text"
-                                        className="form-control"
-                                        value={this.state.nurseGender}
-                                        onChange={this.onChangeGender}
-                                        placeholderplaceholder="Enter email" /> */}
                                 </div>
                             </div>
                         </div>
-
 
                         {/* Edit Telephone Number */}
                         <div className="form-group">
@@ -192,6 +243,8 @@ class NurseEdit extends Component {
                                 className="form-control"
                                 value={this.state.Tel}
                                 onChange={this.onChangeTel}
+                                className={shouldMarkError("Tel") ? "error" : ""}
+                                onBlur={this.handleBlur("Tel")}
                                 placeholder="Enter email" />
                         </div>
 
@@ -201,24 +254,27 @@ class NurseEdit extends Component {
                             <div className="form-group">
                                 <select id="dropDownLocation"
                                     className="form-control"
+                                    className={shouldMarkError("Location") ? "error" : ""}
+                                    onBlur={this.handleBlur("Location")}
                                     onChange={this.onChangeLocation}>
+                                    <option defaultValue> Select District </option>
                                     <option location="Colombo">Colombo</option>
                                     <option location="Gampaha">Gampaha</option>
                                     <option location="Kurunegala">Kurunegala</option>
                                     <option location="Galle">Galle</option>
-
                                 </select>
                             </div>
-
-
                         </div>
 
                         {/* Edit University */}
                         <div className="form-group">
                             <label htmlFor="university">University : {this.state.nurseUni}</label>
                             <select id="dropDownUniversity"
-                                class="form-control "
+                                class="form-control"
+                                className={shouldMarkError("nurseUni") ? "error" : ""}
+                                onBlur={this.handleBlur("nurseUni")}
                                 onChange={this.onChangeUniversity}>
+                                <option defaultValue> Select University </option>
                                 <option university="College of Nursing Colombo" selected>College of Nursing Colombo</option>
                                 <option university="Sri Lanka Medical Council">Sri Lanka Medical Council</option>
                                 <option university="University of Moratuwa">University of Moratuwa</option>
@@ -237,12 +293,15 @@ class NurseEdit extends Component {
                             <label htmlFor="educationlevel">Education Level : {this.state.nurseEdu}</label>
                             <select id="dropDownEdu"
                                 class="form-control"
-                                onChange={this.onChangeEducation}>
+                                onChange={this.onChangeEducation}
+                                className={shouldMarkError("nurseEdu") ? "error" : ""}
+                                onBlur={this.handleBlur("nurseEdu")}    
+                            >
+                                <option defaultValue> Select level of education </option>
                                 <option education="Diploma in Nursing" selected>Diploma in Nursing</option>
                                 <option education="B.Sc degree in Nursing">B.Sc degree in Nursing</option>
                             </select>
                         </div>
-
 
                         {/* Upload NIC Picture */}
                         <div className="form-group">
@@ -278,7 +337,10 @@ class NurseEdit extends Component {
                             <label>Carrier Experience (in years) : {this.state.nurseExp}</label>
                             <select multiple
                                 className="form-control"
+                                className={shouldMarkError("nurseExp") ? "error" : ""}
+                                onBlur={this.handleBlur("nurseExp")}
                                 onChange={this.onChangeExperience}>
+                                <option defaultValue> Select years of experience </option>
                                 <option experience="1-2">1-2</option>
                                 <option experience="3-5">3-5</option>
                                 <option experience="5-10">5-10</option>
@@ -350,13 +412,11 @@ class NurseEdit extends Component {
                     <div className="card-footer">
                         <button type="submit"
                             className="btn btn-primary"
+                            disabled={isDisabled}
                             onClick={this.onUpdate}>
                             Submit</button>
                     </div>
                 </form>
-
-
-
             </div>
         )
     }
