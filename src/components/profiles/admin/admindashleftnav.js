@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
+import Addnurseadmin from './addnurseadmin'
 
 class Admindashleftnav extends Component {
     render() {
@@ -37,7 +38,7 @@ class Admindashleftnav extends Component {
           </a>
           <ul className="nav nav-treeview">
             <li className="nav-item">
-              <a href="./index.html" className="nav-link">
+              <a href="/addnurseadmin" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Add Nurse</p>
               </a>
