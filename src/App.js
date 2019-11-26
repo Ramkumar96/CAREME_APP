@@ -12,7 +12,9 @@ import NurseListMain from "./components/list/NurseListMain";
 import AdminMaindash from './components/profiles/admin/adminMaindash'
 import NurseListCLview from './components/list/NurseListCLview'
 import Addnurseadmin from './components/profiles/admin/addnurseadmin'
+import Addclientadmin from './components/profiles/admin/addclientadmin'
 import Adminnurselist from './components/profiles/admin/adminnurselist'
+import Adminclientlist  from './components/profiles/admin/adminclientlist'
 
 
 
@@ -32,7 +34,9 @@ class App extends Component {
         {/* <Route path="/nursemainedit" exact component={nurseEditMain}/> */}
         <Route path="/adminmaindash" exact component={AdminMaindash} />
         <Route path="/addnurseadmin" exact component={Addnurseadmin} />
+        <Route path="/addclientadmin" exact component={Addclientadmin} />
         <Route path="/nurselistadmin" exact component={Adminnurselist} />
+        <Route path="/clientlistadmin" exact component={Adminclientlist} />
       </Router>
     );
   }

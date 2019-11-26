@@ -83,6 +83,17 @@ UserRegRoutes.route('/').get(function (req, res) {
    });
  });
 
+ //clientListRetrieve
+UserRegRoutes.route('/clientlist').get(function (req, res) {
+  UserReg.find({userID:1},function (err, CAREME_APP) {
+     if (err) {
+        console.log(err);
+      } else {
+        res.json(CAREME_APP);
+      }
+    });
+  });
+
 //validate email
 UserRegRoutes.route('/validEmail').post(function (req, res) {
   UserReg.findOne({Email: req.body.Email })

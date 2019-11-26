@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Addnurseadmin from './addnurseadmin'
+import addclientadmin from './addclientadmin'
 import Adminnurselist from './adminnurselist'
+import Adminclientlist from './adminclientlist'
+
 
 class Admindashleftnav extends Component {
     render() {
@@ -70,7 +73,7 @@ class Admindashleftnav extends Component {
           </a>
           <ul className="nav nav-treeview">
             <li className="nav-item">
-              <a href="./index.html" className="nav-link">
+              <a href="/addclientadmin" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Add Client</p>
               </a>
@@ -82,7 +85,7 @@ class Admindashleftnav extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <a href="./index3.html" className="nav-link">
+              <a href="/clientlistadmin" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>View Client Lists</p>
               </a>

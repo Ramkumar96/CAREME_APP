@@ -4,27 +4,22 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
-
 const UserReg = props => (
     <tr>
-        <td>{props.nurselist.FirstName}</td>
-        <td>{props.nurselist.LastName}</td>
-        <td>{props.nurselist.Email}</td>
-        <td>{props.nurselist.Home}</td>
-        <td>{props.nurselist.nurseID}</td>
-        <td>{props.nurselist.Tel}</td>
-        <td>{props.nurselist.Location}</td>
-        <td>{props.nurselist.Age}</td>
-        <td>{props.nurselist.nurseExp}</td>
-        <td>{props.nurselist.nurseType}</td>
-        <td>{props.nurselist.nurseGender}</td>
+        <td>{props.clientlist.FirstName}</td>
+        <td>{props.clientlist.LastName}</td>
+        <td>{props.clientlist.Email}</td>
+        <td>{props.clientlist.Home}</td>
+        <td>{props.clientlist.Tel}</td>
+        <td>{props.clientlist.Location}</td>
+     
         <td>
-            <Link to={"/edit/"+props.nurselist._id}>View</Link>
+            <Link to={"/edit/"+props.clientlist._id}>View</Link>
         </td>
     </tr>
 )
 
-export default class Adminnurselist extends Component {
+export default class Adminclientlist extends Component {
 
     constructor(props) {
         super(props);
@@ -32,7 +27,7 @@ export default class Adminnurselist extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/User/')
+        axios.get('http://localhost:4000/User/clientlist')
             .then(response => {
                 this.setState({ CAREME_APP: response.data });
             })
@@ -41,17 +36,16 @@ export default class Adminnurselist extends Component {
             })
     }
 
-    Nurses() {
+    Clients() {
         return this.state.CAREME_APP.map(function( currentlist, i){
-            return <UserReg nurselist={currentlist} key={i} />;
+            return <UserReg clientlist={currentlist} key={i} />;
         })
     }
 
 
-
     render() {
         return (
-          <div>
+            <div>
                <div >
                 <Admindashleftnav/>
              </div>
@@ -61,12 +55,12 @@ export default class Adminnurselist extends Component {
       <div className="container-fluid">
         <div className="row mb-2">
           <div className="col-sm-6">
-            <h1>Nurse Data List</h1>
+            <h1>Client Data List</h1>
           </div>
           <div className="col-sm-6">
             <ol className="breadcrumb float-sm-right">
               <li className="breadcrumb-item"><a href="#">Home</a></li>
-              <li className="breadcrumb-item active">Nurse Data List</li>
+              <li className="breadcrumb-item active">Client Data List</li>
             </ol>
           </div>
         </div>
@@ -78,7 +72,7 @@ export default class Adminnurselist extends Component {
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Details of registered nurses of CAREME</h3>
+              <h3 className="card-title">Details of registered Clients of CAREME</h3>
             </div>
             {/* /.card-header */}
             <div className="card-body">
@@ -90,19 +84,14 @@ export default class Adminnurselist extends Component {
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Home</th>
-                    <th>NurseID</th>
                     <th>Tel</th>
                     <th>Location</th>
-                    <th>Age</th>
-                    <th>Exp</th>
-                    <th>Type</th>
-                    <th>Gender</th>
                     <th>Profile</th>
                   </tr>
                 </thead>
                 <div className="table-striped"></div>
                 <tbody className="table-striped">
-                        { this.Nurses() }
+                        { this.Clients() }
                     </tbody>
                 {/* <tfoot>
                   <tr>
