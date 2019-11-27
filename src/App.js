@@ -15,6 +15,7 @@ import Addnurseadmin from './components/profiles/admin/addnurseadmin'
 import Addclientadmin from './components/profiles/admin/addclientadmin'
 import Adminnurselist from './components/profiles/admin/adminnurselist'
 import Adminclientlist  from './components/profiles/admin/adminclientlist'
+import TestList from './components/list/TestList'
 
 
 
@@ -37,6 +38,7 @@ class App extends Component {
         <Route path="/addclientadmin" exact component={Addclientadmin} />
         <Route path="/nurselistadmin" exact component={Adminnurselist} />
         <Route path="/clientlistadmin" exact component={Adminclientlist} />
+        <Route path="/testlist" exact component={TestList} />
       </Router>
     );
   }

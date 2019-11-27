@@ -3,6 +3,7 @@ import Navigationbar from '../homepage/navigationbar/Navigationbar';
 import NurseListProfile from './NurseListProfile';
 import axios from 'axios';
 import { NONAME } from "dns";
+import TestList from "./TestList";
 
 
 
@@ -73,38 +74,38 @@ class NurseListMain extends Component{
         if(selector ==="0"){
             //alert('Hello 01');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].closest('.profile-container').style.display = 'block';
+                tenplus[i].style.display = 'block';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].closest('.profile-container').style.display = 'block';
+                fiveten[i].style.display = 'block';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].closest('.profile-container').style.display = 'block';
+                threefive[i].style.display = 'block';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].closest('.profile-container').style.display = 'block';
+                onetwo[i].style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
         }
         
         if(selector ==="1"){
             // alert('Hello 01');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].closest('.profile-container').style.display = 'none';
+                tenplus[i].style.display = 'none';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].closest('.profile-container').style.display = 'none';
+                fiveten[i].style.display = 'none';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].closest('.profile-container').style.display = 'none';
+                threefive[i].style.display = 'none';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].closest('.profile-container').style.display = 'block';
+                onetwo[i].style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
@@ -112,55 +113,55 @@ class NurseListMain extends Component{
             // alert('Hello 02');
             
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].closest('.profile-container').style.display = 'none';
+                tenplus[i].style.display = 'none';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].closest('.profile-container').style.display = 'none';
+                fiveten[i].style.display = 'none';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].closest('.profile-container').style.display = 'block';
+                threefive[i].style.display = 'block';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].closest('.profile-container').style.display = 'none';
+                onetwo[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
         }
         else if(selector ==="3"){
             // alert('Hello 03');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].closest('.profile-container').style.display = 'none';
+                tenplus[i].style.display = 'none';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].closest('.profile-container').style.display = 'block';
+                fiveten[i].style.display = 'block';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].closest('.profile-container').style.display = 'none';
+                threefive[i].style.display = 'none';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].closest('.profile-container').style.display = 'none';
+                onetwo[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
         }
         else if(selector ==="4"){
             // alert('Hello 04');
             for (var i=0;i<tenplus.length;i+=1){
-                tenplus[i].closest('.profile-container').style.display = 'block';
+                tenplus[i].style.display = 'block';
             }
             for (var i=0;i<fiveten.length;i+=1){
-                fiveten[i].closest('.profile-container').style.display = 'none';
+                fiveten[i].style.display = 'none';
             }
             for (var i=0;i<threefive.length;i+=1){
-                threefive[i].closest('.profile-container').style.display = 'none';
+                threefive[i].style.display = 'none';
             }
             for (var i=0;i<onetwo.length;i+=1){
-                onetwo[i].closest('.profile-container').style.display = 'none';
+                onetwo[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
         }
     }
@@ -181,19 +182,19 @@ class NurseListMain extends Component{
             // alert('Hello 01');
             
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].closest('.profile-container').style.display = 'block';
+                colombo[i].style.display = 'block';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].closest('.profile-container').style.display = 'block';
+                gampaha[i].style.display = 'block';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].closest('.profile-container').style.display = 'block';
+                galle[i].style.display = 'block';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].closest('.profile-container').style.display = 'block';
+                kurunegala[i].style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
@@ -203,19 +204,19 @@ class NurseListMain extends Component{
             // alert('Hello 01');
 
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].closest('.profile-container').style.display = 'block';
+                colombo[i].style.display = 'block';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].closest('.profile-container').style.display = 'none';
+                gampaha[i].style.display = 'none';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].closest('.profile-container').style.display = 'none';
+                galle[i].style.display = 'none';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].closest('.profile-container').style.display = 'none';
+                kurunegala[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
@@ -223,55 +224,55 @@ class NurseListMain extends Component{
             // alert('Hello 02');
             var elems1 = document.getElementById('colombo');
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].closest('.profile-container').style.display = 'none';
+                colombo[i].style.display = 'none';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].closest('.profile-container').style.display = 'block';
+                gampaha[i].style.display = 'block';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].closest('.profile-container').style.display = 'none';
+                galle[i].style.display = 'none';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].closest('.profile-container').style.display = 'none';
+                kurunegala[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
         }
         else if(selector ==="3"){
             // alert('Hello 03');
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].closest('.profile-container').style.display = 'none';
+                colombo[i].style.display = 'none';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].closest('.profile-container').style.display = 'none';
+                gampaha[i].style.display = 'none';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].closest('.profile-container').style.display = 'block';
+                galle[i].style.display = 'block';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].closest('.profile-container').style.display = 'none';
+                kurunegala[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
         }
         else if(selector ==="4"){
             // alert('Hello 04');
             for (var i=0;i<colombo.length;i+=1){
-                colombo[i].closest('.profile-container').style.display = 'none';
+                colombo[i].style.display = 'none';
             }
             for (var i=0;i<gampaha.length;i+=1){
-                gampaha[i].closest('.profile-container').style.display = 'none';
+                gampaha[i].style.display = 'none';
             }
             for (var i=0;i<galle.length;i+=1){
-                galle[i].closest('.profile-container').style.display = 'none';
+                galle[i].style.display = 'none';
             }
             for (var i=0;i<kurunegala.length;i+=1){
-                kurunegala[i].closest('.profile-container').style.display = 'block';
+                kurunegala[i].style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
         }
     }
@@ -292,25 +293,25 @@ class NurseListMain extends Component{
         if(selector ==="0"){
             // alert('Hello 01');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].closest('.profile-container').style.display = 'block';
+                emerg[i].style.display = 'block';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].closest('.profile-container').style.display = 'block';
+                surg[i].style.display = 'block';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].closest('.profile-container').style.display = 'block';
+                geri[i].style.display = 'block';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].closest('.profile-container').style.display = 'block';
+                mid[i].style.display = 'block';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].closest('.profile-container').style.display = 'block';
+                peri[i].style.display = 'block';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].closest('.profile-container').style.display = 'block';
+                ment[i].style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
@@ -319,25 +320,25 @@ class NurseListMain extends Component{
         if(selector ==="1"){
             // alert('Hello 01');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].closest('.profile-container').style.display = 'block';
+                emerg[i].style.display = 'block';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].closest('.profile-container').style.display = 'none';
+                surg[i].style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].closest('.profile-container').style.display = 'none';
+                geri[i].style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].closest('.profile-container').style.display = 'none';
+                mid[i].style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].closest('.profile-container').style.display = 'none';
+                peri[i].style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].closest('.profile-container').style.display = 'none';
+                ment[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
@@ -345,125 +346,125 @@ class NurseListMain extends Component{
             // alert('Hello 02');
             var elems1 = document.getElementById('colombo');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].closest('.profile-container').style.display = 'none';
+                emerg[i].style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].closest('.profile-container').style.display = 'block';
+                surg[i].style.display = 'block';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].closest('.profile-container').style.display = 'none';
+                geri[i].style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].closest('.profile-container').style.display = 'none';
+                mid[i].style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].closest('.profile-container').style.display = 'none';
+                peri[i].style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].closest('.profile-container').style.display = 'none';
+                ment[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
         else if(selector ==="3"){
             // alert('Hello 03');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].closest('.profile-container').style.display = 'none';
+                emerg[i].style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].closest('.profile-container').style.display = 'none';
+                surg[i].style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].closest('.profile-container').style.display = 'block';
+                geri[i].style.display = 'block';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].closest('.profile-container').style.display = 'none';
+                mid[i].style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].closest('.profile-container').style.display = 'none';
+                peri[i].style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].closest('.profile-container').style.display = 'none';
+                ment[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
         else if(selector ==="4"){
             // alert('Hello 04');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].closest('.profile-container').style.display = 'none';
+                emerg[i].style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].closest('.profile-container').style.display = 'none';
+                surg[i].style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].closest('.profile-container').style.display = 'none';
+                geri[i].style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].closest('.profile-container').style.display = 'block';
+                mid[i].style.display = 'block';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].closest('.profile-container').style.display = 'none';
+                peri[i].style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].closest('.profile-container').style.display = 'none';
+                ment[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
 
         }
         else if(selector ==="5"){
             // alert('Hello 04');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].closest('.profile-container').style.display = 'none';
+                emerg[i].style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].closest('.profile-container').style.display = 'none';
+                surg[i].style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].closest('.profile-container').style.display = 'none';
+                geri[i].style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].closest('.profile-container').style.display = 'none';
+                mid[i].style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].closest('.profile-container').style.display = 'block';
+                peri[i].style.display = 'block';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].closest('.profile-container').style.display = 'none';
+                ment[i].style.display = 'none';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
             
         }
         else if(selector ==="6"){
             // alert('Hello 04');
             for (var i=0;i<emerg.length;i+=1){
-                emerg[i].closest('.profile-container').style.display = 'none';
+                emerg[i].style.display = 'none';
             }
             for (var i=0;i<surg.length;i+=1){
-                surg[i].closest('.profile-container').style.display = 'none';
+                surg[i].style.display = 'none';
             }
             for (var i=0;i<geri.length;i+=1){
-                geri[i].closest('.profile-container').style.display = 'none';
+                geri[i].style.display = 'none';
             }
             for (var i=0;i<mid.length;i+=1){
-                mid[i].closest('.profile-container').style.display = 'none';
+                mid[i].style.display = 'none';
             }    
             for (var i=0;i<peri.length;i+=1){
-                peri[i].closest('.profile-container').style.display = 'none';
+                peri[i].style.display = 'none';
             }        
             for (var i=0;i<ment.length;i+=1){
-                ment[i].closest('.profile-container').style.display = 'block';
+                ment[i].style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
-                zero[i].closest('.profile-container').style.display = 'none';
+                zero[i].style.display = 'none';
             }
             
         }
@@ -480,7 +481,7 @@ class NurseListMain extends Component{
         let nurse = this.state.CAREME_APP.filter(searchingFor(this.state.term)).map(nurse => {
             if(!nurse.Age)
             return;
-            return <NurseListProfile fname={nurse.FirstName}
+            return <TestList fname={nurse.FirstName}
             lname={nurse.LastName} 
             nurse_id={nurse.nurseID}
             age= {nurse.Age}
@@ -565,6 +566,7 @@ class NurseListMain extends Component{
             </center>
 
             </div>
+        
             <div class="container">
                 <div class="row">
                         {nurse}
