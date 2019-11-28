@@ -11,8 +11,19 @@ import TestList from "./TestList";
 /*import NurseProfilePage from './NursePofilePage';
 */
 function searchingFor(term){
-    return function(x){
-        return (x.FirstName.toLowerCase().includes(term.toLowerCase()) || x.LastName.toLowerCase().includes(term.toLowerCase()))  || !term;
+    //Edited coding start
+    var names = term.trim().split(" ");
+    console.log(term);
+    console.log(names);
+    //Edited coding end
+    if(names.length>1){
+        return function(x){
+            return (x.FirstName.toLowerCase().includes(names[0].toLowerCase()) && x.LastName.toLowerCase().includes(names[1].toLowerCase()))  || !term;
+        }
+    }else{
+        return function(x){
+            return (x.FirstName.toLowerCase().includes(names[0].toLowerCase()) || x.LastName.toLowerCase().includes(names[0].toLowerCase()))  || !term;
+        }
     }
 }
 
