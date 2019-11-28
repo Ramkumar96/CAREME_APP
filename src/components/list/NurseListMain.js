@@ -39,7 +39,10 @@ class NurseListMain extends Component{
     }
 
     searchHandler(event){
-        this.setState({term: event.target.value})
+        this.setState({term: event.target.value});
+         if(event.target.value==''){
+            window.location.reload();
+        }
     }
     
 
