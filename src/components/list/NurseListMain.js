@@ -581,7 +581,7 @@ class NurseListMain extends Component{
 
             </div>
         
-            <div class="container">
+            <div class="container" style={{width: 960}}>
                 <div class="row">
                         {nurse}
                 </div>
