@@ -68,7 +68,6 @@ function validatePassword(password) {
 class IntroBanner extends Component {
     constructor(props) {
         super(props);
-
         this.onChangeFirstName = this.onChangeFirstName.bind(this);
         this.onChangeLastName = this.onChangeLastName.bind(this);
         this.onChangeNurseID = this.onChangeNurseID.bind(this);
@@ -194,7 +193,8 @@ class IntroBanner extends Component {
             nurseEdu: null,
             nurseUni: null,
             nurseGender: null,
-            profilePic: null
+            profilePic: null,
+            RegDate : new Date()
         };
 
         if (!this.canBeSubmitted()) {
@@ -309,7 +309,8 @@ class IntroBanner extends Component {
             userID: 1,
             Location: null,
             Age: null,
-            profilePic: null
+            profilePic: null,
+            RegDate : new Date()
         };
 
         if (!this.canBeSubmitted1()) {

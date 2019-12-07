@@ -148,6 +148,7 @@ class NurseEdit extends Component {
             nurseEdu: this.state.nurseEdu,
             nurseExp: this.state.nurseExp,
             nurseType: this.state.nurseType,
+            UpdateDate: new Date()
         };
         if (!this.canBeSubmitted()) {
             e.preventDefault();

@@ -94,7 +94,8 @@ class ClientEdit extends Component {
         const nurseobj = {
             Tel: this.state.Tel,
             Location: this.state.Location,
-            Home:this.state.Home
+            Home:this.state.Home,
+            UpdateDate: new Date()
         };
     
         if (!this.canBeSubmitted()) {

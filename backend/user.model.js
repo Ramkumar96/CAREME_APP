@@ -73,9 +73,17 @@ let UserReg = new Schema({
   nurseType: {
     type: String
   },
+
+  RegDate: {
+    type: Date
+  },
   
   nurseGender: {
     type: String
+  },
+
+  UpdateDate: {
+    type: Date
   },
 
   profilePic: {
