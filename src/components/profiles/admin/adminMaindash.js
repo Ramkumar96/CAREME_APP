@@ -4,9 +4,6 @@ import Navigationbar from '../../homepage/navigationbar/Navigationbar'
 import Adminup from './adminup'
 import ProfileNavbar from '../ProfileNavbar'
 
- 
-
-
 class adminMaindash extends Component {
     render() {
         return (
@@ -14,12 +11,6 @@ class adminMaindash extends Component {
                 <ProfileNavbar />
                 <Adminup/>
                 <Admindashleftnav/>
-               
-                
- 
- 
-                
-                
             </div>
         )
     }
