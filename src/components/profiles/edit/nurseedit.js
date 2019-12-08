@@ -276,7 +276,7 @@ class NurseEdit extends Component {
                                 onBlur={this.handleBlur("nurseUni")}
                                 onChange={this.onChangeUniversity}>
                                 <option defaultValue> Select University </option>
-                                <option university="College of Nursing Colombo" selected>College of Nursing Colombo</option>
+                                <option university="College of Nursing Colombo">College of Nursing Colombo</option>
                                 <option university="Sri Lanka Medical Council">Sri Lanka Medical Council</option>
                                 <option university="University of Moratuwa">University of Moratuwa</option>
                                 <option university="Open University of Sri Lanka">Open University of Sri Lanka</option>
@@ -299,7 +299,7 @@ class NurseEdit extends Component {
                                 onBlur={this.handleBlur("nurseEdu")}    
                             >
                                 <option defaultValue> Select level of education </option>
-                                <option education="Diploma in Nursing" selected>Diploma in Nursing</option>
+                                <option education="Diploma in Nursing">Diploma in Nursing</option>
                                 <option education="B.Sc degree in Nursing">B.Sc degree in Nursing</option>
                             </select>
                         </div>
@@ -336,7 +336,7 @@ class NurseEdit extends Component {
                         {/* Edit Experience */}
                         <div className="form-group">
                             <label>Carrier Experience (in years) : {this.state.nurseExp}</label>
-                            <select multiple
+                            <select
                                 className="form-control"
                                 className={shouldMarkError("nurseExp") ? "error" : ""}
                                 onBlur={this.handleBlur("nurseExp")}
