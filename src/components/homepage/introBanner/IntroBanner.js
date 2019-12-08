@@ -186,14 +186,6 @@ class IntroBanner extends Component {
             Home: this.state.Home,
             Tel: this.state.Tel,
             userID: 0,
-            Location: null,
-            Age: null,
-            nurseExp: null,
-            nurseType: null,
-            nurseEdu: null,
-            nurseUni: null,
-            nurseGender: null,
-            profilePic: null,
             RegDate : new Date()
         };
 
@@ -307,9 +299,6 @@ class IntroBanner extends Component {
             Tel: this.state.Tel,
             NIC: this.state.NIC,
             userID: 1,
-            Location: null,
-            Age: null,
-            profilePic: null,
             RegDate : new Date()
         };
 
