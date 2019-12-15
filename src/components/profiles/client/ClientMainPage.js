@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
 //import ClientProfilePage from './ClientPofilePage';
-import ProfilePic from "../ProfilePic";
-import ProfileInfo from "../ProfileInfo";
-import ProfileRight from "../ProfileRight";
+
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 
@@ -35,6 +33,7 @@ class ClientMainPage extends Component {
                 })
             })
     }
+    
     render() {
 
         if(!this.state.profile_data){
@@ -184,7 +183,7 @@ class ClientMainPage extends Component {
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
 
                                         <hr />
-                                        <a href="/nurslistclientview" className="btn btn-warning btn-block"><b>Find A Nurse</b>
+                                        <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b>
                                         </a>
                                     </div>
                                     {/* /.card-body */}

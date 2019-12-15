@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
+// import ProfilePic from "../ProfilePic";
+//import NurseProfileInfo from "./nurseProfileInfo";
+// import ProfileRight from "../ProfileRight";
 
 import NurseEdit from "../edit/nurseedit";
 import axios from "axios";
@@ -8,7 +11,7 @@ import Calendar from "./Calender";
 
 
 
-class NurseMainPage extends Component {
+class ViewNurseProfile extends Component {
 
     constructor(props) {
         super(props);
@@ -38,13 +41,13 @@ class NurseMainPage extends Component {
     }
 
     componentDidMount() {
-        this.getData()
-
+        this.getData();
+        console.log(this.props.match.params)
     }
 
     getData = () => {
         var token = localStorage.getItem('id');
-        axios.get('http://localhost:4000/user/userdata/' + token)
+        axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
             .then(response => {
                 console.log(response.data.profile_data)
                 this.setState({
@@ -54,16 +57,16 @@ class NurseMainPage extends Component {
     }
 
     render() {
-
+        console.log(this.state.profile_data)
         if (!this.state.profile_data) {
             return (
                 <div> <text>Loading</text> </div>
             );
         }
 
-        // if(this.state.profile_data){
 
         return (
+
             <div>
                 <div class="wrapper">
 
@@ -145,8 +148,6 @@ class NurseMainPage extends Component {
                                         <div className="card-header p-2">
                                             <ul className="nav nav-pills">
                                                 <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
-                                                {/* <li className="nav-item"><a className="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li> */}
-                                                <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                                             </ul>
                                         </div>{/* /.card-header */}
 
@@ -187,12 +188,6 @@ class NurseMainPage extends Component {
                                                     {/* /.tab-pane */}
                                                 </div>
 
-                                                <div className="tab-pane" id="settings">
-                                                    <NurseEdit
-                                                        loadData={this.getData} />
-
-                                                </div>
-                                                {/* /.tab-pane */}
                                             </div>
                                             {/* /.tab-content */}
                                         </div>{/* /.card-body */}
@@ -223,8 +218,8 @@ class NurseMainPage extends Component {
                                             <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} />
                                             <Modal visible={this.state.visible} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <div>
-                                                    <Calendar/>
-                                                    
+                                                    <Calendar />
+
                                                 </div>
                                             </Modal>
                                         </div>
@@ -266,4 +261,4 @@ class NurseMainPage extends Component {
     }
 }
 
-export default NurseMainPage;
+export default ViewNurseProfile;
