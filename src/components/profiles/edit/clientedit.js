@@ -32,11 +32,13 @@ class ClientEdit extends Component {
             Tel: '',
             Location: '',
             Home:'' ,
+            profilePic: '',
              
             touched : {
                 Tel: false,
                 Home: false,
-                Location: false
+                Location: false,
+                profilePic: false
             }
         }
     }
@@ -56,7 +58,8 @@ class ClientEdit extends Component {
                     Email: response.data.profile_data.Email,
                     Tel: response.data.profile_data.Tel,
                     Home:response.data.profile_data.Home,
-                    Location:response.data.profile_data.Location
+                    Location:response.data.profile_data.Location,
+                    profilePic:response.data.profile_data.profilePic
                 })
             })
     }
