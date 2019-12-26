@@ -4,7 +4,7 @@ import ProfileNavbar from '../ProfileNavbar';
 
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
-
+import ProfilePicUpload from '../../profiles/profilePicUpload';
 
 
 
@@ -57,6 +57,7 @@ class ClientMainPage extends Component {
                                     <div className="card-body box-profile">
                                         <div className="text-center">
                                             <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile picture" />
+                                            <div><ProfilePicUpload/></div>
                                         </div>
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
                                        

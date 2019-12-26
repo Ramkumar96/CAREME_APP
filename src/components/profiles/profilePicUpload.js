@@ -19,45 +19,14 @@ export default class ProfilePicUpload extends Component {
         })
     }
 
-    // onUploadProfilePic=(e)=>{
-    //     e.preventDefault();
-    //     const profile  = {
-    //         profilePic: this.state.profilePic
-    //     }
-
-    //     const headers = {
-    //         'Content-Type': 'application/json'
-    //     }
-
-    //     var token = localStorage.getItem('id');
-    //     console.log(profile);
-    //     axios.put('http://localhost:4000/user/userdata/update/' +token , profile,{headers: headers})
-    //     .then(response)
-    // };
-
-
-
-
-    onSubmit=(e)=> {
+    onSubmit(e) {
         e.preventDefault()
-
-
-        const formData ={
-            Email:this.state.Email,
-            profilePic: this.state.profilePic
-        }
-
-
-        const headers = {
-            'Content-Type': 'application/json'
-        }
-
-        var token = localStorage.getItem('id');
-        // const formData = new FormData()
-        // formData.append('profilePic', this.state.profilePic)
-        axios.post('http://localhost:4000/user/user-profile/' + token, formData, { headers: headers })
+        const formData = new FormData()
+        formData.append('profilePic', this.state.profilePic)
+        axios.post('http://localhost:4000/user/user-profile/', formData, {
+         })
             .then(response => {
-                alert("profile poto uploaded")
+                alert("profile photo uploaded")
                 console.log(response)
             })
     }
@@ -72,7 +41,7 @@ export default class ProfilePicUpload extends Component {
                             <input type="file" onChange={this.onFileChange} />
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-primary" type="submit" onClick={this.onSubmit}>Upload</button>
+                            <button className="btn btn-primary" type="submit" >Upload</button>
                         </div>
                     </form>
                 </div>
