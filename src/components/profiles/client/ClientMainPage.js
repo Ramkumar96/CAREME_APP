@@ -1,26 +1,65 @@
 import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
-//import ClientProfilePage from './ClientPofilePage';
+import Modal from 'react-awesome-modal';
+import { Button } from 'react-bootstrap';
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 import ProfilePicUpload from '../../profiles/profilePicUpload';
 
-
-
 class ClientMainPage extends Component {
-
 
     constructor(props) {
         super(props);
         this.state = {
-            profile_data: null
+            profile_data: null,
+            visible: false
         }
+    }
+
+    openDeacModal() {
+        this.setState({
+            visible: true
+        });
+    }
+
+    closeDeacModal(){
+        this.setState({
+            visible: false
+        });
     }
 
     componentDidMount() {
         this.getData()
 
+    }
+
+    deactivate() {
+        this.setState ({
+            visible:false
+        });
+
+        const obj = {
+            FirstName : this.state.profile_data.FirstName,
+            LastName : this.state.profile_data.LastName,
+            Email : this.state.profile_data.Email,
+            NIC : this.state.profile_data.NIC,
+            DeacDate : new Date()
+        };
+
+        axios.post('http://localhost:4000/userDeac/add', obj)
+            .then(res => { console.log(res.data) });
+
+        axios.post('http://localhost:4000/user/delete', obj)
+            .then( response => {
+                if(response.data.success){
+                    this.setState({
+                        visible: false,
+                        redirect_home:true
+                    })
+                }
+            });
     }
 
     getData = () => {
@@ -40,7 +79,13 @@ class ClientMainPage extends Component {
             return(
             <div> <text>Loading</text> </div>
             );
-         }
+        }
+
+        if(this.state.redirect_home){
+                return(
+                    <Redirect to='/'/>
+                )
+        }
 
         return (
             <div>
@@ -186,6 +231,17 @@ class ClientMainPage extends Component {
                                         <hr />
                                         <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b> 
                                         </a>
+
+                                        <hr/>
+                                        <input type="button" class="btn btn-danger btn-block" value="Deactivate" onClick={() => this.openDeacModal()} />
+                                        <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
+                                        <h1 align="center">Deactivate</h1>
+                                        <p align="center">Do you really want to Deactivate?</p>
+                                            <center>
+                                                <Button variant="btn btn-danger" type="submit" onClick={() => this.deactivate()}>Yes</Button>
+                                                <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDeacModal()} />
+                                            </center>                                            
+                                        </Modal>
                                     </div>
                                     {/* /.card-body */}
                                 </div>
