@@ -62,7 +62,6 @@ class ProfileNavbar extends Component{
                 return(
                     <Redirect to='/'/>
                 )
-
             }
 
         return(  
@@ -96,26 +95,15 @@ class ProfileNavbar extends Component{
                                         <MenuItem onClick={popupState.close}>Home</MenuItem>
                                         <MenuItem onClick={popupState.close}>Settings</MenuItem>
                                         <MenuItem onClick={popupState.close}>Calander</MenuItem>
-                                        <MenuItem onClick={()=> this.openDeacModal()}>Deactivate</MenuItem>
-                                        <Modal visible={this.state.visible1} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
-                                            <h1 align="center">Deactivate</h1>
-                                            <p align="center">Do you really want to Deactivate your account?</p>
-                                                <center>
-                                                    <Button variant="btn btn-danger" type="submit" onClick={() => this.deactivate()}>Deactivate</Button>
-                                                    <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDeacModal()} />
-                                                </center>
-                                            
-                                        </Modal>
-
+                                        
                                         <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                            <h1 align="center">LogOut</h1>
+                                            <h1 align="center">Logout</h1>
                                             <p align="center">Do you really want to Logout?</p>
                                                 <center>
                                                     <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button>
                                                     <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
-                                                </center>
-                                            
+                                                </center>                                            
                                         </Modal>
                                     </Menu>
                                 </React.Fragment>

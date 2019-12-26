@@ -165,7 +165,7 @@ class NurseEdit extends Component {
             }
 
             var token = localStorage.getItem('id');
-            console.log(nurseobj);
+            //console.log(nurseobj);
             axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
                 .then(response => {
                     alert("Details updated successfully");

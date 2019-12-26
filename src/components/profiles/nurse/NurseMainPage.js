@@ -1,27 +1,38 @@
 import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
-
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import NurseEdit from "../edit/nurseedit";
 import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
-
-
+import { Button } from 'react-bootstrap';
 
 class NurseMainPage extends Component {
 
     constructor(props) {
         super(props);
-        this.openLoginModal = this.openLoginModal.bind(this);
+        this.openModal = this.openModal.bind(this);
         this.state = {
             profile_data: null,
             visible: false
         }
     }
 
-    openLoginModal() {
+    openModal() {
         this.setState({
             visible: true
+        });
+    }
+
+    openDeacModal() {
+        this.setState({
+            visible1: true
+        });
+    }
+
+    closeDeacModal(){
+        this.setState({
+            visible1: false
         });
     }
 
@@ -37,16 +48,40 @@ class NurseMainPage extends Component {
         });
     }
 
+    deactivate() {
+        const obj = {
+            FirstName : this.state.profile_data.FirstName,
+            LastName : this.state.profile_data.LastName,
+            Email : this.state.profile_data.Email,
+            NIC : this.state.profile_data.NIC,
+            DeacDate : new Date()
+        };
+
+        const data = {
+            Email : this.state.profile_data.Email
+        };
+
+        const headers = {
+            'Content-Type': 'application/json'
+        }
+
+        axios.post('http://localhost:4000/userDeac/add', obj)
+            .then(res => { console.log(res.data) });
+
+        axios.get('http://localhost:4000/user/delete', data, {headers:headers})
+            .then(console.log('Deleted'))
+            .catch(err => console.log(err))
+    }
+
     componentDidMount() {
         this.getData()
-
     }
 
     getData = () => {
         var token = localStorage.getItem('id');
         axios.get('http://localhost:4000/user/userdata/' + token)
             .then(response => {
-                console.log(response.data.profile_data)
+                //console.log(response.data.profile_data)
                 this.setState({
                     profile_data: response.data.profile_data
                 })
@@ -61,7 +96,12 @@ class NurseMainPage extends Component {
             );
         }
 
-        // if(this.state.profile_data){
+        if(this.state.redirect_home)
+            {
+                return(
+                    <Redirect to='/'/>
+                )
+            }
 
         return (
             <div>
@@ -220,13 +260,23 @@ class NurseMainPage extends Component {
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />
                                             {/* Calender for booking */}
-                                            <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} />
+                                            <input type="button" class="btn btn-warning btn-block" value="Check Calender" onClick={() => this.openModal()} />
                                             <Modal visible={this.state.visible} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <div>
-                                                    <Calendar/>
-                                                    
+                                                    <Calendar/>                                                    
                                                 </div>
                                             </Modal>
+
+                                            <hr/>
+                                            <input type="button" class="btn btn-danger btn-block" value="Deactivate" onClick={() => this.openDeacModal()} />
+                                            <Modal visible={this.state.visible1} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
+                                            <h1 align="center">Deactivate</h1>
+                                            <p align="center">Do you really want to Deactivate?</p>
+                                                <center>
+                                                    <Button variant="btn btn-danger" type="submit" onClick={() => this.deactivate()}>Yes</Button>
+                                                    <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDeacModal()} />
+                                                </center>                                            
+                                        </Modal>
                                         </div>
                                         {/* /.card-body */}
                                     </div>

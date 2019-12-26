@@ -7,7 +7,7 @@ let multer = require('multer'),
     mongoose = require('mongoose'),
     uuidv4 = require('uuid/v4');
 
-// Defined store route
+// User Registration
 UserRegRoutes.route('/add').post(function (req, res) {
   console.log(req.body)
   let userReg = new UserReg(req.body);
@@ -59,7 +59,6 @@ UserRegRoutes.route('/userdata/:id').get(function (req, res) {
   })
 });
 
-
 //userUpdate
 UserRegRoutes.route('/userdata/update/:id').put(function(req,res){
   //console.log(req.body)
@@ -70,6 +69,18 @@ UserRegRoutes.route('/userdata/update/:id').put(function(req,res){
       message:"User Data Update success",
     })
   })
+})
+
+// Removing user upon deactivation
+UserRegRoutes.route('/delete').get(function (req, res) {
+  console.log(req.body);
+  UserReg.deleteOne({Email: req.body.Email })
+    .then(response=>{
+      res.status(200).send({
+        success:true,
+        message:"User removed"
+      })
+    })
 })
 
 //NurseprofileRetrieve
