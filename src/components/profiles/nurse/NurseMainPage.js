@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import NurseEdit from "../edit/nurseedit";
-import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
 import { Button } from 'react-bootstrap';
+import axios from './../../../../backend/node_modules/axios';
 
 class NurseMainPage extends Component {
 
