@@ -72,7 +72,7 @@ UserRegRoutes.route('/userdata/update/:id').put(function(req,res){
 })
 
 // Removing user upon deactivation
-UserRegRoutes.route('/delete').get(function (req, res) {
+UserRegRoutes.route('/delete').post(function (req, res) {
   console.log(req.body);
   UserReg.deleteOne({Email: req.body.Email })
     .then(response=>{

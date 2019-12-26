@@ -49,6 +49,10 @@ class NurseMainPage extends Component {
     }
 
     deactivate() {
+        this.setState ({
+            visible1:false
+        });
+
         const obj = {
             FirstName : this.state.profile_data.FirstName,
             LastName : this.state.profile_data.LastName,
@@ -57,20 +61,18 @@ class NurseMainPage extends Component {
             DeacDate : new Date()
         };
 
-        const data = {
-            Email : this.state.profile_data.Email
-        };
-
-        const headers = {
-            'Content-Type': 'application/json'
-        }
-
         axios.post('http://localhost:4000/userDeac/add', obj)
             .then(res => { console.log(res.data) });
 
-        axios.get('http://localhost:4000/user/delete', data, {headers:headers})
-            .then(console.log('Deleted'))
-            .catch(err => console.log(err))
+        axios.post('http://localhost:4000/user/delete', obj)
+            .then( response => {
+                if(response.data.success){
+                    this.setState({
+                        visible1: false,
+                        redirect_home:true
+                    })
+                }
+            });
     }
 
     componentDidMount() {
