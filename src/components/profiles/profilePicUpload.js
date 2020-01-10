@@ -9,7 +9,8 @@ export default class ProfilePicUpload extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            profilePic: ''
+            profilePic: '',
+            _id: ''
         }
     }
 
@@ -22,7 +23,10 @@ export default class ProfilePicUpload extends Component {
     onSubmit(e) {
         e.preventDefault()
         const formData = new FormData()
-        formData.append('profilePic', this.state.profilePic)
+        // const formData = localStorage.getItem(_id);
+        formData.append('id',localStorage.getItem('id'));
+        
+        formData.append('profilePic', this.state.profilePic);
         axios.post('http://localhost:4000/user/user-profile/', formData, {
          })
             .then(response => {

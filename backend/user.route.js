@@ -170,27 +170,33 @@ var upload = multer({
 
 // User model for prfile pic upload
 
-UserRegRoutes.post('/user-profile/', upload.single('profilePic'), (req, res, next) => {
+UserRegRoutes.post('/user-profile/', upload.single('profilePic'), async (req, res, next) => {
     const url = req.protocol + '://' + req.get('host')
-    const userReg = new UserReg({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        profilePic: url + '/public/' + req.file.filename
-    });
-    userReg.save().then(result => {
-        res.status(201).json({
-            message: "Profile Pic Uploaded Successfully!",
-            userCreated: {
-                _id: result._id,
-                profilePic: result.profilePic
-            }
-        })
-    }).catch(err => {
-        console.log(err),
-            res.status(500).json({
-                error: err
-            });
+
+    await UserReg.findOneAndUpdate({"_id" : req.body.id}, { profilePic: url + '/public/' + req.file.filename} , (err,doc)=>{
+      if(err){
+
+        res.send(err)
+      }
+      res.send(doc)
     })
+    // userReg.save().then(result => {
+    //     res.status(201).json({
+    //         message: "Profile Pic Uploaded Successfully!",
+    //         userCreated: {
+    //             _id: result._id,
+    //             profilePic: result.profilePic
+    //         }
+    //     })
+    // }).catch(err => {
+    //     console.log(err),
+    //         res.status(500).json({
+    //             error: err
+    //         });
+    // })
+
+
+
 })
 
 UserRegRoutes.get("/", (req, res, next) => {
