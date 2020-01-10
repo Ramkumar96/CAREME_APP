@@ -113,7 +113,7 @@ class NurseMainPage extends Component {
                     <div className="backg">
                         <div className="container-fluid">
                             <div className="row">
-                                
+
                                 {/* Nurse Profile Pic container */}
                                 <div className="col-lg-3">
                                     <div>
@@ -121,7 +121,7 @@ class NurseMainPage extends Component {
                                         <div className="card card-primary card-outline">
                                             <div className="card-body box-profile">
                                                 <div className="text-center">
-                                                    <img className="profile-user-img img-fluid img-circle" src="/images/nur.jpg" alt="User profile picture" />
+                                                    <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile picture" />
                                                 </div>
                                                 <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
 
