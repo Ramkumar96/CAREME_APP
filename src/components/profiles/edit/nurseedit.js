@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
+import ProfilePicUpload from '../profilePicUpload';
 
 function validate (Tele){
     return {
@@ -320,7 +321,7 @@ class NurseEdit extends Component {
 
 
                         {/* Update Profile Picture */}
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <label htmlFor="exampleInputFile">Update your Profile Picture</label>
                             <div className="input-group">
                                 <div className="custom-file">
@@ -331,7 +332,8 @@ class NurseEdit extends Component {
                                     <span className="input-group-text" id>Upload</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                        <div><ProfilePicUpload/></div>
 
                         {/* Edit Experience */}
                         <div className="form-group">

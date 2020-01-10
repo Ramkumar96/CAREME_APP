@@ -3,10 +3,8 @@ import ProfileNavbar from '../ProfileNavbar';
 import Modal from 'react-awesome-modal';
 import { Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
-
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
-import ProfilePicUpload from '../../profiles/profilePicUpload';
 
 class ClientMainPage extends Component {
 
@@ -24,7 +22,7 @@ class ClientMainPage extends Component {
         });
     }
 
-    closeDeacModal(){
+    closeDeacModal() {
         this.setState({
             visible: false
         });
@@ -36,27 +34,27 @@ class ClientMainPage extends Component {
     }
 
     deactivate() {
-        this.setState ({
-            visible:false
+        this.setState({
+            visible: false
         });
 
         const obj = {
-            FirstName : this.state.profile_data.FirstName,
-            LastName : this.state.profile_data.LastName,
-            Email : this.state.profile_data.Email,
-            NIC : this.state.profile_data.NIC,
-            DeacDate : new Date()
+            FirstName: this.state.profile_data.FirstName,
+            LastName: this.state.profile_data.LastName,
+            Email: this.state.profile_data.Email,
+            NIC: this.state.profile_data.NIC,
+            DeacDate: new Date()
         };
 
         axios.post('http://localhost:4000/userDeac/add', obj)
             .then(res => { console.log(res.data) });
 
         axios.post('http://localhost:4000/user/delete', obj)
-            .then( response => {
-                if(response.data.success){
+            .then(response => {
+                if (response.data.success) {
                     this.setState({
                         visible: false,
-                        redirect_home:true
+                        redirect_home: true
                     })
                 }
             });
@@ -72,19 +70,19 @@ class ClientMainPage extends Component {
                 })
             })
     }
-    
+
     render() {
 
-        if(!this.state.profile_data){
-            return(
-            <div> <text>Loading</text> </div>
+        if (!this.state.profile_data) {
+            return (
+                <div> <text>Loading</text> </div>
             );
         }
 
-        if(this.state.redirect_home){
-                return(
-                    <Redirect to='/'/>
-                )
+        if (this.state.redirect_home) {
+            return (
+                <Redirect to='/' />
+            )
         }
 
         return (
@@ -102,10 +100,10 @@ class ClientMainPage extends Component {
                                     <div className="card-body box-profile">
                                         <div className="text-center">
                                             <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile picture" />
-                                            <div><ProfilePicUpload/></div>
+                                            {/* <div><ProfilePicUpload/></div> */}
                                         </div>
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
-                                       
+
 
                                         <ul className="list-group list-group-unbordered mb-3 text-center">
                                             <li className="list-group-item">
@@ -135,7 +133,7 @@ class ClientMainPage extends Component {
                                             B.S. in Nursing from the University of Peradeniya
                                         </p>
                                         <hr /> */}
-                                       <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
+                                        <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted">{this.state.profile_data.Location}</p>
                                         <hr />
                                     </div>
@@ -200,7 +198,7 @@ class ClientMainPage extends Component {
                                             <div className="tab-pane" id="settings">
 
                                                 <ClientEdit
-                                                loadData={this.getData}/>
+                                                    loadData={this.getData} />
                                             </div>
                                             {/* /.tab-pane */}
                                         </div>
@@ -229,18 +227,18 @@ class ClientMainPage extends Component {
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
 
                                         <hr />
-                                        <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b> 
+                                        <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b>
                                         </a>
 
-                                        <hr/>
+                                        <hr />
                                         <input type="button" class="btn btn-danger btn-block" value="Deactivate" onClick={() => this.openDeacModal()} />
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
-                                        <h1 align="center">Deactivate</h1>
-                                        <p align="center">Do you really want to Deactivate?</p>
+                                            <h1 align="center">Deactivate</h1>
+                                            <p align="center">Do you really want to Deactivate?</p>
                                             <center>
                                                 <Button variant="btn btn-danger" type="submit" onClick={() => this.deactivate()}>Yes</Button>
                                                 <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDeacModal()} />
-                                            </center>                                            
+                                            </center>
                                         </Modal>
                                     </div>
                                     {/* /.card-body */}

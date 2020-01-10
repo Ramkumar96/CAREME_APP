@@ -108,12 +108,12 @@ class NurseMainPage extends Component {
         return (
             <div>
                 <div class="wrapper">
-
                     <ProfileNavbar />
                     <br></br>
                     <div className="backg">
                         <div className="container-fluid">
                             <div className="row">
+                                
                                 {/* Nurse Profile Pic container */}
                                 <div className="col-lg-3">
                                     <div>
