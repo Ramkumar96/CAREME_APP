@@ -83,6 +83,27 @@ UserRegRoutes.route('/delete').post(function (req, res) {
     })
 })
 
+
+//count number of nurses in the system
+UserRegRoutes.route('/countNurses').get(function (req,res){
+  UserReg.find({"userID" : "0"}).countDocuments()
+    .then(response=>{
+      res.status(200).send({
+        nurseCount: response
+      })
+    })
+})
+
+//count number of clients in the system
+UserRegRoutes.route('/countClients').get(function (req,res){
+  UserReg.find({"userID" : "1"}).countDocuments()
+    .then(response=>{
+      res.status(200).send({
+        clientCount: response
+      })
+    })
+})
+
 //NurseprofileRetrieve
 UserRegRoutes.route('/').get(function (req, res) {
  UserReg.find({userID:0},function (err, CAREME_APP) {

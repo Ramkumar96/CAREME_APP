@@ -5,7 +5,6 @@ import addclientadmin from './addclientadmin'
 import Adminnurselist from './adminnurselist'
 import Adminclientlist from './adminclientlist'
 
-
 class Admindashleftnav extends Component {
     render() {
         return (
@@ -153,7 +152,7 @@ class Admindashleftnav extends Component {
         </li>
         
         <li className="nav-item">
-          <a href="/userReports" className="nav-link">
+          <a href="userReport" className="nav-link">
             <i className="fas fa-circle nav-icon" />
             <p>User Details</p>
           </a>
