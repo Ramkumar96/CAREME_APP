@@ -153,7 +153,7 @@ class Admindashleftnav extends Component {
         </li>
         
         <li className="nav-item">
-          <a href="#" className="nav-link">
+          <a href="/userReports" className="nav-link">
             <i className="fas fa-circle nav-icon" />
             <p>User Details</p>
           </a>
