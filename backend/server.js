@@ -7,6 +7,7 @@ const config = require('./Database.js');
 
 const userRoute = require('./user.route');
 const userDeacRoute = require('./userDeac.route');
+const nurseCouncilRoute = require('./nurseCouncil.route');
 
 //connecting database
 mongoose.Promise = global.Promise;
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 
 app.use('/userDeac', userDeacRoute);
 app.use('/user', userRoute);
+app.use('/nurseCouncil', nurseCouncilRoute);
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {

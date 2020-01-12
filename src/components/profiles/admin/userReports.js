@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import { Button } from "react-bootstrap";
 import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
+import ProfileNavbar from "../ProfileNavbar";
 
 class UserReport extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            visibleGraph : null
+            visibleGraph : null,
         }
     }
 
@@ -38,17 +39,18 @@ class UserReport extends Component {
             return (
                 <div>
                     <Admindashleftnav/>
-                    <div>
-                        <VictoryPie 
-                            padding = {0}
-                            radius = {20}
-                            colorScale = {["orange", "gold"]}
-                            data = {[
-                                {x: "Nurses\n"+this.state.nurseCount, y:this.state.nurseCount},
-                                {x: "Clients\n"+this.state.clientCount, y:this.state.clientCount}
-                            ]}
-                            style={{ labels: { fontSize: 5, fill: "black"}}}
-                        />
+                    <div> <ProfileNavbar />
+                        <div className="content-wrapper">
+                            <VictoryPie 
+                                radius = {20}
+                                colorScale = {["orange", "gold"]}
+                                data = {[
+                                    {x: "Nurses\n"+this.state.nurseCount, y:this.state.nurseCount},
+                                    {x: "Clients\n"+this.state.clientCount, y:this.state.clientCount}
+                                ]}
+                                style={{ labels: { fontSize: 5, fill: "black"}}}
+                            />
+                        </div>
                     </div>
                 </div>
             );
@@ -58,8 +60,13 @@ class UserReport extends Component {
             <div>
                 <Admindashleftnav />
 
-                <div class="content-wrapper">
-                    <Button onClick={() => this.getUserData()}>User Pie Chart</Button>
+                <div>
+                    <ProfileNavbar />
+                    <div className="content-wrapper">
+                        <h1>Hi, welcome to the reports section</h1>
+                        {/* <Button onClick={() => this.getUserData()}>User Pie Chart</Button> */}
+
+                    </div>
                 </div>
             </div>
         );

@@ -83,7 +83,6 @@ UserRegRoutes.route('/delete').post(function (req, res) {
     })
 })
 
-
 //count number of nurses in the system
 UserRegRoutes.route('/countNurses').get(function (req,res){
   UserReg.find({"userID" : "0"}).countDocuments()

@@ -226,56 +226,70 @@ class IntroBanner extends Component {
                 'Content-Type': 'application/json'
             }
 
-            //verifying as unregistered email
-            axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
-                .then(res => {
-                    if (res.data.success) {
-                        alert("Email already registered. Please use another Email Address");
+            //verifying nurseID
+            axios.post('http://localhost:4000/nurseCouncil/verify', obj, {headers: headers})
+                .then(res=> {
+                    if (!res.data.success){
+                        alert("Please enter registered Nurse Council ID and NIC");
                     }
 
-                    //verifying as unregistered nurse ID
-                    else if (!res.data.success) {
-                        axios.post('http://localhost:4000/user/validNurseID', obj, { headers: headers })
-                            .then(response => {
-                                if (response.data.success) {
-                                    alert("Your Nurse Council ID is already registered");
-                                }
-
-                                //adding new user to the database
+                    else if (res.data.success){
+                        //verifying as unregistered email
+                        axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
+                            .then(res => {
+                                if (res.data.success) {
+                                    alert("Email already registered. Please use another Email Address");
+                                }        
+                                
+                                //verifying as unregistered nurse ID
                                 else if (!res.data.success) {
-                                    axios.post('http://localhost:4000/user/add', obj)
-                                        .then(res => { console.log(res.data) });
-                                    console.log("Registered");
-                                    alert(`Succesfully Registered`);
-
-                                    this.setState({
-                                        FirstName: '',
-                                        LastName: '',
-                                        nurseID: '',
-                                        Email: '',
-                                        NIC: '',
-                                        PW: '',
-                                        CPW: '',
-                                        Home: '',
-                                        Tel: '',
-                                        visible: false,
-
-                                        touched: {
-                                            Email: false,
-                                            FirstName: false,
-                                            LastName: false,
-                                            nurseID: false,
-                                            PW: false,
-                                            CPW: false,
-                                            Home: false,
-                                            Tel: false,
-                                            NIC: false
-                                        }
-                                    });
+                                    axios.post('http://localhost:4000/user/validNurseID', obj, { headers: headers })
+                                        .then(response => {
+                                            if (response.data.success) {
+                                                alert("Your Nurse Council ID is already registered");
+                                            }
+        
+                                            //adding new user to the database
+                                            else if (!res.data.success) {
+                                                axios.post('http://localhost:4000/user/add', obj)
+                                                    .then(res => { console.log(res.data) });
+                                                console.log("Registered");
+                                                alert(`Succesfully Registered`);
+        
+                                                this.setState({
+                                                    FirstName: '',
+                                                    LastName: '',
+                                                    nurseID: '',
+                                                    Email: '',
+                                                    NIC: '',
+                                                    PW: '',
+                                                    CPW: '',
+                                                    Home: '',
+                                                    Tel: '',
+                                                    visible: false,
+        
+                                                    touched: {
+                                                        Email: false,
+                                                        FirstName: false,
+                                                        LastName: false,
+                                                        nurseID: false,
+                                                        PW: false,
+                                                        CPW: false,
+                                                        Home: false,
+                                                        Tel: false,
+                                                        NIC: false
+                                                    }
+                                                });
+                                            }
+                                        });
                                 }
-                            });
-                    }
+                
+                
                 });
+            }
+                
+            });
+        
         }
     }
 
