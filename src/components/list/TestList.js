@@ -18,7 +18,7 @@ export default class TestList extends Component {
     return (
       <>
     
-    {false ? <ViewNurseProfile   nurse={this.props.nurse_data} />:null}
+   
 
       <div>
       

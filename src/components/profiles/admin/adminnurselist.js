@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Admindashleftnav from './admindashleftnav'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ViewNurseProfile from '../nurse/ViewNurseProfile'
 
 
 
@@ -19,7 +20,7 @@ const UserReg = props => (
         <td>{props.nurselist.nurseType}</td>
         <td>{props.nurselist.nurseGender}</td>
         <td>
-            <Link to={"/edit/"+props.nurselist._id}>View</Link>
+            <Link to={"/viewnurseprofile/"+props.nurselist._id}>View</Link>
         </td>
     </tr>
 )
@@ -51,6 +52,7 @@ export default class Adminnurselist extends Component {
 
     render() {
         return (
+          
           <div>
                <div >
                 <Admindashleftnav/>
