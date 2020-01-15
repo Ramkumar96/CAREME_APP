@@ -89,43 +89,10 @@ class ViewNurseProfile extends Component {
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
                                                     </li>
-
-                                                    <li className="list-group-item text-center">
-                                                        <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
-                                                    </li>
                                                 </ul>
                                             </div>
                                             {/* /.card-body */}
                                         </div>
-
-                                        {/* About Me Box */}
-                                        <div className="card card-primary">
-                                            <div className="card-header">
-                                                <h3 className="card-title">About Me</h3>
-                                            </div>
-                                            {/* /.card-header */}
-                                            <div className="card-body">
-                                                <strong><i className="fas fa-book mr-1" /> Education</strong>
-                                                <p className="text-muted">
-                                                    {this.state.profile_data.nurseEdu}
-                                                </p>
-                                                <hr />
-                                                <strong><i className="fas fa-book mr-1" /> University</strong>
-                                                <p className="text-muted">
-                                                    {this.state.profile_data.nurseUni}
-                                                </p>
-                                                <hr />
-                                                <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                                <p className="text-muted">{this.state.profile_data.Location}</p>
-                                                <hr />
-                                                <strong><i className="fas fa-pencil-alt mr-1" /> Skills</strong>
-                                                <p className="text-muted">
-                                                    {this.state.profile_data.nurseType} Nurse
-                                                </p>
-                                            </div>
-                                            {/* /.card-body */}
-                                        </div>
-                                        {/* /.card */}
                                     </div>
                                 </div>
 
@@ -156,20 +123,29 @@ class ViewNurseProfile extends Component {
                                                         </div>
                                                         <div>
                                                             <div className="timeline-item">
+                                                                <h3 className="timeline-header border-0"> <strong>Location:  </strong>{this.state.profile_data.Location}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="timeline-item">
+                                                                <h3 className="timeline-header border-0"> <strong>Skill:  </strong>{this.state.profile_data.nurseType} Nurse</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="timeline-item">
+                                                                <h3 className="timeline-header border-0"> <strong>Education:  </strong>{this.state.profile_data.nurseEdu}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="timeline-item">
+                                                                <h3 className="timeline-header border-0"> <strong>University:  </strong>{this.state.profile_data.nurseUni}</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <div className="timeline-item">
                                                                 <h3 className="timeline-header border-0"> <strong>Email:  </strong>{this.state.profile_data.Email}</h3>
                                                             </div>
                                                         </div>
-                                                        <div>
-                                                            <div className="timeline-item">
-                                                                <h3 className="timeline-header border-0"> <strong>Address:  </strong>{this.state.profile_data.Home}</h3>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div className="timeline-item">
-                                                                <h3 className="timeline-header border-0"> <strong>Telephone:  </strong>{this.state.profile_data.Tel}</h3>
-                                                            </div>
-                                                        </div>
-
                                                         {/* END timeline item */}
 
                                                     </div>
@@ -224,9 +200,6 @@ class ViewNurseProfile extends Component {
 
                                             <hr />
                                             <strong><i className="fas fa-mobile mr-1" /> Phone </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-
-                                            <hr />
-                                            <strong><i className="fas fa-pencil-alt mr-1" />NIC </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
 
                                             <hr />
                                             <strong><i className="far fa-file-alt mr-1" />Reg No </strong><small class="badge badge-danger"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
