@@ -30,7 +30,7 @@ export default class ProfilePicUpload extends Component {
         axios.post('http://localhost:4000/user/user-profile/', formData, {
          })
             .then(response => {
-                alert("profile photo uploaded")
+                alert("Profile photo uploaded")
                 console.log(response)
             })
     }
