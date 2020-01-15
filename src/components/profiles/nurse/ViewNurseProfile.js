@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
-// import ProfilePic from "../ProfilePic";
-//import NurseProfileInfo from "./nurseProfileInfo";
-// import ProfileRight from "../ProfileRight";
-
-import NurseEdit from "../edit/nurseedit";
 import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
-
-
 
 class ViewNurseProfile extends Component {
 
@@ -64,12 +57,9 @@ class ViewNurseProfile extends Component {
             );
         }
 
-
         return (
-
             <div>
                 <div class="wrapper">
-
                     <ProfileNavbar />
                     <br></br>
                     <div className="backg">
@@ -85,7 +75,6 @@ class ViewNurseProfile extends Component {
                                                     <img className="profile-user-img img-fluid img-circle" src="/images/nur.jpg" alt="User profile picture" />
                                                 </div>
                                                 <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
-
 
                                                 <ul className="list-group list-group-unbordered mb-3 text-center">
                                                     <li className="list-group-item">
@@ -108,7 +97,6 @@ class ViewNurseProfile extends Component {
                                             </div>
                                             {/* /.card-body */}
                                         </div>
-
 
                                         {/* About Me Box */}
                                         <div className="card card-primary">
@@ -187,14 +175,11 @@ class ViewNurseProfile extends Component {
                                                     </div>
                                                     {/* /.tab-pane */}
                                                 </div>
-
                                             </div>
                                             {/* /.tab-content */}
                                         </div>{/* /.card-body */}
                                     </div>
                                     {/* /.nav-tabs-custom */}
-
-
                                 </div>
 
                                 {/* Nurse Profile Right side conatiner */}
@@ -245,12 +230,10 @@ class ViewNurseProfile extends Component {
 
                                             <hr />
                                             <strong><i className="far fa-file-alt mr-1" />Reg No </strong><small class="badge badge-danger"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-
                                         </div>
                                         {/* /.card-body */}
                                     </div>
                                     {/* /.card */}
-
                                 </div>
                             </div>
                         </div>

@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import Admindashleftnav from './admindashleftnav'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import ViewNurseProfile from '../nurse/ViewNurseProfile'
-
-
 
 const UserReg = props => (
     <tr>

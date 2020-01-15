@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
-import { Button, Form, Col, ModalDialog } from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 
 //validating empty fields for Nurse

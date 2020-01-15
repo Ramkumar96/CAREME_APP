@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
 import Modal from 'react-awesome-modal';
 import { Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Redirect } from "react-router-dom";
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 

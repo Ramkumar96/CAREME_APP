@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Admindashleftnav from './admindashleftnav'
-import Navigationbar from '../../homepage/navigationbar/Navigationbar'
 import Adminup from './adminup'
 import ProfileNavbar from '../ProfileNavbar'
 
