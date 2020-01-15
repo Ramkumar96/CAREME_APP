@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-awesome-modal';
 import { Button} from 'react-bootstrap';
-import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Redirect } from "react-router-dom";
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ForumIcon from '@material-ui/icons/Forum';
@@ -55,6 +55,12 @@ class ProfileNavbar extends Component{
         })
     }
 
+    closePopup = () => {
+        this.setstate({
+            close: true
+        });
+    };
+
     render(){    
         
         if(this.state.redirect_home)
@@ -91,8 +97,7 @@ class ProfileNavbar extends Component{
                                 <React.Fragment>
                                     <MenuIcon fontSize="large" {...bindTrigger(popupState)}/>
                                     
-                                    <Menu {...bindMenu(popupState)} onClickAway={popupState.close}>
-                                        <MenuItem onClick={popupState.close}>Home</MenuItem>
+                                    <Menu {...bindMenu(popupState)} onClickAway={()=>this.closePopup()}>
                                         <MenuItem onClick={popupState.close}>Settings</MenuItem>
                                         <MenuItem onClick={popupState.close}>Calander</MenuItem>
                                         
