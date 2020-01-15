@@ -99,7 +99,7 @@ class ProfileNavbar extends Component{
                                     
                                     <Menu {...bindMenu(popupState)} onClickAway={()=>this.closePopup()}>
                                         <MenuItem onClick={popupState.close}>Settings</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Calander</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Calender</MenuItem>
                                         
                                         <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
