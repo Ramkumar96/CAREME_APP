@@ -99,7 +99,7 @@ class ClientMainPage extends Component {
                                 <div className="card card-primary card-outline">
                                     <div className="card-body box-profile">
                                         <div className="text-center">
-                                            <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile picture" />
+                                            <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile pic" />
                                             {/* <div><ProfilePicUpload/></div> */}
                                         </div>
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>

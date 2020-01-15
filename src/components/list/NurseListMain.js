@@ -1,12 +1,9 @@
 import React, {Component} from "react";
 import Navigationbar from '../homepage/navigationbar/Navigationbar';
-import NurseListProfile from './NurseListProfile';
+//import NurseListProfile from './NurseListProfile';
 import axios from 'axios';
-import { NONAME } from "dns";
+//import { NONAME } from "dns";
 import TestList from "./TestList";
-
-
-
 
 /*import NurseProfilePage from './NursePofilePage';
 */

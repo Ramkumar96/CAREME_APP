@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ViewNurseProfile from '../profiles/nurse/ViewNurseProfile';
+//import ViewNurseProfile from '../profiles/nurse/ViewNurseProfile';
 
 
 
