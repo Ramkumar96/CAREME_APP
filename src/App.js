@@ -18,7 +18,6 @@ import Adminclientlist  from './components/profiles/admin/adminclientlist'
 import TestList from './components/list/TestList'
 import ViewNurseProfile from "./components/profiles/nurse/ViewNurseProfile";
 import UserReport from "./components/profiles/admin/userReports";
-import TestRating from "./components/profiles/nurse/testRating";
 import Messaging from "./components/profiles/messaging";
 
 
@@ -45,7 +44,6 @@ class App extends Component {
         <Route path="/testlist" exact component={TestList} />
         <Route path="/viewnurseprofile/:id" exact component={ViewNurseProfile} />
         <Route path="/userReport" exact component={UserReport} />
-        <Route path="/testRating" exact component={TestRating} />
         <Route path ="/messaging" exact component={Messaging}/>
       
       </Router>
