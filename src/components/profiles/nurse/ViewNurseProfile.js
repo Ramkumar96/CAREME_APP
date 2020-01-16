@@ -7,6 +7,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import { fontSize } from "@material-ui/system";
 import { Button, Form, Col } from 'react-bootstrap';
 import { tsExpressionWithTypeArguments } from "@babel/types";
+import Complaint from "../complaint";
 
 class ViewNurseProfile extends Component {
 
@@ -140,6 +141,18 @@ class ViewNurseProfile extends Component {
     closeReviewModal(){
         this.setState({
             visible1: false
+        })
+    }
+
+    openComplaintModal(){
+        this.setState({
+            visible2: true
+        })
+    }
+
+    closeComplaintModal(){
+        this.setState({
+            visible2: false
         })
     }
 
@@ -326,15 +339,22 @@ class ViewNurseProfile extends Component {
                                             <hr/>
 
                                             {/* Calender for booking */}
-                                            <input type="button" class="btn btn-success" value="Contact" onClick={event =>  window.location.href='/messaging'} />
-                                            
+
+                                            {/* complaint management*/}
+                                            <input type="button" class="btn btn-success" value="Add a complaint" onClick={() => this.openComplaintModal()} />
+                                            <Modal visible={this.state.visible2} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
+                                                <div>
+                                                    <Complaint/>
+
+                                                </div>
+                                            </Modal>
                                         </div>
                                         {/* /.card-body */}
                                     </div>
                                     {/* /.card */}
 
 
-                                    {/*Seoond Card in Right Side*/}
+                                    {/*Second Card in Right Side*/}
                                     <div className="card card-primary">
                                         <div className="card-header text-center">
                                             <h3 className="card-title text-center"><strong>Verifications</strong></h3>
