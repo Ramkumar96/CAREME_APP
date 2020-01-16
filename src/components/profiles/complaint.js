@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Messaging extends Component {
+class Complaint extends Component {
   constructor(props) {
 	super(props);
 	this.state = { feedback: '', name: 'Name', email: 'email@example.com' };
@@ -11,20 +11,20 @@ class Messaging extends Component {
   render() {
 	return (
   	<form className="test-mailing">
-    	<h1>Send me a message with special remarks</h1>
+    	<h1>Generate a complaint</h1>
     	<div>
       	<textarea
         	id="test-mailing"
         	name="test-mailing"
         	onChange={this.handleChange}
-        	placeholder="Enter some message here"
+        	placeholder="Enter your complaint here"
         	required
         	value={this.state.feedback}
         	style={{width: '100%', height: '150px'}}
       	/>
     	</div>
     	<input type="button" value="Send" className="btn btn-success" onClick={this.handleSubmit} />
-		<input type="button" value="Home" className="btn btn-primary" onClick={event =>  window.location.href='/nursemainlist'} />
+		{/* <input type="button" value="Home" className="btn btn-primary" onClick={event =>  window.location.href='/nursemainlist'} /> */}
   	</form>
 	)
   }
@@ -51,4 +51,4 @@ class Messaging extends Component {
   }
 }
 
-export default Messaging;
+export default Complaint;
