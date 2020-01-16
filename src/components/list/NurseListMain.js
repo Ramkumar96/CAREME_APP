@@ -28,9 +28,10 @@ class NurseListMain extends Component{
 
     constructor(props) {
         super(props);
-        this.state = {CAREME_APP: [],
-        term:'',};
-        
+        this.state = {
+            CAREME_APP: [],
+            term:''
+        }; 
 
         this.searchHandler = this.searchHandler.bind(this);
     }
