@@ -9,6 +9,7 @@ const userRoute = require('./user.route');
 const userDeacRoute = require('./userDeac.route');
 const nurseCouncilRoute = require('./nurseCouncil.route');
 const userRatingRoute = require('./rating.route');
+const userReviewRoute = require('./review.route');
 
 //connecting database
 mongoose.Promise = global.Promise;
@@ -26,6 +27,7 @@ app.use('/userDeac', userDeacRoute);
 app.use('/user', userRoute);
 app.use('/nurseCouncil', nurseCouncilRoute);
 app.use('/rating', userRatingRoute);
+app.use('/review', userReviewRoute);
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {

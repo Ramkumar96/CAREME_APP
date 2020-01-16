@@ -256,13 +256,15 @@ class NurseMainPage extends Component {
                                     <div className="card card-primary">
                                         <div className="card-body text-center">
                                             <strong>Ratings </strong> <br/>
-                                            <StarRatingComponent
-                                                name="rate1"
-                                                editing={false}
-                                                starCount={5}
-                                                value={finalRating} 
-                                            />
+                                            <div style={{fontSize: 28}}>
+                                                <StarRatingComponent
+                                                    name="rate1"
+                                                    editing={false}
+                                                    starCount={5}
+                                                    value={finalRating} 
+                                                />
                                             <hr />
+                                            </div>
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />

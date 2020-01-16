@@ -4,17 +4,25 @@ import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
 import StarRatingComponent from 'react-star-rating-component';
+import { fontSize } from "@material-ui/system";
+import { Button, Form, Col } from 'react-bootstrap';
+import { tsExpressionWithTypeArguments } from "@babel/types";
 
 class ViewNurseProfile extends Component {
 
     constructor(props) {
         super(props);
+        this.onChangeReview = this.onChangeReview.bind(this);
+        this.onSubmitReview = this.onSubmitReview.bind(this);
+
         this.state = {
             profile_data: null,
             visible: false,
             clientEmail: localStorage.getItem("user_Email"),
             nurseEmail: null,
-            response_body: null
+            response_body: null,
+            visible1: false,
+            Review: ''
         }
     }
 
@@ -115,6 +123,47 @@ class ViewNurseProfile extends Component {
                 this.getData()
             }
         });
+    }
+
+    onChangeReview(e) {
+        this.setState({
+            Review: e.target.value
+        });
+    }
+
+    openReviewModal(){
+        this.setState({
+            visible1: true
+        })
+    }
+
+    closeReviewModal(){
+        this.setState({
+            visible1: false
+        })
+    }
+
+    onSubmitReview(e){
+        e.preventDefault();
+
+        const dataObject = {
+            ReviewBy: this.state.clientEmail,
+            ReviewedUser: this.state.profile_data.Email,
+            Review: this.state.Review,
+            ReviewDate: new Date()
+        }
+
+        console.log(dataObject);
+
+        axios.post('http://localhost:4000/review/add', dataObject)
+            .then(res => { 
+                alert("Review Successful! Thank you for taking a moment.");
+            });     
+            
+        this.setState({
+            Review: '',
+            visible1: false
+        })
     }
 
     render() {
@@ -234,18 +283,39 @@ class ViewNurseProfile extends Component {
                                         <div className="card-body text-center">
                                             <strong>Rate {this.state.profile_data.FirstName} </strong>
                                             <br/>
-                                            <StarRatingComponent 
-                                                className = "rateStar"
-                                                name="rate1" 
-                                                starCount={5}
-                                                value={Rating}
-                                                onStarClick={this.onStarClick.bind(this)}
-                                            />
-                                            <hr />
+                                            <div style={{fontSize: 28}}>
+                                                <StarRatingComponent 
+                                                    className = "rateStar"
+                                                    name="rate1" 
+                                                    starCount={5}
+                                                    value={Rating}
+                                                    onStarClick={this.onStarClick.bind(this)}
+                                                />
+                                            <hr/>
+                                            </div>
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />
-                                            {/* Calender for booking */}
+                                            <input type="button" class="btn btn-warning btn-block" value="Leave a Review" onClick={() => this.openReviewModal()} />
+                                            <Modal visible={this.state.visible1} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeReviewModal()}>
+                                                <h3>Leave a Review</h3>
+
+                                                <Form>
+                                                    <Form.Group>
+                                                            <Form.Control
+                                                                required
+                                                                type="textarea"
+                                                                value={this.state.Review}
+                                                                onChange={this.onChangeReview}
+                                                                placeholder="Leave a review"
+                                                            />
+                                                    </Form.Group>
+
+                                                    <Button type="submit" variant="primary" onClick={this.onSubmitReview.bind(this)}>Submit</Button>
+                                                </Form>
+                                            </Modal>
+                                            <hr/>
+
                                             <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} />
                                             <Modal visible={this.state.visible} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <div>
@@ -253,6 +323,9 @@ class ViewNurseProfile extends Component {
 
                                                 </div>
                                             </Modal>
+                                            <hr/>
+
+                                            {/* Calender for booking */}
                                             <input type="button" class="btn btn-success" value="Contact" onClick={event =>  window.location.href='/messaging'} />
                                             
                                         </div>
