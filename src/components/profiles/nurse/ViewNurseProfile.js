@@ -183,6 +183,8 @@ class ViewNurseProfile extends Component {
 
                                                 </div>
                                             </Modal>
+                                            <input type="button" class="btn btn-success" value="Contact" onClick={event =>  window.location.href='/messaging'} />
+                                            
                                         </div>
                                         {/* /.card-body */}
                                     </div>
