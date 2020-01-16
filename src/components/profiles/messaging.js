@@ -11,13 +11,13 @@ class Messaging extends Component {
   render() {
 	return (
   	<form className="test-mailing">
-    	<h1>Let's see if it works</h1>
+    	<h1>Send me a message with special remarks</h1>
     	<div>
       	<textarea
         	id="test-mailing"
         	name="test-mailing"
         	onChange={this.handleChange}
-        	placeholder="Post some lorem ipsum here"
+        	placeholder="Enter some message here"
         	required
         	value={this.state.feedback}
         	style={{width: '100%', height: '150px'}}
