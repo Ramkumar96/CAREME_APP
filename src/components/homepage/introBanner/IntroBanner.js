@@ -190,7 +190,8 @@ class IntroBanner extends Component {
             Tel: this.state.Tel,
             userID: 0,
             RegDate : today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
-            starRating : 0
+            starRating : 0,
+            ratingCount : 0
         };
 
         if (!this.canBeSubmitted()) {
@@ -318,7 +319,8 @@ class IntroBanner extends Component {
             NIC: this.state.NIC,
             userID: 1,
             RegDate : new Date(),
-            starRating: 0
+            starRating: 0,
+            ratingCount: 0
         };
 
         if (!this.canBeSubmitted1()) {

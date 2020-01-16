@@ -38,18 +38,6 @@ UserRatingRoutes.route('/add').post(function (req, res) {
     });
   });
 
-// //userUpdate
-// UserRatingRoutes.route('/update').put(function(req,res){
-//     //console.log(req.body)
-//     UserRating.findOneAndUpdate({"RatedUser": req.body.RatedUser, "RatedBy": req.body.RatedBy})
-//     .then(response=>{
-//       res.status(200).send({
-//         success:true,
-//         message:"Rating Updated success",
-//       })
-//     })
-//   })
-
 UserRatingRoutes.route('/delete').post(function (req, res) {
     console.log(req.body);
     UserRating.deleteOne({RatedBy: req.body.RatedBy, RatedUser: req.body.RatedUser })

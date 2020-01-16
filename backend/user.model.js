@@ -80,6 +80,10 @@ let UserReg = new Schema({
   starRating: {
     type: Number
   },
+
+  ratingCount: {
+    type: Number
+  },
   
   nurseGender: {
     type: String

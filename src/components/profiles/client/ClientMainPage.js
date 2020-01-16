@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { BrowserRouter as Redirect } from "react-router-dom";
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
+import StarRatingComponent from "react-star-rating-component";
 
 class ClientMainPage extends Component {
 
@@ -84,6 +85,11 @@ class ClientMainPage extends Component {
                 <Redirect to='/' />
             )
         }
+
+        const ratingVal = this.state.profile_data.starRating;
+        const rateCount = this.state.profile_data.ratingCount;
+
+        const finalRating = ratingVal/rateCount;
 
         return (
             <div>
@@ -215,13 +221,14 @@ class ClientMainPage extends Component {
                                 <div className="card card-primary">
                                     <div className="card-body text-center">
                                         <strong>Ratings </strong>
-                                        <p className="text-muted text-center">
-                                            <i className="fas fa-star mr-1" />
-                                            <i className="fas fa-star mr-1" />
-                                            <i className="fas fa-star mr-1" />
-                                            <i className="fas fa-star mr-1" />
-                                            <i className="fas fa-star mr-1" />
-                                        </p>
+                                        <br/>
+                                        <StarRatingComponent
+                                            className="rateStar"
+                                            name="rate1"
+                                            editing={false}
+                                            starCount={5}
+                                            value={finalRating} 
+                                        />
                                         <hr />
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>

@@ -12,7 +12,6 @@ class ViewNurseProfile extends Component {
         super(props);
         this.state = {
             profile_data: null,
-            Rating: null,
             visible: false,
             clientEmail: localStorage.getItem("user_Email"),
             nurseEmail: null,
@@ -22,6 +21,7 @@ class ViewNurseProfile extends Component {
 
     componentDidMount() {
         this.getData();
+        // this.getRating();
         //console.log(this.props.match.params)
     }
 
@@ -34,31 +34,43 @@ class ViewNurseProfile extends Component {
                     profile_data: response.data.profile_data,
                 })
             })
-
-        // const checkObj = {
-        //     nurseEmail : this.state.profile_data.Email,
-        //     clientEmail : this.state.clientEmail
-        // }   
-
-        // const headers = {
-        //     'Content-Type': 'application/json'
-        //   }
-
-        // axios.post('http://localhost:4000/rating/checkPresence', checkObj, {headers:headers})
-        // .then (res => {
-        //     if (res.data.success){
-        //        this.setState({
-        //            Rating: this.state.Rating
-        //        })
-        //     }
-
-        //     else {
-        //         this.setState({
-        //             Rating: 0
-        //         })
-        //     }
-        // })
     }
+
+    // getRating = () => {
+    //     if (this.state.profile_data){
+    //         const checkObject = {
+    //             nurseEmail : this.state.profile_data.Email,
+    //             clientEmail : this.state.clientEmail
+    //         }   
+
+    //         const headers = {
+    //             'Content-Type': 'application/json'
+    //         }
+
+    //         axios.post('http://localhost:4000/rating/checkPresence', checkObject, {headers:headers})
+    //         .then (res => {
+    //             if (res.data.success){
+    //                 this.setState({
+    //                     response_body : res.data.response_body
+    //                 })
+    //             }
+    //         })
+
+    //         // if (this.state.response_body){
+    //         //     this.setState({
+    //         //         Rating: this.state.response_body.Rating
+    //         //     })
+    //         // }
+
+    //         if (!this.state.response_body) {
+    //             this.setState({
+    //                 Rating: 0
+    //             })
+    //         }
+
+    //         console.log(this.state.Rating);
+    //     }
+    // }
 
     onStarClick(nextValue) {
         const obj = {
@@ -73,6 +85,11 @@ class ViewNurseProfile extends Component {
             clientEmail : this.state.clientEmail
         }
 
+        const userObj = {
+            Rating: nextValue,
+            nurseEmail: this.state.profile_data.Email
+        }
+
         const headers = {
             'Content-Type': 'application/json'
           }
@@ -82,17 +99,26 @@ class ViewNurseProfile extends Component {
               if (res.data.success){
                 axios.post('http://localhost:4000/rating/delete', obj)
                 .then( response => {
-                    console.log(response.data);
+                    //console.log(response.data);
                 });
               }
 
               axios.post('http://localhost:4000/rating/add', obj)
-                .then(res => { console.log(res.data) });
+                .then(res => { 
+                    //console.log(res.data) 
+                });
           })
+
+        axios.put('http://localhost:4000/user/userdata/updateRating/', userObj, { headers: headers })
+        .then(response => {
+            alert("Details successfully updated");
+            if (response.data.success) {
+                this.getData()
+            }
+        });
     }
 
     render() {
-        console.log(this.state.profile_data)
         if (!this.state.profile_data) {
             return (
                 <div> <text>Loading</text> </div>
