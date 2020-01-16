@@ -6,6 +6,7 @@ import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
 import { Button } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
+import StarRatingComponent from "react-star-rating-component";
 
 class NurseMainPage extends Component {
 
@@ -104,6 +105,11 @@ class NurseMainPage extends Component {
                     <Redirect to='/'/>
                 )
             }
+
+        const ratingVal = this.state.profile_data.starRating;
+        const rateCount = this.state.profile_data.ratingCount;
+
+        const finalRating = ratingVal/rateCount;
 
         return (
             <div>
@@ -249,14 +255,13 @@ class NurseMainPage extends Component {
                                     {/*First Card in Right Side*/}
                                     <div className="card card-primary">
                                         <div className="card-body text-center">
-                                            <strong>Ratings </strong>
-                                            <p className="text-muted text-center">
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                            </p>
+                                            <strong>Ratings </strong> <br/>
+                                            <StarRatingComponent
+                                                name="rate1"
+                                                editing={false}
+                                                starCount={5}
+                                                value={finalRating} 
+                                            />
                                             <hr />
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>

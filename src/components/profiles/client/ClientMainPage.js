@@ -223,7 +223,6 @@ class ClientMainPage extends Component {
                                         <strong>Ratings </strong>
                                         <br/>
                                         <StarRatingComponent
-                                            className="rateStar"
                                             name="rate1"
                                             editing={false}
                                             starCount={5}

@@ -4,7 +4,6 @@ import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
 import StarRatingComponent from 'react-star-rating-component';
-import { isNumericLiteral } from "@babel/types";
 
 class ViewNurseProfile extends Component {
 
