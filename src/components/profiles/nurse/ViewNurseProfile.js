@@ -3,39 +3,26 @@ import ProfileNavbar from '../ProfileNavbar';
 import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
+import StarRatingComponent from 'react-star-rating-component';
+import { isNumericLiteral } from "@babel/types";
 
 class ViewNurseProfile extends Component {
 
     constructor(props) {
         super(props);
-        this.openLoginModal = this.openLoginModal.bind(this);
         this.state = {
             profile_data: null,
-            visible: false
-        }
-    }
-
-    openLoginModal() {
-        this.setState({
-            visible: true
-        });
-    }
-
-    closeModal() {
-        this.setState({
+            Rating: null,
             visible: false,
-            Email: '',
-            Password: '',
-            touched: {
-                Email: false,
-                Password: false
-            }
-        });
+            clientEmail: localStorage.getItem("user_Email"),
+            nurseEmail: null,
+            response_body: null
+        }
     }
 
     componentDidMount() {
         this.getData();
-        console.log(this.props.match.params)
+        //console.log(this.props.match.params)
     }
 
     getData = () => {
@@ -44,9 +31,64 @@ class ViewNurseProfile extends Component {
             .then(response => {
                 console.log(response.data.profile_data)
                 this.setState({
-                    profile_data: response.data.profile_data
+                    profile_data: response.data.profile_data,
                 })
             })
+
+        // const checkObj = {
+        //     nurseEmail : this.state.profile_data.Email,
+        //     clientEmail : this.state.clientEmail
+        // }   
+
+        // const headers = {
+        //     'Content-Type': 'application/json'
+        //   }
+
+        // axios.post('http://localhost:4000/rating/checkPresence', checkObj, {headers:headers})
+        // .then (res => {
+        //     if (res.data.success){
+        //        this.setState({
+        //            Rating: this.state.Rating
+        //        })
+        //     }
+
+        //     else {
+        //         this.setState({
+        //             Rating: 0
+        //         })
+        //     }
+        // })
+    }
+
+    onStarClick(nextValue) {
+        const obj = {
+            RatedBy : this.state.clientEmail,
+            RatedUser : this.state.profile_data.Email,
+            Rating : nextValue,
+            RatedDate: new Date()
+        }
+
+        const checkObj = {
+            nurseEmail : this.state.profile_data.Email,
+            clientEmail : this.state.clientEmail
+        }
+
+        const headers = {
+            'Content-Type': 'application/json'
+          }
+
+        axios.post('http://localhost:4000/rating/checkPresence', checkObj, {headers:headers})
+          .then (res => {
+              if (res.data.success){
+                axios.post('http://localhost:4000/rating/delete', obj)
+                .then( response => {
+                    console.log(response.data);
+                });
+              }
+
+              axios.post('http://localhost:4000/rating/add', obj)
+                .then(res => { console.log(res.data) });
+          })
     }
 
     render() {
@@ -56,6 +98,8 @@ class ViewNurseProfile extends Component {
                 <div> <text>Loading</text> </div>
             );
         }
+
+        const {Rating} = this.setState;
 
         return (
             <div>
@@ -163,14 +207,15 @@ class ViewNurseProfile extends Component {
                                     {/*First Card in Right Side*/}
                                     <div className="card card-primary">
                                         <div className="card-body text-center">
-                                            <strong>Ratings </strong>
-                                            <p className="text-muted text-center">
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                            </p>
+                                            <strong>Rate {this.state.profile_data.FirstName} </strong>
+                                            <br/>
+                                            <StarRatingComponent 
+                                                className = "rateStar"
+                                                name="rate1" 
+                                                starCount={5}
+                                                value={Rating}
+                                                onStarClick={this.onStarClick.bind(this)}
+                                            />
                                             <hr />
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>

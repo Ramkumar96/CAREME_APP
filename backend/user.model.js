@@ -76,6 +76,10 @@ let UserReg = new Schema({
   RegDate: {
     type: Date
   },
+
+  starRating: {
+    type: Number
+  },
   
   nurseGender: {
     type: String
