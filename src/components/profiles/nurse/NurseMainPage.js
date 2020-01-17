@@ -6,6 +6,7 @@ import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
 import { Button } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
+import NurseCalendar from "./NurseCalendar";
 
 class NurseMainPage extends Component {
 
@@ -262,14 +263,16 @@ class NurseMainPage extends Component {
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />
                                             {/* Calender for booking */}
-                                            <input type="button" class="btn btn-warning btn-block" value="Check Calender" onClick={() => this.openModal()} />
+                                            <a href="/nursecalendar" className="btn btn-warning btn-block"><b>Edit Availability</b>
+                                            </a>
                                             <Modal visible={this.state.visible} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <div>
-                                                    <Calendar/>                                                    
+                                                    <NurseCalendar/>   
                                                 </div>
                                             </Modal>
 
                                             <hr/>
+                                            {/* Deactivate Modal */}
                                             <input type="button" class="btn btn-danger btn-block" value="Deactivate" onClick={() => this.openDeacModal()} />
                                             <Modal visible={this.state.visible1} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
                                             <h1 align="center">Deactivate</h1>
