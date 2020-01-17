@@ -95,7 +95,13 @@ let UserReg = new Schema({
 
   profilePic: {
     type: String
+  },
+
+  UnavailableDates:{
+    type: [String],
+    default: []
   }
+  
 },{
     collection: 'Users'
 });
