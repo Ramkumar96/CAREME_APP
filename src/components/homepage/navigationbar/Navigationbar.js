@@ -118,6 +118,7 @@ class Navigationbar extends Component {
                             localStorage.setItem("id", response.data.user_data._id)
                             localStorage.setItem("user_id", response.data.user_data.userID)
                             localStorage.setItem("user_name", response.data.user_data.FirstName)
+                            localStorage.setItem("user_Email", response.data.user_data.Email)
                             this.setState({
                                 redirect_profile: true,
                                 user_type:response.data.user_data.userID

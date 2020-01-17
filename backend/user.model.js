@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -76,6 +75,14 @@ let UserReg = new Schema({
 
   RegDate: {
     type: Date
+  },
+
+  starRating: {
+    type: Number
+  },
+
+  ratingCount: {
+    type: Number
   },
   
   nurseGender: {

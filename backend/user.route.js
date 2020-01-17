@@ -71,14 +71,47 @@ UserRegRoutes.route('/userdata/update/:id').put(function (req, res) {
     })
 })
 
+//update Rating
+UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
+  console.log(req.body)
+  UserReg.updateOne({Email: req.body.nurseEmail}, {$inc: {starRating: req.body.Rating, ratingCount: 1}})
+  .then(response=>{
+    res.status(200).send({
+      success:true,
+      message:"User Data Update success",
+    })
+  })
+})
+
 // Removing user upon deactivation
 UserRegRoutes.route('/delete').post(function (req, res) {
   console.log(req.body);
-  UserReg.deleteOne({ Email: req.body.Email })
-    .then(response => {
+  UserReg.deleteOne({Email: req.body.Email })
+    .then(response=>{
+      console.log(res.body);
       res.status(200).send({
         success: true,
         message: "User removed"
+      })
+    })
+})
+
+//count number of nurses in the system
+UserRegRoutes.route('/countNurses').get(function (req,res){
+  UserReg.find({"userID" : "0"}).countDocuments()
+    .then(response=>{
+      res.status(200).send({
+        nurseCount: response
+      })
+    })
+})
+
+//count number of clients in the system
+UserRegRoutes.route('/countClients').get(function (req,res){
+  UserReg.find({"userID" : "1"}).countDocuments()
+    .then(response=>{
+      res.status(200).send({
+        clientCount: response
       })
     })
 })

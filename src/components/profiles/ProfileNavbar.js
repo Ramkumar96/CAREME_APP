@@ -55,6 +55,12 @@ class ProfileNavbar extends Component{
         })
     }
 
+    closePopup = () => {
+        this.setstate({
+            close: true
+        });
+    };
+
     render(){    
         
         if(this.state.redirect_home)
@@ -91,10 +97,9 @@ class ProfileNavbar extends Component{
                                 <React.Fragment>
                                     <MenuIcon fontSize="large" {...bindTrigger(popupState)}/>
                                     
-                                    <Menu {...bindMenu(popupState)} onClickAway={popupState.close}>
-                                        <MenuItem onClick={popupState.close}>Home</MenuItem>
+                                    <Menu {...bindMenu(popupState)} onClickAway={()=>this.closePopup()}>
                                         <MenuItem onClick={popupState.close}>Settings</MenuItem>
-                                        <MenuItem onClick={popupState.close}>Calander</MenuItem>
+                                        <MenuItem onClick={popupState.close}>Calender</MenuItem>
                                         
                                         <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>

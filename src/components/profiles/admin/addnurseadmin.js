@@ -138,9 +138,7 @@ export default class Addnurseadmin extends Component {
                     NIC: false
                 }
             });
-        
     }
-
 
     render() {
         return (

@@ -155,7 +155,7 @@ class ClientEdit extends Component {
 
         return (
             <div>
-                <form role="form">
+                <form >
                     <div className="card-body">
                         {/* Edit Telephone Number */}
                         <div className="form-group">
@@ -211,7 +211,7 @@ class ClientEdit extends Component {
                         </div>
 
                         {/* Update Profile Picture */}
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <label htmlFor="exampleInputFile">Update your Profile Picture</label>
                             <div className="input-group">
                                 <div className="custom-file">
@@ -222,7 +222,8 @@ class ClientEdit extends Component {
                                     <span className="input-group-text" id>Upload</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                        <div><ProfilePicUpload/></div>
                     </div>
 
                     {/* /.card-body */}

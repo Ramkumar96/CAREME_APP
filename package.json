@@ -18,6 +18,7 @@
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "css-loader": "^3.2.1",
+    "emailjs-com": "^2.4.1",
     "express": "^4.17.1",
     "fullcalendar": "^3.10.1",
     "indicative": "^7.2.3",
@@ -35,11 +36,14 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.3.0",
+    "react-star-rating-component": "^1.4.1",
+    "react-star-ratings": "^2.3.0",
     "reactjs-popup": "^1.5.0",
     "reactstrap": "^8.1.1",
     "sass-loader": "^8.0.0",
     "save": "^2.4.0",
-    "style-loader": "^1.0.1"
+    "style-loader": "^1.0.1",
+    "victory": "^34.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

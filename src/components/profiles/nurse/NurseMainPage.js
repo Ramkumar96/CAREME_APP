@@ -7,6 +7,8 @@ import Calendar from "./Calender";
 import { Button } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 import NurseCalendar from "./NurseCalendar";
+import StarRatingComponent from "react-star-rating-component";
+
 
 class NurseMainPage extends Component {
 
@@ -106,15 +108,20 @@ class NurseMainPage extends Component {
                 )
             }
 
+        const ratingVal = this.state.profile_data.starRating;
+        const rateCount = this.state.profile_data.ratingCount;
+
+        const finalRating = ratingVal/rateCount;
+
         return (
             <div>
                 <div class="wrapper">
-
                     <ProfileNavbar />
                     <br></br>
                     <div className="backg">
                         <div className="container-fluid">
                             <div className="row">
+
                                 {/* Nurse Profile Pic container */}
                                 <div className="col-lg-3">
                                     <div>
@@ -122,7 +129,7 @@ class NurseMainPage extends Component {
                                         <div className="card card-primary card-outline">
                                             <div className="card-body box-profile">
                                                 <div className="text-center">
-                                                    <img className="profile-user-img img-fluid img-circle" src="/images/nur.jpg" alt="User profile picture" />
+                                                    <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile picture" />
                                                 </div>
                                                 <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
 
@@ -250,15 +257,16 @@ class NurseMainPage extends Component {
                                     {/*First Card in Right Side*/}
                                     <div className="card card-primary">
                                         <div className="card-body text-center">
-                                            <strong>Ratings </strong>
-                                            <p className="text-muted text-center">
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                                <i className="fas fa-star mr-1" />
-                                            </p>
+                                            <strong>Ratings </strong> <br/>
+                                            <div style={{fontSize: 28}}>
+                                                <StarRatingComponent
+                                                    name="rate1"
+                                                    editing={false}
+                                                    starCount={5}
+                                                    value={finalRating} 
+                                                />
                                             <hr />
+                                            </div>
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />

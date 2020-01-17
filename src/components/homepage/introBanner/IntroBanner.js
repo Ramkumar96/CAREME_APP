@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
-import { Button, Form, Col, ModalDialog } from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
+import { constants } from "fs";
 
 //validating empty fields for Nurse
 function validate(Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC) {
@@ -175,6 +176,8 @@ class IntroBanner extends Component {
     onSubmitNurse(e) {
         e.preventDefault();
 
+        const today = new Date();
+
         const obj = {
             FirstName: this.state.FirstName,
             LastName: this.state.LastName,
@@ -186,7 +189,9 @@ class IntroBanner extends Component {
             Home: this.state.Home,
             Tel: this.state.Tel,
             userID: 0,
-            RegDate : new Date()
+            RegDate : today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+            starRating : 0,
+            ratingCount : 0
         };
 
         if (!this.canBeSubmitted()) {
@@ -226,56 +231,70 @@ class IntroBanner extends Component {
                 'Content-Type': 'application/json'
             }
 
-            //verifying as unregistered email
-            axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
-                .then(res => {
-                    if (res.data.success) {
-                        alert("Email already registered. Please use another Email Address");
+            //verifying nurseID
+            axios.post('http://localhost:4000/nurseCouncil/verify', obj, {headers: headers})
+                .then(res=> {
+                    if (!res.data.success){
+                        alert("Please enter registered Nurse Council ID and NIC");
                     }
 
-                    //verifying as unregistered nurse ID
-                    else if (!res.data.success) {
-                        axios.post('http://localhost:4000/user/validNurseID', obj, { headers: headers })
-                            .then(response => {
-                                if (response.data.success) {
-                                    alert("Your Nurse Council ID is already registered");
-                                }
-
-                                //adding new user to the database
+                    else if (res.data.success){
+                        //verifying as unregistered email
+                        axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
+                            .then(res => {
+                                if (res.data.success) {
+                                    alert("Email already registered. Please use another Email Address");
+                                }        
+                                
+                                //verifying as unregistered nurse ID
                                 else if (!res.data.success) {
-                                    axios.post('http://localhost:4000/user/add', obj)
-                                        .then(res => { console.log(res.data) });
-                                    console.log("Registered");
-                                    alert(`Succesfully Registered`);
-
-                                    this.setState({
-                                        FirstName: '',
-                                        LastName: '',
-                                        nurseID: '',
-                                        Email: '',
-                                        NIC: '',
-                                        PW: '',
-                                        CPW: '',
-                                        Home: '',
-                                        Tel: '',
-                                        visible: false,
-
-                                        touched: {
-                                            Email: false,
-                                            FirstName: false,
-                                            LastName: false,
-                                            nurseID: false,
-                                            PW: false,
-                                            CPW: false,
-                                            Home: false,
-                                            Tel: false,
-                                            NIC: false
-                                        }
-                                    });
+                                    axios.post('http://localhost:4000/user/validNurseID', obj, { headers: headers })
+                                        .then(response => {
+                                            if (response.data.success) {
+                                                alert("Your Nurse Council ID is already registered");
+                                            }
+        
+                                            //adding new user to the database
+                                            else if (!res.data.success) {
+                                                axios.post('http://localhost:4000/user/add', obj)
+                                                    .then(res => { console.log(res.data) });
+                                                console.log("Registered");
+                                                alert(`Succesfully Registered`);
+        
+                                                this.setState({
+                                                    FirstName: '',
+                                                    LastName: '',
+                                                    nurseID: '',
+                                                    Email: '',
+                                                    NIC: '',
+                                                    PW: '',
+                                                    CPW: '',
+                                                    Home: '',
+                                                    Tel: '',
+                                                    visible: false,
+        
+                                                    touched: {
+                                                        Email: false,
+                                                        FirstName: false,
+                                                        LastName: false,
+                                                        nurseID: false,
+                                                        PW: false,
+                                                        CPW: false,
+                                                        Home: false,
+                                                        Tel: false,
+                                                        NIC: false
+                                                    }
+                                                });
+                                            }
+                                        });
                                 }
-                            });
-                    }
+                
+                
                 });
+            }
+                
+            });
+        
         }
     }
 
@@ -299,7 +318,9 @@ class IntroBanner extends Component {
             Tel: this.state.Tel,
             NIC: this.state.NIC,
             userID: 1,
-            RegDate : new Date()
+            RegDate : new Date(),
+            starRating: 0,
+            ratingCount: 0
         };
 
         if (!this.canBeSubmitted1()) {
