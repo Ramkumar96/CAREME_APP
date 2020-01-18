@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import listPlugin from '@fullcalendar/list'
-import interactionPlugin from "@fullcalendar/interaction"
+// import listPlugin from 'fullcalendar/ListView'
+import interactionPlugin from "@fullcalendar/interaction";
 // import bootstrapPlugin from '@fullcalendar/bootstrap'
 
 
@@ -127,23 +127,19 @@ class NurseCalendar extends Component {
                 console.log(response.data.profile_data.UnavailableDates.length)
               console.log(response.data.profile_data.UnavailableDates[response.data.profile_data.UnavailableDates.length-1])
                 this.closeDateModal();
-                // this.reloadCalendar();
-                this.setState({
-                    unavailableDates:[...this.state.unavailableDates,{
-                        // id:dates.indexOf(date),
-                        title: 'Unavailable', // a property!
-                        start:  this.state.date, // a property!
-                        allDay: true,
-                        color: 'blue'// a property! ** see important note below about 'end' **       
-                    }]
+                window.location.reload();
+                 //this.reloadCalendar();
+                // this.setState({
+                //     unavailableDates:[...this.state.unavailableDates,{
+                //         // id:dates.indexOf(date),
+                //         title: 'Unavailable', // a property!
+                //         start:  this.state.date, // a property!
+                //         allDay: true,
+                //         color: 'blue'// a property! ** see important note below about 'end' **       
+                //     }]
 
                 })
 
-                if (response.data.success) {
-
-                 
-                }
-            });
     }
 
     render() {
@@ -164,7 +160,7 @@ class NurseCalendar extends Component {
                 <div className="container">
                     <FullCalendar
                         defaultView="dayGridMonth"
-                        plugins={[dayGridPlugin, listPlugin, interactionPlugin]}
+                        plugins={[dayGridPlugin, interactionPlugin]}
                         // themeSystem={{bootstrap}}
                         header={{
                             left: "prev,next today",

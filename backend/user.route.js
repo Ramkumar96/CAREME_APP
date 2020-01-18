@@ -1,7 +1,9 @@
 const express = require('express');
 const UserRegRoutes = express.Router();
-
 let UserReg = require('./user.model');
+
+//import pusher from './pusher';
+
 
 let multer = require('multer'),
   mongoose = require('mongoose'),
@@ -228,6 +230,9 @@ UserRegRoutes.get("/", (req, res, next) => {
 //unavailable dates
 UserRegRoutes.route('/userdata/unavailableDates/:id').post(function (req, res) {
   console.log(req.body.date);
+  // pusher.trigger(req.params.id, 'my-event', {
+  //   "message": "hello world"
+  // });
   UserReg.findByIdAndUpdate(req.params.id, { $push: { "UnavailableDates": req.body.date } }, (err, doc) => {
 
     if (err) {

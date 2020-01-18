@@ -329,13 +329,9 @@ class ViewNurseProfile extends Component {
                                             </Modal>
                                             <hr/>
 
-                                            <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} />
-                                            <Modal visible={this.state.visible} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                                <div>
-                                                    <Calendar />
-
-                                                </div>
-                                            </Modal>
+                                            <a href={`/clientviewnursecalendar/${this.props.match.params.id}`} className="btn btn-danger btn-block"><b>Check Calendar</b></a>
+                                            {/* <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} /> */}
+                          
                                             <hr/>
 
                                             {/* Calender for booking */}
