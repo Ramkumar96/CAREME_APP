@@ -47,13 +47,21 @@ UserDeacRoutes.route('/validEmail').post(function (req, res) {
           success: true,
           user_data: response
         })
-      } else {
+      } 
+      else {
         res.status(200).send({
           success: false
         })
 
         console.log("We have issues");
       }
+    })
+
+    .catch (err=>{
+      res.status(200).send({
+        success: false,
+        message: "Check login or registration"
+      })
     })
 });
 

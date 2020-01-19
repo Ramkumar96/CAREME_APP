@@ -289,6 +289,16 @@ class Navigationbar extends Component {
                                 }
                             });
                 }
+
+                else if (!response.data.success){
+                    alert("Try logging into your account if youre registered. If not please register yourself");
+
+                    this.setState({
+                        Email: '',
+                        Password: '',
+                        visible: false,
+                    });
+                }
             });
     }
 
