@@ -255,7 +255,7 @@ class IntroBanner extends Component {
                                             }
         
                                             //adding new user to the database
-                                            else if (!res.data.success) {
+                                            else if (!response.data.success) {
                                                 axios.post('http://localhost:4000/user/add', obj)
                                                     .then(res => { console.log(res.data) });
                                                 console.log("Registered");

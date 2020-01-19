@@ -59,8 +59,15 @@ class NurseMainPage extends Component {
         const obj = {
             FirstName : this.state.profile_data.FirstName,
             LastName : this.state.profile_data.LastName,
+            nurseID : this.state.profile_data.nurseID,
             Email : this.state.profile_data.Email,
             NIC : this.state.profile_data.NIC,
+            Address : this.state.profile_data.Address,
+            PW : this.state.profile_data.PW,
+            CPW : this.state.profile_data.CPW,
+            Tel : this.state.profile_data.Tel,
+            userID : this.state.profile_data.userID,
+            RegDate : this.state.profile_data.RegDate,
             DeacDate : new Date()
         };
 
@@ -101,12 +108,11 @@ class NurseMainPage extends Component {
             );
         }
 
-        if(this.state.redirect_home)
-            {
-                return(
-                    <Redirect to='/'/>
-                )
-            }
+        if(this.state.redirect_home){
+            return(
+                <Redirect to='/'/>
+            );
+        }
 
         const ratingVal = this.state.profile_data.starRating;
         const rateCount = this.state.profile_data.ratingCount;

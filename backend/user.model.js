@@ -77,6 +77,14 @@ let UserReg = new Schema({
     type: Date
   },
 
+  ReacDate : {
+    type : Date
+  },
+
+  DeacDate : {
+    type : Date
+  },
+
   starRating: {
     type: Number
   },

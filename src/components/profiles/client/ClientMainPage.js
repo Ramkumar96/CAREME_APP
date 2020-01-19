@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
 import Modal from 'react-awesome-modal';
 import { Button } from 'react-bootstrap';
-import { BrowserRouter as Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
@@ -13,7 +13,8 @@ class ClientMainPage extends Component {
         super(props);
         this.state = {
             profile_data: null,
-            visible: false
+            visible: false,
+            redirect_home: false
         }
     }
 
@@ -44,6 +45,12 @@ class ClientMainPage extends Component {
             LastName: this.state.profile_data.LastName,
             Email: this.state.profile_data.Email,
             NIC: this.state.profile_data.NIC,
+            Tel : this.state.profile_data.Tel,
+            Home : this.state.profile_data.Home,
+            userID : this.state.profile_data.userID,
+            PW : this.state.profile_data.PW,
+            CPW : this.state.profile_data.CPW,
+            RegDate : this.state.profile_data.RegDate,
             DeacDate: new Date()
         };
 
@@ -53,10 +60,11 @@ class ClientMainPage extends Component {
         axios.post('http://localhost:4000/user/delete', obj)
             .then(response => {
                 if (response.data.success) {
+                    console.log("To prove that deactivated properly");
                     this.setState({
                         visible: false,
                         redirect_home: true
-                    })
+                    });
                 }
             });
     }
@@ -83,7 +91,7 @@ class ClientMainPage extends Component {
         if (this.state.redirect_home) {
             return (
                 <Redirect to='/' />
-            )
+            );
         }
 
         const ratingVal = this.state.profile_data.starRating;

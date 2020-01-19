@@ -10,12 +10,40 @@ let UserDeac = new Schema ({
         type : String
     },
 
+    nurseID : {
+        type : Number 
+    },
+
+    Home : {
+        type : String
+    },
+
+    PW : {
+        type : String
+    },
+
+    CPW : {
+        type : String
+    },
+
     Email : {
         type : String
     },
 
     NIC : {
         type : String
+    },
+
+    Tel : {
+        type : Number
+    },
+
+    userID : {
+        type : Number
+    },
+
+    RegDate : {
+        type : Date
     },
 
     DeacDate : {

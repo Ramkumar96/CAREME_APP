@@ -138,17 +138,158 @@ class Navigationbar extends Component {
             }
 
             else if (!res.data.success){
-                alert("Email address not registered");
-                this.setState({
-                    Email: '',
-                    Password: '',
-                    touched: {
-                        Email: false,
-                        Password: false
-                    }
-                });
+                axios.post('http://localhost:4000/userDeac/validEmail', data,{headers:headers})
+                    .then(response => {
+                        if (response.data.success){
+                            //console.log(response.data)
+                            alert("Your account has been deactivated. Click on re-activate account to join back.");
+
+                            this.setState({
+                                Email: '',
+                                Password : '',
+                                touched : {
+                                    Email : false,
+                                    Password : false
+                                }
+                            })
+                        }
+
+                        else {
+                            alert("Email address not registered");
+                            this.setState({
+                                Email: '',
+                                Password: '',
+                                touched: {
+                                    Email: false,
+                                    Password: false
+                                }
+                            });
+                        }
+                    })
             }
         });        
+    }
+
+    onReactivate = (e) => {
+        e.preventDefault();
+
+        const headers = {
+            'Content-Type': 'application/json'
+        }
+
+        const data = {
+            Email: this.state.Email,
+            Password: this.state.Password
+        };
+
+        axios.post('http://localhost:4000/userDeac/validEmail', data, {headers:headers})
+            .then(response => {
+                if (response.data.success){
+                    this.setState({
+                        user_data : response.data.user_data,
+                    })
+
+                    if (this.state.user_data.userID == 0){
+                        var object = {
+                            Email : this.state.user_data.Email,
+                            FirstName : this.state.user_data.FirstName,
+                            LastName : this.state.user_data.LastName,
+                            NIC : this.state.user_data.NIC,
+                            nurseID : this.state.user_data.nurseID,
+                            Home : this.state.user_data.Home,
+                            Tel : this.state.user_data.Tel,
+                            userID : this.state.user_data.userID,
+                            PW : this.state.user_data.PW,
+                            CPW : this.state.user_data.CPW,
+                            RegDate : this.state.user_data.RegDate,
+                            DeacDate : this.state.user_data.DeacDate,
+                            ReacDate : new Date ()
+                        };
+                    }
+
+                    if (this.state.user_data.userID == 1){
+                        var object = {
+                            Email : this.state.user_data.Email,
+                            FirstName : this.state.user_data.FirstName,
+                            LastName : this.state.user_data.LastName,
+                            NIC : this.state.user_data.NIC,
+                            Home : this.state.user_data.Home,
+                            Tel : this.state.user_data.Tel,
+                            userID : this.state.user_data.userID,
+                            PW : this.state.user_data.PW,
+                            CPW : this.state.user_data.CPW,
+                            RegDate : this.state.user_data.RegDate,
+                            DeacDate : this.state.user_data.DeacDate,
+                            ReacDate : new Date ()
+                        };
+                    }
+
+                    const obj = object;
+                    console.log(this.state.user_data.userID);
+
+                    axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
+                            .then(res => {
+                                if (res.data.success) {
+                                    alert("Email already registered. Please use another Email Address");
+                                }        
+                                
+                                //verifying as unregistered nurse ID
+                                else if (!res.data.success && this.state.user_data.userID==0) {
+                                    axios.post('http://localhost:4000/user/validNurseID', obj, { headers: headers })
+                                        .then(response => {
+                                            if (res.data.success) {
+                                                alert("Your Nurse Council ID is already registered");
+                                            }
+        
+                                            //adding new user to the database
+                                            else if (!res.data.success) {
+                                                axios.post('http://localhost:4000/user/add', obj)
+                                                    .then(res => { 
+                                                        //console.log(res.data) 
+                                                        console.log("Registered Again");
+                
+                                                    axios.post('http://localhost:4000/userDeac/delete', obj)
+                                                        .then( response => {
+                                                            if(response.data.success){
+                                                                console.log("Account reactivated");
+                                                                alert(`Succesfully Reactivated`);
+                                                            }
+                                                        });
+                                                    });
+
+                                                    this.setState({
+                                                        Email: '',
+                                                        Password: '',
+                                                        visible: false
+                                                    });
+                                            }
+                                        });
+                                }
+
+                                else if (!res.data.success && this.state.user_data.userID==1) {
+                                    axios.post('http://localhost:4000/user/add', obj)
+                                        .then(res => { 
+                                            //console.log(res.data) 
+                                            console.log("Registered again");
+
+                                            axios.post('http://localhost:4000/userDeac/delete', obj)
+                                            .then( response => {
+                                                if(response.data.success){
+                                                    console.log("Account reactivated");
+                                                    alert(`Succesfully Reactivated`);
+                                                }
+                                            });
+                                        });
+
+                                        this.setState({
+                                            Email: '',
+                                            Password: '',
+                                            visible: false,
+                                        });
+                                }
+                            });
+                }
+            });
     }
 
     render() {
@@ -235,7 +376,12 @@ class Navigationbar extends Component {
                                                     onBlur={this.handleBlur("Password")}
                                                 />
                                             </Form.Group>
-                                            <center><Button variant="btn btn-success" disabled={isDisabled} onClick={this.onLogin} type="submit">Login</Button></center>
+
+
+                                            <center>
+                                                <Button variant="btn btn-success" disabled={isDisabled} onClick={this.onLogin} type="submit">Login</Button>
+                                                <Button variant="btn btn-warning" disabled={isDisabled} onClick={this.onReactivate} type="submit">Reactivate</Button>
+                                            </center>
                                         </Form>
                                         </div>
                                     </Modal>

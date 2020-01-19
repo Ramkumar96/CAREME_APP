@@ -142,16 +142,17 @@ UserRegRoutes.route('/clientlist').get(function (req, res) {
 
 //validate email
 UserRegRoutes.route('/validEmail').post(function (req, res) {
+  console.log(req.body);
   UserReg.findOne({ Email: req.body.Email })
     .then(response => {
       if (response) {
         console.log("existsss");
         res.status(200).send({
           success: true,
-          message: "Email already exists",
+          message: "Email already exists in user collection",
         });
       } else {
-        console.log('not there');
+        console.log('Email not there in user collection');
         res.status(200).send({
           success: false,
         });
@@ -165,13 +166,13 @@ UserRegRoutes.route('/validNurseID').post(function (req, res) {
   UserReg.findOne({ nurseID: req.body.nurseID })
     .then(response => {
       if (response) {
-        console.log("existsss");
+        console.log("Email exists in user collection");
         res.status(200).send({
           success: true,
           message: "Registered nurse ID. try another.",
         });
       } else {
-        console.log('not there');
+        console.log('Email not there in user collection');
         res.status(200).send({
           success: false,
         });
