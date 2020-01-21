@@ -2,9 +2,6 @@ const express = require('express');
 const UserRegRoutes = express.Router();
 let UserReg = require('./user.model');
 
-//import pusher from './pusher';
-
-
 let multer = require('multer'),
   mongoose = require('mongoose'),
   uuidv4 = require('uuid/v4');
@@ -22,6 +19,7 @@ UserRegRoutes.route('/add').post(function (req, res) {
       res.status(400).send("unable to save to database");
     });
 });
+
 
 //Login
 UserRegRoutes.route('/login').post(function (req, res) {
@@ -47,6 +45,7 @@ UserRegRoutes.route('/login').post(function (req, res) {
     })
 });
 
+
 //userdata
 UserRegRoutes.route('/userdata/:id').get(function (req, res) {
   //console.log(req.params.id)
@@ -61,6 +60,7 @@ UserRegRoutes.route('/userdata/:id').get(function (req, res) {
     })
 });
 
+
 //userUpdate
 UserRegRoutes.route('/userdata/update/:id').put(function (req, res) {
   //console.log(req.body)
@@ -73,6 +73,7 @@ UserRegRoutes.route('/userdata/update/:id').put(function (req, res) {
     })
 })
 
+
 //update Rating
 UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
   console.log(req.body)
@@ -84,6 +85,7 @@ UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
     })
   })
 })
+
 
 // Removing user upon deactivation
 UserRegRoutes.route('/delete').post(function (req, res) {
@@ -98,6 +100,7 @@ UserRegRoutes.route('/delete').post(function (req, res) {
     })
 })
 
+
 //count number of nurses in the system
 UserRegRoutes.route('/countNurses').get(function (req,res){
   UserReg.find({"userID" : "0"}).countDocuments()
@@ -108,6 +111,7 @@ UserRegRoutes.route('/countNurses').get(function (req,res){
     })
 })
 
+
 //count number of clients in the system
 UserRegRoutes.route('/countClients').get(function (req,res){
   UserReg.find({"userID" : "1"}).countDocuments()
@@ -117,6 +121,7 @@ UserRegRoutes.route('/countClients').get(function (req,res){
       })
     })
 })
+
 
 //NurseprofileRetrieve
 UserRegRoutes.route('/').get(function (req, res) {
@@ -129,6 +134,7 @@ UserRegRoutes.route('/').get(function (req, res) {
   });
 });
 
+
 //clientListRetrieve
 UserRegRoutes.route('/clientlist').get(function (req, res) {
   UserReg.find({ userID: 1 }, function (err, CAREME_APP) {
@@ -139,6 +145,7 @@ UserRegRoutes.route('/clientlist').get(function (req, res) {
     }
   });
 });
+
 
 //validate email
 UserRegRoutes.route('/validEmail').post(function (req, res) {
@@ -180,6 +187,7 @@ UserRegRoutes.route('/validNurseID').post(function (req, res) {
     })
 });
 
+
 //Profile picture upload and retrieve
 const DIR = './public/';
 
@@ -205,6 +213,7 @@ var upload = multer({
   }
 });
 
+
 // User model for prfile pic upload
 UserRegRoutes.post('/user-profile/', upload.single('profilePic'), async (req, res, next) => {
   const url = req.protocol + '://' + req.get('host')
@@ -216,6 +225,7 @@ UserRegRoutes.post('/user-profile/', upload.single('profilePic'), async (req, re
   })
 })
 
+
 UserRegRoutes.get("/", (req, res, next) => {
   UserReg.find().then(data => {
     res.status(200).json({
@@ -224,8 +234,6 @@ UserRegRoutes.get("/", (req, res, next) => {
     });
   });
 });
-
-
 
 
 //unavailable dates
@@ -251,8 +259,6 @@ UserRegRoutes.route('/userdata/unavailableDates/:id').post(function (req, res) {
   })
   // UserReg.update({_id:req.params.id},
   //   // {$push:{date:req.body.UnavailableDates}})
-
-
   //   )
   // .then(response=>{
   //   console.log(response)
@@ -279,5 +285,16 @@ UserRegRoutes.route('/userdata/unavailableDates/:id').get(function (req, res) {
 });
 
 
+//retrieve user data for admin purposes
+UserRegRoutes.route('/userDetails').get(function (req, res) {
+  UserReg.find(function(err, users){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(users);
+    }
+  });
+});
 
 module.exports = UserRegRoutes;
