@@ -1,47 +1,199 @@
-import { VictoryBar, VictoryChart, VictoryPie } from 'victory';
+import { VictoryBar, VictoryChart, VictoryPie, VictoryTheme } from 'victory';
 import React, { Component } from 'react';
-import { Button } from "react-bootstrap";
 import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
 import ProfileNavbar from "../ProfileNavbar";
-import Modal from 'react-awesome-modal';
+import { textAlign } from '@material-ui/system';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import { yellow } from '@material-ui/core/colors';
 
 class UserReport extends Component {
-    constructor(props) {
-        super(props);
+    constructor (props){
+        super(props); 
+        this.onChangeMonth = this.onChangeMonth.bind(this);
+        this.onChangeYear = this.onChangeYear.bind(this);
+        this.onSubmitRequest = this.onSubmitRequest.bind(this);
+
         this.state = {
-            visibleUserCount : null,
+            visibleReport : false
         }
     }
 
-    closeUserGraph(){
+    onChangeMonth(e){
         this.setState({
-            visibleUserCount : false
+            month: e.target.value
         })
     }
 
-    getUserData (){
-        axios.get('http://localhost:4000/user/countNurses')
-            .then(response => {
-                this.setState({
-                    nurseCount : response.data.nurseCount
+    onChangeYear(e){
+        this.setState({
+            year: e.target.value
+        })
+    }
+
+    onSubmitRequest(e){
+        e.preventDefault();
+
+        if (this.state.month==-1 || this.state.year==-1){
+            alert("Please select period for report generation");
+        }
+
+        else {
+            const data = {
+                month: this.state.month,
+                year: this.state.year
+            }
+
+            const headers = {
+                'Content-Type': 'application/json'
+            }
+
+            console.log(data);
+
+            if (this.state.month!=0){
+                axios.get('http://localhost:4000/user/countNurses')
+                    .then(response => {
+                        this.setState({
+                            totalActiveNurses : response.data.nurseCount
+                        })
+
+                        console.log("The total active nurses now : ", this.state.totalActiveNurses)
+                    })
+
+                axios.get('http://localhost:4000/user/countClients')
+                    .then(response => {
+                        this.setState({
+                            totalActiveClients : response.data.clientCount
+                        })
+
+                        console.log("The total active clients now : ", this.state.totalActiveClients)
+                    })
+
+
+                axios.post('http://localhost:4000/user/countNursesMonth', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            activeNurses: response.data.nurseCount
+                        })
+
+                        console.log("Number of nurses registered this month : ", this.state.activeNurses);
+                    })
+
+                axios.post('http://localhost:4000/user/countClientsMonth', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            activeClients: response.data.clientCount
+                        })
+
+                        console.log("Number of clients registered this month : ", this.state.activeClients);
+                    })
+
+                axios.post('http://localhost:4000/userDeac/countNursesMonth', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            deactivatedNurses: response.data.nurseCount
+                        })
+
+                        console.log("Number of nurses deactivated this month : ", this.state.deactivatedNurses);
+                    })
+
+                axios.post('http://localhost:4000/userDeac/countClientsMonth', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            deactivatedClients: response.data.clientCount
+                        })
+
+                        console.log("Number of clients deactivated this month : ", this.state.deactivatedClients);
+                    })
+                
+                axios.post('http://localhost:4000/rating/countRatings', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            ratingCount: response.data.ratingCount
+                        })
+
+                        console.log("Number of ratings this month : ", this.state.ratingCount);
+                    })
+            
+                axios.post('http://localhost:4000/review/countReviews', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            reviewCount: response.data.reviewCount
+                        })
+
+                        console.log("Number of reviews this month : ", this.state.reviewCount);
+                    })
+
+                this.setState ({
+                    visibleReport: true
                 })
-
-                console.log(this.state.nurseCount)
-            })
-
-        axios.get('http://localhost:4000/user/countClients')
-        .then(response => {
-            this.setState({
-                clientCount : response.data.clientCount,
-                visibleUserCount : true
-            })
-
-            console.log(this.state.clientCount)
-        })
+            }
+        }
     }
-
+    
     render() {
+        if (this.state.visibleReport){
+            return (
+                <div>
+                    <Admindashleftnav />
+                    
+                    <div>
+                        <ProfileNavbar />
+
+                        <div className="content-wrapper"> 
+                                <h2> User Classification </h2>
+
+                                <VictoryPie 
+                                    radius = {30}
+                                    colorScale = {["orange", "gold"]}
+                                    data = {[
+                                        {x: "Nurses\n"+this.state.totalActiveNurses, y:this.state.totalActiveNurses},
+                                        {x: "Clients\n"+this.state.totalActiveClients, y:this.state.totalActiveClients}
+                                    ]}
+                                    style={{ labels: { fontSize: 7}}}
+                                />
+
+                                <h2> New user registrations for the month </h2>
+
+                                <VictoryPie 
+                                    radius = {30}
+                                    colorScale = {["blue", "cyan"]}
+                                    data = {[
+                                        {x: "Nurses\n"+this.state.activeNurses, y:this.state.activeNurses},
+                                        {x: "Clients\n"+this.state.activeClients, y:this.state.activeClients}
+                                    ]}
+                                    style={{ labels: { fontSize: 7}}}
+                                />
+
+                                <h2> User deactivations for the month </h2>
+
+                                <VictoryPie 
+                                    radius = {30}
+                                    colorScale = {["black", "grey"]}
+                                    data = {[
+                                        {x: "Nurses\n"+this.state.deactivatedNurses, y:this.state.deactivatedNurses},
+                                        {x: "Clients\n"+this.state.deactivatedClients, y:this.state.deactivatedClients}
+                                    ]}
+                                    style={{ labels: { fontSize: 7}}}
+                                />
+
+                                <h2> User ratings and reviews for the month </h2>
+
+                                <VictoryPie 
+                                    radius = {30}
+                                    colorScale = {["orange", "gold"]}
+                                    data = {[
+                                        {x: "Ratings\n"+this.state.ratingCount, y:this.state.ratingCount},
+                                        {x: "Reviews\n"+this.state.reviewCount, y:this.state.reviewCount}
+                                    ]}
+                                    style={{ labels: { fontSize: 7}}}
+                                />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div>
                 <Admindashleftnav />
@@ -49,23 +201,42 @@ class UserReport extends Component {
                 <div>
                     <ProfileNavbar />
                     <div className="content-wrapper">
-                        <h1>Hi, welcome to the reports section</h1>
-                        <Button onClick={() => this.getUserData()}>User Pie Chart</Button>
-                        <Modal visible={this.state.visibleUserCount} width="50%" height="50%" effect="fadeInLeft" onClickAway={() => this.closeUserGraph()}>
-                            <div>
-                                <VictoryPie 
-                                    radius = {20}
-                                    colorScale = {["orange", "gold"]}
-                                    data = {[
-                                        {x: "Nurses\n"+this.state.nurseCount, y:this.state.nurseCount},
-                                        {x: "Clients\n"+this.state.clientCount, y:this.state.clientCount}
-                                    ]}
-                                    style={{ labels: { fontSize: 5, fill: "black"}}}
-                                />
-                            </div>
-                        </Modal>
+                        <h2>User Reports</h2>
 
-                        <a href="/userTable">User details table</a>
+                        <Form>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <select class="form-control" onChange={(event)=>this.onChangeYear(event)}>
+                                        <option value={-1} selected>Select Year</option>
+                                        <option value={2020}>2020</option>
+                                        <option value={2019}>2019</option>
+                                    </select>
+                                </Form.Group>
+
+                                <Form.Group as={Col}>
+                                    <select class="form-control" onChange={(event)=>this.onChangeMonth(event)} placeholder="Select sub period">
+                                        <option value={-1} selected>Select subperiod</option>
+                                        <option value={0}>Complete Year</option>
+                                        <option value={1}>January</option>
+                                        <option value={2}>February</option>
+                                        <option value={3}>March</option>
+                                        <option value={4}>April</option>
+                                        <option value={5}>May</option>
+                                        <option value={6}>June</option>
+                                        <option value={7}>July</option>
+                                        <option value={8}>August</option>
+                                        <option value={9}>September</option>
+                                        <option value={10}>October</option>
+                                        <option value={11}>November</option>
+                                        <option value={12}>December</option>
+                                    </select>
+                                </Form.Group>
+
+                                <Form.Group as={Col}>
+                                    <Button type="submit" variant="primary" onClick={this.onSubmitRequest.bind(this)}>Generate Report</Button>
+                                </Form.Group>
+                            </Form.Row>
+                        </Form>
                     </div>
                 </div>
             </div>

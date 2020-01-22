@@ -49,4 +49,32 @@ UserRatingRoutes.route('/delete').post(function (req, res) {
       })
   })
 
+//count number of ratings in a month
+UserRatingRoutes.route('/countRatings').post(function (req,res){
+  const yearToFind = req.body.year;
+  const monthToFind = req.body.month;
+  ratingCount=0;
+
+  UserRating.find()
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if(response[i].RatedDate.getFullYear()==yearToFind && response[i].RatedDate.getMonth()==monthToFind-1){
+          ratingCount++;
+        }
+      }
+
+      console.log(ratingCount);
+
+      res.status(200).send({
+        ratingCount : ratingCount
+      })
+    })
+
+    .catch(err=>{
+      res.status(400).send({
+        ratingCount: 0
+      })
+    })
+})
+
 module.exports = UserRatingRoutes;

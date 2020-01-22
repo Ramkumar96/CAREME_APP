@@ -65,4 +65,60 @@ UserDeacRoutes.route('/validEmail').post(function (req, res) {
     })
 });
 
+//count number of nurses deactivated in a month
+UserDeacRoutes.route('/countNursesMonth').post(function (req,res){
+  const yearToFind = req.body.year;
+  const monthToFind = req.body.month;
+  UserDeac.find({"userID" : "0"})
+    .then(response=>{
+      nurseCount=0;
+      for (let i=0; i<response.length; i++){
+        if(response[i].DeacDate.getFullYear()==yearToFind && response[i].DeacDate.getMonth() == monthToFind-1){
+          nurseCount++;
+        }
+      }
+
+      res.status(200).send({
+        nurseCount: nurseCount
+      })
+    })
+
+    .catch(err=>{
+      res.status(400).send({
+        nurseCount: 0
+      })
+    })
+})
+
+
+//count number of clients deactivated in a month
+UserDeacRoutes.route('/countClientsMonth').post(function (req,res){
+  const yearToFind = req.body.year;
+  const monthToFind = req.body.month;
+  clientCount=0;
+
+  console.log(yearToFind);
+
+  UserDeac.find({"userID" : 1})
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if(response[i].DeacDate.getFullYear()==yearToFind && response[i].DeacDate.getMonth()==monthToFind-1){
+          clientCount++;
+        }
+      }
+
+      console.log(clientCount);
+
+      res.status(200).send({
+        clientCount : clientCount
+      })
+    })
+
+    .catch(err=>{
+      res.status(400).send({
+        clientCount: 0
+      })
+    })
+})
+
 module.exports = UserDeacRoutes;

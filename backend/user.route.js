@@ -123,6 +123,59 @@ UserRegRoutes.route('/countClients').get(function (req,res){
 })
 
 
+//count number of nurses registered in a month
+UserRegRoutes.route('/countNursesMonth').post(function (req,res){
+  const yearToFind = req.body.year;
+  const monthToFind = req.body.month;
+  UserReg.find({"userID" : "0"})
+    .then(response=>{
+      nurseCount=0;
+      for (let i=0; i<response.length; i++){
+        if(response[i].RegDate.getFullYear()==yearToFind && response[i].RegDate.getMonth() == monthToFind-1){
+          nurseCount++;
+        }
+      }
+
+      res.status(200).send({
+        nurseCount: nurseCount
+      })
+    })
+
+    .catch(err=>{
+      res.status(400).send({
+        nurseCount: 0
+      })
+    })
+})
+
+
+//count number of clients registered in a month
+UserRegRoutes.route('/countClientsMonth').post(function (req,res){
+  const yearToFind = req.body.year;
+  const monthToFind = req.body.month;
+  clientCount=0;
+
+  UserReg.find({"userID" : 1})
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if(response[i].RegDate.getFullYear()==yearToFind && response[i].RegDate.getMonth()==monthToFind-1){
+          clientCount++;
+        }
+      }
+
+      res.status(200).send({
+        clientCount : clientCount
+      })
+    })
+
+    .catch(err=>{
+      res.status(400).send({
+        clientCount: 0
+      })
+    })
+})
+
+
 //NurseprofileRetrieve
 UserRegRoutes.route('/').get(function (req, res) {
   UserReg.find({ userID: 0 }, function (err, CAREME_APP) {
