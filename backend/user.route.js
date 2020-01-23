@@ -176,6 +176,75 @@ UserRegRoutes.route('/countClientsMonth').post(function (req,res){
 })
 
 
+//count number of nurses registered throughout a year
+UserRegRoutes.route('/countNursesYear').post(function (req,res){
+  const yearToFind = req.body.year;
+  const nurseCount = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+  UserReg.find({"userID" : 0})
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if (response[i].RegDate.getFullYear() == yearToFind){
+          switch(response[i].RegDate.getMonth()){
+            case(0):
+              nurseCount[0]++;
+              break;
+
+            case(1):
+              nurseCount[1]++;
+              break;
+
+            case(2):
+              nurseCount[2]++;
+              break;
+
+            case(3):
+              nurseCount[3]++;
+              break;
+
+            case(4):
+              nurseCount[4]++;
+              break;
+
+            case(5):
+              nurseCount[5]++;
+              break;
+
+            case(6):
+              nurseCount[6]++;
+              break;
+
+            case(7):
+              nurseCount[7]++;
+              break;
+
+            case(8):
+              nurseCount[8]++;
+              break;
+
+            case(9):
+              nurseCount[9]++;
+              break;
+
+            case(10):
+              nurseCount[10]++;
+              break;
+
+            case(11):
+              nurseCount[11]++;
+              break;
+          }
+        }
+    }
+
+    console.log(nurseCount);
+
+    res.status(200).send({
+      nurseCount: nurseCount
+    })
+  })
+})
+
 //NurseprofileRetrieve
 UserRegRoutes.route('/').get(function (req, res) {
   UserReg.find({ userID: 0 }, function (err, CAREME_APP) {

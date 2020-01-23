@@ -1,4 +1,4 @@
-import { VictoryBar, VictoryChart, VictoryPie, VictoryTheme } from 'victory';
+import { VictoryBar, VictoryChart, VictoryPie, VictoryTheme, VictoryLine } from 'victory';
 import React, { Component } from 'react';
 import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
@@ -6,6 +6,7 @@ import ProfileNavbar from "../ProfileNavbar";
 import { textAlign } from '@material-ui/system';
 import { Button, Form, Col, Row } from 'react-bootstrap';
 import { yellow } from '@material-ui/core/colors';
+import { Chart } from "chart.js";
 
 class UserReport extends Component {
     constructor (props){
@@ -15,7 +16,10 @@ class UserReport extends Component {
         this.onSubmitRequest = this.onSubmitRequest.bind(this);
 
         this.state = {
-            visibleReport : false
+            visibleMonthReport : false,
+            visibleYearReport : false,
+            activeNursesYear : [],
+            monthLabels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         }
     }
 
@@ -125,14 +129,40 @@ class UserReport extends Component {
                     })
 
                 this.setState ({
-                    visibleReport: true
+                    visibleMonthReport: true
+                })
+            }
+
+            else if (this.state.month==0) {
+                axios.post('http://localhost:4000/user/countNursesYear', data, {headers: headers})
+                    .then(response => {
+                        this.setState({
+                            resBody: response.data.nurseCount
+                        })
+
+                        this.state.activeNursesYear[0]=0;
+                        let j=1;
+                        for (let i=0; i<12; i++){
+                            this.state.activeNursesYear[j] = this.state.resBody[i];
+                            j++;
+                        }
+
+                        console.log("The total active nurses now : ", this.state.activeNursesYear)
+
+                        this.setState({
+                            activeNursesYear: this.state.activeNursesYear
+                        })
+                    })
+
+                this.setState({
+                    visibleYearReport : true
                 })
             }
         }
     }
     
     render() {
-        if (this.state.visibleReport){
+        if (this.state.visibleMonthReport){
             return (
                 <div>
                     <Admindashleftnav />
@@ -193,6 +223,42 @@ class UserReport extends Component {
                 </div>
             );
         }
+
+        else if (this.state.visibleYearReport){
+            return (
+                <div>
+                    <Admindashleftnav />
+
+                    <div>
+                        <ProfileNavbar />
+
+                        <div className="content-wrapper">
+                            <h2>Nurse registrations in {this.state.year}</h2>
+
+                            <VictoryChart
+                                height = {300}
+                                width = {600}
+                                theme={VictoryTheme.material}
+                                //domainPadding={{ x: 25 }}
+                                padding={{ top: 40, bottom: 80, left: 40, right: 80 }}
+                                >
+                                <VictoryLine
+                                    //barRatio={0.5}
+                                    alignment="start"
+                                    // style={{
+                                    //     data: { fill: "blue" },
+                                    // }}
+
+                                    //barWidth={({ index }) => index * 5 + 8}
+                                    data={this.state.activeNursesYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+                        </div>
+                    </div>
+                </div>
+            );
+        }   
 
         return (
             <div>
