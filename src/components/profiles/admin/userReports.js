@@ -1,9 +1,9 @@
-import { VictoryBar, VictoryChart, VictoryPie, VictoryTheme, VictoryLine } from 'victory';
+import { VictoryBar, VictoryLabel, VictoryChart, VictoryPie, VictoryTheme, VictoryLine } from 'victory';
 import React, { Component } from 'react';
 import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
 import ProfileNavbar from "../ProfileNavbar";
-import { textAlign } from '@material-ui/system';
+import { textAlign, fontSize } from '@material-ui/system';
 import { Button, Form, Col, Row } from 'react-bootstrap';
 import { yellow } from '@material-ui/core/colors';
 import { Chart } from "chart.js";
@@ -19,6 +19,9 @@ class UserReport extends Component {
             visibleMonthReport : false,
             visibleYearReport : false,
             activeNursesYear : [],
+            activeClientsYear : [],
+            deacClientsYear : [],
+            deacNursesYear : [],
             monthLabels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         }
     }
@@ -154,6 +157,66 @@ class UserReport extends Component {
                         })
                     })
 
+                axios.post('http://localhost:4000/user/countClientsYear', data, {headers: headers})
+                .then(response => {
+                    this.setState({
+                        resBody: response.data.clientCount
+                    })
+
+                    this.state.activeClientsYear[0]=0;
+                    let j=1;
+                    for (let i=0; i<12; i++){
+                        this.state.activeClientsYear[j] = this.state.resBody[i];
+                        j++;
+                    }
+
+                    console.log("The total active clients now : ", this.state.activeClientsYear)
+
+                    this.setState({
+                        activeClientsYear: this.state.activeClientsYear
+                    })
+                })
+
+                axios.post('http://localhost:4000/userDeac/countClientsYear', data, {headers: headers})
+                .then(response => {
+                    this.setState({
+                        resBody: response.data.clientCount
+                    })
+
+                    this.state.deacClientsYear[0]=0;
+                    let j=1;
+                    for (let i=0; i<12; i++){
+                        this.state.deacClientsYear[j] = this.state.resBody[i];
+                        j++;
+                    }
+
+                    console.log("The total deactivated clients now : ", this.state.deacClientsYear)
+
+                    this.setState({
+                        deacClientsYear: this.state.deacClientsYear
+                    })
+                })
+
+                axios.post('http://localhost:4000/userDeac/countNursesYear', data, {headers: headers})
+                .then(response => {
+                    this.setState({
+                        resBody: response.data.nurseCount
+                    })
+
+                    this.state.deacNursesYear[0]=0;
+                    let j=1;
+                    for (let i=0; i<12; i++){
+                        this.state.deacNursesYear[j] = this.state.resBody[i];
+                        j++;
+                    }
+
+                    console.log("The total deactivated nurses now : ", this.state.deacNursesYear)
+
+                    this.setState({
+                        deacNursesYear: this.state.deacNursesYear
+                    })
+                })
+
                 this.setState({
                     visibleYearReport : true
                 })
@@ -171,17 +234,19 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
+                        <div>
                                 <h2> User Classification </h2>
-
-                                <VictoryPie 
-                                    radius = {30}
-                                    colorScale = {["orange", "gold"]}
-                                    data = {[
-                                        {x: "Nurses\n"+this.state.totalActiveNurses, y:this.state.totalActiveNurses},
-                                        {x: "Clients\n"+this.state.totalActiveClients, y:this.state.totalActiveClients}
-                                    ]}
-                                    style={{ labels: { fontSize: 7}}}
-                                />
+                                    <VictoryPie 
+                                        radius = {30}
+                                        padding = {{top: 10}}
+                                        colorScale = {["orange", "gold"]}
+                                        data = {[
+                                            {x: "Nurses\n"+this.state.totalActiveNurses, y:this.state.totalActiveNurses},
+                                            {x: "Clients\n"+this.state.totalActiveClients, y:this.state.totalActiveClients}
+                                        ]}
+                                        style={{ labels: { fontSize: 7}}}
+                                    />
+                                </div>
 
                                 <h2> New user registrations for the month </h2>
 
@@ -235,22 +300,80 @@ class UserReport extends Component {
                         <div className="content-wrapper">
                             <h2>Nurse registrations in {this.state.year}</h2>
 
-                            <VictoryChart
-                                height = {300}
-                                width = {600}
+                            <VictoryChart 
+                                maxDomain ={{y:20}}
+                                height = {200}
+                                width = {500}
                                 theme={VictoryTheme.material}
-                                //domainPadding={{ x: 25 }}
-                                padding={{ top: 40, bottom: 80, left: 40, right: 80 }}
+                                padding={{ top: 20, bottom: 40, left: 80, right: 100 }}
+                                domainPadding={{x:10}}
                                 >
-                                <VictoryLine
-                                    //barRatio={0.5}
-                                    alignment="start"
-                                    // style={{
-                                    //     data: { fill: "blue" },
-                                    // }}
-
-                                    //barWidth={({ index }) => index * 5 + 8}
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31"}}}
+                                    cornerRadius={{topLeft: 10}}
                                     data={this.state.activeNursesYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+
+                            <h2>Client registrations in {this.state.year}</h2>
+
+                            <VictoryChart
+                                maxDomain ={{y:20}}
+                                height = {200}
+                                width = {500}
+                                theme={VictoryTheme.material}
+                                padding={{ top: 20, bottom: 40, left: 80, right: 100 }}
+                                domainPadding={{x:10}}
+                                >
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31" }}}
+                                    cornerRadius={{topLeft: 10}}
+                                    data={this.state.activeClientsYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+
+                            <h2>Nurse deactivations in {this.state.year}</h2>
+
+                            <VictoryChart
+                                maxDomain ={{y:20}}
+                                height = {200}
+                                width = {500}
+                                theme={VictoryTheme.material}
+                                padding={{ top: 20, bottom: 40, left: 80, right: 100 }}
+                                domainPadding={{x:10}}
+                                >
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31" }}}
+                                    cornerRadius={{topLeft: 10}}
+                                    data={this.state.deacNursesYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+
+                            <h2>Client deactivations in {this.state.year}</h2>
+
+                            <VictoryChart
+                                maxDomain ={{y:20}}
+                                height = {200}
+                                width = {500}
+                                theme={VictoryTheme.material}
+                                padding={{ top: 20, bottom: 40, left: 80, right: 100 }}
+                                domainPadding={{x:10}}
+                                >
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31" }}}
+                                    cornerRadius={{topLeft: 10}}
+                                    data={this.state.deacClientsYear}
                                     categories={{ x: this.state.monthLabels }}
                                 />
                             </VictoryChart>

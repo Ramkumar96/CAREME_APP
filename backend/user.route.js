@@ -176,6 +176,76 @@ UserRegRoutes.route('/countClientsMonth').post(function (req,res){
 })
 
 
+//count number of clients registered throughout a year
+UserRegRoutes.route('/countClientsYear').post(function (req,res){
+  const yearToFind = req.body.year;
+  const clientCount = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+  UserReg.find({"userID" : 1})
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if (response[i].RegDate.getFullYear() == yearToFind){
+          switch(response[i].RegDate.getMonth()){
+            case(0):
+              clientCount[0]++;
+              break;
+
+            case(1):
+              clientCount[1]++;
+              break;
+
+            case(2):
+              clientCount[2]++;
+              break;
+
+            case(3):
+              clientCount[3]++;
+              break;
+
+            case(4):
+              clientCount[4]++;
+              break;
+
+            case(5):
+              clientCount[5]++;
+              break;
+
+            case(6):
+              clientCount[6]++;
+              break;
+
+            case(7):
+              clientCount[7]++;
+              break;
+
+            case(8):
+              clientCount[8]++;
+              break;
+
+            case(9):
+              clientCount[9]++;
+              break;
+
+            case(10):
+              clientCount[10]++;
+              break;
+
+            case(11):
+              clientCount[11]++;
+              break;
+          }
+        }
+    }
+
+    console.log(clientCount);
+
+    res.status(200).send({
+      clientCount: clientCount
+    })
+  })
+})
+
+
 //count number of nurses registered throughout a year
 UserRegRoutes.route('/countNursesYear').post(function (req,res){
   const yearToFind = req.body.year;
