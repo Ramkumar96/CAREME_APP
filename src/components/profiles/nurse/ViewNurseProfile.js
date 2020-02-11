@@ -8,6 +8,8 @@ import { fontSize } from "@material-ui/system";
 import { Button, Form, Col } from 'react-bootstrap';
 import { tsExpressionWithTypeArguments } from "@babel/types";
 import Complaint from "../complaint";
+import Messaging from "../messaging";
+
 
 class ViewNurseProfile extends Component {
 
@@ -15,16 +17,20 @@ class ViewNurseProfile extends Component {
         super(props);
         this.onChangeReview = this.onChangeReview.bind(this);
         this.onSubmitReview = this.onSubmitReview.bind(this);
+        this.onChangeMessage = this.onChangeMessage.bind(this);
+        this.onSubmitMessage = this.onSubmitMessage.bind(this);
 
         this.state = {
             profile_data: null,
             visible: false,
             clientEmail: localStorage.getItem("user_Email"),
             nurseEmail: null,
-            response_body: null,
+            response_body: null, 
             visible1: false,
-            Review: ''
-        }
+            Review: '',
+            message: '',
+            visible3: false
+        } //do we need reponse body here? (~Ruka)
     }
 
     componentDidMount() {
@@ -156,8 +162,28 @@ class ViewNurseProfile extends Component {
         })
     }
 
+    onChangeMessage(e) {
+        this.setState({
+            message: e.target.value
+        });
+
+        //console.log(e.target.value)
+    }
+
+    openMessageModal(){
+        this.setState({
+            visible3: true
+        })
+    }
+
+    closeMessageModal(){
+        this.setState({
+            visible3: false
+        })
+    }
+
     onSubmitReview(e){
-        e.preventDefault();
+         e.preventDefault();
 
         const dataObject = {
             ReviewBy: this.state.clientEmail,
@@ -176,6 +202,33 @@ class ViewNurseProfile extends Component {
         this.setState({
             Review: '',
             visible1: false
+        })
+    }
+    onSubmitMessage(e){
+        // e.preventDefault();
+
+        const dataObjectMessaging = {
+            messageClient: this.state.clientEmail,
+            clientStatus: 1,
+            messageNurse: this.state.profile_data.Email,
+            nurseStatus: 1,
+            message: this.state.message,
+            messageDate: new Date()
+        }
+
+        console.log(dataObjectMessaging);
+
+        axios.post('http://localhost:4000/messaging/add', dataObjectMessaging)
+            .then(res => { 
+                if (res.status.success){
+                    alert("Message sent successfully");
+                    }
+                
+            });     
+            
+        this.setState({
+            message: '',
+            visible3: false
         })
     }
 
@@ -344,6 +397,32 @@ class ViewNurseProfile extends Component {
 
                                                 </div>
                                             </Modal>
+
+                                            <hr />
+                                            {/* Messaging component */}
+                                            <input type="button" class="btn btn-primary" value="Leave a Message" onClick={() => this.openMessageModal()} />
+                                            <Modal visible={this.state.visible3} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeMessageModal()}>
+                                                <h3>Leave a Message</h3>
+
+                                                                                          
+                                                    <Form>
+                                                        <Form.Group>
+                                                                <Form.Control
+                                                                    required
+                                                                    type="textarea"
+                                                                    value={this.state.message}
+                                                                    onChange={this.onChangeMessage}
+                                                                    placeholder="Leave a message"
+                                                                />
+                                                        
+                                                        </Form.Group>
+                                                        <Button type="submit" variant="primary" onClick={this.onSubmitMessage.bind(this)}>Send</Button>
+                                                    </Form> 
+                                                </Modal>
+
+
+
+                                            
                                         </div>
                                         {/* /.card-body */}
                                     </div>
