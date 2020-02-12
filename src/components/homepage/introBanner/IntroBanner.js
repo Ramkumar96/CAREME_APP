@@ -191,8 +191,7 @@ class IntroBanner extends Component {
             userID: 0,
             RegDate : today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
             starRating : 0,
-            ratingCount : 0,
-            UserType: "Nurse"
+            ratingCount : 0
         };
 
         if (!this.canBeSubmitted()) {
@@ -322,7 +321,7 @@ class IntroBanner extends Component {
             RegDate : new Date(),
             starRating: 0,
             ratingCount: 0,
-            UserType: "Client"
+            Location: 0
         };
 
         if (!this.canBeSubmitted1()) {

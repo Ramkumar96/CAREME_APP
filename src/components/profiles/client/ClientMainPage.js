@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
 import Modal from 'react-awesome-modal';
-import { Button } from 'react-bootstrap';
+import { Button, ProgressBar } from 'react-bootstrap';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
+import  Progress  from "react-progressbar";
 
 class ClientMainPage extends Component {
 
@@ -14,7 +15,8 @@ class ClientMainPage extends Component {
         this.state = {
             profile_data: null,
             visible: false,
-            redirect_home: false
+            redirect_home: false,
+            completion : 75
         }
     }
 
@@ -78,6 +80,36 @@ class ClientMainPage extends Component {
                     profile_data: response.data.profile_data
                 })
             })
+
+        if (this.state.profile_data){
+            if (this.state.profile_data.Location == null){
+                if (this.state.profile_data.profilePic == null){
+                    this.setState = {
+                        completion : 75
+                    }
+                }
+
+                else {
+                    this.setState = {
+                        completion : 90
+                    }
+                }
+            }
+
+            else {
+                if (this.state.profile_data.profilePic == null){
+                    this.setState = {
+                        completion : 80
+                    }
+                }
+
+                else {
+                    this.setState = {
+                        completion : 100
+                    }
+                }
+            }
+        }
     }
 
     render() {
@@ -124,10 +156,7 @@ class ClientMainPage extends Component {
                                                 <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
                                             </li>
                                             <li className="list-group-item">
-                                                <h6 className="text-center">Member since 2018</h6>
-                                            </li>
-                                            <li className="list-group-item text-center">
-                                                <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
+                                                <h6 className="text-center">Member since 2019</h6>
                                             </li>
                                         </ul>
                                     </div>
@@ -265,24 +294,19 @@ class ClientMainPage extends Component {
                                 {/*Seoond Card in Right Side*/}
                                 <div className="card card-primary">
                                     <div className="card-header text-center">
-                                        <h3 className="card-title text-center"><strong>Verifications</strong></h3>
+                                        <h3 className="card-title text-center"><strong>Profile Status</strong></h3>
                                     </div>
                                     {/* /.card-header */}
                                     <div className="card-body">
-                                        <strong><i className="fas fa-email mr-1" /> Email   </strong> <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
+                                        <strong><i className="far fa-file-alt mr-1" />Profile completed : {this.state.completion}% </strong>
                                         <hr />
-                                        <strong><i className="fas fa-mobile mr-1" /> Phone</strong>  <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-                                        <hr />
-                                        <strong><i className="fas fa-pencil-alt mr-1" />NIC</strong> <small class="badge badge-danger"><i class="far fa-check-circle mr-2"></i>  Not Verified</small>
-                                        <hr />
-                                        <strong><i className="far fa-file-alt mr-1" />Reg No</strong> <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
+                                        <Progress
+                                            completed = {this.state.completion}
+                                        />
                                     </div>
                                     {/* /.card-body */}
                                 </div>
                                 {/* /.card */}
-
-
-
                             </div>
                         </div>
                     </div>
