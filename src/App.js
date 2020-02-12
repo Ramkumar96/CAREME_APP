@@ -22,6 +22,7 @@ import UserReport from "./components/profiles/admin/userReports";
 import Complaint from "./components/profiles/complaint";
 import ClientViewNurseCalendar from "./components/profiles/nurse/ClientViewNurseCalendar";
 import UserDetails from "./components/profiles/admin/userDetails";
+import { Row } from "react-bootstrap";
 
 class App extends Component {
   render() {

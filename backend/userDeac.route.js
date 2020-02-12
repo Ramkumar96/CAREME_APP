@@ -99,8 +99,8 @@ UserDeacRoutes.route('/countNursesYear').post(function (req,res){
   UserDeac.find({"userID" : 0})
     .then(response=>{
       for (let i=0; i<response.length; i++){
-        if (response[i].RegDate.getFullYear() == yearToFind){
-          switch(response[i].RegDate.getMonth()){
+        if (response[i].DeacDate.getFullYear() == yearToFind){
+          switch(response[i].DeacDate.getMonth()){
             case(0):
               nurseCount[0]++;
               break;
@@ -168,8 +168,8 @@ UserDeacRoutes.route('/countClientsYear').post(function (req,res){
   UserDeac.find({"userID" : 1})
     .then(response=>{
       for (let i=0; i<response.length; i++){
-        if (response[i].RegDate.getFullYear() == yearToFind){
-          switch(response[i].RegDate.getMonth()){
+        if (response[i].DeacDate.getFullYear() == yearToFind){
+          switch(response[i].DeacDate.getMonth()){
             case(0):
               clientCount[0]++;
               break;

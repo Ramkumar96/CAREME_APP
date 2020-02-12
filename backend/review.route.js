@@ -45,4 +45,73 @@ UserReviewRoutes.route('/countReviews').post(function (req,res){
     })
 })
 
+//count number of user ratings throughout a year
+UserReviewRoutes.route('/countReviewsYear').post(function (req,res){
+  const yearToFind = req.body.year;
+  const reviewCount = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+  UserReview.find()
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if (response[i].ReviewDate.getFullYear() == yearToFind){
+          switch(response[i].ReviewDate.getMonth()){
+            case(0):
+              reviewCount[0]++;
+              break;
+
+            case(1):
+              reviewCount[1]++;
+              break;
+
+            case(2):
+              reviewCount[2]++;
+              break;
+
+            case(3):
+              reviewCount[3]++;
+              break;
+
+            case(4):
+              reviewCount[4]++;
+              break;
+
+            case(5):
+              reviewCount[5]++;
+              break;
+
+            case(6):
+              reviewCount[6]++;
+              break;
+
+            case(7):
+              reviewCount[7]++;
+              break;
+
+            case(8):
+              reviewCount[8]++;
+              break;
+
+            case(9):
+              reviewCount[9]++;
+              break;
+
+            case(10):
+              reviewCount[10]++;
+              break;
+
+            case(11):
+              reviewCount[11]++;
+              break;
+          }
+        }
+    }
+
+    console.log("The total number of reviews this year "+reviewCount);
+
+    res.status(200).send({
+      reviewCount : reviewCount
+    })
+  })
+})
+
   module.exports = UserReviewRoutes;
