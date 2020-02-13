@@ -77,7 +77,7 @@ UserRegRoutes.route('/userdata/update/:id').put(function (req, res) {
 //update Rating
 UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
   console.log(req.body)
-  UserReg.updateOne({Email: req.body.nurseEmail}, {$inc: {starRating: req.body.Rating, ratingCount: 1}})
+  UserReg.updateOne({Email: req.body.RatedUser}, {$inc: {starRating: req.body.Rating, ratingCount: 1}})
   .then(response=>{
     res.status(200).send({
       success:true,
@@ -86,6 +86,18 @@ UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
   })
 })
 
+
+//Deduct Rating
+UserRegRoutes.route('/deductRating').put(function(req,res){
+  console.log(req.body)
+  UserReg.updateOne({Email: req.body.RatedUser}, {$inc: {starRating: -req.body.Rating, ratingCount: -1}})
+  .then(response=>{
+    res.status(200).send({
+      success:true,
+      message:"User Data Update success",
+    })
+  })
+})
 
 // Removing user upon deactivation
 UserRegRoutes.route('/delete').post(function (req, res) {
