@@ -4,6 +4,7 @@ import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
 import ProfileNavbar from "../ProfileNavbar";
 import { Button, Form, Col, Row } from 'react-bootstrap';
+import { Container } from '@material-ui/core';
 
 class UserReport extends Component {
     constructor (props){
@@ -370,7 +371,7 @@ class UserReport extends Component {
             colorScale = {["orange", "gold"]}
             innerRadius = {15}
             outerRadius = {30}
-            height = {85}
+            height = {150}
             data = {[
                 {x: "Nurses\n"+this.state.activeNurses, y:this.state.activeNurses},
                 {x: "Clients\n"+this.state.activeClients, y:this.state.activeClients}
@@ -389,10 +390,10 @@ class UserReport extends Component {
                 colorScale = {["orange", "gold"]}
                 innerRadius = {15}
                 outerRadius = {30}
-                height = {85}
+                height = {150}
                 data = {[
-                    {x: "Nurses\n"+this.state.deactivatedNurses, y:this.state.deactivatedNurses},
-                    {x: "Clients\n"+this.state.deactivatedClients, y:this.state.deactivatedClients}
+                    {x: "Deactivated Nurses\n"+this.state.deactivatedNurses, y:this.state.deactivatedNurses},
+                    {x: "Deactivated Clients\n"+this.state.deactivatedClients, y:this.state.deactivatedClients}
                 ]}
                 style={{ labels: { fontSize: 7}}}
             />
@@ -408,7 +409,7 @@ class UserReport extends Component {
                 colorScale = {["orange", "gold"]}
                 innerRadius = {15}
                 outerRadius = {30}
-                height = {85}
+                height = {150}
                 data = {[
                     {x: "Ratings\n"+this.state.ratingCount, y:this.state.ratingCount},
                     {x: "Reviews\n"+this.state.reviewCount, y:this.state.reviewCount}
@@ -427,7 +428,7 @@ class UserReport extends Component {
                 colorScale = {["orange", "gold"]}
                 innerRadius = {15}
                 outerRadius = {30}
-                height = {85}
+                height = {150}
                 data = {[
                     {x: "Against nurses\n"+this.state.nurseComCount, y:this.state.nurseComCount},
                     {x: "Against Clients\n"+this.state.clientComCount, y:this.state.clientComCount}
@@ -458,7 +459,7 @@ class UserReport extends Component {
                                     colorScale = {["orange", "gold"]}
                                     innerRadius = {15}
                                     outerRadius = {30}
-                                    height = {85}
+                                    height = {100}
                                     data = {[
                                         {x: "Nurses\n"+this.state.totalActiveNurses, y:this.state.totalActiveNurses},
                                         {x: "Clients\n"+this.state.totalActiveClients, y:this.state.totalActiveClients}
