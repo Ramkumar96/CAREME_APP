@@ -54,15 +54,15 @@ class ViewNurseProfile extends Component {
         })
 
         const obj = {
-            RatedBy : this.state.clientEmail,
-            RatedUser : this.state.profile_data.Email,
-            Rating : nextValue,
+            RatedBy: this.state.clientEmail,
+            RatedUser: this.state.profile_data.Email,
+            Rating: nextValue,
             RatedDate: new Date()
         }
 
         const checkObj = {
-            nurseEmail : this.state.profile_data.Email,
-            clientEmail : this.state.clientEmail
+            nurseEmail: this.state.profile_data.Email,
+            clientEmail: this.state.clientEmail
         }
 
         const userObj = {
@@ -72,31 +72,31 @@ class ViewNurseProfile extends Component {
 
         const headers = {
             'Content-Type': 'application/json'
-          }
+        }
 
 
-        axios.post('http://localhost:4000/rating/checkPresence', checkObj, {headers:headers})
-          .then (res => {
-              if (res.data.success){
-                axios.post('http://localhost:4000/rating/delete', obj)
-                .then( response => {
-                    //console.log(response.data);
-                });
-              }
+        axios.post('http://localhost:4000/rating/checkPresence', checkObj, { headers: headers })
+            .then(res => {
+                if (res.data.success) {
+                    axios.post('http://localhost:4000/rating/delete', obj)
+                        .then(response => {
+                            //console.log(response.data);
+                        });
+                }
 
-              axios.post('http://localhost:4000/rating/add', obj)
-                .then(res => { 
-                    //console.log(res.data) 
-                });
-          })
+                axios.post('http://localhost:4000/rating/add', obj)
+                    .then(res => {
+                        //console.log(res.data) 
+                    });
+            })
 
         axios.put('http://localhost:4000/user/userdata/updateRating/', userObj, { headers: headers })
-        .then(response => {
-            alert("Details successfully updated");
-            if (response.data.success) {
-                this.getData()
-            }
-        });
+            .then(response => {
+                alert("Details successfully updated");
+                if (response.data.success) {
+                    this.getData()
+                }
+            });
     }
 
     onChangeReview(e) {
@@ -105,31 +105,31 @@ class ViewNurseProfile extends Component {
         });
     }
 
-    openReviewModal(){
+    openReviewModal() {
         this.setState({
             visible1: true
         })
     }
 
-    closeReviewModal(){
+    closeReviewModal() {
         this.setState({
             visible1: false
         })
     }
 
-    openComplaintModal(){
+    openComplaintModal() {
         this.setState({
             visible2: true
         })
     }
 
-    closeComplaintModal(){
+    closeComplaintModal() {
         this.setState({
             visible2: false
         })
     }
 
-    onSubmitReview(e){
+    onSubmitReview(e) {
         e.preventDefault();
 
         const dataObject = {
@@ -142,10 +142,10 @@ class ViewNurseProfile extends Component {
         console.log(dataObject);
 
         axios.post('http://localhost:4000/review/add', dataObject)
-            .then(res => { 
+            .then(res => {
                 alert("Review Successful! Thank you for taking a moment.");
-            });     
-            
+            });
+
         this.setState({
             Review: '',
             visible1: false
@@ -162,9 +162,9 @@ class ViewNurseProfile extends Component {
         const totalRating = this.state.profile_data.starRating;
         const ratingCount = this.state.profile_data.ratingCount;
 
-        const finalRating = totalRating/ratingCount;
+        const finalRating = totalRating / ratingCount;
 
-        const {Rating} = this.setState;
+        const { Rating } = this.setState;
 
         return (
             <div>
@@ -200,12 +200,12 @@ class ViewNurseProfile extends Component {
                                                     </li>
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">{this.state.profile_data.FirstName}'s Rating : </h6>
-                                                        <div style={{fontSize: 28}}>
+                                                        <div style={{ fontSize: 28 }}>
                                                             <StarRatingComponent
                                                                 name="rate1"
                                                                 editing={false}
                                                                 starCount={5}
-                                                                value={finalRating} 
+                                                                value={finalRating}
                                                             />
                                                         </div>
                                                     </li>
@@ -284,16 +284,16 @@ class ViewNurseProfile extends Component {
                                     <div className="card card-primary">
                                         <div className="card-body text-center">
                                             <strong>Rate {this.state.profile_data.FirstName} </strong>
-                                            <br/>
-                                            <div style={{fontSize: 28}}>
-                                                <StarRatingComponent 
-                                                    className = "rateStar"
-                                                    name="rate1" 
+                                            <br />
+                                            <div style={{ fontSize: 28 }}>
+                                                <StarRatingComponent
+                                                    className="rateStar"
+                                                    name="rate1"
                                                     starCount={5}
                                                     value={this.state.Rating}
                                                     onStarClick={this.onStarClick.bind(this)}
                                                 />
-                                            <hr/>
+                                                <hr />
                                             </div>
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
@@ -304,24 +304,24 @@ class ViewNurseProfile extends Component {
 
                                                 <Form>
                                                     <Form.Group>
-                                                            <Form.Control
-                                                                required
-                                                                type="textarea"
-                                                                value={this.state.Review}
-                                                                onChange={this.onChangeReview}
-                                                                placeholder="Leave a review"
-                                                            />
+                                                        <Form.Control
+                                                            required
+                                                            type="textarea"
+                                                            value={this.state.Review}
+                                                            onChange={this.onChangeReview}
+                                                            placeholder="Leave a review"
+                                                        />
                                                     </Form.Group>
 
                                                     <Button type="submit" variant="primary" onClick={this.onSubmitReview.bind(this)}>Submit</Button>
                                                 </Form>
                                             </Modal>
-                                            <hr/>
+                                            <hr />
 
                                             <a href={`/clientviewnursecalendar/${this.props.match.params.id}`} className="btn btn-danger btn-block"><b>Check Calendar</b></a>
                                             {/* <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} /> */}
-                          
-                                            <hr/>
+
+                                            <hr />
 
                                             {/* Calender for booking */}
 
@@ -329,7 +329,7 @@ class ViewNurseProfile extends Component {
                                             <input type="button" class="btn btn-success" value="Add a complaint" onClick={() => this.openComplaintModal()} />
                                             <Modal visible={this.state.visible2} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
                                                 <div>
-                                                    <Complaint/>
+                                                    <Complaint />
                                                 </div>
                                             </Modal>
                                         </div>
