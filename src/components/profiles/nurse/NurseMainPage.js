@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 import NurseCalendar from "./NurseCalendar";
 import StarRatingComponent from "react-star-rating-component";
+import NurseNotification from "./booking/NurseNotification";
 
 
 class NurseMainPage extends Component {
@@ -201,7 +202,7 @@ class NurseMainPage extends Component {
                                         <div className="card-header p-2">
                                             <ul className="nav nav-pills">
                                                 <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
-                                                {/* <li className="nav-item"><a className="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li> */}
+                                                <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
                                                 <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                                             </ul>
                                         </div>{/* /.card-header */}
@@ -243,11 +244,16 @@ class NurseMainPage extends Component {
                                                     {/* /.tab-pane */}
                                                 </div>
 
+                                                <div className="tab-pane" id="notification">
+                                                    <NurseNotification/>
+                                                </div>
+
                                                 <div className="tab-pane" id="settings">
                                                     <NurseEdit
                                                         loadData={this.getData} />
-
                                                 </div>
+
+
                                                 {/* /.tab-pane */}
                                             </div>
                                             {/* /.tab-content */}

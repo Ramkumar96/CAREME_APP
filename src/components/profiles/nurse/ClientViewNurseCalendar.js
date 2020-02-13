@@ -21,7 +21,7 @@ class ClientViewNurseCalendar extends Component {
             visible: false,
             date: null,
             unavailableDates: [],
-            loading: true,
+            loading: true, 
             response_dates: [],
         }
     }
@@ -31,17 +31,40 @@ class ClientViewNurseCalendar extends Component {
 
     }
 
+   
+
+    getClientData = () => {
+        var token = localStorage.getItem('id');
+        axios.get('http://localhost:4000/user/userdata/' + token)
+            .then(response => {
+                console.log(response.data.profile_data)
+                this.setState({
+                    Client_profile_data: response.data.profile_data,
+                    client_name:response.data.profile_data.FirstName,
+                    client_Location:response.data.profile_data.Location,
+                    client_id:response.data.profile_data._id
+                    
+                })
+            })
+    }
+
+
     getUnavailableDates = () => {
-        console.log("----------------dedde")
-        console.log(this.props.match.params.id)
-        //var token = localStorage.getItem('id');
+        //console.log("----------------dedde")
+        //console.log(this.props.match.params.id)
+        
+       //Get Data of Nurse
         axios.get('http://localhost:4000/user/userdata/unavailableDates/' + this.props.match.params.id)
             .then(response => {
                 console.log(response.data.profile_data.UnavailableDates)
                 this.setState({
+                    profile_data:response.data.profile_data,
+                    nurse_name:response.data.profile_data.FirstName,
+                    nurse_id:response.data.profile_data._id,
+
                     response_dates: response.data.profile_data.UnavailableDates
                 })
-
+                //console.log(this.state.profile_data)
                 this.setUnavailableDates(response.data.profile_data.UnavailableDates)
             })
     }
@@ -70,27 +93,26 @@ class ClientViewNurseCalendar extends Component {
 
     }
 
-
+    
     dateClick = (date) => {
-        console.log(date, '-----------------------')
-        console.log(this.state.response_dates.includes(date.dateStr))
-
+        //console.log(new Date(date.dateStr).getTime(), '-----------------------')
+        //console.log(this.state.response_dates.includes(date.dateStr))
         //console.log(this.state.unavailableDates.includes(date)) 
         //console.log(Date.now())
         //console.log(date.dateStr)
 
 
-        if (this.state.response_dates.includes(date.dateStr)===false) {
-            //console.log(date)
+        if ((this.state.response_dates.includes(date.dateStr)===false) && (new Date(date.dateStr).getTime() >= Date.now())) {
+    
             this.openDateModal();
+            this.getClientData()
+            console.log(this.state.profile_data)
+            console.log(this.state.nurse_name)
+            console.log(this.state.nurse_id)
+           
+          
         }
-
-        // this.setState({
-        //     date: date.dateStr
-
-        // })
-
-        //  alert('Clicked on: ' + this.state.date)        
+       
     }
 
     openDateModal = () => {
@@ -109,6 +131,37 @@ class ClientViewNurseCalendar extends Component {
     eventClick = (event) => {
         console.log('event--------------')
         console.log(event.data)
+    }
+
+
+    requestNurse =() => {
+
+        const RequestObj = {
+            RequestedClient : this.state.client_name,
+            RequestedByClientID : this.state.client_id,
+            RequestedClientLocation: this.state.client_Location,
+            RequestedNurse : this.state.nurse_name,
+            RequestedNurseID:this.state.nurse_id,
+            RequestedDate: Date.now()
+        }
+
+        const headers = {
+            'Content-Type': 'application/json'
+          }
+
+        axios.post('http://localhost:4000/request/add', RequestObj, {headers:headers})
+          .then (res => {
+              if (res.data.success){
+               console.log(res.data);
+               alert("Details successfully updated");
+                
+              }
+          })
+          
+          this.closeDateModal();
+        console.log("request Nurse")
+        console.log(this.state.profile_data)
+        
     }
 
     render() {
@@ -145,7 +198,7 @@ class ClientViewNurseCalendar extends Component {
                         <h5 align="center">Book Nurse {this.state.date}</h5>
                         <center>
                             {/* <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button> */} 
-                            <input type="button" class="btn btn-danger" value="Request the Nurse" onClick={() => this.addUnavailableDates()} />
+                            <input type="button" class="btn btn-danger" value="Request the Nurse" onClick={() => this.requestNurse()} />
                             <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDateModal()} />
                         </center>
                     </Modal>
