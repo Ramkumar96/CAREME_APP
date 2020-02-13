@@ -22,6 +22,8 @@ import UserReport from "./components/profiles/admin/userReports";
 import Complaint from "./components/profiles/complaint";
 import ClientViewNurseCalendar from "./components/profiles/nurse/ClientViewNurseCalendar";
 import ComplaintsReview from "./components/profiles/admin/complaintsReview";
+import { Row } from "react-bootstrap";
+import NurseViewClientProfile from "./components/profiles/client/NurseViewClientProfile";
 
 class App extends Component {
   render() {
@@ -47,6 +49,7 @@ class App extends Component {
         <Route path="/userReport" exact component={UserReport} />
         <Route path ="/complaint" exact component={Complaint}/>
         <Route path="/complaintsReview" exact component={ComplaintsReview} />
+        <Route path="/nurseviewclientprofile/:id" exact component={NurseViewClientProfile}/>
       </Router>
     );
   }
