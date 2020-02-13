@@ -23,14 +23,6 @@ class NurseCalendar extends Component {
             date: null,
             unavailableDates:[],
             loading:true
-            // events: [
-            //     { // this object will be "parsed" into an Event Object
-            //         title: 'The Title', // a property!
-            //         start: '2018-09-01', // a property!
-            //         end: '2019-12-27',
-            //         color: 'red'// a property! ** see important note below about 'end' **
-            //     }
-            // ]
         }
     }
 
@@ -45,10 +37,6 @@ class NurseCalendar extends Component {
         axios.get('http://localhost:4000/user/userdata/unavailableDates/'+token)
         .then(response => {
             console.log(response.data.profile_data.UnavailableDates)
-            // this.setState({
-            //     UnavailableDates:response.data.profile_data.UnavailableDates
-            // })
-
             this.setUnavailableDates(response.data.profile_data.UnavailableDates)
         })
     }
@@ -67,6 +55,7 @@ class NurseCalendar extends Component {
                 console.log(this.state.unavailableDates)
         })
 
+        
         this.setState({
             loading:false
         })
@@ -121,23 +110,13 @@ class NurseCalendar extends Component {
         var token = localStorage.getItem('id');
         console.log(dateobj);
 
-        axios.post('http://localhost:4000/user/userdata/unavailableDates/' + token, { date: this.state.date }, { headers: headers })
+        axios.post('http://localhost:4000/user/userdata/unavailableDates/' + token, dateobj, { headers: headers })
             .then(response => {
 
-                console.log(response.data.profile_data.UnavailableDates.length)
-              console.log(response.data.profile_data.UnavailableDates[response.data.profile_data.UnavailableDates.length-1])
+                // console.log(response.data.profile_data.UnavailableDates.length)
+                // console.log(response.data.profile_data.UnavailableDates[response.data.profile_data.UnavailableDates.length-1])
                 this.closeDateModal();
                 window.location.reload();
-                 //this.reloadCalendar();
-                // this.setState({
-                //     unavailableDates:[...this.state.unavailableDates,{
-                //         // id:dates.indexOf(date),
-                //         title: 'Unavailable', // a property!
-                //         start:  this.state.date, // a property!
-                //         allDay: true,
-                //         color: 'blue'// a property! ** see important note below about 'end' **       
-                //     }]
-
                 })
 
     }

@@ -212,14 +212,14 @@ class NurseEdit extends Component {
                         <div className="form-group">
                             <div class="row">
                                 <div className="col-5">
-                                    <label htmlFor="exampleInputEmail1">Age : {this.state.Age}</label>
+                                    <label htmlFor="exampleInputEmail1">Age : </label>
                                     <input type="text"
                                         className="form-control"
                                         value={this.state.Age}
                                         onChange={this.onChangeAge}
                                         className={shouldMarkError("Age") ? "error" : ""}
                                         onBlur={this.handleBlur("Age")}
-                                        placeholderplaceholder="Enter email" />
+                                     placeholder="Enter email" />
                                 </div>
 
                                 <div className="col-5">
@@ -272,11 +272,12 @@ class NurseEdit extends Component {
                         <div className="form-group">
                             <label htmlFor="university">University : {this.state.nurseUni}</label>
                             <select id="dropDownUniversity"
+                                value={this.state.nurseUni}
                                 class="form-control"
                                 className={shouldMarkError("nurseUni") ? "error" : ""}
                                 onBlur={this.handleBlur("nurseUni")}
                                 onChange={this.onChangeUniversity}>
-                                <option defaultValue> Select University </option>
+                                {/* <option defaultValue> Select University </option> */}
                                 <option university="College of Nursing Colombo">College of Nursing Colombo</option>
                                 <option university="Sri Lanka Medical Council">Sri Lanka Medical Council</option>
                                 <option university="University of Moratuwa">University of Moratuwa</option>
