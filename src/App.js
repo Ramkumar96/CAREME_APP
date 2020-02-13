@@ -21,7 +21,7 @@ import NurseCalendar from "./components/profiles/nurse/NurseCalendar";
 import UserReport from "./components/profiles/admin/userReports";
 import Complaint from "./components/profiles/complaint";
 import ClientViewNurseCalendar from "./components/profiles/nurse/ClientViewNurseCalendar";
-import Messaging from "./components/profiles/messaging";
+import Messaging from "./components/profiles/messaging/messaging";
 
 
 

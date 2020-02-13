@@ -180,7 +180,7 @@ UserRegRoutes.route('/validNurseID').post(function (req, res) {
     })
 });
 
-//Profile picture upload and retrieve
+//Profile picture upload
 const DIR = './public/';
 
 const storage = multer.diskStorage({
@@ -216,14 +216,14 @@ UserRegRoutes.post('/user-profile/', upload.single('profilePic'), async (req, re
   })
 })
 
-UserRegRoutes.get("/", (req, res, next) => {
-  UserReg.find().then(data => {
-    res.status(200).json({
-      message: "Profile Pic retrieved successfully!",
-      users: data
-    });
-  });
-});
+// UserRegRoutes.get("/", (req, res, next) => {
+//   UserReg.find().then(data => {
+//     res.status(200).json({
+//       message: "Profile Pic retrieved successfully!",
+//       users: data
+//     });
+//   });
+// });
 
 
 

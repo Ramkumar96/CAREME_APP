@@ -8,7 +8,7 @@ import { fontSize } from "@material-ui/system";
 import { Button, Form, Col } from 'react-bootstrap';
 import { tsExpressionWithTypeArguments } from "@babel/types";
 import Complaint from "../complaint";
-import Messaging from "../messaging";
+import Messaging from "../messaging/messaging";
 
 
 class ViewNurseProfile extends Component {
@@ -167,7 +167,7 @@ class ViewNurseProfile extends Component {
             message: e.target.value
         });
 
-        //console.log(e.target.value)
+        console.log(e.target.value)
     }
 
     openMessageModal(){
@@ -208,10 +208,9 @@ class ViewNurseProfile extends Component {
         // e.preventDefault();
 
         const dataObjectMessaging = {
-            messageClient: this.state.clientEmail,
-            clientStatus: 1,
-            messageNurse: this.state.profile_data.Email,
-            nurseStatus: 1,
+            senderEmail: this.state.clientEmail,
+            receiverEmail: this.state.profile_data.Email,
+            receiverStatus: 0,
             message: this.state.message,
             messageDate: new Date()
         }

@@ -2,19 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Messaging = new Schema({
-    messageClient: {
+    senderEmail: {
         type: String
     },
 
-    clientStatus: {
-        type: Boolean
-    },
-
-    messageNurse: {
+    receiverEmail: {
         type: String
     },
     
-    nurseStatus: {
+    receiverStatus: {
         type: Boolean
     },
 
@@ -26,7 +22,7 @@ let Messaging = new Schema({
         type: Date
     }
 },{
-    collection: 'Messages'
+    collection: 'Messaging'
 });
 
-module.exports = mongoose.model('Messages', Messaging);
+module.exports = mongoose.model('Messaging', Messaging);

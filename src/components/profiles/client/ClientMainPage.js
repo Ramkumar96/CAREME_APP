@@ -14,7 +14,9 @@ class ClientMainPage extends Component {
         this.state = {
             profile_data: null,
             visible: false,
-            redirect_home: false
+            visible1 : false,
+            redirect_home: false,
+            user: null
         }
     }
 
@@ -28,6 +30,18 @@ class ClientMainPage extends Component {
         this.setState({
             visible: false
         });
+    }
+
+    openMessageModal(){
+        this.setState({
+            visible1: true
+        })
+    }
+
+    closeMessageModal(){
+        this.setState({
+            visible1: false
+        })
     }
 
     componentDidMount() {
@@ -69,6 +83,27 @@ class ClientMainPage extends Component {
             });
     }
 
+    sortedMsges(){
+        this.setState({
+            visible: false
+        });
+
+        const obj2 = {
+            FirstName: this.state.profile_data.FirstName,
+            LastName: this.state.profile_data.LastName,
+            Email: this.state.msg_data.receiverEmail,
+            sender: this.state.msg_data.senderEmail,
+            message: this.state.msg_data.message,
+            date: this.state.msg_data.messageDate
+        };
+        //methnata sort karana function eka
+        //log wela inna userge email address eka thiyena okkoma messages watenna ona. 
+        //date ekata anuwa sort karanna
+        //view it
+        //return this.state.data.msg_data.map(function(obj2 , ))
+        
+    }
+
     getData = () => {
         var token = localStorage.getItem('id');
         axios.get('http://localhost:4000/user/userdata/' + token)
@@ -76,6 +111,18 @@ class ClientMainPage extends Component {
                 console.log(response.data.profile_data)
                 this.setState({
                     profile_data: response.data.profile_data
+                })
+            })
+
+        this.setState ({
+            user : localStorage.getItem('Email')
+        })
+        
+        axios.get('http://localhost:4000/messaging/msgdata', this.state.user)
+            .then(response => {
+                console.log(response.data.msg_data)
+                this.setState({
+                    msg_data :response.data.msg_data
                 })
             })
     }
@@ -254,6 +301,22 @@ class ClientMainPage extends Component {
                                             <center>
                                                 <Button variant="btn btn-danger" type="submit" onClick={() => this.deactivate()}>Yes</Button>
                                                 <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDeacModal()} />
+                                            </center>
+                                        </Modal>
+
+                                        {/* new message check button*/}
+                                        <hr />
+                                        <input type="button" class="btn btn-primary" value="Check Messages" onClick={() => this.openMessageModal()} />
+                                            <Modal visible={this.state.visible1} width="50%" height="70%" effect="fadeInUp" onClickAway={() => this.closeMessageModal()}>
+                                                <h3 align="center">Messages</h3>
+                                            <p align="center">messages must render here</p>
+                                            <center>
+                                                <div>
+                                                    {/* {this.sortedMsges()} */}
+                                                    {/* <p className="text-muted text-center">{this.state.msg_data.message}</p> */}
+                                                </div>
+                                                <Button variant="btn btn-info" type="submit" onClick={() => this.sortedMsges()}>Refresh</Button>
+                                                <input type="button" class="btn btn-danger" value="Cancel" onClick={() => this.closeMessageModal()} />
                                             </center>
                                         </Modal>
                                     </div>
