@@ -42,6 +42,10 @@ class Complaint extends Component {
 		accusedByID : localStorage.getItem('accusedByID'),
 		accusedUserID : localStorage.getItem('accusedUserID'),
 		accusedUser : localStorage.getItem('accusedEmail'),
+		accusedByFName : localStorage.getItem('user_name'),
+		accusedByLName : localStorage.getItem('user_lname'),
+		accusedUserFName : localStorage.getItem('accusedUserFName'),
+		accusedUserLName : localStorage.getItem('accusedUserLName'),
 		complainedDate : new Date(),
 		complaint : this.state.feedback
 	}
