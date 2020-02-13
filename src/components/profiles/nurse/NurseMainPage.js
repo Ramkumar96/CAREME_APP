@@ -9,7 +9,7 @@ import axios from './../../../../backend/node_modules/axios';
 import NurseCalendar from "./NurseCalendar";
 import StarRatingComponent from "react-star-rating-component";
 import NurseNotification from "./booking/NurseNotification";
-
+import Progress from "react-progressbar";
 
 class NurseMainPage extends Component {
 
@@ -18,7 +18,8 @@ class NurseMainPage extends Component {
         this.openModal = this.openModal.bind(this);
         this.state = {
             profile_data: null,
-            visible: false
+            visible: false,
+            completedPer: 100
         }
     }
 
@@ -69,7 +70,8 @@ class NurseMainPage extends Component {
             Tel : this.state.profile_data.Tel,
             userID : this.state.profile_data.userID,
             RegDate : this.state.profile_data.RegDate,
-            DeacDate : new Date()
+            DeacDate : new Date(),
+            completedPer : null
         };
 
         axios.post('http://localhost:4000/userDeac/add', obj)
@@ -99,6 +101,42 @@ class NurseMainPage extends Component {
                     profile_data: response.data.profile_data
                 })
             })
+
+        let completion = 100;
+
+        if (this.state.profile_data){
+            if (this.state.Location == null) {
+                completion = completion - 10;
+            }
+
+            if (this.state.Age == null){
+                completion  = completion - 6;
+            }
+
+            if (this.state.nurseExp == null){
+                completion = completion - 10;
+            }
+
+            if (this.state.nurseUni == null){
+                completion = completion - 6;
+            }
+
+            if (this.state.nurseEdu == null){
+                completion = completion - 8;
+            }
+
+            if (this.state.nurseType == null){
+                completion = completion - 10;
+            }
+
+            if (this.state.profilePic == null){
+                completion = completion - 10;
+            }
+
+            this.setState = {
+                completedPer : completion
+            }
+        }
     }
 
     render() {
@@ -311,21 +349,16 @@ class NurseMainPage extends Component {
                                     {/*Seoond Card in Right Side*/}
                                     <div className="card card-primary">
                                         <div className="card-header text-center">
-                                            <h3 className="card-title text-center"><strong>Verifications</strong></h3>
+                                            <h3 className="card-title text-center"><strong>Profile Status</strong></h3>
                                         </div>
                                         {/* /.card-header */}
                                         <div className="card-body">
-                                            <strong><i className="fas fa-email mr-1" /> Email </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-
+                                            <strong><i className="fas fa-email mr-1" /> Profile Completed : {this.state.completedPer}% </strong>
                                             <hr />
-                                            <strong><i className="fas fa-mobile mr-1" /> Phone </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
 
-                                            <hr />
-                                            <strong><i className="fas fa-pencil-alt mr-1" />NIC </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-
-                                            <hr />
-                                            <strong><i className="far fa-file-alt mr-1" />Reg No </strong><small class="badge badge-danger"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-
+                                            <Progress 
+                                                completed = {this.state.completedPer}
+                                            />                                            
                                         </div>
                                         {/* /.card-body */}
                                     </div>

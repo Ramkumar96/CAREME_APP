@@ -320,7 +320,8 @@ class IntroBanner extends Component {
             userID: 1,
             RegDate : new Date(),
             starRating: 0,
-            ratingCount: 0
+            ratingCount: 0,
+            Location: 0
         };
 
         if (!this.canBeSubmitted1()) {

@@ -23,7 +23,8 @@ class ViewNurseProfile extends Component {
             nurseEmail: null,
             response_body: null,
             visible1: false,
-            Review: ''
+            Review: '',
+            Rating: 0
         }
     }
 
@@ -41,46 +42,18 @@ class ViewNurseProfile extends Component {
                 this.setState({
                     profile_data: response.data.profile_data,
                 })
+
+                localStorage.setItem("accusedEmail", this.state.profile_data.Email);
+                localStorage.setItem("accusedByID", 1);
+                localStorage.setItem("accusedUserID", 0);
             })
     }
 
-    // getRating = () => {
-    //     if (this.state.profile_data){
-    //         const checkObject = {
-    //             nurseEmail : this.state.profile_data.Email,
-    //             clientEmail : this.state.clientEmail
-    //         }   
-
-    //         const headers = {
-    //             'Content-Type': 'application/json'
-    //         }
-
-    //         axios.post('http://localhost:4000/rating/checkPresence', checkObject, {headers:headers})
-    //         .then (res => {
-    //             if (res.data.success){
-    //                 this.setState({
-    //                     response_body : res.data.response_body
-    //                 })
-    //             }
-    //         })
-
-    //         // if (this.state.response_body){
-    //         //     this.setState({
-    //         //         Rating: this.state.response_body.Rating
-    //         //     })
-    //         // }
-
-    //         if (!this.state.response_body) {
-    //             this.setState({
-    //                 Rating: 0
-    //             })
-    //         }
-
-    //         console.log(this.state.Rating);
-    //     }
-    // }
-
     onStarClick(nextValue) {
+        this.setState({
+            Rating: nextValue
+        })
+
         const obj = {
             RatedBy : this.state.clientEmail,
             RatedUser : this.state.profile_data.Email,
@@ -101,6 +74,7 @@ class ViewNurseProfile extends Component {
         const headers = {
             'Content-Type': 'application/json'
           }
+
 
         axios.post('http://localhost:4000/rating/checkPresence', checkObj, {headers:headers})
           .then (res => {
@@ -186,6 +160,11 @@ class ViewNurseProfile extends Component {
             );
         }
 
+        const totalRating = this.state.profile_data.starRating;
+        const ratingCount = this.state.profile_data.ratingCount;
+
+        const finalRating = totalRating/ratingCount;
+
         const {Rating} = this.setState;
 
         return (
@@ -219,6 +198,17 @@ class ViewNurseProfile extends Component {
                                                     </li>
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        <h6 className="text-center">{this.state.profile_data.FirstName}'s Rating : </h6>
+                                                        <div style={{fontSize: 28}}>
+                                                            <StarRatingComponent
+                                                                name="rate1"
+                                                                editing={false}
+                                                                starCount={5}
+                                                                value={finalRating} 
+                                                            />
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -301,7 +291,7 @@ class ViewNurseProfile extends Component {
                                                     className = "rateStar"
                                                     name="rate1" 
                                                     starCount={5}
-                                                    value={Rating}
+                                                    value={this.state.Rating}
                                                     onStarClick={this.onStarClick.bind(this)}
                                                 />
                                             <hr/>
@@ -341,29 +331,8 @@ class ViewNurseProfile extends Component {
                                             <Modal visible={this.state.visible2} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
                                                 <div>
                                                     <Complaint/>
-
                                                 </div>
                                             </Modal>
-                                        </div>
-                                        {/* /.card-body */}
-                                    </div>
-                                    {/* /.card */}
-
-
-                                    {/*Second Card in Right Side*/}
-                                    <div className="card card-primary">
-                                        <div className="card-header text-center">
-                                            <h3 className="card-title text-center"><strong>Verifications</strong></h3>
-                                        </div>
-                                        {/* /.card-header */}
-                                        <div className="card-body">
-                                            <strong><i className="fas fa-email mr-1" /> Email </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-
-                                            <hr />
-                                            <strong><i className="fas fa-mobile mr-1" /> Phone </strong><small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
-
-                                            <hr />
-                                            <strong><i className="far fa-file-alt mr-1" />Reg No </strong><small class="badge badge-danger"><i class="far fa-check-circle mr-2"></i>  Fully Verified</small>
                                         </div>
                                         {/* /.card-body */}
                                     </div>

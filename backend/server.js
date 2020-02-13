@@ -12,6 +12,8 @@ const userRatingRoute = require('./rating.route');
 const userReviewRoute = require('./review.route');
 const UserRequestRoute = require('./request.route');
 const UserAcceptRoute = require('./accept.route')
+const complaintRoute = require('./complaint.route');
+
 
 //connecting database
 mongoose.Promise = global.Promise;
@@ -32,7 +34,7 @@ app.use('/rating', userRatingRoute);
 app.use('/review', userReviewRoute);
 app.use('/request', UserRequestRoute);
 app.use('/accept', UserAcceptRoute);
-
+app.use('/complaint', complaintRoute);
 
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {

@@ -21,12 +21,8 @@ import NurseCalendar from "./components/profiles/nurse/NurseCalendar";
 import UserReport from "./components/profiles/admin/userReports";
 import Complaint from "./components/profiles/complaint";
 import ClientViewNurseCalendar from "./components/profiles/nurse/ClientViewNurseCalendar";
-
-
-
-
-
-
+import UserDetails from "./components/profiles/admin/userDetails";
+import { Row } from "react-bootstrap";
 
 class App extends Component {
   render() {
@@ -51,8 +47,7 @@ class App extends Component {
         <Route path="/clientviewnursecalendar/:id" exact component={ClientViewNurseCalendar} />
         <Route path="/userReport" exact component={UserReport} />
         <Route path ="/complaint" exact component={Complaint}/>
-
-      
+        <Route path="/userTable" exact component={UserDetails}/>
 
       </Router>
     );

@@ -1,9 +1,39 @@
 import React, { Component } from 'react'
+import axios from '../../../../backend/node_modules/axios';
+
 
 export default class Adminup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        visibleUserCount : true,
+    }
+}
+
+componentDidMount(){
+    axios.get('http://localhost:4000/user/countNurses')
+        .then(response => {
+            this.setState({
+                nurseCount : response.data.nurseCount
+            })
+
+            console.log(this.state.nurseCount)
+        })
+
+    axios.get('http://localhost:4000/user/countClients')
+    .then(response => {
+        this.setState({
+            clientCount : response.data.clientCount,
+            visibleUserCount : true
+        })
+
+        console.log(this.state.clientCount)
+    })
+}
     render() {
       return (
         <div>
+          
           {/* Content Wrapper. Contains page content */}
           <div className="content-wrapper">
             {/* Content Header (Page header) */}
@@ -17,6 +47,7 @@ export default class Adminup extends Component {
                     <ol className="breadcrumb float-sm-right">
                       <li className="breadcrumb-item"><a href="#">Home</a></li>
                       <li className="breadcrumb-item active">Admin Dashboard</li>
+                      
                     </ol>
                   </div>{/* /.col */}
                 </div>{/* /.row */}
@@ -60,7 +91,7 @@ export default class Adminup extends Component {
           </span>
               <div class="info-box-content">
                           <span class="info-box-text">Nurses</span>
-                          <span class="info-box-number">760</span>
+                          <span class="info-box-number">{this.state.nurseCount}</span>
                         </div>
               {/* /.info-box-content */}
             </div>
@@ -73,7 +104,7 @@ export default class Adminup extends Component {
               <span className="info-box-icon bg-warning elevation-1"><i className="fas fa-users" /></span>
               <div className="info-box-content">
                 <span className="info-box-text">Clients</span>
-                <span className="info-box-number">2,000</span>
+                <span className="info-box-number">{this.state.clientCount}</span>
               </div>
               {/* /.info-box-content */}
             </div>
