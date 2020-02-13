@@ -4,7 +4,6 @@ import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
 import StarRatingComponent from 'react-star-rating-component';
-import { fontSize } from "@material-ui/system";
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
 
@@ -63,13 +62,13 @@ class ViewNurseProfile extends Component {
         }
 
         const checkObj = {
-            nurseEmail: this.state.profile_data.Email,
-            clientEmail: this.state.clientEmail
+            RatesUser: this.state.profile_data.Email,
+            RatedBy: this.state.clientEmail
         }
 
         const userObj = {
             Rating: nextValue,
-            nurseEmail: this.state.profile_data.Email
+            RatedUser: this.state.profile_data.Email
         }
 
         const headers = {
@@ -80,6 +79,20 @@ class ViewNurseProfile extends Component {
         axios.post('http://localhost:4000/rating/checkPresence', checkObj, { headers: headers })
             .then(res => {
                 if (res.data.success) {
+                    this.setState({
+                        toDeleteRating : res.data.response_body.Rating
+                    })
+
+                    const toReduce = {
+                        Rating: this.state.toDeleteRating,
+                        RatedUser: this.state.profile_data.Email
+                    }
+                    
+                    axios.put('http://localhost:4000/user/deductRating', toReduce)
+                        .then(response => {
+                            //console.log(response.data);
+                        });
+
                     axios.post('http://localhost:4000/rating/delete', obj)
                         .then(response => {
                             //console.log(response.data);
