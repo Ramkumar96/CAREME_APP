@@ -143,4 +143,16 @@ ComplaintRoutes.route('/countClientComplaints').post(function (req,res){
 //   })
 // })
 
+//retrieve complaint data for admin purposes
+ComplaintRoutes.route('/complaintDetails').get(function (req, res) {
+  Complaint.find(function(err, complaints){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(complaints);
+    }
+  });
+});
+
 module.exports = ComplaintRoutes;

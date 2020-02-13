@@ -43,6 +43,8 @@ class ViewNurseProfile extends Component {
                 })
 
                 localStorage.setItem("accusedEmail", this.state.profile_data.Email);
+                localStorage.setItem("accusedUserFName", this.state.profile_data.FirstName);
+                localStorage.setItem("accusedUserLName", this.state.profile_data.LastName);
                 localStorage.setItem("accusedByID", 1);
                 localStorage.setItem("accusedUserID", 0);
             })
