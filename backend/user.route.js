@@ -284,6 +284,44 @@ UserRegRoutes.route('/countUsersDistrict').post(function (req,res){
 })
 
 
+//count number of new users district wise per month
+UserRegRoutes.route('/countUsersDistrictMonth').post(function (req,res){
+  const yearToFind = req.body.year;
+  const monthToFind = req.body.month;
+  const userCountDistrict = [0,0,0,0];
+
+  UserReg.find({$or: [{"userID" : 0}, {"userID" : 1}]})
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if (response[i].RegDate.getFullYear() == yearToFind && response[i].RegDate.getMonth() == monthToFind-1){
+          switch(response[i].Location){
+            case("Colombo"):
+              userCountDistrict[0]++;
+              break;
+
+            case("Galle"):
+              userCountDistrict[1]++;
+              break;
+
+            case("Gampaha"):
+              userCountDistrict[2]++;
+              break;
+
+            case("Kurunegala"):
+              userCountDistrict[3]++;
+              break;
+          }
+        }
+    }
+
+    console.log(userCountDistrict);
+
+    res.status(200).send({
+      userCountDistrict: userCountDistrict
+    })
+  })
+})
+
 //count number of new users district wise per year
 UserRegRoutes.route('/countNursesType').post(function (req,res){
   const yearToFind = req.body.year;
@@ -329,6 +367,52 @@ UserRegRoutes.route('/countNursesType').post(function (req,res){
   })
 })
 
+
+//count number of new users district wise per year
+UserRegRoutes.route('/countNursesTypeMonth').post(function (req,res){
+  const yearToFind = req.body.year;
+  const monthToFind = req.body.month;
+  const nurseTypeCount = [0,0,0,0,0,0];
+
+  UserReg.find({"userID" : 0})
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if (response[i].RegDate.getFullYear() == yearToFind && response[i].RegDate.getMonth() == monthToFind-1){
+          switch(response[i].nurseType){
+            case("Emergency"):
+              nurseTypeCount[0]++;
+              break;
+
+            case("Surgical"):
+              nurseTypeCount[1]++;
+              break;
+
+            case("Geriatric"):
+              nurseTypeCount[2]++;
+              break;
+
+            case("Midwife"):
+              nurseTypeCount[3]++;
+              break;
+
+            case("Pediatric"):
+              nurseTypeCount[4]++;
+              break;
+
+            case("Psychiatric"):
+              nurseTypeCount[5]++;
+              break;
+          }
+        }
+    }
+
+    console.log(nurseTypeCount);
+
+    res.status(200).send({
+     nurseTypeCount: nurseTypeCount
+    })
+  })
+})
 
 //count number of nurses registered throughout a year
 UserRegRoutes.route('/countNursesYear').post(function (req,res){

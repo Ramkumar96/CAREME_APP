@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from './../../../backend/node_modules/axios';
 
 class Complaint extends Component {
   constructor(props) {
@@ -35,6 +36,20 @@ class Complaint extends Component {
 
   handleSubmit (event) {
 	const templateId = 'template_id';
+
+	const data = {
+		accusedBy : localStorage.getItem('user_Email'),
+		accusedByID : localStorage.getItem('accusedByID'),
+		accusedUserID : localStorage.getItem('accusedUserID'),
+		accusedUser : localStorage.getItem('accusedEmail'),
+		complainedDate : new Date(),
+		complaint : this.state.feedback
+	}
+
+	axios.post('http://localhost:4000/complaint/add', data)
+		.then(res => { 
+			//console.log(res.data) 
+		});
 
 	this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.Name, reply_to: this.state.Email})
   }

@@ -1,12 +1,9 @@
-import { VictoryBar, VictoryGroup, VictoryChart, VictoryPie, VictoryTheme, VictoryLine, VictoryAxis } from 'victory';
+import { VictoryBar, VictoryChart, VictoryPie, VictoryTheme, VictoryAxis } from 'victory';
 import React, { Component } from 'react';
 import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
 import ProfileNavbar from "../ProfileNavbar";
-import { textAlign, fontSize } from '@material-ui/system';
 import { Button, Form, Col, Row } from 'react-bootstrap';
-import { yellow } from '@material-ui/core/colors';
-import { Chart } from "chart.js";
 
 class UserReport extends Component {
     constructor (props){
@@ -82,6 +79,25 @@ class UserReport extends Component {
                         console.log("The total active clients now : ", this.state.totalActiveClients)
                     })
 
+                axios.post('http://localhost:4000/user/countUsersDistrictMonth', data, {headers: headers})
+                .then(response => {
+                    this.setState({
+                        resBody: response.data.userCountDistrict
+                    })
+
+                    let j=1;
+                    for (let i=0; i<4; i++){
+                        this.state.userCountDistrict[j] = this.state.resBody[i];
+                        j++;
+                    }
+
+                    console.log("The total users according to districts : ", this.state.userCountDistrict)
+
+                    this.setState({
+                        userCountDistrict: this.state.userCountDistrict
+                    })
+                })
+
 
                 axios.post('http://localhost:4000/user/countNursesMonth', data, {headers: headers})
                     .then(response=> {
@@ -135,6 +151,43 @@ class UserReport extends Component {
                         })
 
                         console.log("Number of reviews this month : ", this.state.reviewCount);
+                    })
+
+                axios.post('http://localhost:4000/complaint/countNurseComplaints', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            nurseComCount: response.data.nurseComCount
+                        })
+
+                        console.log("Number of complaints against nurses this month : ", this.state.nurseComCount);
+                    })
+
+                axios.post('http://localhost:4000/complaint/countClientComplaints', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            clientComCount: response.data.clientComCount
+                        })
+
+                        console.log("Number of complaints against clients this month : ", this.state.clientComCount);
+                    })
+
+                axios.post('http://localhost:4000/user/countNursesTypeMonth', data, {headers: headers})
+                    .then(response => {
+                        this.setState({
+                            resBody: response.data.nurseTypeCount
+                        })
+
+                        let j=1;
+                        for (let i=0; i<4; i++){
+                            this.state.nurseTypeCount[j] = this.state.resBody[i];
+                            j++;
+                        }
+
+                        console.log("The total nurses according to type : ", this.state.nurseTypeCount)
+
+                        this.setState({
+                            nurseTypeCount : this.state.nurseTypeCount
+                        })
                     })
 
                 this.setState ({
@@ -309,11 +362,15 @@ class UserReport extends Component {
     }
     
     render() {
-        var newUsers, deacUsers, userRatesRevs;
-        if (this.state.activeNurses!=0 && this.state.activeClients!=0){
+        var newUsers, deacUsers, userRatesRevs, userComplaints;
+
+        if (this.state.activeNurses!=0 || this.state.activeClients!=0){
             newUsers = <VictoryPie 
             radius = {30}
             colorScale = {["orange", "gold"]}
+            innerRadius = {15}
+            outerRadius = {30}
+            height = {85}
             data = {[
                 {x: "Nurses\n"+this.state.activeNurses, y:this.state.activeNurses},
                 {x: "Clients\n"+this.state.activeClients, y:this.state.activeClients}
@@ -326,10 +383,13 @@ class UserReport extends Component {
             newUsers = <h5>No new registered users for this period.</h5>
         }
 
-        if (this.state.deactivatedClients!=0 && this.state.deactivatedNurses!=0){
+        if (this.state.deactivatedClients!=0 || this.state.deactivatedNurses!=0){
             deacUsers = <VictoryPie 
                 radius = {30}
                 colorScale = {["orange", "gold"]}
+                innerRadius = {15}
+                outerRadius = {30}
+                height = {85}
                 data = {[
                     {x: "Nurses\n"+this.state.deactivatedNurses, y:this.state.deactivatedNurses},
                     {x: "Clients\n"+this.state.deactivatedClients, y:this.state.deactivatedClients}
@@ -342,10 +402,13 @@ class UserReport extends Component {
             deacUsers = <h5>No user deactivations this month</h5>
         }
 
-        if (this.state.ratingCount!=0 && this.state.reviewCount!=0){
+        if (this.state.ratingCount!=0 || this.state.reviewCount!=0){
             userRatesRevs = <VictoryPie 
                 radius = {30}
                 colorScale = {["orange", "gold"]}
+                innerRadius = {15}
+                outerRadius = {30}
+                height = {85}
                 data = {[
                     {x: "Ratings\n"+this.state.ratingCount, y:this.state.ratingCount},
                     {x: "Reviews\n"+this.state.reviewCount, y:this.state.reviewCount}
@@ -356,6 +419,25 @@ class UserReport extends Component {
         
         else {
             userRatesRevs = <h5>No user ratings or reviews this month</h5>
+        }
+
+        if (this.state.nurseComCount!=0 || this.state.clientComCount!=0){
+            userComplaints = <VictoryPie 
+                radius = {30}
+                colorScale = {["orange", "gold"]}
+                innerRadius = {15}
+                outerRadius = {30}
+                height = {85}
+                data = {[
+                    {x: "Against nurses\n"+this.state.nurseComCount, y:this.state.nurseComCount},
+                    {x: "Against Clients\n"+this.state.clientComCount, y:this.state.clientComCount}
+                ]}
+                style={{ labels: { fontSize: 7}}}
+            />
+        }
+        
+        else {
+            userComplaints = <h5>No user complaints this month</h5>
         }
 
         if (this.state.visibleMonthReport){
@@ -369,12 +451,14 @@ class UserReport extends Component {
                         <div className="content-wrapper"> 
                             <h2>CareMe Usage Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
                             <br/>
-
+                                <div className="box-left">
                                 <h3> User Classification </h3>
                                 <VictoryPie 
                                     radius = {30}
-                                    padding = {{top: 10}}
                                     colorScale = {["orange", "gold"]}
+                                    innerRadius = {15}
+                                    outerRadius = {30}
+                                    height = {85}
                                     data = {[
                                         {x: "Nurses\n"+this.state.totalActiveNurses, y:this.state.totalActiveNurses},
                                         {x: "Clients\n"+this.state.totalActiveClients, y:this.state.totalActiveClients}
@@ -382,17 +466,76 @@ class UserReport extends Component {
                                     style={{ labels: { fontSize: 7}}}
                                 />     
                                 <br/> 
+                                </div>
                             
                                 <h3> New user registrations for the month </h3>
                                 {newUsers}
                                 <br/>
+
+                                <h3 style= {{paddingLeft:15}}>User registrations based on location in the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h3>
+                                <VictoryChart 
+                                    maxDomain ={{y:20}}
+                                    height = {125}
+                                    width = {400}
+                                    theme={VictoryTheme.material}
+                                    padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
+                                    domainPadding={{x:15}}
+                                    >
+
+                                    <VictoryAxis dependentAxis
+                                        style = {{ tickLabels: {fontSize: 6}}}
+                                    />
+
+                                    <VictoryAxis crossAxis
+                                        style = {{ tickLabels : {fontSize: 6}}}
+                                    />
+                                        
+                                    <VictoryBar
+                                        alignment="middle"
+                                        style = {{ data : {fill: "#c43a31"}}}
+                                        cornerRadius={{topLeft: 5}}
+                                        data={this.state.userCountDistrict}
+                                        categories={{ x: this.state.districts }}
+                                    />
+                                </VictoryChart>
                                     
+                                <h3 style= {{paddingLeft:15}}>Nurse registrations based on type in the month of {this.state.monthLabels[this.state.month-1]} -  {this.state.year}</h3>
+                                <VictoryChart 
+                                    maxDomain ={{y:20}}
+                                    height = {125}
+                                    width = {400}
+                                    theme={VictoryTheme.material}
+                                    padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
+                                    domainPadding={{x:8}}
+                                    >
+
+                                    <VictoryAxis dependentAxis
+                                        style = {{ tickLabels: {fontSize: 6}}}
+                                    />
+
+                                    <VictoryAxis crossAxis
+                                        style = {{ tickLabels : {fontSize: 6}}}
+                                    />
+                                        
+                                    <VictoryBar
+                                        alignment="middle"
+                                        style = {{ data : {fill: "#c43a31"}}}
+                                        cornerRadius={{topLeft: 5}}
+                                        data={this.state.nurseTypeCount}
+                                        categories={{ x: this.state.nurseTypes }}
+                                    />
+                                </VictoryChart>
+
                                 <h3> User deactivations for the month </h3>
                                 {deacUsers}
                                 <br/>
 
                                 <h3> User ratings and reviews for the month </h3>
                                 {userRatesRevs}
+                                <br/>
+
+                                <h3> User complaints for the month </h3>
+                                {userComplaints}
                                 <br/>
                         </div>
                     </div>

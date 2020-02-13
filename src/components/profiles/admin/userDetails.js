@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import axios from "../../../../backend/node_modules/axios";
 import TableRow from './TableRow';
 import InteractiveTable from 'react-interactive-table';
-import Admindashleftnav from "./admindashleftnav";
-import ProfileNavbar from "../ProfileNavbar";
 
 class UserDetails extends Component{
     constructor(props){
@@ -38,10 +36,6 @@ class UserDetails extends Component{
   
       render() {
         return (
-          <div>
-            <Admindashleftnav />
-            <div>
-              <ProfileNavbar/>
               <div className="content-wrapper">
                 <h3 align="center">CareMe Users</h3>
                 <InteractiveTable
@@ -96,8 +90,6 @@ class UserDetails extends Component{
                     }}
                 />
               </div>
-            </div>
-          </div>
         );
       }
 }
