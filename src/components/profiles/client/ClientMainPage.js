@@ -84,29 +84,29 @@ class ClientMainPage extends Component {
         if (this.state.profile_data){
             if (this.state.profile_data.Location == null){
                 if (this.state.profile_data.profilePic == null){
-                    this.setState = {
+                    this.setState( {
                         completion : 75
-                    }
+                    })
                 }
 
                 else {
-                    this.setState = {
+                    this.setState ( {
                         completion : 90
-                    }
+                    })
                 }
             }
 
             else {
                 if (this.state.profile_data.profilePic == null){
-                    this.setState = {
+                    this.setState ( {
                         completion : 80
-                    }
+                    })
                 }
 
                 else {
-                    this.setState = {
+                    this.setState ( {
                         completion : 100
-                    }
+                    })
                 }
             }
         }

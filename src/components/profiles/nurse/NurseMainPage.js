@@ -133,9 +133,9 @@ class NurseMainPage extends Component {
                 completion = completion - 10;
             }
 
-            this.setState = {
+            this.setState ({
                 completedPer : completion
-            }
+            })
         }
     }
 

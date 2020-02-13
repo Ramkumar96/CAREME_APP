@@ -6,7 +6,6 @@ import Calendar from "./Calender";
 import StarRatingComponent from 'react-star-rating-component';
 import { fontSize } from "@material-ui/system";
 import { Button, Form, Col } from 'react-bootstrap';
-import { tsExpressionWithTypeArguments } from "@babel/types";
 import Complaint from "../complaint";
 
 class ViewNurseProfile extends Component {
