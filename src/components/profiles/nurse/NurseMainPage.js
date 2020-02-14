@@ -195,9 +195,6 @@ class NurseMainPage extends Component {
 
                                                 <ul className="list-group list-group-unbordered mb-3 text-center">
                                                     <li className="list-group-item">
-                                                        <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
-                                                    </li>
-                                                    <li className="list-group-item">
                                                         <h6 className="text-center">Gender : {this.state.profile_data.nurseGender}</h6>
                                                     </li>
                                                     <li className="list-group-item">
@@ -205,10 +202,6 @@ class NurseMainPage extends Component {
                                                     </li>
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
-                                                    </li>
-
-                                                    <li className="list-group-item text-center">
-                                                        <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -334,6 +327,16 @@ class NurseMainPage extends Component {
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />
+
+                                            <hr />
+                                            <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
+                                            <div>
+                                            <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
+                                                <ChatComponent/>                                                    
+                                            </Modal>
+                                            </div>
+                                            <hr />
+
                                             {/* Calender for booking */}
                                             <a href="/nursecalendar" className="btn btn-warning btn-block"><b>Edit Availability</b>
                                             </a>
@@ -375,12 +378,6 @@ class NurseMainPage extends Component {
                                             />                                            
                                         </div>
                                         {/* /.card-body */}
-                                    </div>
-                                    <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
-                                    <div>
-                                    <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
-                                        <ChatComponent/>                                                    
-                                    </Modal>
                                     </div>
                                     {/* /.card */}
 

@@ -173,14 +173,20 @@ class ClientMainPage extends Component {
                                             <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile pic" />
                                             {/* <div><ProfilePicUpload/></div> */}
                                         </div>
+                                        <br />
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
-
                                         <ul className="list-group list-group-unbordered mb-3 text-center">
                                             <li className="list-group-item">
-                                                <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
-                                            </li>
-                                            <li className="list-group-item">
-                                                <h6 className="text-center">Member since 2019</h6>
+                                                <strong>Ratings </strong>
+                                                <br/>
+                                                <div style={{fontSize: 28}}>
+                                                    <StarRatingComponent
+                                                        name="rate1"
+                                                        editing={false}
+                                                        starCount={5}
+                                                        value={finalRating} 
+                                                    />
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -281,25 +287,22 @@ class ClientMainPage extends Component {
                                 {/*First Card in Right Side*/}
                                 <div className="card card-primary">
                                     <div className="card-body text-center">
-                                        <strong>Ratings </strong>
-                                        <br/>
-                                        <div style={{fontSize: 28}}>
-                                            <StarRatingComponent
-                                                name="rate1"
-                                                editing={false}
-                                                starCount={5}
-                                                value={finalRating} 
-                                            />
-                                        <hr />
-                                        </div>
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
-
                                         <hr />
+
+                                        <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
+                                        <div>
+                                        <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
+                                            <ChatComponent/>                                                    
+                                        </Modal>
+                                        </div>
+                                        <hr/>
+
                                         <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b>
                                         </a>
-
                                         <hr />
+
                                         <input type="button" class="btn btn-danger btn-block" value="Deactivate" onClick={() => this.openDeacModal()} />
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
                                             <h1 align="center">Deactivate</h1>
@@ -329,13 +332,6 @@ class ClientMainPage extends Component {
                                         />
                                     </div>
                                     {/* /.card-body */}
-                                </div>
-                                
-                                <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
-                                <div>
-                                <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
-                                    <ChatComponent/>                                                    
-                                </Modal>
                                 </div>
                                 {/* /.card */}
                             </div>
