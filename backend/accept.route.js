@@ -21,6 +21,17 @@ UserAcceptRoute.route('/add').post(function (req, res) {
     // });
   });
 
+//Retrive Notification Data
+UserAcceptRoute.route('/getnotification/:id').get(function(req, res){
+  UserAccepting.find({AcceptedClientID: req.params.id} , function (err, Notification) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.json(Notification);
+          console.log(Notification)
+        }
+});
+});
 
 //   // Deleting Notification Data
 //   UserRequestRoute.route('/delete').post(function (req, res) {
@@ -36,16 +47,6 @@ UserAcceptRoute.route('/add').post(function (req, res) {
 // })
 
 
-// //Retrive Notification Data
-// UserRequestRoute.route('/notification/:id').get(function(req, res){
-//     UserRequesting.find({RequestedNurseID: req.params.id} , function (err, Notification) {
-//         if (err) {
-//           console.log(err);
-//         } else {
-//           res.json(Notification);
-//           console.log(Notification)
-//         }
-// });
-// });
+
   
 module.exports = UserAcceptRoute;

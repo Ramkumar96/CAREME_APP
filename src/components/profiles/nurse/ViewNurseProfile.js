@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
 import axios from "axios";
 import Modal from 'react-awesome-modal';
-import Calendar from "./Calender";
+
 import StarRatingComponent from 'react-star-rating-component';
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
