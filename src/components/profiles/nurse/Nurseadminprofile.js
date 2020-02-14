@@ -3,17 +3,17 @@ import ProfileNavbar from '../ProfileNavbar';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import NurseEdit from "../edit/nurseedit";
 import Modal from 'react-awesome-modal';
-
+import Calendar from "./Calender";
 import { Button } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 import NurseCalendar from "./NurseCalendar";
 import StarRatingComponent from "react-star-rating-component";
 import NurseNotification from "./booking/NurseNotification";
 import Progress from "react-progressbar";
-import Footer from "../../homepage/footer/Footer";
-import ChatComponent from "../messaging/ChatComponent";
+//import Nurseadminprofile from "../edit/AdminNurseEdit";
+import AdminNurseEdit from "../edit/AdminNurseEdit";
 
-class NurseMainPage extends Component {
+class NurseAdminMainPage extends Component {
 
     constructor(props) {
         super(props);
@@ -21,8 +21,7 @@ class NurseMainPage extends Component {
         this.state = {
             profile_data: null,
             visible: false,
-            completedPer: 100,
-            visible3: false
+            completedPer: 100
         }
     }
 
@@ -54,18 +53,6 @@ class NurseMainPage extends Component {
                 Password: false
             }
         });
-    }
-
-    openMsgModal(){
-        this.setState({
-            visible3: true
-        })
-    }
-
-    closeMsgModal(){
-        this.setState({
-            visible3: false
-        })
     }
 
     deactivate() {
@@ -107,16 +94,38 @@ class NurseMainPage extends Component {
         this.getData()
     }
 
-    
+    // getData = () => {
+    //     var token = localStorage.getItem('id');
+    //     axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
+    //         .then(response => {
+    //             console.log(response.data.profile_data)
+    //             this.setState({
+    //                 profile_data: response.data.profile_data,
+    //             })
+
+    //             localStorage.setItem("accusedEmail", this.state.profile_data.Email);
+    //             localStorage.setItem("accusedUserFName", this.state.profile_data.FirstName);
+    //             localStorage.setItem("accusedUserLName", this.state.profile_data.LastName);
+    //             localStorage.setItem("accusedByID", 1);
+    //             localStorage.setItem("accusedUserID", 0);
+    //         })
+    // }    
 
     getData = () => {
-        var token = localStorage.getItem('id');
-        axios.get('http://localhost:4000/user/userdata/' + token)
+        var token = this.props.match.params.id;
+        //console.log(token)
+        axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
             .then(response => {
                 //console.log(response.data.profile_data)
                 this.setState({
                     profile_data: response.data.profile_data
                 })
+                //console.log(response.data.profile_data)
+                // localStorage.setItem("accusedEmail", this.state.profile_data.Email);
+                // localStorage.setItem("accusedUserFName", this.state.profile_data.FirstName);
+                // localStorage.setItem("accusedUserLName", this.state.profile_data.LastName);
+                // localStorage.setItem("accusedByID", 2);
+                // localStorage.setItem("accusedUserID", 0);
             })
 
         let completion = 100;
@@ -198,6 +207,9 @@ class NurseMainPage extends Component {
 
                                                 <ul className="list-group list-group-unbordered mb-3 text-center">
                                                     <li className="list-group-item">
+                                                        <h6 className="text-center">@{this.state.profile_data.FirstName}{this.state.profile_data.LastName}</h6>
+                                                    </li>
+                                                    <li className="list-group-item">
                                                         <h6 className="text-center">Gender : {this.state.profile_data.nurseGender}</h6>
                                                     </li>
                                                     <li className="list-group-item">
@@ -205,6 +217,10 @@ class NurseMainPage extends Component {
                                                     </li>
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
+                                                    </li>
+
+                                                    <li className="list-group-item text-center">
+                                                        <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -297,7 +313,7 @@ class NurseMainPage extends Component {
                                                 </div>
 
                                                 <div className="tab-pane" id="settings">
-                                                    <NurseEdit
+                                                    <AdminNurseEdit
                                                         loadData={this.getData} />
                                                 </div>
 
@@ -330,16 +346,6 @@ class NurseMainPage extends Component {
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />
-
-                                            <hr />
-                                            <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
-                                            <div>
-                                            <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
-                                                <ChatComponent/>                                                    
-                                            </Modal>
-                                            </div>
-                                            <hr />
-
                                             {/* Calender for booking */}
                                             <a href="/nursecalendar" className="btn btn-warning btn-block"><b>Edit Availability</b>
                                             </a>
@@ -389,12 +395,9 @@ class NurseMainPage extends Component {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <Footer/>
-                </div>
             </div>
         );
     }
 }
 
-export default NurseMainPage;
+export default NurseAdminMainPage;

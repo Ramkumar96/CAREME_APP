@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
 import ProfilePicUpload from '../profilePicUpload';
-import Dialog from 'react-bootstrap-dialog';
 
 function validate (Tele){
     return {
@@ -22,7 +21,7 @@ function validateTel (tel){
     }
 }
 
-class NurseEdit extends Component {
+class AdminNurseEdit extends Component {
 
     constructor(props) {
         super(props);
@@ -55,16 +54,10 @@ class NurseEdit extends Component {
         this.getData()
     }
 
-    onShowDialog(){
-        this.dialog.showAlert("Details added successfully");
-    }
-
-    onShowTelephoneError(){
-        this.dialog.showAlert("Your telephone number is invalid");
-    }
 
     getData = () => {
         var token = localStorage.getItem('id');
+        //console.log(this.props.req.params.id)
         axios.get('http://localhost:4000/user/userdata/' + token)
             .then(response => {
                 console.log(response.data.profile_data)
@@ -167,7 +160,7 @@ class NurseEdit extends Component {
         }
     
         else if(!validateTel(this.state.Tel)){
-            this.onShowTelephoneError();
+            alert("Enter valid telephone number");
         }
     
         else {
@@ -179,7 +172,7 @@ class NurseEdit extends Component {
             //console.log(nurseobj);
             axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
                 .then(response => {
-                    this.onShowDialog();
+                    alert("Details updated successfully");
                     if (response.data.success) {
                         this.getData()
                         this.props.loadData()
@@ -332,6 +325,18 @@ class NurseEdit extends Component {
 
 
                         {/* Update Profile Picture */}
+                        {/* <div className="form-group">
+                            <label htmlFor="exampleInputFile">Update your Profile Picture</label>
+                            <div className="input-group">
+                                <div className="custom-file">
+                                    <input type="file" className="custom-file-input" id="exampleInputFile" />
+                                    <label className="custom-file-label" htmlFor="exampleInputFile">Choose file</label>
+                                </div>
+                                <div className="input-group-append">
+                                    <span className="input-group-text" id>Upload</span>
+                                </div>
+                            </div>
+                        </div> */}
                         <div><ProfilePicUpload/></div>
 
                         {/* Edit Experience */}
@@ -419,11 +424,9 @@ class NurseEdit extends Component {
                             Submit</button>
                     </div>
                 </form>
-
-                <Dialog ref={(component) => { this.dialog = component }} />
             </div>
         )
     }
 }
 
-export default NurseEdit;
+export default AdminNurseEdit;

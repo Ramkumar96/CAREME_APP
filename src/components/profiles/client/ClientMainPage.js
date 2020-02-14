@@ -7,6 +7,7 @@ import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import  Progress  from "react-progressbar";
+import NurseListCLview from "../../list/NurseListCLview"
 import ClientNotification from "../nurse/booking/ClientNotification";
 import Footer from "../../homepage/footer/Footer";
 import ChatComponent from "../messaging/ChatComponent";
@@ -299,6 +300,7 @@ class ClientMainPage extends Component {
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                         <hr />
+                                        <a href="/nurselistclview" className="btn btn-warning btn-block"><b>Find A Nurse</b>
 
                                         <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
                                         <div>

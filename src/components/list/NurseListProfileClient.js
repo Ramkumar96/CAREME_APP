@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 
 
-export default class TestList extends Component {
+export default class NurseListProfileClient extends Component {
   constructor(){
     super();
     this.state={
@@ -29,7 +29,7 @@ export default class TestList extends Component {
             <div id={`${this.props.exp}`} className={`${this.props.exp}`} >
               <div id={`${this.props.nType}`} className={`${this.props.nType}`}>
                 <div className="card " style={{ width: '18rem' }}>
-                  <img className="card-img-top" src={this.props.pic} alt="Card image cap" />
+                  <img className="card-img-top" src="../../dist/img/nurse.jpeg" alt="Card image cap" />
                   <div className="card-body">
                     <h5 className="card-title"><b>{this.props.fname} {this.props.lname}</b></h5>
                     <p className="card-text"><b>About:</b> {this.props.nType} Nurse </p>
@@ -45,9 +45,9 @@ export default class TestList extends Component {
                         {/* <button class="btn btn-sm btn-primary" type="submit" href={'/viewnurseprofile/'+this.props.id}>
                           View Profile
                         </button> */}
-                        {/* <button class="btn btn-sm btn-primary" type="submit" >
+                        <button class="btn btn-sm btn-primary" type="submit" >
                           <a href={'/viewnurseprofile/'+this.props.id}><i className="fas fa-user" /> View Profile</a>
-                        </button> */}
+                        </button>
 
 
                       </div></center>

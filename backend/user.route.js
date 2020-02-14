@@ -72,6 +72,7 @@ UserRegRoutes.route('/userdata/:id').get(function (req, res) {
 });
 
 
+
 //userUpdate
 UserRegRoutes.route('/userdata/update/:id').put(function (req, res) {
   //console.log(req.body)
