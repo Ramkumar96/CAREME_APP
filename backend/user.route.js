@@ -6,6 +6,8 @@ let multer = require('multer'),
   mongoose = require('mongoose'),
   uuidv4 = require('uuid/v4');
 
+const StreamChat = require('stream-chat').StreamChat;
+
 // User Registration
 UserRegRoutes.route('/add').post(function (req, res) {
   console.log(req.body)
@@ -31,11 +33,20 @@ UserRegRoutes.route('/login').post(function (req, res) {
       console.log(req_password, res_password)
       console.log(req_password == res_password)
       if (req_password == res_password) {
+        
+        var n = req.body.Email.indexOf("@");
+        var name = req.body.Email.slice(0, n);
+        console.log(name);
+        const client = new StreamChat('', 'nvnzrhsag4wjqmncstnsxzdnfxvzdjzt57732s4snjf7n46utfyaa3t4j4kxw5sf');
+        const chatToken = client.createToken(name);
+        console.log(chatToken);
+
         console.log("login sucess")
         res.status(200).send({
           success: true,
           message: "Login success",
-          user_data: response
+          user_data: response,
+          chat_token: chatToken
         })
       } else {
         res.status(200).send({

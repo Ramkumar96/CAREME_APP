@@ -21,6 +21,7 @@ import NurseCalendar from "./components/profiles/nurse/NurseCalendar";
 import UserReport from "./components/profiles/admin/userReports";
 import Complaint from "./components/profiles/complaint";
 import ClientViewNurseCalendar from "./components/profiles/nurse/ClientViewNurseCalendar";
+import ChatComponent from "./components/profiles/messaging/ChatComponent"
 import ComplaintsReview from "./components/profiles/admin/complaintsReview";
 import { Row } from "react-bootstrap";
 import NurseViewClientProfile from "./components/profiles/client/NurseViewClientProfile";
@@ -48,8 +49,10 @@ class App extends Component {
         <Route path="/clientviewnursecalendar/:id" exact component={ClientViewNurseCalendar} />
         <Route path="/userReport" exact component={UserReport} />
         <Route path ="/complaint" exact component={Complaint}/>
+        <Route path ="/chatcomponent" exact component={ChatComponent}/>
         <Route path="/complaintsReview" exact component={ComplaintsReview} />
         <Route path="/nurseviewclientprofile/:id" exact component={NurseViewClientProfile}/>
+
       </Router>
     );
   }

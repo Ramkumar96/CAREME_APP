@@ -10,6 +10,7 @@ import NurseCalendar from "./NurseCalendar";
 import StarRatingComponent from "react-star-rating-component";
 import NurseNotification from "./booking/NurseNotification";
 import Progress from "react-progressbar";
+import ChatComponent from "../messaging/ChatComponent";
 
 class NurseMainPage extends Component {
 
@@ -19,7 +20,8 @@ class NurseMainPage extends Component {
         this.state = {
             profile_data: null,
             visible: false,
-            completedPer: 100
+            completedPer: 100,
+            visible3: false
         }
     }
 
@@ -51,6 +53,18 @@ class NurseMainPage extends Component {
                 Password: false
             }
         });
+    }
+
+    openMsgModal(){
+        this.setState({
+            visible3: true
+        })
+    }
+
+    closeMsgModal(){
+        this.setState({
+            visible3: false
+        })
     }
 
     deactivate() {
@@ -361,6 +375,12 @@ class NurseMainPage extends Component {
                                             />                                            
                                         </div>
                                         {/* /.card-body */}
+                                    </div>
+                                    <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
+                                    <div>
+                                    <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
+                                        <ChatComponent/>                                                    
+                                    </Modal>
                                     </div>
                                     {/* /.card */}
 

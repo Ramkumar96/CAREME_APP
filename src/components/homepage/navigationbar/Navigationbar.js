@@ -28,6 +28,7 @@ class Navigationbar extends Component {
             Password: '',
             redirect_profile: false,
             user_type: null,
+            chatting_token:null,
 
             touched: {
                 Email: false,
@@ -112,7 +113,7 @@ class Navigationbar extends Component {
             if(res.data.success){
                 axios.post('http://localhost:4000/user/login', data,{headers:headers})
                     .then(response => {
-                        //console.log(response.data)
+                        console.log(response.data)
                         if (response.data.success) {
                             console.log(response.data.user_data)
                             localStorage.setItem("id", response.data.user_data._id)
@@ -120,6 +121,8 @@ class Navigationbar extends Component {
                             localStorage.setItem("user_name", response.data.user_data.FirstName)
                             localStorage.setItem("user_lname", response.data.user_data.LastName);
                             localStorage.setItem("user_Email", response.data.user_data.Email)
+                            localStorage.setItem("user_pic", response.data.profilePic)
+                            localStorage.setItem("chat_token", response.data.chat_token)
                             this.setState({
                                 redirect_profile: true,
                                 user_type:response.data.user_data.userID
