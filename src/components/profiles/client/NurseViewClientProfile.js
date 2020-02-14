@@ -6,6 +6,7 @@ import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
+import Dialog from 'react-bootstrap-dialog';
 
 class NurseViewClientProfile extends Component {
 
@@ -36,6 +37,10 @@ class NurseViewClientProfile extends Component {
         this.setState({
             visible2: false
         })
+    }
+
+    onShowReviewSuccess(){
+        this.dialog.showAlert("Successfully reviewed! Thank you for taking a moment.");
     }
 
     openDeacModal() {
@@ -131,7 +136,6 @@ class NurseViewClientProfile extends Component {
 
         axios.put('http://localhost:4000/user/userdata/updateRating/', userObj, { headers: headers })
             .then(response => {
-                alert("Details successfully updated");
                 if (response.data.success) {
                     this.getData()
                 }
@@ -170,7 +174,7 @@ class NurseViewClientProfile extends Component {
 
         axios.post('http://localhost:4000/review/add', dataObject)
             .then(res => {
-                alert("Review Successful! Thank you for taking a moment.");
+                this.onShowReviewSuccess();
             });
 
         this.setState({
@@ -378,6 +382,8 @@ class NurseViewClientProfile extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Dialog ref={(component) => { this.dialog = component }} />
             </div>
         );
     }
