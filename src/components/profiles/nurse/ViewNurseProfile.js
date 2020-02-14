@@ -6,6 +6,7 @@ import Calendar from "./Calender";
 import StarRatingComponent from 'react-star-rating-component';
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
+import Dialog from 'react-bootstrap-dialog';
 
 class ViewNurseProfile extends Component {
 
@@ -47,6 +48,10 @@ class ViewNurseProfile extends Component {
                 localStorage.setItem("accusedByID", 1);
                 localStorage.setItem("accusedUserID", 0);
             })
+    }
+
+    onShowReviewSuccess(){
+        this.dialog.showAlert("Successfully reviewed! Thank you for taking a moment.");
     }
 
     onStarClick(nextValue) {
@@ -107,7 +112,6 @@ class ViewNurseProfile extends Component {
 
         axios.put('http://localhost:4000/user/userdata/updateRating/', userObj, { headers: headers })
             .then(response => {
-                alert("Details successfully updated");
                 if (response.data.success) {
                     this.getData()
                 }
@@ -158,7 +162,7 @@ class ViewNurseProfile extends Component {
 
         axios.post('http://localhost:4000/review/add', dataObject)
             .then(res => {
-                alert("Review Successful! Thank you for taking a moment.");
+                this.onShowReviewSuccess();
             });
 
         this.setState({
@@ -356,6 +360,8 @@ class ViewNurseProfile extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Dialog ref={(component) => { this.dialog = component }} />
             </div>
         );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
 import ProfilePicUpload from '../profilePicUpload';
+import Dialog from 'react-bootstrap-dialog';
 
 function validate (Tele, Address){
     return {
@@ -85,6 +86,14 @@ class ClientEdit extends Component {
         });
     }
 
+    onShowDialog(){
+        this.dialog.showAlert("Details added successfully");
+    }
+
+    onShowTelephoneError(){
+        this.dialog.showAlert("Your telephone number is invalid");
+    }
+
     handleBlur = field => e => {
         this.setState({
             touched: { ...this.state.touched, [field]: true }
@@ -107,7 +116,7 @@ class ClientEdit extends Component {
         }
 
         else if(!validateTel(this.state.Tel)){
-            alert("Enter valid telephone number");
+            this.onShowTelephoneError();
         }
 
         else {
@@ -119,7 +128,7 @@ class ClientEdit extends Component {
             console.log(nurseobj);
             axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
                 .then(response => {
-                    alert("Details successfully updated");
+                    this.onShowDialog();
                     if (response.data.success) {
                         this.getData()
                         this.props.loadData()
@@ -234,8 +243,9 @@ class ClientEdit extends Component {
                         onClick={this.onUpdate}>
                             Submit</button>
                     </div>
-                </form>
-                
+                </form>                
+
+                <Dialog ref={(component) => { this.dialog = component }} />
                 {/* <div><ProfilePicUpload/></div> */}
             </div>
         )

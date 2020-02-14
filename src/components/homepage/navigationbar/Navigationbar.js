@@ -152,7 +152,7 @@ class Navigationbar extends Component {
                                     Email : false,
                                     Password : false
                                 }
-                            })
+                            });
                         }
 
                         else {
