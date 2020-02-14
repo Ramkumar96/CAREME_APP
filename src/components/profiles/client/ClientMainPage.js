@@ -299,7 +299,7 @@ class ClientMainPage extends Component {
                                         </div>
                                         <hr/>
 
-                                        <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b>
+                                        <a href="/nurselistclview" className="btn btn-warning btn-block"><b>Find A Nurse</b>
                                         </a>
                                         <hr />
 
