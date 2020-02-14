@@ -8,6 +8,7 @@ import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput } from 'stream-chat-react';
+import ChatComponent from "../messaging/ChatComponent";
 import Dialog from 'react-bootstrap-dialog';
 
 class ViewNurseProfile extends Component {
@@ -24,6 +25,7 @@ class ViewNurseProfile extends Component {
             nurseEmail: null,
             response_body: null,
             visible1: false,
+            visible2: false,
             Review: '',
             Rating: 0,
             visible3: false
@@ -187,11 +189,6 @@ class ViewNurseProfile extends Component {
     }
     
 
- 
-     
-    
-
-    
     render() {
         if (!this.state.profile_data) {
             return (
@@ -206,27 +203,30 @@ class ViewNurseProfile extends Component {
 
         const { Rating } = this.setState;
 
-             //chat
+    /** 
+    * @desc: code snippets to start a chat-coversation
+    * @required: stream-chat, stream-chat-react
+    */
             const client = new StreamChat("jh66vkvun7x5");
             const userToken = localStorage.getItem('chat_token');
         
-            const clientEmail = this.state.clientEmail;
-            var n = clientEmail.indexOf("@");
-            var clientName = clientEmail.slice(0, n);
-            console.log(clientName);
+            const senderEmail = this.state.clientEmail;
+            var n = senderEmail.indexOf("@");
+            var senderName = senderEmail.slice(0, n);
+            console.log(senderName);
         
-            const nurseEmail = this.state.profile_data.Email;
-            var m = nurseEmail.indexOf("@");
-            var nurseName = nurseEmail.slice(0, m);
-            console.log(nurseName);
+            const receiverEmail = this.state.profile_data.Email;
+            var m = receiverEmail.indexOf("@");
+            var receiverName = receiverEmail.slice(0, m);
+            console.log(receiverName);
 
-            var channelName = clientName.concat('-',nurseName);
+            var channelName = senderName.concat('-',receiverName);
             console.log(channelName);
         
             client.setUser( //logged in user details
                 {
-                    id: clientName,
-                    name: clientName,
+                    id: senderName,
+                    name: senderName,
                     image: localStorage.getItem('user_pic'),
                 }, 
                 userToken,
@@ -236,9 +236,8 @@ class ViewNurseProfile extends Component {
             const conversation = client.channel('messaging', channelName, {
                 name: channelName,
                 image: localStorage.getItem('user_pic'),
-                members: [clientName, nurseName]
+                members: [senderName, receiverName]
             });
-        //logged in person is clientName
 
         return (
             <div>
@@ -406,11 +405,16 @@ class ViewNurseProfile extends Component {
                                                     <Complaint />
                                                 </div>
                                             </Modal>
-                                        
-                                            <input type="button" class="btn btn-success" value="Send Msg" onClick={() => this.openMsgModal()} />
+
+
+                                            {/* /** 
+                                            * @desc: code snippets to display the chat in.
+                                            * @required: stream-chat, stream-chat-react
+                                            */ }
+                                            <input type="button" class="btn btn-success" value="Send Message to Nurse" onClick={() => this.openMsgModal()} />
                                             <div>
                                             <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
-                                                
+                                            {/* <ChatComponent/> */}
                                             {/* //for holding the chat window */}
      
                                                 <Chat client={client} theme={'messaging light'}>
@@ -426,6 +430,8 @@ class ViewNurseProfile extends Component {
 
                                             </Modal>
                                             </div>
+                                            {/* END of code snippets for chat */}
+
                                         </div>
                                         {/* /.card-body */}
                                     </div>

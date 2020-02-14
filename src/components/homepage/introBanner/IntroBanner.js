@@ -93,6 +93,7 @@ class IntroBanner extends Component {
             Home: '',
             Tel: '',
             NIC: '',
+            profilePic: '',
 
             //to check whether any fields have been clicked on and skipped wiithout filling
             touched: {
@@ -188,6 +189,7 @@ class IntroBanner extends Component {
             CPW: this.state.CPW,
             Home: this.state.Home,
             Tel: this.state.Tel,
+            profilePic: 'http://localhost:4000/public/sampleimage.jpg',
             userID: 0,
             RegDate : today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
             starRating : 0,
@@ -271,6 +273,7 @@ class IntroBanner extends Component {
                                                     CPW: '',
                                                     Home: '',
                                                     Tel: '',
+                                                    profilePic: '',
                                                     visible: false,
         
                                                     touched: {
@@ -318,6 +321,7 @@ class IntroBanner extends Component {
             Tel: this.state.Tel,
             NIC: this.state.NIC,
             userID: 1,
+            profilePic: 'http://localhost:4000/public/sampleimage.jpg',
             RegDate : new Date(),
             starRating: 0,
             ratingCount: 0,
@@ -385,6 +389,7 @@ class IntroBanner extends Component {
                             CPW: '',
                             Home: '',
                             Tel: '',
+                            profilePic: '',
                             visible1: false,
                             touched: {
                                 Email: false,
@@ -435,6 +440,7 @@ class IntroBanner extends Component {
             CPW: '',
             Home: '',
             Tel: '',
+            profilePic: '',
 
             touched: {
                 Email: false,
@@ -467,6 +473,7 @@ class IntroBanner extends Component {
             Home: '',
             Tel: '',
             NIC: '',
+            profilePic: '',
 
             touched: {
                 Email: false,
