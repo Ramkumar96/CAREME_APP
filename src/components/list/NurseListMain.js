@@ -502,6 +502,7 @@ class NurseListMain extends Component{
             loc= {nurse.Location}
             nType= {nurse.nurseType}
             key={nurse._id}
+            pic={nurse.profilePic}
             nurse_data={nurse}
         />})
 

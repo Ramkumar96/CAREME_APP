@@ -9,7 +9,7 @@ import 'stream-chat-react/dist/css/index.css';
 
 const ChatComponent = (props) => {
   //client = stream.connect('dmr78d6h89rt', null, '68343');
-  const client = new StreamChat("3e3rdknp58kg");
+  const client = new StreamChat("jh66vkvun7x5");
   const userToken = localStorage.getItem('chat_token');
 
   const email = localStorage.getItem('user_Email');
@@ -33,7 +33,7 @@ const ChatComponent = (props) => {
     image: 'http://bit.ly/2O35mws',
 });*/
 
- const filters = { type: 'messaging'};
+ const filters = { type: 'messaging', members: { $in: [name] }};
 const sort = { last_message_at: -1 };
 const channels = client.queryChannels(filters, sort);
 
