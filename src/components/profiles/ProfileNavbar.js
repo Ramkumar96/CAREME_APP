@@ -20,6 +20,7 @@ class ProfileNavbar extends Component {
         this.state = {
             visible: false,
             visible1: false,
+            visible2: false,
             redirect_home: false,
         }
     }
@@ -61,6 +62,18 @@ class ProfileNavbar extends Component {
         });
     };
 
+    openMsgModal() {
+        this.setState({
+            visible2: true
+        });
+    }
+
+    closeMsgModal() {
+        this.setState({
+            visible2: false
+        });
+    }
+
     render() {
 
         if (this.state.redirect_home) {
@@ -85,16 +98,16 @@ class ProfileNavbar extends Component {
                         </li>
                     </ul>
 
-                    <AccountCircleIcon fontSize="large" />
+                    <AccountCircleIcon fontSize="large" type="button"/>
 
-                    <ForumIcon fontSize="large" />
+                    {/* <ForumIcon fontSize="large" type="button" onClick={() => this.openModal()}/> */}
 
                     {/* <NotificationsActiveIcon fontSize="large" /> */}
 
                     <PopupState variant="popover" popupId="demo-popup-menu">
                         {popupState => (
                             <React.Fragment>
-                                <NotificationsActiveIcon fontSize="large" {...bindTrigger(popupState)} />
+                                <NotificationsActiveIcon type="button" fontSize="large" {...bindTrigger(popupState)} />
 
                                 <Menu {...bindMenu(popupState)} onClickAway={() => this.closePopup()}>
                                 <MenuItem onClick={popupState.close}>Notifications</MenuItem>
@@ -123,12 +136,12 @@ class ProfileNavbar extends Component {
                     <PopupState variant="popover" popupId="demo-popup-menu">
                         {popupState => (
                             <React.Fragment>
-                                <MenuIcon fontSize="large" {...bindTrigger(popupState)} />
+                                <MenuIcon type="button" fontSize="large" {...bindTrigger(popupState)} />
 
                                 <Menu {...bindMenu(popupState)} onClickAway={() => this.closePopup()}>
 
                                         
-                                <MenuItem onClick={popupState.close}>Settings</MenuItem>
+                                    <MenuItem onClick={popupState.close}>Settings</MenuItem>
                                     <MenuItem onClick={popupState.close}>Calender</MenuItem>
 
                                     <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>

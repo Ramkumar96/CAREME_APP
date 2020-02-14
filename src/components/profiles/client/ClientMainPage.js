@@ -9,6 +9,7 @@ import StarRatingComponent from "react-star-rating-component";
 import  Progress  from "react-progressbar";
 import ClientNotification from "../nurse/booking/ClientNotification";
 import Footer from "../../homepage/footer/Footer";
+import ChatComponent from "../messaging/ChatComponent";
 
 class ClientMainPage extends Component {
 
@@ -18,7 +19,9 @@ class ClientMainPage extends Component {
             profile_data: null,
             visible: false,
             redirect_home: false,
-            completion : 75
+            completion : 75,
+            chat_token: null,
+            visible3: null
         }
     }
 
@@ -33,9 +36,21 @@ class ClientMainPage extends Component {
             visible: false
         });
     }
+    openMsgModal(){
+        this.setState({
+            visible3: true
+        })
+    }
+
+    closeMsgModal(){
+        this.setState({
+            visible3: false
+        })
+    }
 
     componentDidMount() {
         this.getData()
+        this.chatToken()
 
     }
 
@@ -114,6 +129,16 @@ class ClientMainPage extends Component {
         }
     }
 
+    /** 
+    * @desc: function to check chatToken from localStorage
+    * @required: localStorage
+    */
+    chatToken=()=>{
+        var chat_token = localStorage.getItem('chat_token');
+        console.log("chat_token:",chat_token)
+    }
+
+
     render() {
 
         if (!this.state.profile_data) {
@@ -151,7 +176,6 @@ class ClientMainPage extends Component {
                                             {/* <div><ProfilePicUpload/></div> */}
                                         </div>
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
-
 
                                         <ul className="list-group list-group-unbordered mb-3 text-center">
                                             <li className="list-group-item">
@@ -314,6 +338,13 @@ class ClientMainPage extends Component {
                                         />
                                     </div>
                                     {/* /.card-body */}
+                                </div>
+                                
+                                <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
+                                <div>
+                                <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
+                                    <ChatComponent/>                                                    
+                                </Modal>
                                 </div>
                                 {/* /.card */}
                             </div>

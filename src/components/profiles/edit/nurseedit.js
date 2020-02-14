@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
 import ProfilePicUpload from '../profilePicUpload';
+import Dialog from 'react-bootstrap-dialog';
 
 function validate (Tele){
     return {
@@ -54,6 +55,13 @@ class NurseEdit extends Component {
         this.getData()
     }
 
+    onShowDialog(){
+        this.dialog.showAlert("Details added successfully");
+    }
+
+    onShowTelephoneError(){
+        this.dialog.showAlert("Your telephone number is invalid");
+    }
 
     getData = () => {
         var token = localStorage.getItem('id');
@@ -157,7 +165,7 @@ class NurseEdit extends Component {
         }
     
         else if(!validateTel(this.state.Tel)){
-            alert("Enter valid telephone number");
+            this.onShowTelephoneError();
         }
     
         else {
@@ -169,7 +177,7 @@ class NurseEdit extends Component {
             //console.log(nurseobj);
             axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
                 .then(response => {
-                    alert("Details updated successfully");
+                    this.onShowDialog();
                     if (response.data.success) {
                         this.getData()
                         this.props.loadData()
@@ -322,18 +330,6 @@ class NurseEdit extends Component {
 
 
                         {/* Update Profile Picture */}
-                        {/* <div className="form-group">
-                            <label htmlFor="exampleInputFile">Update your Profile Picture</label>
-                            <div className="input-group">
-                                <div className="custom-file">
-                                    <input type="file" className="custom-file-input" id="exampleInputFile" />
-                                    <label className="custom-file-label" htmlFor="exampleInputFile">Choose file</label>
-                                </div>
-                                <div className="input-group-append">
-                                    <span className="input-group-text" id>Upload</span>
-                                </div>
-                            </div>
-                        </div> */}
                         <div><ProfilePicUpload/></div>
 
                         {/* Edit Experience */}
@@ -421,6 +417,8 @@ class NurseEdit extends Component {
                             Submit</button>
                     </div>
                 </form>
+
+                <Dialog ref={(component) => { this.dialog = component }} />
             </div>
         )
     }

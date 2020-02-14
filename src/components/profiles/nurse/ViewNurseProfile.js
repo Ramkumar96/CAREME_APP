@@ -6,6 +6,9 @@ import Modal from 'react-awesome-modal';
 import StarRatingComponent from 'react-star-rating-component';
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
+import { StreamChat } from 'stream-chat';
+import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput } from 'stream-chat-react';
+import Dialog from 'react-bootstrap-dialog';
 
 class ViewNurseProfile extends Component {
 
@@ -22,7 +25,8 @@ class ViewNurseProfile extends Component {
             response_body: null,
             visible1: false,
             Review: '',
-            Rating: 0
+            Rating: 0,
+            visible3: false
         }
     }
 
@@ -47,6 +51,10 @@ class ViewNurseProfile extends Component {
                 localStorage.setItem("accusedByID", 1);
                 localStorage.setItem("accusedUserID", 0);
             })
+    }
+
+    onShowReviewSuccess(){
+        this.dialog.showAlert("Successfully reviewed! Thank you for taking a moment.");
     }
 
     onStarClick(nextValue) {
@@ -107,7 +115,6 @@ class ViewNurseProfile extends Component {
 
         axios.put('http://localhost:4000/user/userdata/updateRating/', userObj, { headers: headers })
             .then(response => {
-                alert("Details successfully updated");
                 if (response.data.success) {
                     this.getData()
                 }
@@ -144,6 +151,18 @@ class ViewNurseProfile extends Component {
         })
     }
 
+    openMsgModal(){
+        this.setState({
+            visible3: true
+        })
+    }
+
+    closeMsgModal(){
+        this.setState({
+            visible3: false
+        })
+    }
+
     onSubmitReview(e) {
         e.preventDefault();
 
@@ -158,7 +177,7 @@ class ViewNurseProfile extends Component {
 
         axios.post('http://localhost:4000/review/add', dataObject)
             .then(res => {
-                alert("Review Successful! Thank you for taking a moment.");
+                this.onShowReviewSuccess();
             });
 
         this.setState({
@@ -166,7 +185,13 @@ class ViewNurseProfile extends Component {
             visible1: false
         })
     }
+    
 
+ 
+     
+    
+
+    
     render() {
         if (!this.state.profile_data) {
             return (
@@ -180,6 +205,40 @@ class ViewNurseProfile extends Component {
         const finalRating = totalRating / ratingCount;
 
         const { Rating } = this.setState;
+
+             //chat
+            const client = new StreamChat("3e3rdknp58kg");
+            const userToken = localStorage.getItem('chat_token');
+        
+            const clientEmail = this.state.clientEmail;
+            var n = clientEmail.indexOf("@");
+            var clientName = clientEmail.slice(0, n);
+            console.log(clientName);
+        
+            const nurseEmail = this.state.profile_data.Email;
+            var m = nurseEmail.indexOf("@");
+            var nurseName = nurseEmail.slice(0, m);
+            console.log(nurseName);
+
+            var channelName = clientName.concat('-',nurseName);
+            console.log(channelName);
+        
+            client.setUser( //logged in user details
+                {
+                    id: clientName,
+                    name: clientName,
+                    image: localStorage.getItem('user_pic'),
+                }, 
+                userToken,
+            );
+        
+           
+            const conversation = client.channel('messaging', channelName, {
+                name: channelName,
+                image: localStorage.getItem('user_pic'),
+                members: [clientName, nurseName]
+            });
+        //logged in person is clientName
 
         return (
             <div>
@@ -347,6 +406,26 @@ class ViewNurseProfile extends Component {
                                                     <Complaint />
                                                 </div>
                                             </Modal>
+                                        
+                                            <input type="button" class="btn btn-success" value="Send Msg" onClick={() => this.openMsgModal()} />
+                                            <div>
+                                            <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
+                                                
+                                            {/* //for holding the chat window */}
+     
+                                                <Chat client={client} theme={'messaging light'}>
+                                                                <Channel channel={conversation}>
+                                                                    <Window>
+                                                                    <ChannelHeader />
+                                                                    <MessageList />
+                                                                    <MessageInput />
+                                                                    </Window>
+                                                                    <Thread />
+                                                                </Channel>
+                                                            </Chat>                                               
+
+                                            </Modal>
+                                            </div>
                                         </div>
                                         {/* /.card-body */}
                                     </div>
@@ -356,6 +435,8 @@ class ViewNurseProfile extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Dialog ref={(component) => { this.dialog = component }} />
             </div>
         );
     }
