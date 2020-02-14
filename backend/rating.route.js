@@ -5,7 +5,7 @@ let UserRating = require('./rating.model');
 
 // check whether already rated
 UserRatingRoutes.route('/checkPresence').post(function (req, res) {
-    UserRating.findOne({RatedBy: req.body.clientEmail, RatedUser: req.body.nurseEmail })
+    UserRating.findOne({RatedBy: req.body.RatedBy, RatedUser: req.body.RatedUser })
       .then(response => {
         if (response) {
           console.log("already rated")

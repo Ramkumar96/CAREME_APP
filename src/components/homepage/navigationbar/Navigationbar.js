@@ -119,6 +119,7 @@ class Navigationbar extends Component {
                             localStorage.setItem("id", response.data.user_data._id)
                             localStorage.setItem("user_id", response.data.user_data.userID)
                             localStorage.setItem("user_name", response.data.user_data.FirstName)
+                            localStorage.setItem("user_lname", response.data.user_data.LastName);
                             localStorage.setItem("user_Email", response.data.user_data.Email)
                             localStorage.setItem("user_pic", response.data.profilePic)
                             localStorage.setItem("chat_token", response.data.chat_token)
@@ -154,7 +155,7 @@ class Navigationbar extends Component {
                                     Email : false,
                                     Password : false
                                 }
-                            })
+                            });
                         }
 
                         else {

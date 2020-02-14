@@ -4,11 +4,11 @@ import axios from "axios";
 import Modal from 'react-awesome-modal';
 import Calendar from "./Calender";
 import StarRatingComponent from 'react-star-rating-component';
-import { fontSize } from "@material-ui/system";
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput } from 'stream-chat-react';
+import Dialog from 'react-bootstrap-dialog';
 
 class ViewNurseProfile extends Component {
 
@@ -46,9 +46,15 @@ class ViewNurseProfile extends Component {
                 })
 
                 localStorage.setItem("accusedEmail", this.state.profile_data.Email);
+                localStorage.setItem("accusedUserFName", this.state.profile_data.FirstName);
+                localStorage.setItem("accusedUserLName", this.state.profile_data.LastName);
                 localStorage.setItem("accusedByID", 1);
                 localStorage.setItem("accusedUserID", 0);
             })
+    }
+
+    onShowReviewSuccess(){
+        this.dialog.showAlert("Successfully reviewed! Thank you for taking a moment.");
     }
 
     onStarClick(nextValue) {
@@ -57,49 +63,62 @@ class ViewNurseProfile extends Component {
         })
 
         const obj = {
-            RatedBy : this.state.clientEmail,
-            RatedUser : this.state.profile_data.Email,
-            Rating : nextValue,
+            RatedBy: this.state.clientEmail,
+            RatedUser: this.state.profile_data.Email,
+            Rating: nextValue,
             RatedDate: new Date()
         }
 
         const checkObj = {
-            nurseEmail : this.state.profile_data.Email,
-            clientEmail : this.state.clientEmail
+            RatesUser: this.state.profile_data.Email,
+            RatedBy: this.state.clientEmail
         }
 
         const userObj = {
             Rating: nextValue,
-            nurseEmail: this.state.profile_data.Email
+            RatedUser: this.state.profile_data.Email
         }
 
         const headers = {
             'Content-Type': 'application/json'
-          }
+        }
 
 
-        axios.post('http://localhost:4000/rating/checkPresence', checkObj, {headers:headers})
-          .then (res => {
-              if (res.data.success){
-                axios.post('http://localhost:4000/rating/delete', obj)
-                .then( response => {
-                    //console.log(response.data);
-                });
-              }
+        axios.post('http://localhost:4000/rating/checkPresence', checkObj, { headers: headers })
+            .then(res => {
+                if (res.data.success) {
+                    this.setState({
+                        toDeleteRating : res.data.response_body.Rating
+                    })
 
-              axios.post('http://localhost:4000/rating/add', obj)
-                .then(res => { 
-                    //console.log(res.data) 
-                });
-          })
+                    const toReduce = {
+                        Rating: this.state.toDeleteRating,
+                        RatedUser: this.state.profile_data.Email
+                    }
+                    
+                    axios.put('http://localhost:4000/user/deductRating', toReduce)
+                        .then(response => {
+                            //console.log(response.data);
+                        });
+
+                    axios.post('http://localhost:4000/rating/delete', obj)
+                        .then(response => {
+                            //console.log(response.data);
+                        });
+                }
+
+                axios.post('http://localhost:4000/rating/add', obj)
+                    .then(res => {
+                        //console.log(res.data) 
+                    });
+            })
 
         axios.put('http://localhost:4000/user/userdata/updateRating/', userObj, { headers: headers })
-        .then(response => {
-            alert("Details successfully updated");
-            if (response.data.success) {
-                this.getData()
-            }
-        });
+            .then(response => {
+                if (response.data.success) {
+                    this.getData()
+                }
+            });
     }
 
     onChangeReview(e) {
@@ -108,25 +127,25 @@ class ViewNurseProfile extends Component {
         });
     }
 
-    openReviewModal(){
+    openReviewModal() {
         this.setState({
             visible1: true
         })
     }
 
-    closeReviewModal(){
+    closeReviewModal() {
         this.setState({
             visible1: false
         })
     }
 
-    openComplaintModal(){
+    openComplaintModal() {
         this.setState({
             visible2: true
         })
     }
 
-    closeComplaintModal(){
+    closeComplaintModal() {
         this.setState({
             visible2: false
         })
@@ -144,7 +163,7 @@ class ViewNurseProfile extends Component {
         })
     }
 
-    onSubmitReview(e){
+    onSubmitReview(e) {
         e.preventDefault();
 
         const dataObject = {
@@ -157,10 +176,10 @@ class ViewNurseProfile extends Component {
         console.log(dataObject);
 
         axios.post('http://localhost:4000/review/add', dataObject)
-            .then(res => { 
-                alert("Review Successful! Thank you for taking a moment.");
-            });     
-            
+            .then(res => {
+                this.onShowReviewSuccess();
+            });
+
         this.setState({
             Review: '',
             visible1: false
@@ -183,9 +202,9 @@ class ViewNurseProfile extends Component {
         const totalRating = this.state.profile_data.starRating;
         const ratingCount = this.state.profile_data.ratingCount;
 
-        const finalRating = totalRating/ratingCount;
+        const finalRating = totalRating / ratingCount;
 
-        const {Rating} = this.setState;
+        const { Rating } = this.setState;
 
              //chat
             const client = new StreamChat("3e3rdknp58kg");
@@ -255,12 +274,12 @@ class ViewNurseProfile extends Component {
                                                     </li>
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">{this.state.profile_data.FirstName}'s Rating : </h6>
-                                                        <div style={{fontSize: 28}}>
+                                                        <div style={{ fontSize: 28 }}>
                                                             <StarRatingComponent
                                                                 name="rate1"
                                                                 editing={false}
                                                                 starCount={5}
-                                                                value={finalRating} 
+                                                                value={finalRating}
                                                             />
                                                         </div>
                                                     </li>
@@ -339,16 +358,16 @@ class ViewNurseProfile extends Component {
                                     <div className="card card-primary">
                                         <div className="card-body text-center">
                                             <strong>Rate {this.state.profile_data.FirstName} </strong>
-                                            <br/>
-                                            <div style={{fontSize: 28}}>
-                                                <StarRatingComponent 
-                                                    className = "rateStar"
-                                                    name="rate1" 
+                                            <br />
+                                            <div style={{ fontSize: 28 }}>
+                                                <StarRatingComponent
+                                                    className="rateStar"
+                                                    name="rate1"
                                                     starCount={5}
                                                     value={this.state.Rating}
                                                     onStarClick={this.onStarClick.bind(this)}
                                                 />
-                                            <hr/>
+                                                <hr />
                                             </div>
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
@@ -359,24 +378,24 @@ class ViewNurseProfile extends Component {
 
                                                 <Form>
                                                     <Form.Group>
-                                                            <Form.Control
-                                                                required
-                                                                type="textarea"
-                                                                value={this.state.Review}
-                                                                onChange={this.onChangeReview}
-                                                                placeholder="Leave a review"
-                                                            />
+                                                        <Form.Control
+                                                            required
+                                                            type="textarea"
+                                                            value={this.state.Review}
+                                                            onChange={this.onChangeReview}
+                                                            placeholder="Leave a review"
+                                                        />
                                                     </Form.Group>
 
                                                     <Button type="submit" variant="primary" onClick={this.onSubmitReview.bind(this)}>Submit</Button>
                                                 </Form>
                                             </Modal>
-                                            <hr/>
+                                            <hr />
 
                                             <a href={`/clientviewnursecalendar/${this.props.match.params.id}`} className="btn btn-danger btn-block"><b>Check Calendar</b></a>
                                             {/* <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} /> */}
-                          
-                                            <hr/>
+
+                                            <hr />
 
                                             {/* Calender for booking */}
 
@@ -384,7 +403,7 @@ class ViewNurseProfile extends Component {
                                             <input type="button" class="btn btn-success" value="Add a complaint" onClick={() => this.openComplaintModal()} />
                                             <Modal visible={this.state.visible2} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
                                                 <div>
-                                                    <Complaint/>
+                                                    <Complaint />
                                                 </div>
                                             </Modal>
                                         
@@ -416,6 +435,8 @@ class ViewNurseProfile extends Component {
                         </div>
                     </div>
                 </div>
+
+                <Dialog ref={(component) => { this.dialog = component }} />
             </div>
         );
     }

@@ -13,12 +13,15 @@ const NotifyBox = props => (
             <div>
                 <i className="fas fa-bell bg-primary" />
                 <div className="timeline-item">
-
+                {/* {'/nurseviewclientprofile/'+props.clientID} */}
                     <span className="time"><i className="far fa-clock" /> 12:05</span>
-                    <h3 className="timeline-header"><a href="#">{props.clientName}</a> sent you a booking Request</h3>
+                    <h3 className="timeline-header"><a href={'/nurseviewclientprofile/'+props.clientID}>{props.clientName}</a> sent you a booking Request</h3>
                     <div className="timeline-body">
                         <div >
                             <h6> <strong>Client Name:</strong>{props.clientName}</h6>
+                        </div>
+                        <div >
+                            <h6> <strong>Client ID :</strong>{props.clientID}</h6>
                         </div>
                         <div >
                             <h6> <strong>Client Location :</strong>{props.clientLocation}</h6>

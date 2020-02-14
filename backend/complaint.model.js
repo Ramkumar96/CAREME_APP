@@ -6,7 +6,23 @@ let Complaint = new Schema({
         type: String
     },
 
+    accusedByFName: {
+        type: String
+    },
+
+    accusedByLName: {
+        type: String
+    },
+
     accusedUser: {
+        type: String
+    },
+
+    accusedUserFName: {
+        type: String
+    },
+
+    accusedUserLName: {
         type: String
     },
 

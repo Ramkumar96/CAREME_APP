@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
-import Addnurseadmin from './addnurseadmin'
-import addclientadmin from './addclientadmin'
-import Adminnurselist from './adminnurselist'
-import Adminclientlist from './adminclientlist'
 
 class Admindashleftnav extends Component {
     render() {
@@ -11,9 +7,9 @@ class Admindashleftnav extends Component {
   <div>
 <aside className="main-sidebar sidebar-dark-primary elevation-4">
   {/* Brand Logo */}
-  <a href="index3.html" className="brand-link">
+  <a href="/adminmaindash" className="brand-link">
     <img src="/images/careme.png" alt="careme Logo" className="brand-image img-circle elevation-5" style={{opacity: '.8'}} />
-    <span className="brand-text font-weight-light">CAREme</span>
+    <span className="brand-text font-weight-light">CareMe</span>
   </a>
   {/* Sidebar */}
   <div className="sidebar">
@@ -90,51 +86,7 @@ class Admindashleftnav extends Component {
               </a>
             </li>
           </ul>
-        </li>
-        
-       
-        
-        
-        <li className="nav-header">EXAMPLES</li>
-        <li className="nav-item">
-          <a href="pages/calendar.html" className="nav-link">
-            <i className="nav-icon fas fa-calendar-alt" />
-            <p>
-              Calendar
-              <span className="badge badge-info right">2</span>
-            </p>
-          </a>
-        </li>
-        <li className="nav-item has-treeview">
-          <a href="#" className="nav-link">
-            <i className="nav-icon far fa-envelope" />
-            <p>
-              Mailbox
-              <i className="fas fa-angle-left right" />
-            </p>
-          </a>
-          <ul className="nav nav-treeview">
-            <li className="nav-item">
-              <a href="pages/mailbox/mailbox.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Inbox</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/mailbox/compose.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Compose</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/mailbox/read-mail.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Read</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        
+        </li>        
         
         <li className="nav-header">Documents</li>
         <li className="nav-item">
@@ -159,7 +111,7 @@ class Admindashleftnav extends Component {
         </li>
 
         <li className="nav-item">
-          <a href="#" className="nav-link">
+          <a href="complaintsReview" className="nav-link">
             <i className="fas fa-circle nav-icon" />
             <p>Complaint Report</p>
           </a>
