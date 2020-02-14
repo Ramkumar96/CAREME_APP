@@ -21,6 +21,7 @@ import NurseCalendar from "./components/profiles/nurse/NurseCalendar";
 import UserReport from "./components/profiles/admin/userReports";
 import Complaint from "./components/profiles/complaint";
 import ClientViewNurseCalendar from "./components/profiles/nurse/ClientViewNurseCalendar";
+import ChatComponent from "./components/profiles/messaging/ChatComponent"
 import { Row } from "react-bootstrap";
 
 class App extends Component {
@@ -46,6 +47,7 @@ class App extends Component {
         <Route path="/clientviewnursecalendar/:id" exact component={ClientViewNurseCalendar} />
         <Route path="/userReport" exact component={UserReport} />
         <Route path ="/complaint" exact component={Complaint}/>
+        <Route path ="/chatcomponent" exact component={ChatComponent}/>
       </Router>
     );
   }
