@@ -3,7 +3,7 @@ import ProfileNavbar from '../ProfileNavbar';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import NurseEdit from "../edit/nurseedit";
 import Modal from 'react-awesome-modal';
-import Calendar from "./Calender";
+import Calendar from "./../nurse/NurseCalendar";
 import { Button } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 import NurseCalendar from "./NurseCalendar";

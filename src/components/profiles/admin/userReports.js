@@ -4,6 +4,7 @@ import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
 import ProfileNavbar from "../ProfileNavbar";
 import { Button, Form, Col, Row } from 'react-bootstrap';
+import Dialog from 'react-bootstrap-dialog';
 
 class UserReport extends Component {
     constructor (props){
@@ -25,7 +26,10 @@ class UserReport extends Component {
             nurseTypeCount: [],
             monthLabels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             districts: ["Colombo", "Galle", "Gampaha", "Kurunegala"],
-            nurseTypes: ["Emergency", "Surgical", "Geriatric", "Midwife", "Pediatric", "Psychiatric"]
+            nurseTypes: ["Emergency", "Surgical", "Geriatric", "Midwife", "Pediatric", "Psychiatric"],
+            month: -1,
+            year: -1,
+            reportType: -1
         }
     }
 
@@ -35,17 +39,27 @@ class UserReport extends Component {
         })
     }
 
+    onChangeReportType(e){
+        this.setState({
+            reportType: e.target.value
+        })
+    }
+
     onChangeYear(e){
         this.setState({
             year: e.target.value
         })
     }
 
+    onShowErrorDialog(){
+        this.dialog.showAlert("Please complete request for report generation");
+    }
+
     onSubmitRequest(e){
         e.preventDefault();
 
-        if (this.state.month==-1 || this.state.year==-1){
-            alert("Please select period for report generation");
+        if (this.state.month==-1 || this.state.year==-1 || this.state.reportType==-1){
+            this.onShowErrorDialog();
         }
 
         else {
@@ -60,44 +74,70 @@ class UserReport extends Component {
 
             console.log(data);
 
+            if (this.state.reportType==0){
+                if (this.state.month!=0){
+                    //total number of nurses in the system
+                    axios.get('http://localhost:4000/user/countNurses')
+                        .then(response => {
+                            this.setState({
+                                totalActiveNurses : response.data.nurseCount
+                            })
+
+                            console.log("The total active nurses now : ", this.state.totalActiveNurses)
+                        })
+
+                    //total number of clients in the system
+                    axios.get('http://localhost:4000/user/countClients')
+                        .then(response => {
+                            this.setState({
+                                totalActiveClients : response.data.clientCount
+                            })
+
+                            console.log("The total active clients now : ", this.state.totalActiveClients)
+                        })
+
+                    axios.post('http://localhost:4000/user/countUsersDistrictMonth', data, {headers: headers})
+                        .then(response => {
+                            this.setState({
+                                resBody: response.data.userCountDistrict
+                            })
+        
+                            let j=1;
+                            for (let i=0; i<4; i++){
+                                this.state.userCountDistrict[j] = this.state.resBody[i];
+                                j++;
+                            }
+        
+                            console.log("The total users according to districts : ", this.state.userCountDistrict)
+        
+                            this.setState({
+                                userCountDistrict: this.state.userCountDistrict
+                            })
+                        })
+
+                    axios.post('http://localhost:4000/user/countNursesTypeMonth', data, {headers: headers})
+                        .then(response => {
+                            this.setState({
+                                resBody: response.data.nurseTypeCount
+                            })
+    
+                            let j=1;
+                            for (let i=0; i<4; i++){
+                                this.state.nurseTypeCount[j] = this.state.resBody[i];
+                                j++;
+                            }
+    
+                            console.log("The total nurses according to type : ", this.state.nurseTypeCount)
+    
+                            this.setState({
+                                nurseTypeCount : this.state.nurseTypeCount
+                            })
+                        })        
+                }
+            }
+
             if (this.state.month!=0){
-                axios.get('http://localhost:4000/user/countNurses')
-                    .then(response => {
-                        this.setState({
-                            totalActiveNurses : response.data.nurseCount
-                        })
-
-                        console.log("The total active nurses now : ", this.state.totalActiveNurses)
-                    })
-
-                axios.get('http://localhost:4000/user/countClients')
-                    .then(response => {
-                        this.setState({
-                            totalActiveClients : response.data.clientCount
-                        })
-
-                        console.log("The total active clients now : ", this.state.totalActiveClients)
-                    })
-
-                axios.post('http://localhost:4000/user/countUsersDistrictMonth', data, {headers: headers})
-                .then(response => {
-                    this.setState({
-                        resBody: response.data.userCountDistrict
-                    })
-
-                    let j=1;
-                    for (let i=0; i<4; i++){
-                        this.state.userCountDistrict[j] = this.state.resBody[i];
-                        j++;
-                    }
-
-                    console.log("The total users according to districts : ", this.state.userCountDistrict)
-
-                    this.setState({
-                        userCountDistrict: this.state.userCountDistrict
-                    })
-                })
-
+                
 
                 axios.post('http://localhost:4000/user/countNursesMonth', data, {headers: headers})
                     .then(response=> {
@@ -171,24 +211,7 @@ class UserReport extends Component {
                         console.log("Number of complaints against clients this month : ", this.state.clientComCount);
                     })
 
-                axios.post('http://localhost:4000/user/countNursesTypeMonth', data, {headers: headers})
-                    .then(response => {
-                        this.setState({
-                            resBody: response.data.nurseTypeCount
-                        })
-
-                        let j=1;
-                        for (let i=0; i<4; i++){
-                            this.state.nurseTypeCount[j] = this.state.resBody[i];
-                            j++;
-                        }
-
-                        console.log("The total nurses according to type : ", this.state.nurseTypeCount)
-
-                        this.setState({
-                            nurseTypeCount : this.state.nurseTypeCount
-                        })
-                    })
+                
 
                 this.setState ({
                     visibleMonthReport: true
@@ -820,10 +843,22 @@ class UserReport extends Component {
                                 </Form.Group>
 
                                 <Form.Group as={Col}>
+                                    <select class="form-control" onChange={(event)=>this.onChangeReportType(event)} placeholder="Select Required Report">
+                                        <option value={-1} selected>Select Type</option>
+                                        <option value={0}>Total Users</option>
+                                        <option value={1}>Activations and Deactivations</option>
+                                        <option value={2}>Complaints</option>
+                                        <option value={3}>Ratings and Reviews</option>
+                                    </select>
+                                </Form.Group>
+
+                                <Form.Group as={Col}>
                                     <Button type="submit" variant="primary" onClick={this.onSubmitRequest.bind(this)}>Generate Report</Button>
                                 </Form.Group>
                             </Form.Row>
                         </Form>
+
+                        <Dialog ref={(component) => { this.dialog = component }} />
                     </div>
                 </div>
             </div>
