@@ -235,7 +235,7 @@ class ViewNurseProfile extends Component {
            
             const conversation = client.channel('messaging', channelName, {
                 name: channelName,
-                image: 'http://bit.ly/2O35mws',
+                image: localStorage.getItem('user_pic'),
                 members: [clientName, nurseName]
             });
         //logged in person is clientName
