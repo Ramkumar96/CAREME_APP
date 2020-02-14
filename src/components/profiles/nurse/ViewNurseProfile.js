@@ -207,7 +207,7 @@ class ViewNurseProfile extends Component {
         const { Rating } = this.setState;
 
              //chat
-            const client = new StreamChat("3e3rdknp58kg");
+            const client = new StreamChat("jh66vkvun7x5");
             const userToken = localStorage.getItem('chat_token');
         
             const clientEmail = this.state.clientEmail;

@@ -37,7 +37,7 @@ UserRegRoutes.route('/login').post(function (req, res) {
         var n = req.body.Email.indexOf("@");
         var name = req.body.Email.slice(0, n);
         console.log(name);
-        const client = new StreamChat('', 'nvnzrhsag4wjqmncstnsxzdnfxvzdjzt57732s4snjf7n46utfyaa3t4j4kxw5sf');
+        const client = new StreamChat('', 'yet5qpqxuh9p98r94vcvndd5rr82t2x2cb9m3dgaq4yx46ua8r4ckpuu7fvpyews');
         const chatToken = client.createToken(name);
         console.log(chatToken);
 
