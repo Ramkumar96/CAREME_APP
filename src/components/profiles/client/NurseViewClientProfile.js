@@ -6,6 +6,9 @@ import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
+import { StreamChat } from 'stream-chat';
+import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput } from 'stream-chat-react';
+import ChatComponent from "../messaging/ChatComponent";
 import Dialog from 'react-bootstrap-dialog';
 
 class NurseViewClientProfile extends Component {
@@ -23,7 +26,8 @@ class NurseViewClientProfile extends Component {
             nurseEmail: localStorage.getItem('user_Email'),
             visible1: false,
             Review: '',
-            visible2: false
+            visible2: false,
+            visible3: false
         }
     }
 
@@ -53,6 +57,18 @@ class NurseViewClientProfile extends Component {
         this.setState({
             visible: false
         });
+    }
+
+    openMsgModal(){
+        this.setState({
+            visible3: true
+        })
+    }
+
+    closeMsgModal(){
+        this.setState({
+            visible3: false
+        })
     }
 
     componentDidMount() {
@@ -202,6 +218,43 @@ class NurseViewClientProfile extends Component {
         const rateCount = this.state.profile_data.ratingCount;
 
         const finalRating = ratingVal/rateCount;
+
+    /** 
+    * @desc: code snippets to start a chat-coversation
+    * @required: stream-chat, stream-chat-react
+    */
+
+        const client = new StreamChat("jh66vkvun7x5");
+        const userToken = localStorage.getItem('chat_token');
+
+        const senderEmail = this.state.nurseEmail;
+        var n = senderEmail.indexOf("@");
+        var senderName = senderEmail.slice(0, n);
+        console.log(senderName);
+
+        const receiverEmail = this.state.profile_data.Email;
+        var m = receiverEmail.indexOf("@");
+        var receiverName = receiverEmail.slice(0, m);
+        console.log(receiverName);
+
+        var channelName = senderName.concat('-',receiverName);
+        console.log(channelName);
+
+        client.setUser( //logged in user details
+            {
+                id: senderName,
+                name: senderName,
+                image: localStorage.getItem('user_pic'),
+            }, 
+            userToken,
+        );
+
+        
+        const conversation = client.channel('messaging', channelName, {
+            name: channelName,
+            image: localStorage.getItem('user_pic'),
+            members: [senderName, receiverName]
+        });
 
         return (
             <div>
@@ -372,7 +425,33 @@ class NurseViewClientProfile extends Component {
                                                 <div>
                                                     <Complaint />
                                                 </div>
-                                            </Modal>                           
+                                            </Modal>
+
+                                            {/* /** 
+                                            * @desc: code snippets to display the chat in.
+                                            * @required: stream-chat, stream-chat-react
+                                            */ }
+                                            <input type="button" class="btn btn-success" value="Send Message to Client" onClick={() => this.openMsgModal()} />
+                                            <div>
+                                            <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
+                                             {/* <ChatComponent/> */}   
+                                            {/* //for holding the chat window */}
+     
+                                                <Chat client={client} theme={'messaging light'}>
+                                                                <Channel channel={conversation}>
+                                                                    <Window>
+                                                                    <ChannelHeader />
+                                                                    <MessageList />
+                                                                    <MessageInput />
+                                                                    </Window>
+                                                                    <Thread />
+                                                                </Channel>
+                                                            </Chat>                                               
+
+                                            </Modal>
+                                            </div>
+                                            {/* END of code snippets for chat */}
+
                                     </div>
                                     {/* /.card-body */}
                                 </div>
