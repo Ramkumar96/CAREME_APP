@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 
 
-export default class TestList extends Component {
+export default class NurseListProfileClient extends Component {
   constructor(){
     super();
     this.state={
@@ -45,9 +45,9 @@ export default class TestList extends Component {
                         {/* <button class="btn btn-sm btn-primary" type="submit" href={'/viewnurseprofile/'+this.props.id}>
                           View Profile
                         </button> */}
-                        {/* <button class="btn btn-sm btn-primary" type="submit" >
+                        <button class="btn btn-sm btn-primary" type="submit" >
                           <a href={'/viewnurseprofile/'+this.props.id}><i className="fas fa-user" /> View Profile</a>
-                        </button> */}
+                        </button>
 
 
                       </div></center>

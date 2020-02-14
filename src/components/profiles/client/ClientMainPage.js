@@ -7,6 +7,7 @@ import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import  Progress  from "react-progressbar";
+import NurseListCLview from "../../list/NurseListCLview"
 
 class ClientMainPage extends Component {
 
@@ -272,7 +273,7 @@ class ClientMainPage extends Component {
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
 
                                         <hr />
-                                        <a href="/nursemainlist" className="btn btn-warning btn-block"><b>Find A Nurse</b>
+                                        <a href="/nurselistclview" className="btn btn-warning btn-block"><b>Find A Nurse</b>
                                         </a>
 
                                         <hr />

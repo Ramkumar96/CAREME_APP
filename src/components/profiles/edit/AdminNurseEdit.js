@@ -21,7 +21,7 @@ function validateTel (tel){
     }
 }
 
-class NurseEdit extends Component {
+class AdminNurseEdit extends Component {
 
     constructor(props) {
         super(props);
@@ -57,6 +57,7 @@ class NurseEdit extends Component {
 
     getData = () => {
         var token = localStorage.getItem('id');
+        //console.log(this.props.req.params.id)
         axios.get('http://localhost:4000/user/userdata/' + token)
             .then(response => {
                 console.log(response.data.profile_data)
@@ -428,4 +429,4 @@ class NurseEdit extends Component {
     }
 }
 
-export default NurseEdit;
+export default AdminNurseEdit;

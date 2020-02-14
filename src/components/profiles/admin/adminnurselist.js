@@ -17,7 +17,7 @@ const UserReg = props => (
         <td>{props.nurselist.nurseType}</td>
         <td>{props.nurselist.nurseGender}</td>
         <td>
-            <Link to={"/viewnurseprofile/"+props.nurselist._id}>View</Link>
+            <Link to={"/adminviewnurseprofile/"+props.nurselist._id}>View</Link>
         </td>
     </tr>
 )

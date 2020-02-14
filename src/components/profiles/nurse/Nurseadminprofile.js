@@ -10,8 +10,10 @@ import NurseCalendar from "./NurseCalendar";
 import StarRatingComponent from "react-star-rating-component";
 import NurseNotification from "./booking/NurseNotification";
 import Progress from "react-progressbar";
+//import Nurseadminprofile from "../edit/AdminNurseEdit";
+import AdminNurseEdit from "../edit/AdminNurseEdit";
 
-class NurseMainPage extends Component {
+class NurseAdminMainPage extends Component {
 
     constructor(props) {
         super(props);
@@ -92,16 +94,38 @@ class NurseMainPage extends Component {
         this.getData()
     }
 
-    
+    // getData = () => {
+    //     var token = localStorage.getItem('id');
+    //     axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
+    //         .then(response => {
+    //             console.log(response.data.profile_data)
+    //             this.setState({
+    //                 profile_data: response.data.profile_data,
+    //             })
+
+    //             localStorage.setItem("accusedEmail", this.state.profile_data.Email);
+    //             localStorage.setItem("accusedUserFName", this.state.profile_data.FirstName);
+    //             localStorage.setItem("accusedUserLName", this.state.profile_data.LastName);
+    //             localStorage.setItem("accusedByID", 1);
+    //             localStorage.setItem("accusedUserID", 0);
+    //         })
+    // }    
 
     getData = () => {
-        var token = localStorage.getItem('id');
-        axios.get('http://localhost:4000/user/userdata/' + token)
+        var token = this.props.match.params.id;
+        //console.log(token)
+        axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
             .then(response => {
                 //console.log(response.data.profile_data)
                 this.setState({
                     profile_data: response.data.profile_data
                 })
+                //console.log(response.data.profile_data)
+                // localStorage.setItem("accusedEmail", this.state.profile_data.Email);
+                // localStorage.setItem("accusedUserFName", this.state.profile_data.FirstName);
+                // localStorage.setItem("accusedUserLName", this.state.profile_data.LastName);
+                // localStorage.setItem("accusedByID", 2);
+                // localStorage.setItem("accusedUserID", 0);
             })
 
         let completion = 100;
@@ -289,7 +313,7 @@ class NurseMainPage extends Component {
                                                 </div>
 
                                                 <div className="tab-pane" id="settings">
-                                                    <NurseEdit
+                                                    <AdminNurseEdit
                                                         loadData={this.getData} />
                                                 </div>
 
@@ -376,4 +400,4 @@ class NurseMainPage extends Component {
     }
 }
 
-export default NurseMainPage;
+export default NurseAdminMainPage;
