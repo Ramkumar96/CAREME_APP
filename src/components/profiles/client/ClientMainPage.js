@@ -9,6 +9,8 @@ import StarRatingComponent from "react-star-rating-component";
 import  Progress  from "react-progressbar";
 import ChatComponent from "../messaging/ChatComponent";
 import ClientNotification from "../nurse/booking/ClientNotification";
+import { StreamChat } from 'stream-chat';
+
 
 class ClientMainPage extends Component {
 
@@ -136,6 +138,7 @@ class ClientMainPage extends Component {
         var chat_token = localStorage.getItem('chat_token');
         console.log("chat_token:",chat_token)
     }
+    
 
 
     render() {
@@ -156,6 +159,43 @@ class ClientMainPage extends Component {
         const rateCount = this.state.profile_data.ratingCount;
 
         const finalRating = ratingVal/rateCount;
+
+      /** 
+        * @desc: code snippets to start a chat-coversation - render an client in streachat cloud
+        * @required: stream-chat, stream-chat-react
+        */
+        const client = new StreamChat("jh66vkvun7x5");
+        const userToken = localStorage.getItem('chat_token');
+
+        //    const senderEmail = this.state.clientEmail;
+        //    var n = senderEmail.indexOf("@");
+        //    var senderName = senderEmail.slice(0, n);
+        //    console.log(senderName);
+
+        const receiverEmail = this.state.profile_data.Email;
+        var m = receiverEmail.indexOf("@");
+        var receiverName = receiverEmail.slice(0, m);
+        console.log(receiverName);
+
+        //    var channelName = senderName.concat('-',receiverName);
+        //    console.log(channelName);
+
+        //    client.setUser( //logged in user details
+        //        {
+        //            id: senderName,
+        //            name: senderName,
+        //            image: localStorage.getItem('user_pic'),
+        //        }, 
+        //        userToken,
+        //    );
+        client.setUser( //logged in user details
+            {
+                id: receiverName,
+                name: receiverName,
+                image: localStorage.getItem('user_pic'),
+            }, 
+            userToken,
+        );
 
         return (
             <div>
@@ -300,7 +340,7 @@ class ClientMainPage extends Component {
 
                                         <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} />
                                         <div>
-                                        <Modal visible={this.state.visible3} width="80%" height="100%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
+                                        <Modal visible={this.state.visible3} width="80%" height="90%" align="center" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
                                             <ChatComponent/>                                                    
                                         </Modal>
                                         </div>

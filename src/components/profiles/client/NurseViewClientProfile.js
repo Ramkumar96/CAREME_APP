@@ -219,11 +219,10 @@ class NurseViewClientProfile extends Component {
 
         const finalRating = ratingVal/rateCount;
 
-    /** 
-    * @desc: code snippets to start a chat-coversation
-    * @required: stream-chat, stream-chat-react
-    */
-
+      /** 
+        * @desc: code snippets to start a chat-coversation
+        * @required: stream-chat, stream-chat-react
+        */
         const client = new StreamChat("jh66vkvun7x5");
         const userToken = localStorage.getItem('chat_token');
 
@@ -248,8 +247,7 @@ class NurseViewClientProfile extends Component {
             }, 
             userToken,
         );
-
-        
+        console.log(client);
         const conversation = client.channel('messaging', channelName, {
             name: channelName,
             image: localStorage.getItem('user_pic'),
@@ -427,30 +425,17 @@ class NurseViewClientProfile extends Component {
                                                 </div>
                                             </Modal>
 
-                                            {/* /** 
-                                            * @desc: code snippets to display the chat in.
-                                            * @required: stream-chat, stream-chat-react
+                                        { /** 
+                                            * @desc: chatting component.
+                                            * @required: ChatComponent
                                             */ }
                                             <input type="button" class="btn btn-success" value="Send Message to Client" onClick={() => this.openMsgModal()} />
                                             <div>
                                             <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
-                                             {/* <ChatComponent/> */}   
-                                            {/* //for holding the chat window */}
-     
-                                                <Chat client={client} theme={'messaging light'}>
-                                                                <Channel channel={conversation}>
-                                                                    <Window>
-                                                                    <ChannelHeader />
-                                                                    <MessageList />
-                                                                    <MessageInput />
-                                                                    </Window>
-                                                                    <Thread />
-                                                                </Channel>
-                                                            </Chat>                                               
-
+                                            <ChatComponent/>                                             
                                             </Modal>
                                             </div>
-                                            {/* END of code snippets for chat */}
+                                        {/* END of code for chat */}
 
                                     </div>
                                     {/* /.card-body */}
