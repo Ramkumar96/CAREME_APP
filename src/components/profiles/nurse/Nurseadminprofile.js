@@ -308,10 +308,6 @@ class NurseAdminMainPage extends Component {
                                                     {/* /.tab-pane */}
                                                 </div>
 
-                                                <div className="tab-pane" id="notification">
-                                                    <NurseNotification/>
-                                                </div>
-
                                                 <div className="tab-pane" id="settings">
                                                     <AdminNurseEdit
                                                         loadData={this.getData} />
