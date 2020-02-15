@@ -105,21 +105,6 @@ export default class Adminnurselist extends Component {
                 <tbody className="table-striped">
                         { this.Nurses() }
                     </tbody>
-                {/* <tfoot>
-                  <tr>
-                  <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Home</th>
-                    <th>NurseID</th>
-                    <th>Tel</th>
-                    <th>Location</th>
-                    <th>Age</th>
-                    <th>Exp</th>
-                    <th>Type</th>
-                    <th>Gender</th>
-                  </tr>
-                </tfoot> */}
               </table>
               </div>
             </div>
