@@ -11,6 +11,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Modal from 'react-awesome-modal';
 import ProfileNavbar from '../ProfileNavbar'
 import axios from '../../../../backend/node_modules/axios';
+import Dialog from "react-bootstrap-dialog";
 
 
 class ClientViewNurseCalendar extends Component {
@@ -93,7 +94,10 @@ class ClientViewNurseCalendar extends Component {
 
     }
 
-    
+    onShowDialog(){
+        this.dialog.showAlert("Booking request sent successfully");
+    }
+
     dateClick = (date) => {
         //console.log(new Date(date.dateStr).getTime(), '-----------------------')
         //console.log(this.state.response_dates.includes(date.dateStr))
@@ -157,7 +161,7 @@ class ClientViewNurseCalendar extends Component {
           .then (res => {
               if (res.data.success){
                console.log(res.data);
-               alert("Details successfully updated");
+               this.onShowDialog();
                 
               }
           })
@@ -207,6 +211,7 @@ class ClientViewNurseCalendar extends Component {
                         </center>
                     </Modal>
                     
+                    <Dialog ref={(component) => { this.dialog = component }} />
                 </div>
             </div>
         )

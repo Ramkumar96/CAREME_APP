@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from '../../../../../backend/node_modules/axios';
 
-
 const NotifyBox = props => (
     <div>
         {/* The timeline */}
@@ -45,6 +44,10 @@ class NurseNotification extends Component {
         this.NotificationID = null;
     }
 
+    onShowDeleteRequest(){
+        this.dialog.showAlert("Request deleted successfully");
+    }
+
     componentDidMount = () => {
         //this.getNotificationData();
         var token = localStorage.getItem('id');
@@ -80,21 +83,7 @@ class NurseNotification extends Component {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    alert("Details successfully updates");
-
-                    //this.deleteNotification(notification_ID)
-                    const obj = {
-                        NotificationID: notification_ID
-                    };
-            
-                    axios.post('http://localhost:4000/request/delete', obj)
-                        .then(response => {
-                            if (response.data.success) {
-                                console.log(response.data);
-                                alert("Details successfully deleted");
-                            }
-                        });
-
+                    alert("Request successfully accepted.");
                 }
             });
     };
@@ -115,19 +104,7 @@ class NurseNotification extends Component {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    alert("Details successfully Updated");
-
-                    const obj = {
-                        NotificationID: deleted_notification_ID
-                    };
-            
-                    axios.post('http://localhost:4000/request/delete', obj)
-                        .then(response => {
-                            if (response.data.success) {
-                                console.log(response.data);
-                                alert("Details successfully deleted");
-                            }
-                        });
+                    alert("Request successfully deleted");
                 }
             });  
     }
@@ -151,7 +128,6 @@ class NurseNotification extends Component {
         return (
             <div>
                 {this.notificationData()}
-
             </div>
         )
     }

@@ -106,8 +106,8 @@ class NurseMainPage extends Component {
 
     componentDidMount() {
         this.getData()
-    }
 
+    }
 
 
     getData = () => {
@@ -118,9 +118,13 @@ class NurseMainPage extends Component {
                 this.setState({
                     profile_data: response.data.profile_data
                 })
+                this.progressBar();
             })
+    }
 
+    progressBar(){
         let completion = 100;
+
 
         if (this.state.profile_data) {
             if (this.state.Location == null) {
@@ -148,12 +152,41 @@ class NurseMainPage extends Component {
             }
 
             if (this.state.profilePic == null) {
+
+        if(this.state.profile_data){
+            if (this.state.profile_data.Location == null) {
+                completion = completion - 10;
+            }
+
+            if (this.state.profile_data.Age == null){
+                completion  = completion - 6;
+            }
+
+            if (this.state.profile_data.nurseExp == null){
+                completion = completion - 10;
+            }
+
+            if (this.state.profile_data.nurseUni == null){
+                completion = completion - 6;
+            }
+
+            if (this.state.profile_data.nurseEdu == null){
+                completion = completion - 8;
+            }
+
+            if (this.state.profile_data.nurseType == null){
+                completion = completion - 10;
+            }
+
+            if (this.state.profile_data.profilePic == null){
                 completion = completion - 10;
             }
 
             this.setState({
                 completedPer: completion
             })
+
+            console.log(this.state.completedPer);
         }
     }
 
@@ -217,7 +250,7 @@ class NurseMainPage extends Component {
             <div>
                 <div class="wrapper">
                     <ProfileNavbar />
-                    <br></br>
+                    <br/>
                     <div className="backg">
                         <div className="container-fluid">
                             <div className="row">
