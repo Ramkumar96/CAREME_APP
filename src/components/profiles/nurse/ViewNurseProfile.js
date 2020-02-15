@@ -203,10 +203,10 @@ class ViewNurseProfile extends Component {
 
         const { Rating } = this.setState;
 
-    /** 
-    * @desc: code snippets to start a chat-coversation
-    * @required: stream-chat, stream-chat-react
-    */
+      /** 
+        * @desc: code snippets to start a chat-coversation
+        * @required: stream-chat, stream-chat-react
+        */
             const client = new StreamChat("jh66vkvun7x5");
             const userToken = localStorage.getItem('chat_token');
         
@@ -227,15 +227,15 @@ class ViewNurseProfile extends Component {
                 {
                     id: senderName,
                     name: senderName,
-                    image: localStorage.getItem('user_pic'),
+                    image: 'http://bit.ly/2O35mws',
                 }, 
                 userToken,
             );
-        
+            console.log(client);
            
             const conversation = client.channel('messaging', channelName, {
                 name: channelName,
-                image: localStorage.getItem('user_pic'),
+                image: 'http://bit.ly/2O35mws',
                 members: [senderName, receiverName]
             });
 
@@ -407,27 +407,24 @@ class ViewNurseProfile extends Component {
                                             </Modal>
 
 
-                                            {/* /** 
-                                            * @desc: code snippets to display the chat in.
-                                            * @required: stream-chat, stream-chat-react
+                                        { /**
+                                            * @desc: chatting component.
+                                            * @required: ChatComponent
                                             */ }
                                             <input type="button" class="btn btn-success" value="Send Message to Nurse" onClick={() => this.openMsgModal()} />
                                             <div>
                                             <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
-                                            {/* <ChatComponent/> */}
-                                            {/* //for holding the chat window */}
-     
-                                                <Chat client={client} theme={'messaging light'}>
-                                                                <Channel channel={conversation}>
-                                                                    <Window>
-                                                                    <ChannelHeader />
-                                                                    <MessageList />
-                                                                    <MessageInput />
-                                                                    </Window>
-                                                                    <Thread />
-                                                                </Channel>
-                                                            </Chat>                                               
-
+                                            <Chat client={client} theme={'messaging light'}>
+                        <Channel channel={conversation}>
+                            {/* <Window>
+                            <ChannelHeader />
+                            <MessageList />
+                            <MessageInput />
+                            </Window> */}
+                            <Thread />
+                        </Channel>
+                    </Chat>
+                                            <ChatComponent/>                                            
                                             </Modal>
                                             </div>
                                             {/* END of code snippets for chat */}

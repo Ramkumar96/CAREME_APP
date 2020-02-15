@@ -8,7 +8,6 @@ import 'stream-chat-react/dist/css/index.css';
 
 
 const ChatComponent = (props) => {
-  //client = stream.connect('dmr78d6h89rt', null, '68343');
   const client = new StreamChat("jh66vkvun7x5");
   const userToken = localStorage.getItem('chat_token');
 
@@ -23,17 +22,18 @@ const ChatComponent = (props) => {
     {
         id: name,
         name: name,
-        image: localStorage.getItem('user_pic'),
+        image: 'http://bit.ly/2O35mws',
     },
     userToken,
   );
+  
+  console.log(client);
+//   const conversation = client.channel('messaging', 'new-chat3', {
+//     name: 'Chat',
+//     image: 'http://bit.ly/2O35mws',
+// });
 
-  /*const conversation = client.channel('messaging', 'new-chat3', {
-    name: 'Chat',
-    image: 'http://bit.ly/2O35mws',
-});*/
-
- const filters = { type: 'messaging', members: { $in: [name] }};
+const filters = { type: 'messaging', members: { $in: [name] }};
 const sort = { last_message_at: -1 };
 const channels = client.queryChannels(filters, sort);
 
@@ -41,7 +41,7 @@ const channels = client.queryChannels(filters, sort);
 
 
   return(
-    <div style={{marginLeft: '100px',marginTop: '50px'}}>
+    <div style={{marginLeft: '0px',marginTop: '0px'}}>
         <Chat client={client} theme={'messaging light'}>
         <ChannelList filters={filters} sort={sort}/>
           <Channel>
