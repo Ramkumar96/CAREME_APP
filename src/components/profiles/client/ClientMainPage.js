@@ -216,7 +216,7 @@ class ClientMainPage extends Component {
                                             <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile pic" />
                                             {/* <div><ProfilePicUpload/></div> */}
                                         </div>
-                                        <br />
+                                        {/* <br /> */}
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
                                         <ul className="list-group list-group-unbordered mb-3 text-center">
                                             <li className="list-group-item">
@@ -243,15 +243,10 @@ class ClientMainPage extends Component {
                                         <h3 className="card-title">About Me</h3>
                                     </div>
                                     {/* /.card-header */}
-                                    <div className="card-body">
-                                        {/* <strong><i className="fas fa-book mr-1" /> Education</strong>
-                                        <p className="text-muted">
-                                            B.S. in Nursing from the University of Peradeniya
-                                        </p>
-                                        <hr /> */}
+                                    <div className="card-body text-center">
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                        <p className="text-muted">{this.state.profile_data.Location}</p>
-                                        <hr />
+                                        <p className="text-muted text-center">{this.state.profile_data.Location}</p>
+
                                     </div>
                                     {/* /.card-body */}
                                 </div>

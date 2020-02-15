@@ -1,9 +1,10 @@
 import React, {Component} from "react";
-import Navigationbar from '../homepage/navigationbar/Navigationbar';
+import ProfileNavbar from "../profiles/ProfileNavbar";
 import NurseListProfileClient from './NurseListProfileClient';
 import axios from 'axios';
 //import { NONAME } from "dns";
 import TestList from "./TestList";
+
 
 /*import NurseProfilePage from './NursePofilePage';
 */
@@ -508,7 +509,7 @@ class NurseListCLview extends Component{
 
         return(
             <div>
-                <Navigationbar/>
+                <ProfileNavbar/>
                 <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">

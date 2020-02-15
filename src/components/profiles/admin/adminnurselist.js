@@ -20,6 +20,8 @@ const UserReg = props => (
             <Link to={"/adminviewnurseprofile/"+props.nurselist._id}>View</Link>
         </td>
     </tr>
+
+    // Adminnurselist.nurseID()
 )
 
 export default class Adminnurselist extends Component {
