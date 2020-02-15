@@ -52,7 +52,6 @@ class ClientMainPage extends Component {
     componentDidMount() {
         this.getData()
         this.chatToken()
-
     }
 
     deactivate() {
@@ -97,8 +96,11 @@ class ClientMainPage extends Component {
                 this.setState({
                     profile_data: response.data.profile_data
                 })
+                this.progressBar();
             })
+    }
 
+    progressBar (){
         if (this.state.profile_data){
             if (this.state.profile_data.Location == null){
                 if (this.state.profile_data.profilePic == null){

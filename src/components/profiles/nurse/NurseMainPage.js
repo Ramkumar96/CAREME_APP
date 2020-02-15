@@ -87,7 +87,6 @@ class NurseMainPage extends Component {
             userID : this.state.profile_data.userID,
             RegDate : this.state.profile_data.RegDate,
             DeacDate : new Date(),
-            completedPer : null
         };
 
         axios.post('http://localhost:4000/userDeac/add', obj)
@@ -106,9 +105,7 @@ class NurseMainPage extends Component {
 
     componentDidMount() {
         this.getData()
-    }
-
-    
+    } 
 
     getData = () => {
         var token = localStorage.getItem('id');
@@ -118,42 +115,47 @@ class NurseMainPage extends Component {
                 this.setState({
                     profile_data: response.data.profile_data
                 })
+                this.progressBar();
             })
+    }
 
+    progressBar(){
         let completion = 100;
 
-        if (this.state.profile_data){
-            if (this.state.Location == null) {
+        if(this.state.profile_data){
+            if (this.state.profile_data.Location == null) {
                 completion = completion - 10;
             }
 
-            if (this.state.Age == null){
+            if (this.state.profile_data.Age == null){
                 completion  = completion - 6;
             }
 
-            if (this.state.nurseExp == null){
+            if (this.state.profile_data.nurseExp == null){
                 completion = completion - 10;
             }
 
-            if (this.state.nurseUni == null){
+            if (this.state.profile_data.nurseUni == null){
                 completion = completion - 6;
             }
 
-            if (this.state.nurseEdu == null){
+            if (this.state.profile_data.nurseEdu == null){
                 completion = completion - 8;
             }
 
-            if (this.state.nurseType == null){
+            if (this.state.profile_data.nurseType == null){
                 completion = completion - 10;
             }
 
-            if (this.state.profilePic == null){
+            if (this.state.profile_data.profilePic == null){
                 completion = completion - 10;
             }
 
-            this.setState ({
+            this.setState({
                 completedPer : completion
             })
+
+            console.log(this.state.completedPer);
         }
     }
 
@@ -217,7 +219,7 @@ class NurseMainPage extends Component {
             <div>
                 <div class="wrapper">
                     <ProfileNavbar />
-                    <br></br>
+                    <br/>
                     <div className="backg">
                         <div className="container-fluid">
                             <div className="row">
