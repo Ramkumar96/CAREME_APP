@@ -414,17 +414,17 @@ class ViewNurseProfile extends Component {
                                             <input type="button" class="btn btn-success" value="Send Message to Nurse" onClick={() => this.openMsgModal()} />
                                             <div>
                                             <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
-                                            <Chat client={client} theme={'messaging light'}>
-                        <Channel channel={conversation}>
-                            {/* <Window>
-                            <ChannelHeader />
-                            <MessageList />
-                            <MessageInput />
-                            </Window> */}
-                            <Thread />
-                        </Channel>
-                    </Chat>
-                                            <ChatComponent/>                                            
+                                            {/* <Chat client={client} theme={'messaging light'}>
+                                                <Channel channel={conversation}>
+                                                    <Window>
+                                                    <ChannelHeader />
+                                                    <MessageList />
+                                                    <MessageInput />
+                                                    </Window> 
+                                                    <Thread />
+                                                </Channel>
+                                            </Chat> */}
+                                             <ChatComponent/>                                          
                                             </Modal>
                                             </div>
                                             {/* END of code snippets for chat */}

@@ -247,7 +247,7 @@ class NurseViewClientProfile extends Component {
             }, 
             userToken,
         );
-        
+        console.log(client);
         const conversation = client.channel('messaging', channelName, {
             name: channelName,
             image: localStorage.getItem('user_pic'),
