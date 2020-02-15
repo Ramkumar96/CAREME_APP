@@ -99,11 +99,16 @@ class ClientViewNurseCalendar extends Component {
         //console.log(this.state.response_dates.includes(date.dateStr))
         //console.log(this.state.unavailableDates.includes(date)) 
         //console.log(Date.now())
-        //console.log(date.dateStr)
+        console.log(date.dateStr)
 
 
         if ((this.state.response_dates.includes(date.dateStr)===false) && (new Date(date.dateStr).getTime() >= Date.now())) {
+            
+            this.setState({
+                requesteddate: date.dateStr
     
+            })
+
             this.openDateModal();
             this.getClientData()
             console.log(this.state.profile_data)
@@ -112,7 +117,7 @@ class ClientViewNurseCalendar extends Component {
            
           
         }
-       
+       console.log(this.state.requesteddate)
     }
 
     openDateModal = () => {
@@ -132,8 +137,7 @@ class ClientViewNurseCalendar extends Component {
         console.log('event--------------')
         console.log(event.data)
     }
-
-
+    
     requestNurse =() => {
 
         const RequestObj = {
@@ -142,9 +146,9 @@ class ClientViewNurseCalendar extends Component {
             RequestedClientLocation: this.state.client_Location,
             RequestedNurse : this.state.nurse_name,
             RequestedNurseID:this.state.nurse_id,
-            RequestedDate: Date.now()
+            RequestedDate: this.state.requesteddate
         }
-
+        console.log(this.state.requesteddate)
         const headers = {
             'Content-Type': 'application/json'
           }

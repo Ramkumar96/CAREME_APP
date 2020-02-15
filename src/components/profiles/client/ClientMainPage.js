@@ -8,6 +8,7 @@ import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import  Progress  from "react-progressbar";
 import ChatComponent from "../messaging/ChatComponent";
+import ClientNotification from "../nurse/booking/ClientNotification";
 
 class ClientMainPage extends Component {
 
@@ -223,7 +224,7 @@ class ClientMainPage extends Component {
                                     <div className="card-header p-2">
                                         <ul className="nav nav-pills">
                                             <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile Details</a></li>
-                                            {/* <li className="nav-item"><a className="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li> */}
+                                            <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
                                             <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Update Profile</a></li>
                                         </ul>
                                     </div>{/* /.card-header */}
@@ -267,6 +268,10 @@ class ClientMainPage extends Component {
                                                 {/* /.tab-pane */}
                                             </div>
 
+                                            <div className="tab-pane" id="notification">
+                                                    <ClientNotification/>
+                                                </div>
+
                                             {/* Update Profile Form container */}
                                             <div className="tab-pane" id="settings">
 
@@ -276,6 +281,8 @@ class ClientMainPage extends Component {
                                             {/* /.tab-pane */}
                                         </div>
                                         {/* /.tab-content */}
+
+
                                     </div>{/* /.card-body */}
                                 </div>
                                 {/* /.nav-tabs-custom */}
