@@ -7,7 +7,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
 import { StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput } from 'stream-chat-react';
+import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput , Conversation} from 'stream-chat-react';
 import ChatComponent from "../messaging/ChatComponent";
 import Dialog from 'react-bootstrap-dialog';
 
@@ -209,6 +209,8 @@ class ViewNurseProfile extends Component {
         */
             const client = new StreamChat("jh66vkvun7x5");
             const userToken = localStorage.getItem('chat_token');
+
+            console.log("Token : ", userToken)
         
             const senderEmail = this.state.clientEmail;
             var n = senderEmail.indexOf("@");
@@ -222,22 +224,29 @@ class ViewNurseProfile extends Component {
 
             var channelName = senderName.concat('-',receiverName);
             console.log(channelName);
+
+            // client.setAnonymousUser();
         
             client.setUser( //logged in user details
                 {
                     id: senderName,
                     name: senderName,
-                    image: 'http://bit.ly/2O35mws',
+                   // image: 'http://bit.ly/2O35mws',
                 }, 
-                userToken,
+                userToken
             );
             console.log(client);
+
+            console.log("user", senderName)
+            console.log("recv", receiverName)
+            console.log("channel", channelName)
            
-            const conversation = client.channel('messaging', channelName, {
+            const conversation = client.channel('messaging', '', {
                 name: channelName,
                 image: 'http://bit.ly/2O35mws',
-                members: [senderName, receiverName]
+                members: [receiverName, senderName]
             });
+
 
         return (
             <div>
@@ -398,6 +407,7 @@ class ViewNurseProfile extends Component {
 
                                             {/* Calender for booking */}
 
+                                            <div>
                                             {/* complaint management*/}
                                             <input type="button" class="btn btn-success" value="Add a complaint" onClick={() => this.openComplaintModal()} />
                                             <Modal visible={this.state.visible2} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
@@ -405,14 +415,18 @@ class ViewNurseProfile extends Component {
                                                     <Complaint />
                                                 </div>
                                             </Modal>
-
+                                        </div>
+                                        </div>
+                                        {/* /.card-body */}
+                                        
+                                          
 
                                         { /**
                                             * @desc: chatting component.
                                             * @required: ChatComponent
                                             */ }
                                             <input type="button" class="btn btn-success" value="Send Message to Nurse" onClick={() => this.openMsgModal()} />
-                                            <div>
+                                            
                                             <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>   
                                             {/* <Chat client={client} theme={'messaging light'}>
                                                 <Channel channel={conversation}>
@@ -421,16 +435,13 @@ class ViewNurseProfile extends Component {
                                                     <MessageList />
                                                     <MessageInput />
                                                     </Window> 
-                                                    <Thread />
+                                                    <Thread/>
                                                 </Channel>
                                             </Chat> */}
-                                             <ChatComponent/>                                          
+                                             <ChatComponent/>
                                             </Modal>
-                                            </div>
+                                            
                                             {/* END of code snippets for chat */}
-
-                                        </div>
-                                        {/* /.card-body */}
                                     </div>
                                     {/* /.card */}
                                 </div>
@@ -442,6 +453,7 @@ class ViewNurseProfile extends Component {
                 <Dialog ref={(component) => { this.dialog = component }} />
             </div>
         );
+        
     }
 }
 

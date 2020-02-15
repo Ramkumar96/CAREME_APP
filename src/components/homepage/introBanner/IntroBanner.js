@@ -4,6 +4,9 @@ import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 import { constants } from "fs";
+import { Chat, Channel, ChannelHeader, Thread, Window, ChannelList } from 'stream-chat-react';
+import { MessageList, MessageInput } from 'stream-chat-react';
+import { StreamChat } from 'stream-chat';
 
 //validating empty fields for Nurse
 function validate(Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC) {
@@ -504,6 +507,31 @@ class IntroBanner extends Component {
 
             return hasError ? shouldShow : false;
         };
+
+        // /** 
+        // * @desc: code snippets to start a chat-coversation
+        // * @required: stream-chat, stream-chat-react
+        // */
+        // const client = new StreamChat("jh66vkvun7x5");
+        // const userToken = localStorage.getItem('chat_token');
+
+        // const email = localStorage.getItem('user_Email');
+        // console.log(email)
+        // var n = email.indexOf("@");
+        // var name = email.slice(0, n);
+        // console.log(name);
+
+        // //client.disconnect();
+        // client.setUser(
+        //     {
+        //         id: name,
+        //         name: name,
+        //         image: 'http://bit.ly/2O35mws',
+        //     },
+        //     userToken,
+        // );
+        
+        // console.log(client);
 
         return (
             <div class="container-fluid">
