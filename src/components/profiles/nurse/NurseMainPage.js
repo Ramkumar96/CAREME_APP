@@ -106,9 +106,7 @@ class NurseMainPage extends Component {
 
     componentDidMount() {
         this.getData()
-
     }
-
 
     getData = () => {
         var token = localStorage.getItem('id');
@@ -125,60 +123,32 @@ class NurseMainPage extends Component {
     progressBar(){
         let completion = 100;
 
-
         if (this.state.profile_data) {
-            if (this.state.Location == null) {
-                completion = completion - 10;
-            }
-
-            if (this.state.Age == null) {
-                completion = completion - 6;
-            }
-
-            if (this.state.nurseExp == null) {
-                completion = completion - 10;
-            }
-
-            if (this.state.nurseUni == null) {
-                completion = completion - 6;
-            }
-
-            if (this.state.nurseEdu == null) {
-                completion = completion - 8;
-            }
-
-            if (this.state.nurseType == null) {
-                completion = completion - 10;
-            }
-
-            if (this.state.profilePic == null) {
-
-        if(this.state.profile_data){
             if (this.state.profile_data.Location == null) {
                 completion = completion - 10;
             }
 
-            if (this.state.profile_data.Age == null){
-                completion  = completion - 6;
-            }
-
-            if (this.state.profile_data.nurseExp == null){
-                completion = completion - 10;
-            }
-
-            if (this.state.profile_data.nurseUni == null){
+            if (this.state.profile_data.Age == null) {
                 completion = completion - 6;
             }
 
-            if (this.state.profile_data.nurseEdu == null){
-                completion = completion - 8;
-            }
-
-            if (this.state.profile_data.nurseType == null){
+            if (this.state.profile_data.nurseExp == null) {
                 completion = completion - 10;
             }
 
-            if (this.state.profile_data.profilePic == null){
+            if (this.state.profile_data.nurseUni == null) {
+                completion = completion - 6;
+            }
+
+            if (this.state.profile_data.nurseEdu == null) {
+                completion = completion - 8;
+            }
+
+            if (this.state.profile_data.nurseType == null) {
+                completion = completion - 10;
+            }
+
+            if (this.state.profile_data.profilePic == null) {
                 completion = completion - 10;
             }
 
