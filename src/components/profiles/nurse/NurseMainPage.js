@@ -12,6 +12,7 @@ import NurseNotification from "./booking/NurseNotification";
 import Progress from "react-progressbar";
 import Footer from "../../homepage/footer/Footer";
 import ChatComponent from "../messaging/ChatComponent";
+import { StreamChat } from 'stream-chat';
 
 class NurseMainPage extends Component {
 
@@ -174,6 +175,43 @@ class NurseMainPage extends Component {
         const rateCount = this.state.profile_data.ratingCount;
 
         const finalRating = ratingVal/rateCount;
+
+    /** 
+    * @desc: code snippets to start a chat-coversation
+    * @required: stream-chat, stream-chat-react
+    */
+   const client = new StreamChat("jh66vkvun7x5");
+   const userToken = localStorage.getItem('chat_token');
+
+//    const senderEmail = this.state.clientEmail;
+//    var n = senderEmail.indexOf("@");
+//    var senderName = senderEmail.slice(0, n);
+//    console.log(senderName);
+
+   const receiverEmail = this.state.profile_data.Email;
+   var m = receiverEmail.indexOf("@");
+   var receiverName = receiverEmail.slice(0, m);
+   console.log(receiverName);
+
+//    var channelName = senderName.concat('-',receiverName);
+//    console.log(channelName);
+
+//    client.setUser( //logged in user details
+//        {
+//            id: senderName,
+//            name: senderName,
+//            image: localStorage.getItem('user_pic'),
+//        }, 
+//        userToken,
+//    );
+   client.setUser( //logged in user details
+    {
+        id: receiverName,
+        name: receiverName,
+        image: localStorage.getItem('user_pic'),
+    }, 
+    userToken,
+);
 
         return (
             <div>
