@@ -143,6 +143,8 @@ class AdminNurseEdit extends Component {
     onUpdate = (e) => {
         e.preventDefault();
 
+        console.log(this.props.nurseID)
+
         const nurseobj = {
             Age: this.state.Age,
             nurseGender: this.state.nurseGender,
@@ -168,7 +170,8 @@ class AdminNurseEdit extends Component {
                 'Content-Type': 'application/json'
             }
 
-            var token = localStorage.getItem('id');
+            //var token = localStorage.getItem('id');
+            var token = this.props.nurseID ;
             //console.log(nurseobj);
             axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
                 .then(response => {
