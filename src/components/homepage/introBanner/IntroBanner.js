@@ -324,8 +324,7 @@ class IntroBanner extends Component {
             profilePic: 'http://localhost:4000/public/sampleimage.jpeg',
             RegDate : new Date(),
             starRating: 0,
-            ratingCount: 0,
-            Location: 0
+            ratingCount: 0
         };
 
         if (!this.canBeSubmitted1()) {
