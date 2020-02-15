@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import axios from './../../../backend/node_modules/axios';
+import emailjs from 'emailjs-com'
 
 class Complaint extends Component {
   constructor(props) {
 	super(props);
-	this.state = { feedback: '', name: 'Name', email: 'email@example.com' };
+	this.state = { 
+		feedback: '', 
+		name: localStorage.getItem('user_name'), 
+		email: localStorage.getItem('user_Email') 
+	};
 	this.handleChange = this.handleChange.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -55,16 +60,20 @@ class Complaint extends Component {
 			//console.log(res.data) 
 		});
 
-	this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.Name, reply_to: this.state.Email})
-  }
+	 this.sendFeedback('template_RlSsXIuh', {message_html: this.state.feedback, from_name: localStorage.getItem('user_name')+" "+localStorage.getItem('user_lname'), reply_to: localStorage.getItem('user_Email'),to_name:"ComplaintTeam"})
+	//this.sendFeedback(templateId, {reply_to:localStorage.getItem('user_Email'),to_name:"ComplaintTeam",from_name:localStorage.getItem('user_Name'),complaintSenderEmail:"",message_html:this.state.feedback})
+		console.log(this.state);
+}
 
   sendFeedback (templateId, variables) {
 	window.emailjs.send(
-  	'gmail',  'template_RlSsXIuh',
-  	variables
+  	'gmail1',  templateId,	variables
   	).then(res => {
-    	console.log('Email successfully sent!')
-  	})
+		console.log('Email successfully sent!');
+		
+	  })
+	window.emailjs.send("gmail2", "acknowledgement", {"complaintSender":localStorage.getItem('user_Email')})
+	
   	// Handle errors here however you like, or use a React error boundary
   	.catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
   }
