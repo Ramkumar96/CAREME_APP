@@ -36,7 +36,7 @@ const NotifyBox = props => (
 
                     <div className="timeline-footer">
                         <a href="#" className="btn btn-primary btn-sm" onClick={() => NurseNotification.confirmRequest(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Confirm</a>
-                        <a href="#" className="btn btn-danger btn-sm" onClick={() => NurseNotification.deleteNotification(props.NoficationID)}>Delete</a>
+                        <a href="#" className="btn btn-danger btn-sm" onClick={() => NurseNotification.deleteNotification(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Delete</a>
                     </div>
                 </div>
             </div>
@@ -90,25 +90,54 @@ class NurseNotification extends Component {
                     console.log(response.data);
                     alert("Details successfully updates");
 
-                    this.deleteNotification(notification_ID)
+                    //this.deleteNotification(notification_ID)
+                    const obj = {
+                        NotificationID: notification_ID
+                    };
+            
+                    axios.post('http://localhost:4000/request/delete', obj)
+                        .then(response => {
+                            if (response.data.success) {
+                                console.log(response.data);
+                                alert("Details successfully deleted");
+                            }
+                        });
 
                 }
             });
     };
 
     //Delete Button Deleting Notification
-    static deleteNotification = (ID) => {
-        const obj = {
-            NotificationID: ID
+
+    static deleteNotification = (deleted_Client_name,deleted_Client_id, deleted_date,deleted_notification_ID, deleted_nurse_name,deleted_nurse_ID) => {
+        
+        const deleteobj = {
+            DeletedRequestedClient: deleted_Client_name,
+            DeletedRequestedByClientID: deleted_Client_id,
+            DeletedRequestedDate:deleted_date,
+            DeletedRequestedNurse:deleted_nurse_name,
+            DeletedRequestedNurseID:deleted_nurse_ID
         };
 
-        axios.post('http://localhost:4000/request/delete', obj)
+        axios.post('http://localhost:4000/requestDeleted/add', deleteobj)
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    alert("Details successfully deleted");
+                    alert("Details successfully Updated");
+
+                    const obj = {
+                        NotificationID: deleted_notification_ID
+                    };
+            
+                    axios.post('http://localhost:4000/request/delete', obj)
+                        .then(response => {
+                            if (response.data.success) {
+                                console.log(response.data);
+                                alert("Details successfully deleted");
+                            }
+                        });
                 }
-            });
+            });  
     }
 
     //Mapping the Notification Data
