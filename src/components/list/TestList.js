@@ -23,7 +23,7 @@ export default class TestList extends Component {
 
       <div>
       
-        <div className="p-3 ">
+        {/* <div className="p-3 "> */}
           <div id={`${this.props.loc}`} className={`${this.props.loc}`}>
 
             <div id={`${this.props.exp}`} className={`${this.props.exp}`} >
@@ -56,7 +56,7 @@ export default class TestList extends Component {
               </div>
             </div>
           </div>
-        </div>
+        {/* </div> */}
        
       </div>
 </>
