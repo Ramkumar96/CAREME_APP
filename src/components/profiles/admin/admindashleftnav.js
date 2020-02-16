@@ -18,7 +18,7 @@ class Admindashleftnav extends Component {
                 <img src="dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
               </div>
               <div className="info">
-                <a href="#" className="d-block"><b>Admin</b></a>
+                <a href="/adminmaindash" className="d-block"><b>Admin</b></a>
               </div>
             </div>
             {/* Sidebar Menu */}
@@ -27,11 +27,11 @@ class Admindashleftnav extends Component {
                 {/* Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library */}
                 <li className="nav-item has-treeview">
-                  <a href="#" className="nav-link active">
+                  <a className="nav-link active">
                     <i className="fa fa-user-md" />
                     <p>
                       Nurse
-              <i className="right fas fa-angle-left" />
+                    <i className="right fas fa-angle-left" />
                     </p>
                   </a>
                   <ul className="nav nav-treeview">
@@ -52,7 +52,7 @@ class Admindashleftnav extends Component {
 
 
                 <li className="nav-item has-treeview">
-                  <a href="#" className="nav-link">
+                  <a className="nav-link active">
                     <i className="fas fa-users" />
                     <p>
                       Clients
