@@ -551,7 +551,7 @@ class NurseListCLview extends Component{
 
             <div class="col">
                 <div className="form-group">
-                    <label>Sort by Location </label>
+                    <label>Filter by Location </label>
                     <select class="form-control" onChange={(event)=>this.nursesortloc(event)}>
                         <option value={0}>Select district</option>
                         <option value={1}>Colombo</option>
@@ -564,7 +564,7 @@ class NurseListCLview extends Component{
               
             <div class="col">
                 <div className="form-group">
-                    <label>Sort by Nurse Type </label>
+                    <label>Filter by Nurse Type </label>
                     <select class="form-control" onChange={(event)=>this.nursesorttype(event)}>
                         <option value={0}>Select Type</option>
                         <option value={1}>Emergency Nurse</option>
