@@ -15,7 +15,6 @@ const UserAcceptRoute = require('./accept.route');
 const complaintRoute = require('./complaint.route');
 const UserRequestDeletedRoute = require('./requestDeleted.route');
 
-
 //connecting database
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
@@ -56,3 +55,19 @@ app.use(function (err, req, res, next) {
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
+
+// app.get('/send-email', (req,res)=> {
+//   //get variables from query string in the search bar
+//   const {recipient, sender,topic, text} = req.query;
+
+//   //sendgrid data requirements
+//   const msg ={
+//     to: recipient,
+//     from:sender,
+//     subject: topic,
+//     text:text,
+//   }
+
+//   sgMail.send(msg)
+//   .then((msg)=> console.log(text));
+// })

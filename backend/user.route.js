@@ -16,6 +16,22 @@ UserRegRoutes.route('/add').post(function (req, res) {
   userReg.save()
     .then(userReg => {
       res.status(200).json({ 'UserReg': 'User added successfully' });
+      var n = req.body.Email.indexOf("@");
+        var name = req.body.Email.slice(0, n);
+        console.log(name);
+        const client = new StreamChat('', 'yet5qpqxuh9p98r94vcvndd5rr82t2x2cb9m3dgaq4yx46ua8r4ckpuu7fvpyews');
+        const chatToken = client.createToken(name);
+        console.log(chatToken);
+        client.setUser(
+          {
+              id: name,
+              name: name,
+              //image: 'http://bit.ly/2O35mws',
+          },
+          userToken,
+        );
+
+
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
