@@ -96,15 +96,14 @@ class AdminClientViewProfile extends Component {
         var token = this.props.match.params.id;
         axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
             .then(response => {
-                console.log(response.data.profile_data)
+                console.log(response.data.profile_data._id)
                 this.setState({
                     profile_data: response.data.profile_data,
                     client_id: response.data.profile_data._id
                 })
                 this.progressBar();
-            })
-
-            console.log(this.state.client_id)
+                console.log(this.state.client_id)
+            })     
     }
 
     progressBar() {
@@ -231,23 +230,6 @@ class AdminClientViewProfile extends Component {
                                     </div>
                                     {/* /.card-body */}
                                 </div>
-
-
-                                {/* About Me Box */}
-                                <div className="card card-primary">
-                                    <div className="card-header">
-                                        <h3 className="card-title">About Me</h3>
-                                    </div>
-                                    {/* /.card-header */}
-                                    <div className="card-body text-center">
-                                        <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                        <p className="text-muted text-center">{this.state.profile_data.Location}</p>
-
-                                    </div>
-                                    {/* /.card-body */}
-                                </div>
-                                {/* /.card */}
-
                             </div>
 
                             {/* client user information container */}
@@ -326,11 +308,10 @@ class AdminClientViewProfile extends Component {
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                         <hr />
-                                        <a href="/nurselistclview" className="btn btn btn-info btn-block"><i className="fa fa-user-md mr-2"></i><b>Find A Nurse</b></a>
+                                        {/* <a href="/nurselistclview" className="btn btn btn-info btn-block"><i className="fa fa-user-md mr-2"></i><b>Find A Nurse</b></a> */}
                                         {/* <a href="/nurselistclview" className="btn btn-warning btn-block"><b>Find A Nurse</b></a> */}
-                                        <hr />
-
-                                        <Button className="btn btn-danger btn-block" onClick={() => this.openDeacModal()}><i className="fa fa-user-times mr-2"></i>Deactivate</Button>
+                                       
+                                    <Button className="btn btn-danger btn-block" onClick={() => this.openDeacModal()}><i className="fa fa-user-times mr-2"></i>Deactivate</Button>
 
                                         {/* Deactivate Modal */}
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>

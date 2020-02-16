@@ -220,10 +220,6 @@ class NurseAdminMainPage extends Component {
                                                     <li className="list-group-item">
                                                         <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
                                                     </li>
-
-                                                    <li className="list-group-item text-center">
-                                                        <small class="badge badge-success"><i class="far fa-check-circle mr-2"></i>Fully Verified</small>
-                                                    </li>
                                                 </ul>
                                             </div>
                                             {/* /.card-body */}
@@ -246,9 +242,6 @@ class NurseAdminMainPage extends Component {
                                                 <p className="text-muted">
                                                     {this.state.profile_data.nurseUni}
                                                 </p>
-                                                <hr />
-                                                <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                                <p className="text-muted">{this.state.profile_data.Location}</p>
                                                 <hr />
                                                 <strong><i className="fas fa-pencil-alt mr-1" /> Skills</strong>
                                                 <p className="text-muted">
@@ -315,11 +308,8 @@ class NurseAdminMainPage extends Component {
                                                         loadData={this.getData}
                                                         nurseID={this.state.nurse_id} 
 
-                                                        />
-                                                         
+                                                        />                              
                                                 </div>
-
-
                                                 {/* /.tab-pane */}
                                             </div>
                                             {/* /.tab-content */}

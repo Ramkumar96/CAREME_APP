@@ -124,7 +124,8 @@ class ClientEdit extends Component {
                 'Content-Type': 'application/json'
             }
 
-            var token = localStorage.getItem('id');
+            //var token = localStorage.getItem('id');
+            var token = this.props.clientID;
             console.log(nurseobj);
             axios.put('http://localhost:4000/user/userdata/update/' + token, nurseobj, { headers: headers })
                 .then(response => {
@@ -209,8 +210,6 @@ class ClientEdit extends Component {
                                 <option value="Kurunegala">Kurunegala</option>
                             </select>
                         </div>
-
-                        <div><ProfilePicUpload /></div>
                     </div>
 
                     {/* /.card-body */}
