@@ -39,6 +39,7 @@
     "react-dom": "^16.12.0",
     "react-icons": "^3.7.0",
     "react-interactive-table": "^1.0.0",
+    "react-js-pagination": "^3.0.2",
     "react-minimal-pie-chart": "^6.0.1",
     "react-modal": "^3.10.1",
     "react-progressbar": "^15.4.1",
