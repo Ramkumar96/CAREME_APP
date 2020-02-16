@@ -315,22 +315,6 @@ class NurseEdit extends Component {
                                 <option education="B.Sc degree in Nursing">B.Sc degree in Nursing</option>
                             </select>
                         </div>
-
-                        {/* Upload NIC Picture */}
-                        <div className="form-group">
-                            <label htmlFor="exampleInputFile">Upload NIC Copy</label>
-                            <div className="input-group">
-                                <div className="custom-file">
-                                    <input type="file" className="custom-file-input" id="exampleInputFile" />
-                                    <label className="custom-file-label" htmlFor="exampleInputFile">Choose file</label>
-                                </div>
-                                <div className="input-group-append">
-                                    <span className="input-group-text" id>Upload</span>
-                                </div>
-                            </div>
-                        </div>
-
-
                         {/* Update Profile Picture */}
                         <div><ProfilePicUpload/></div>
 

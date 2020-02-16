@@ -7,10 +7,11 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction";
 // import bootstrapPlugin from '@fullcalendar/bootstrap'
 
-
+import emailjs from 'emailjs-com';
 import Modal from 'react-awesome-modal';
 import ProfileNavbar from '../ProfileNavbar'
 import axios from '../../../../backend/node_modules/axios';
+import Dialog from "react-bootstrap-dialog";
 
 
 class ClientViewNurseCalendar extends Component {
@@ -60,8 +61,9 @@ class ClientViewNurseCalendar extends Component {
                 this.setState({
                     profile_data:response.data.profile_data,
                     nurse_name:response.data.profile_data.FirstName,
+                    nurse_lname:response.data.profile_data.LastName,
                     nurse_id:response.data.profile_data._id,
-
+                    nurse_email:response.data.profile_data.Email,
                     response_dates: response.data.profile_data.UnavailableDates
                 })
                 //console.log(this.state.profile_data)
@@ -93,17 +95,25 @@ class ClientViewNurseCalendar extends Component {
 
     }
 
-    
+    onShowDialog(){
+        this.dialog.showAlert("Booking request sent successfully");
+    }
+
     dateClick = (date) => {
         //console.log(new Date(date.dateStr).getTime(), '-----------------------')
         //console.log(this.state.response_dates.includes(date.dateStr))
         //console.log(this.state.unavailableDates.includes(date)) 
         //console.log(Date.now())
-        //console.log(date.dateStr)
+        console.log(date.dateStr)
 
 
         if ((this.state.response_dates.includes(date.dateStr)===false) && (new Date(date.dateStr).getTime() >= Date.now())) {
+            
+            this.setState({
+                requesteddate: date.dateStr
     
+            })
+
             this.openDateModal();
             this.getClientData()
             console.log(this.state.profile_data)
@@ -112,7 +122,7 @@ class ClientViewNurseCalendar extends Component {
            
           
         }
-       
+       console.log(this.state.requesteddate)
     }
 
     openDateModal = () => {
@@ -132,8 +142,7 @@ class ClientViewNurseCalendar extends Component {
         console.log('event--------------')
         console.log(event.data)
     }
-
-
+    
     requestNurse =() => {
 
         const RequestObj = {
@@ -142,9 +151,9 @@ class ClientViewNurseCalendar extends Component {
             RequestedClientLocation: this.state.client_Location,
             RequestedNurse : this.state.nurse_name,
             RequestedNurseID:this.state.nurse_id,
-            RequestedDate: Date.now()
+            RequestedDate: this.state.requesteddate
         }
-
+        console.log(this.state.requesteddate)
         const headers = {
             'Content-Type': 'application/json'
           }
@@ -153,7 +162,11 @@ class ClientViewNurseCalendar extends Component {
           .then (res => {
               if (res.data.success){
                console.log(res.data);
+
                alert("Details successfully updated");
+               window.emailjs.send("gmail3","template_G2HWQa7Y", {"nurseEmail":this.state.nurse_email,"to_name":this.state.nurse_name}) 
+
+               this.onShowDialog();
                 
               }
           })
@@ -161,8 +174,19 @@ class ClientViewNurseCalendar extends Component {
           this.closeDateModal();
         console.log("request Nurse")
         console.log(this.state.profile_data)
+        // this.sendFeedback('template_G2HWQa7Y', {"nurseEmail":this.state.nurse_email,"to_name":this.state.nurse_name+" "+this.state.nurse_lname})
         
     }
+
+    // sendFeedback (templateId, variables) {
+    //     window.emailjs.send(
+    //       'gmail3',  templateId, variables
+    //       ).then(res => {
+    //         console.log('Notified Nurse!');
+    //       })        
+    //       // Handle errors here however you like, or use a React error boundary
+    //       .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+    //   }
 
     render() {
 
@@ -203,6 +227,7 @@ class ClientViewNurseCalendar extends Component {
                         </center>
                     </Modal>
                     
+                    <Dialog ref={(component) => { this.dialog = component }} />
                 </div>
             </div>
         )

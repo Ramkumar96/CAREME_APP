@@ -84,7 +84,7 @@ class NurseAdminMainPage extends Component {
                 if(response.data.success){
                     this.setState({
                         visible1: false,
-                        redirect_home:true
+                        redirect_admin:true
                     })
                 }
             });
@@ -116,9 +116,10 @@ class NurseAdminMainPage extends Component {
         //console.log(token)
         axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
             .then(response => {
-                //console.log(response.data.profile_data)
+                console.log(response.data.profile_data)
                 this.setState({
-                    profile_data: response.data.profile_data
+                    profile_data: response.data.profile_data,
+                    nurse_id: response.data.profile_data._id
                 })
                 //console.log(response.data.profile_data)
                 // localStorage.setItem("accusedEmail", this.state.profile_data.Email);
@@ -126,6 +127,7 @@ class NurseAdminMainPage extends Component {
                 // localStorage.setItem("accusedUserLName", this.state.profile_data.LastName);
                 // localStorage.setItem("accusedByID", 2);
                 // localStorage.setItem("accusedUserID", 0);
+                console.log(this.state.nurse_id)
             })
 
         let completion = 100;
@@ -173,9 +175,9 @@ class NurseAdminMainPage extends Component {
             );
         }
 
-        if(this.state.redirect_home){
+        if(this.state.redirect_admin){
             return(
-                <Redirect to='/'/>
+                <Redirect to='/adminmaindash'/>
             );
         }
 
@@ -308,13 +310,13 @@ class NurseAdminMainPage extends Component {
                                                     {/* /.tab-pane */}
                                                 </div>
 
-                                                <div className="tab-pane" id="notification">
-                                                    <NurseNotification/>
-                                                </div>
-
                                                 <div className="tab-pane" id="settings">
                                                     <AdminNurseEdit
-                                                        loadData={this.getData} />
+                                                        loadData={this.getData}
+                                                        nurseID={this.state.nurse_id} 
+
+                                                        />
+                                                         
                                                 </div>
 
 

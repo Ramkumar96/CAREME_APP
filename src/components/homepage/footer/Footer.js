@@ -12,11 +12,10 @@ class Footer extends Component {
                         <div className="row">
                             <div className="col-lg-3 col-xs-12 about-company align">
                                 <h3>Care Me</h3>
-                                <p className="pr-5 text-white-50">  CareMe is a web based solution
-                                    that aims to improve the home health
+                                <p className="pr-5 text-white-50">  CareMe aims to improve the home health
                                     nursing sector of Sri Lanka. Our ultimate goal
                                     is to help patients recover in a healthier
-                                    and safer environment to their best.
+                                    and safer surrounding.
                                 </p>
                             </div>
 
@@ -39,15 +38,15 @@ class Footer extends Component {
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-xs-12 pl-5 links align">
+                            <div class="col-lg-3 col-xs-12 about-company align">
                                 <h4 className="mt-lg-0 mt-sm-3">Services</h4>
-                                <ul className="m-0 p-0">
-                                    <div><a href="#">Partners</a></div>
-                                    <div><a href="#">About Us</a></div>
-                                    <div><a href="#">Terms & Conditions</a></div>
-                                    <div><a href="#">Privacy Policy</a></div>
-                                    <div><a href="#">Contact Us</a></div>
-                                    <div><a href="#">FAQ</a></div>
+                                <ul className="pr-5 text-white-50">
+                                    <li>Filter for your need</li>
+                                    <li>Find your nurse</li>
+                                    <li>Send a request</li>
+                                    <li>Connect</li>
+                                    <li>Recover</li>
+                                    <li>Leave a review</li>
                                 </ul>
                             </div>
 
@@ -55,13 +54,13 @@ class Footer extends Component {
                                 <h4 class="">Follow Us</h4>
                                 <ul>
                                     <div><a href="https://www.linkedin.com/"><FontAwesomeIcon icon={faLinkedin} size="1x" /></a>
-                                    <span><a href="https://www.linkedin.com/">Linked In of careMe</a></span></div>
+                                    <span><a href="https://www.linkedin.com/">LinkedIn</a></span></div>
                                     <br/>
                                     <div><a href="https://github.com/"><FontAwesomeIcon icon={faGithub} size="1x" /></a>
-                                    <span><a href="https://github.com/">Git Hub of CareMe</a></span></div>
+                                    <span><a href="https://github.com/">GitHub</a></span></div>
                                     <br/>
                                     <div><a href="https://facebook.com/"><FontAwesomeIcon icon={faFacebookSquare} size="1x" /></a>
-                                    <span><a href="https://facebook.com/">FaceBook of CareMe</a></span></div>
+                                    <span><a href="https://facebook.com/">Facebook</a></span></div>
                                 </ul>
 
                             </div>

@@ -8,7 +8,9 @@ import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import  Progress  from "react-progressbar";
 import ChatComponent from "../messaging/ChatComponent";
+import ClientNotification from "../nurse/booking/ClientNotification";
 import { StreamChat } from 'stream-chat';
+
 
 class ClientMainPage extends Component {
 
@@ -50,7 +52,6 @@ class ClientMainPage extends Component {
     componentDidMount() {
         this.getData()
         this.chatToken()
-
     }
 
     deactivate() {
@@ -95,8 +96,11 @@ class ClientMainPage extends Component {
                 this.setState({
                     profile_data: response.data.profile_data
                 })
+                this.progressBar();
             })
+    }
 
+    progressBar (){
         if (this.state.profile_data){
             if (this.state.profile_data.Location == null){
                 if (this.state.profile_data.profilePic == null){
@@ -212,7 +216,7 @@ class ClientMainPage extends Component {
                                             <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile pic" />
                                             {/* <div><ProfilePicUpload/></div> */}
                                         </div>
-                                        <br />
+                                        {/* <br /> */}
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
                                         <ul className="list-group list-group-unbordered mb-3 text-center">
                                             <li className="list-group-item">
@@ -239,15 +243,10 @@ class ClientMainPage extends Component {
                                         <h3 className="card-title">About Me</h3>
                                     </div>
                                     {/* /.card-header */}
-                                    <div className="card-body">
-                                        {/* <strong><i className="fas fa-book mr-1" /> Education</strong>
-                                        <p className="text-muted">
-                                            B.S. in Nursing from the University of Peradeniya
-                                        </p>
-                                        <hr /> */}
+                                    <div className="card-body text-center">
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                        <p className="text-muted">{this.state.profile_data.Location}</p>
-                                        <hr />
+                                        <p className="text-muted text-center">{this.state.profile_data.Location}</p>
+
                                     </div>
                                     {/* /.card-body */}
                                 </div>
@@ -262,7 +261,7 @@ class ClientMainPage extends Component {
                                     <div className="card-header p-2">
                                         <ul className="nav nav-pills">
                                             <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile Details</a></li>
-                                            {/* <li className="nav-item"><a className="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li> */}
+                                            <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
                                             <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Update Profile</a></li>
                                         </ul>
                                     </div>{/* /.card-header */}
@@ -306,6 +305,10 @@ class ClientMainPage extends Component {
                                                 {/* /.tab-pane */}
                                             </div>
 
+                                            <div className="tab-pane" id="notification">
+                                                    <ClientNotification/>
+                                                </div>
+
                                             {/* Update Profile Form container */}
                                             <div className="tab-pane" id="settings">
 
@@ -315,6 +318,8 @@ class ClientMainPage extends Component {
                                             {/* /.tab-pane */}
                                         </div>
                                         {/* /.tab-content */}
+
+
                                     </div>{/* /.card-body */}
                                 </div>
                                 {/* /.nav-tabs-custom */}

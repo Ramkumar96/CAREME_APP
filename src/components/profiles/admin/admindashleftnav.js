@@ -88,25 +88,18 @@ class Admindashleftnav extends Component {
           </ul>
         </li>        
         
-        <li className="nav-header">Documents</li>
+        <li className="nav-header">Reports</li> 
         <li className="nav-item">
-          <a href="https://adminlte.io/docs/3.0" className="nav-link">
-            <i className="nav-icon fas fa-file" />
-            <p>Company Policy</p>
-          </a>
-        </li>
-        <li className="nav-header">Reports</li>
-        <li className="nav-item">
-          <a href="#" className="nav-link">
+          <a href="totalUserReport" className="nav-link">
             <i className="fas fa-circle nav-icon" />
-            <p>Monthly Income</p>
+            <p>Total Users</p>
           </a>
         </li>
-        
+
         <li className="nav-item">
           <a href="userReport" className="nav-link">
             <i className="fas fa-circle nav-icon" />
-            <p>User Details</p>
+            <p>System Reports</p>
           </a>
         </li>
 
@@ -114,26 +107,6 @@ class Admindashleftnav extends Component {
           <a href="complaintsReview" className="nav-link">
             <i className="fas fa-circle nav-icon" />
             <p>Complaint Report</p>
-          </a>
-        </li>
-
-        <li className="nav-header">Information</li>
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <i className="nav-icon far fa-circle text-danger" />
-            <p className="text">Company Details</p>
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <i className="nav-icon far fa-circle text-warning" />
-            <p>Service Details</p>
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="#" className="nav-link">
-            <i className="nav-icon far fa-circle text-info" />
-            <p>Technical Assistance</p>
           </a>
         </li>
       </ul>

@@ -10,7 +10,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Modal from 'react-awesome-modal';
 import ProfileNavbar from '../ProfileNavbar'
 import axios from '../../../../backend/node_modules/axios'
-import Footer from '../../homepage/footer/Footer';
 
 
 class NurseCalendar extends Component {
@@ -82,7 +81,7 @@ class NurseCalendar extends Component {
     dateClick = (date) => {
         console.log('-----------------------')
         // console.log(Date.now())
-        // console.log(date.dateStr)
+        console.log(date.dateStr)
 
         if (new Date(date.dateStr).getTime() >= Date.now()) {
             //console.log(date)
@@ -130,32 +129,9 @@ class NurseCalendar extends Component {
             )
         }
         return (
-
-            
-
-
             <div>
                 <ProfileNavbar />
 
-                <div>
-                <div class="container-fluid">
-                    <div className="row">
-                        {/* AboutBanner Left Col */}
-                        <div className="col-4 calendarback">
-                            
-                            <div class="text-center calendarbacktext">
-                                <h1 class="text-capitalize">
-                                    <div><strong class="banner-title">Update</strong></div>
-                                    <div> <strong class="banner-title">Your</strong></div>
-                                    <div><strong class="banner-title">Availability</strong></div>
-                                </h1>
-                            
-                            </div>
-                        </div>
-                        {/* About Banner Right Col */}
-                        <div className="col-8 aboutimg">
-                          
-                          {/* calendar */}
                 <div className="container">
                     <FullCalendar
                         defaultView="dayGridMonth"
@@ -180,11 +156,6 @@ class NurseCalendar extends Component {
                         </center>
                     </Modal>
                 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                    <Footer/>
             </div>
         )
     }
