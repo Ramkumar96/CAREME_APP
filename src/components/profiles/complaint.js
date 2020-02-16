@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from './../../../backend/node_modules/axios';
-import emailjs from 'emailjs-com'
+import emailjs from 'emailjs-com';
+import Dialog from 'react-bootstrap-dialog';
 
 class Complaint extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ class Complaint extends Component {
 	this.handleChange = this.handleChange.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  onShowComplaintSuccess(){
+	this.dialog.showAlert("Your complaint has been recorded. Team CareMe will get back to you with a quick solution.");
+	}
 
   render() {
 	return (
@@ -31,7 +36,8 @@ class Complaint extends Component {
     	</div>
     	<input type="button" value="Send" className="btn btn-success" onClick={this.handleSubmit} />
 		{/* <input type="button" value="Home" className="btn btn-primary" onClick={event =>  window.location.href='/nursemainlist'} /> */}
-  	</form>
+		<Dialog ref={(component) => { this.dialog = component }} />
+	</form>
 	)
   }
 
@@ -58,6 +64,7 @@ class Complaint extends Component {
 	axios.post('http://localhost:4000/complaint/add', data)
 		.then(res => { 
 			//console.log(res.data) 
+			this.onShowComplaintSuccess();
 		});
 
 	 this.sendFeedback('template_RlSsXIuh', {message_html: this.state.feedback, from_name: localStorage.getItem('user_name')+" "+localStorage.getItem('user_lname'), reply_to: localStorage.getItem('user_Email'),to_name:"ComplaintTeam"})

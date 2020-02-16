@@ -4,9 +4,9 @@ import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 import { constants } from "fs";
-import { Chat, Channel, ChannelHeader, Thread, Window, ChannelList } from 'stream-chat-react';
-import { MessageList, MessageInput } from 'stream-chat-react';
-import { StreamChat } from 'stream-chat';
+// import { Chat, Channel, ChannelHeader, Thread, Window, ChannelList } from 'stream-chat-react';
+// import { MessageList, MessageInput } from 'stream-chat-react';
+// import { StreamChat } from 'stream-chat';
 
 //validating empty fields for Nurse
 function validate(Email, FirstName, LastName, nurseID, PW, CPW, Home, Tel, NIC) {

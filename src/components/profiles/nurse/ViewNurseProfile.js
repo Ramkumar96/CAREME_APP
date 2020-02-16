@@ -6,8 +6,8 @@ import Modal from 'react-awesome-modal';
 import StarRatingComponent from 'react-star-rating-component';
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
-import { StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput , Conversation} from 'stream-chat-react';
+// import { StreamChat } from 'stream-chat';
+// import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput , Conversation} from 'stream-chat-react';
 import ChatComponent from "../messaging/ChatComponent";
 import Dialog from 'react-bootstrap-dialog';
 
@@ -204,48 +204,48 @@ class ViewNurseProfile extends Component {
         const { Rating } = this.setState;
 
       /** 
-        * @desc: code snippets to start a chat-coversation
+        * @desc: code snippets to start a private chat-coversation
         * @required: stream-chat, stream-chat-react
         */
-            const client = new StreamChat("jh66vkvun7x5");
-            const userToken = localStorage.getItem('chat_token');
+            // const client = new StreamChat("jh66vkvun7x5");
+            // const userToken = localStorage.getItem('chat_token');
 
-            console.log("Token : ", userToken)
+            // console.log("Token : ", userToken)
         
-            const senderEmail = this.state.clientEmail;
-            var n = senderEmail.indexOf("@");
-            var senderName = senderEmail.slice(0, n);
-            console.log(senderName);
+            // const senderEmail = this.state.clientEmail;
+            // var n = senderEmail.indexOf("@");
+            // var senderName = senderEmail.slice(0, n);
+            // console.log(senderName);
         
-            const receiverEmail = this.state.profile_data.Email;
-            var m = receiverEmail.indexOf("@");
-            var receiverName = receiverEmail.slice(0, m);
-            console.log(receiverName);
+            // const receiverEmail = this.state.profile_data.Email;
+            // var m = receiverEmail.indexOf("@");
+            // var receiverName = receiverEmail.slice(0, m);
+            // console.log(receiverName);
 
-            var channelName = senderName.concat('-',receiverName);
-            console.log(channelName);
+            // var channelName = senderName.concat('-',receiverName);
+            // console.log(channelName);
 
-            // client.setAnonymousUser();
+            // // client.setAnonymousUser();
         
-            client.setUser( //logged in user details
-                {
-                    id: senderName,
-                    name: senderName,
-                   // image: 'http://bit.ly/2O35mws',
-                }, 
-                userToken
-            );
-            console.log(client);
+            // client.setUser( //logged in user details
+            //     {
+            //         id: senderName,
+            //         name: senderName,
+            //        // image: 'http://bit.ly/2O35mws',
+            //     }, 
+            //     userToken
+            // );
+            // console.log(client);
 
-            console.log("user", senderName)
-            console.log("recv", receiverName)
-            console.log("channel", channelName)
+            // console.log("user", senderName)
+            // console.log("recv", receiverName)
+            // console.log("channel", channelName)
            
-            const conversation = client.channel('messaging', '', {
-                name: channelName,
-                image: 'http://bit.ly/2O35mws',
-                members: [receiverName, senderName]
-            });
+            // const conversation = client.channel('messaging', '', {
+            //     name: channelName,
+            //     image: 'http://bit.ly/2O35mws',
+            //     members: [receiverName, senderName]
+            // });
 
 
         return (

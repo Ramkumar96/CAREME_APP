@@ -6,8 +6,8 @@ import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import { Button, Form, Col } from 'react-bootstrap';
 import Complaint from "../complaint";
-import { StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput } from 'stream-chat-react';
+// import { StreamChat } from 'stream-chat';
+// import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput } from 'stream-chat-react';
 import ChatComponent from "../messaging/ChatComponent";
 import Dialog from 'react-bootstrap-dialog';
 
@@ -220,39 +220,39 @@ class NurseViewClientProfile extends Component {
         const finalRating = ratingVal/rateCount;
 
       /** 
-        * @desc: code snippets to start a chat-coversation
+        * @desc: code snippets to start a private chat-coversation
         * @required: stream-chat, stream-chat-react
         */
-        const client = new StreamChat("jh66vkvun7x5");
-        const userToken = localStorage.getItem('chat_token');
+        // const client = new StreamChat("jh66vkvun7x5");
+        // const userToken = localStorage.getItem('chat_token');
 
-        const senderEmail = this.state.nurseEmail;
-        var n = senderEmail.indexOf("@");
-        var senderName = senderEmail.slice(0, n);
-        console.log(senderName);
+        // const senderEmail = this.state.nurseEmail;
+        // var n = senderEmail.indexOf("@");
+        // var senderName = senderEmail.slice(0, n);
+        // console.log(senderName);
 
-        const receiverEmail = this.state.profile_data.Email;
-        var m = receiverEmail.indexOf("@");
-        var receiverName = receiverEmail.slice(0, m);
-        console.log(receiverName);
+        // const receiverEmail = this.state.profile_data.Email;
+        // var m = receiverEmail.indexOf("@");
+        // var receiverName = receiverEmail.slice(0, m);
+        // console.log(receiverName);
 
-        var channelName = senderName.concat('-',receiverName);
-        console.log(channelName);
+        // var channelName = senderName.concat('-',receiverName);
+        // console.log(channelName);
 
-        client.setUser( //logged in user details
-            {
-                id: senderName,
-                name: senderName,
-                image: localStorage.getItem('user_pic'),
-            }, 
-            userToken,
-        );
-        console.log(client);
-        const conversation = client.channel('messaging', channelName, {
-            name: channelName,
-            image: localStorage.getItem('user_pic'),
-            members: [senderName, receiverName]
-        });
+        // client.setUser( //logged in user details
+        //     {
+        //         id: senderName,
+        //         name: senderName,
+        //         image: localStorage.getItem('user_pic'),
+        //     }, 
+        //     userToken,
+        // );
+        // console.log(client);
+        // const conversation = client.channel('messaging', channelName, {
+        //     name: channelName,
+        //     image: localStorage.getItem('user_pic'),
+        //     members: [senderName, receiverName]
+        // });
 
         return (
             <div>

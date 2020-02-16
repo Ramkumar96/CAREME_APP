@@ -7,7 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction";
 // import bootstrapPlugin from '@fullcalendar/bootstrap'
 
-
+import emailjs from 'emailjs-com';
 import Modal from 'react-awesome-modal';
 import ProfileNavbar from '../ProfileNavbar'
 import axios from '../../../../backend/node_modules/axios';
@@ -60,8 +60,9 @@ class ClientViewNurseCalendar extends Component {
                 this.setState({
                     profile_data:response.data.profile_data,
                     nurse_name:response.data.profile_data.FirstName,
+                    nurse_lname:response.data.profile_data.LastName,
                     nurse_id:response.data.profile_data._id,
-
+                    nurse_email:response.data.profile_data.Email,
                     response_dates: response.data.profile_data.UnavailableDates
                 })
                 //console.log(this.state.profile_data)
@@ -154,15 +155,26 @@ class ClientViewNurseCalendar extends Component {
               if (res.data.success){
                console.log(res.data);
                alert("Details successfully updated");
-                
+               window.emailjs.send("gmail3","template_G2HWQa7Y", {"nurseEmail":this.state.nurse_email,"to_name":this.state.nurse_name}) 
               }
           })
           
           this.closeDateModal();
         console.log("request Nurse")
         console.log(this.state.profile_data)
+        // this.sendFeedback('template_G2HWQa7Y', {"nurseEmail":this.state.nurse_email,"to_name":this.state.nurse_name+" "+this.state.nurse_lname})
         
     }
+
+    // sendFeedback (templateId, variables) {
+    //     window.emailjs.send(
+    //       'gmail3',  templateId, variables
+    //       ).then(res => {
+    //         console.log('Notified Nurse!');
+    //       })        
+    //       // Handle errors here however you like, or use a React error boundary
+    //       .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
+    //   }
 
     render() {
 

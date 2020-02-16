@@ -14,10 +14,6 @@ const UserRequestRoute = require('./request.route');
 const UserAcceptRoute = require('./accept.route')
 const complaintRoute = require('./complaint.route');
 
-const sgMail = require('@sendgrid/mail');
-
-sgMail.setApiKey('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');
-
 //connecting database
 mongoose.Promise = global.Promise;
 mongoose.connect(config.DB, { useNewUrlParser: true }).then(
@@ -58,18 +54,18 @@ app.use(function (err, req, res, next) {
   res.status(err.statusCode).send(err.message);
 });
 
-app.get('/send-email', (req,res)=> {
-  //get variables from query string in the search bar
-  const {recipient, sender,topic, text} = req.query;
+// app.get('/send-email', (req,res)=> {
+//   //get variables from query string in the search bar
+//   const {recipient, sender,topic, text} = req.query;
 
-  //sendgrid data requirements
-  const msg ={
-    to: recipient,
-    from:sender,
-    subject: topic,
-    text:text,
-  }
+//   //sendgrid data requirements
+//   const msg ={
+//     to: recipient,
+//     from:sender,
+//     subject: topic,
+//     text:text,
+//   }
 
-  sgMail.send(msg)
-  .then((msg)=> console.log(text));
-})
+//   sgMail.send(msg)
+//   .then((msg)=> console.log(text));
+// })
