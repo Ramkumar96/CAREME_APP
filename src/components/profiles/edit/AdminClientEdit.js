@@ -30,7 +30,8 @@ class ClientEdit extends Component {
 
 
     getData = () => {
-        var token = localStorage.getItem('id');
+        // var token = localStorage.getItem('id');
+        var token = this.props.clientID;
         axios.get('http://localhost:4000/user/userdata/' + token)
             .then(response => {
                 console.log(response.data.profile_data)
@@ -81,6 +82,7 @@ class ClientEdit extends Component {
             Tel: this.state.Tel,
             Location: this.state.Location,
             Home: this.state.Home,
+            updatedBy: 'Admin',
             UpdateDate: new Date()
         };
 

@@ -105,6 +105,10 @@ let UserReg = new Schema({
     type: String
   },
 
+  updatedBy: {
+    type: String
+  },
+
   UnavailableDates:{
     type: [String],
     default: []

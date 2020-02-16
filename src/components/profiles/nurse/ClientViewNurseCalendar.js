@@ -161,8 +161,6 @@ class ClientViewNurseCalendar extends Component {
           .then (res => {
               if (res.data.success){
                console.log(res.data);
-
-               alert("Details successfully updated");
                window.emailjs.send("gmail3","template_G2HWQa7Y", {"nurseEmail":this.state.nurse_email,"to_name":this.state.nurse_name}) 
 
                this.onShowDialog();

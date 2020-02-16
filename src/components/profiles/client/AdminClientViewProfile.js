@@ -326,24 +326,6 @@ class AdminClientViewProfile extends Component {
                                     {/* /.card-body */}
                                 </div>
                                 {/* /.card */}
-
-
-                                {/*Seoond Card in Right Side*/}
-                                <div className="card card-primary">
-                                    <div className="card-header text-center">
-                                        <h3 className="card-title text-center"><strong>Profile Status</strong></h3>
-                                    </div>
-                                    {/* /.card-header */}
-                                    <div className="card-body">
-                                        <strong><i className="far fa-file-alt mr-1" />Profile completed : {this.state.completion}% </strong>
-                                        <hr />
-                                        <Progress
-                                            completed={this.state.completion}
-                                        />
-                                    </div>
-                                    {/* /.card-body */}
-                                </div>
-                                {/* /.card */}
                             </div>
                         </div>
                     </div>

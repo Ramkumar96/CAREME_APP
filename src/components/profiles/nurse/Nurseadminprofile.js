@@ -37,7 +37,7 @@ class NurseAdminMainPage extends Component {
         });
     }
 
-    closeDeacModal(){
+    closeDeacModal() {
         this.setState({
             visible1: false
         });
@@ -56,35 +56,35 @@ class NurseAdminMainPage extends Component {
     }
 
     deactivate() {
-        this.setState ({
-            visible1:false
+        this.setState({
+            visible1: false
         });
 
         const obj = {
-            FirstName : this.state.profile_data.FirstName,
-            LastName : this.state.profile_data.LastName,
-            nurseID : this.state.profile_data.nurseID,
-            Email : this.state.profile_data.Email,
-            NIC : this.state.profile_data.NIC,
-            Address : this.state.profile_data.Address,
-            PW : this.state.profile_data.PW,
-            CPW : this.state.profile_data.CPW,
-            Tel : this.state.profile_data.Tel,
-            userID : this.state.profile_data.userID,
-            RegDate : this.state.profile_data.RegDate,
-            DeacDate : new Date(),
-            completedPer : null
+            FirstName: this.state.profile_data.FirstName,
+            LastName: this.state.profile_data.LastName,
+            nurseID: this.state.profile_data.nurseID,
+            Email: this.state.profile_data.Email,
+            NIC: this.state.profile_data.NIC,
+            Address: this.state.profile_data.Address,
+            PW: this.state.profile_data.PW,
+            CPW: this.state.profile_data.CPW,
+            Tel: this.state.profile_data.Tel,
+            userID: this.state.profile_data.userID,
+            RegDate: this.state.profile_data.RegDate,
+            DeacDate: new Date(),
+            completedPer: null
         };
 
         axios.post('http://localhost:4000/userDeac/add', obj)
             .then(res => { console.log(res.data) });
 
         axios.post('http://localhost:4000/user/delete', obj)
-            .then( response => {
-                if(response.data.success){
+            .then(response => {
+                if (response.data.success) {
                     this.setState({
                         visible1: false,
-                        redirect_admin:true
+                        redirect_admin: true
                     })
                 }
             });
@@ -132,37 +132,37 @@ class NurseAdminMainPage extends Component {
 
         let completion = 100;
 
-        if (this.state.profile_data){
+        if (this.state.profile_data) {
             if (this.state.Location == null) {
                 completion = completion - 10;
             }
 
-            if (this.state.Age == null){
-                completion  = completion - 6;
-            }
-
-            if (this.state.nurseExp == null){
-                completion = completion - 10;
-            }
-
-            if (this.state.nurseUni == null){
+            if (this.state.Age == null) {
                 completion = completion - 6;
             }
 
-            if (this.state.nurseEdu == null){
+            if (this.state.nurseExp == null) {
+                completion = completion - 10;
+            }
+
+            if (this.state.nurseUni == null) {
+                completion = completion - 6;
+            }
+
+            if (this.state.nurseEdu == null) {
                 completion = completion - 8;
             }
 
-            if (this.state.nurseType == null){
+            if (this.state.nurseType == null) {
                 completion = completion - 10;
             }
 
-            if (this.state.profilePic == null){
+            if (this.state.profilePic == null) {
                 completion = completion - 10;
             }
 
-            this.setState ({
-                completedPer : completion
+            this.setState({
+                completedPer: completion
             })
         }
     }
@@ -175,16 +175,16 @@ class NurseAdminMainPage extends Component {
             );
         }
 
-        if(this.state.redirect_admin){
-            return(
-                <Redirect to='/adminmaindash'/>
+        if (this.state.redirect_admin) {
+            return (
+                <Redirect to='/adminmaindash' />
             );
         }
 
         const ratingVal = this.state.profile_data.starRating;
         const rateCount = this.state.profile_data.ratingCount;
 
-        const finalRating = ratingVal/rateCount;
+        const finalRating = ratingVal / rateCount;
 
         return (
             <div>
@@ -260,9 +260,9 @@ class NurseAdminMainPage extends Component {
                                     <div className="card">
                                         <div className="card-header p-2">
                                             <ul className="nav nav-pills">
-                                                <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
+                                                <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile Details</a></li>
                                                 {/* <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li> */}
-                                                <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                                                <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Update Profile</a></li>
                                             </ul>
                                         </div>{/* /.card-header */}
 
@@ -306,9 +306,9 @@ class NurseAdminMainPage extends Component {
                                                 <div className="tab-pane" id="settings">
                                                     <AdminNurseEdit
                                                         loadData={this.getData}
-                                                        nurseID={this.state.nurse_id} 
+                                                        nurseID={this.state.nurse_id}
 
-                                                        />                              
+                                                    />
                                                 </div>
                                                 {/* /.tab-pane */}
                                             </div>
@@ -325,63 +325,42 @@ class NurseAdminMainPage extends Component {
                                     {/*First Card in Right Side*/}
                                     <div className="card card-primary">
                                         <div className="card-body text-center">
-                                            <strong>Ratings </strong> <br/>
-                                            <div style={{fontSize: 28}}>
+                                            <strong>Ratings </strong> <br />
+                                            <div style={{ fontSize: 28 }}>
                                                 <StarRatingComponent
                                                     name="rate1"
                                                     editing={false}
                                                     starCount={5}
-                                                    value={finalRating} 
+                                                    value={finalRating}
                                                 />
-                                            <hr />
+                                                <hr />
                                             </div>
                                             <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                             <hr />
                                             {/* Calender for booking */}
-                                            <a href="/nursecalendar" className="btn btn-warning btn-block"><b>Edit Availability</b>
-                                            </a>
-                                            <Modal visible={this.state.visible} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                                            <a href="/nursecalendar" className="btn btn-outline-warning btn-block"><i className="fa fa-calendar-alt mr-2"></i>Edit Availability</a>
+                                            {/* <Modal visible={this.state.visible} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                                                 <div>
                                                     <NurseCalendar/>   
                                                 </div>
-                                            </Modal>
+                                            </Modal> */}
 
-                                            <hr/>
-                                            {/* Deactivate Modal */}
-                                            <input type="button" class="btn btn-danger btn-block" value="Deactivate" onClick={() => this.openDeacModal()} />
-                                            <Modal visible={this.state.visible1} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
-                                            <h1 align="center">Deactivate</h1>
-                                            <p align="center">Do you really want to Deactivate?</p>
-                                                <center>
-                                                    <Button variant="btn btn-danger" type="submit" onClick={() => this.deactivate()}>Yes</Button>
-                                                    <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDeacModal()} />
-                                                </center>                                            
-                                        </Modal>
-                                        </div>
-                                        {/* /.card-body */}
-                                    </div>
-                                    {/* /.card */}
-
-
-                                    {/*Seoond Card in Right Side*/}
-                                    <div className="card card-primary">
-                                        <div className="card-header text-center">
-                                            <h3 className="card-title text-center"><strong>Profile Status</strong></h3>
-                                        </div>
-                                        {/* /.card-header */}
-                                        <div className="card-body">
-                                            <strong><i className="fas fa-email mr-1" /> Profile Completed : {this.state.completedPer}% </strong>
                                             <hr />
+                                            <Button className="btn btn-danger btn-block" onClick={() => this.openDeacModal()}><i className="fa fa-user-times mr-2"></i>Deactivate</Button>
 
-                                            <Progress 
-                                                completed = {this.state.completedPer}
-                                            />                                            
+                                            {/* Deactivate Modal */}
+                                            <Modal visible={this.state.visible1} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
+                                                <div class="modal-content">
+                                                    <div className="modal-header"><h4 align="center">Deactivate <i class="fa fa-user-times"></i></h4></div>
+                                                    <div className="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to Deactivate?</div>
+                                                    <div className="modal-footer"> <Button className="btn btn-danger btn-block" type="submit" onClick={() => this.deactivate()}>Deactivate</Button></div>
+                                                </div>
+                                            </Modal>
                                         </div>
                                         {/* /.card-body */}
                                     </div>
                                     {/* /.card */}
-
                                 </div>
                             </div>
                         </div>

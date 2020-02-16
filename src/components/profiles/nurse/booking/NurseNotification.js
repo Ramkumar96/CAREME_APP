@@ -83,14 +83,13 @@ class NurseNotification extends Component {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    alert("Request successfully accepted.");
 
 
                     axios.post('http://localhost:4000/request/delete', obj)
                     .then(response => {
                         if (response.data.success) {
                             console.log(response.data);
-                            alert("Request successfully deleted");
+                            alert("Request successfully accepted");
                             }
                         });
 
@@ -115,7 +114,6 @@ class NurseNotification extends Component {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    alert("Request successfully deleted");
                     
                     axios.post('http://localhost:4000/request/delete', deleteobj)
                     .then(response => {
