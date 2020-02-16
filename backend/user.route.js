@@ -167,6 +167,8 @@ UserRegRoutes.route('/countClients').get(function (req,res){
 UserRegRoutes.route('/countNursesMonth').post(function (req,res){
   const yearToFind = req.body.year;
   const monthToFind = req.body.month;
+
+  console.log("testingg");
   UserReg.find({"userID" : "0"})
     .then(response=>{
       nurseCount=0;
@@ -326,13 +328,10 @@ UserRegRoutes.route('/countUsersDistrict').post(function (req,res){
 //count total active users according to that month
 UserRegRoutes.route('/countTotalUsersDistrict').post(function (req,res){
   const userCountDistrict = [0,0,0,0];
-  const yearToFind = req.body.year;
-  const monthToFind = req.body.month;
 
   UserReg.find({$or: [{"userID" : 0}, {"userID" : 1}]})
     .then(response=>{
       for (let i=0; i<response.length; i++){
-        if (response[i].RegDate.getFullYear()<=yearToFind && response[i].RegDate.getMonth()<=monthToFind-1){
           switch(response[i].Location){
             case("Colombo"):
               userCountDistrict[0]++;
@@ -350,10 +349,9 @@ UserRegRoutes.route('/countTotalUsersDistrict').post(function (req,res){
               userCountDistrict[3]++;
               break;
           }
-        }
     }
 
-    console.log(userCountDistrict);
+    console.log("Total users according to the district",userCountDistrict);
 
     res.status(200).send({
       userCountDistrict: userCountDistrict
@@ -492,15 +490,14 @@ UserRegRoutes.route('/countNursesTypeMonth').post(function (req,res){
 })
 
 
-//count all nurses type wise until a month  
+//count all nurses types in the system 
 UserRegRoutes.route('/countTotalNursesType').post(function (req,res){
   const nurseTypeCount = [0,0,0,0,0,0];
 
   UserReg.find({"userID" : 0})
     .then(response=>{
       for (let i=0; i<response.length; i++){
-        if (response[i].RegDate.getFullYear()<=yearToFind && response[i].RegDate.getMonth()<=monthToFind-1){
-         switch(response[i].nurseType){
+          switch(response[i].nurseType){
             case("Emergency"):
               nurseTypeCount[0]++;
               break;
@@ -525,10 +522,9 @@ UserRegRoutes.route('/countTotalNursesType').post(function (req,res){
               nurseTypeCount[5]++;
               break;
           }
-        }
     }
 
-    console.log(nurseTypeCount);
+    console.log("nurse type",nurseTypeCount);
 
     res.status(200).send({
      nurseTypeCount: nurseTypeCount

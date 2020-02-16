@@ -26,6 +26,7 @@ import ComplaintsReview from "./components/profiles/admin/complaintsReview";
 import { Row } from "react-bootstrap";
 import NurseViewClientProfile from "./components/profiles/client/NurseViewClientProfile";
 import NurseAdminMainPage from "./components/profiles/nurse/Nurseadminprofile";
+import TotalUserReport from "./components/profiles/admin/totalUserReport";
 
 
 
@@ -59,6 +60,7 @@ class App extends Component {
         <Route path="/nurseviewclientprofile/:id" exact component={NurseViewClientProfile}/>
         <Route path="/adminviewnurseprofile/:id" exact component={NurseAdminMainPage}/>
         <Route path="/nurselistclview" exact component={NurseListCLview}/>
+        <Route path="/totalUserReport" exact component={TotalUserReport}/>
 
       </Router>
     );

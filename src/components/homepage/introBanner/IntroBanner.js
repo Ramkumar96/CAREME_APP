@@ -3,6 +3,7 @@ import "./IntroBanner.css";
 import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
+import md5 from 'md5';
 import { constants } from "fs";
 // import { Chat, Channel, ChannelHeader, Thread, Window, ChannelList } from 'stream-chat-react';
 // import { MessageList, MessageInput } from 'stream-chat-react';
@@ -261,7 +262,26 @@ class IntroBanner extends Component {
         
                                             //adding new user to the database
                                             else if (!response.data.success) {
-                                                axios.post('http://localhost:4000/user/add', obj)
+                                                var hashed = md5(this.state.PW);
+
+                                                const object = {
+                                                    FirstName: this.state.FirstName,
+                                                    LastName: this.state.LastName,
+                                                    nurseID: this.state.nurseID,
+                                                    Email: this.state.Email,
+                                                    NIC: this.state.NIC,
+                                                    PW: hashed,
+                                                    CPW: hashed,
+                                                    Home: this.state.Home,
+                                                    Tel: this.state.Tel,
+                                                    profilePic: 'http://localhost:4000/public/sampleimage.jpg',
+                                                    userID: 0,
+                                                    RegDate : today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+                                                    starRating : 0,
+                                                    ratingCount : 0
+                                                };
+
+                                                axios.post('http://localhost:4000/user/add', object)
                                                     .then(res => { console.log(res.data) });
                                                 console.log("Registered");
                                                 alert(`Succesfully Registered`);
@@ -324,7 +344,7 @@ class IntroBanner extends Component {
             Tel: this.state.Tel,
             NIC: this.state.NIC,
             userID: 1,
-            profilePic: 'http://localhost:4000/public/sampleimage.jpg',
+            profilePic: 'http://localhost:4000/public/sampleimage.jpeg',
             RegDate : new Date(),
             starRating: 0,
             ratingCount: 0
@@ -377,7 +397,25 @@ class IntroBanner extends Component {
 
                     //adding new client to the database
                     else if (!res.data.success) {
-                        axios.post('http://localhost:4000/user/add', obj)
+                        var hashedPW = md5(this.state.PW);
+
+                        const object = {
+                            FirstName: this.state.FirstName,
+                            LastName: this.state.LastName,
+                            Email: this.state.Email,
+                            PW: hashedPW,
+                            CPW: hashedPW,
+                            Home: this.state.Home,
+                            Tel: this.state.Tel,
+                            NIC: this.state.NIC,
+                            userID: 1,
+                            profilePic: 'http://localhost:4000/public/sampleimage.jpeg',
+                            RegDate : new Date(),
+                            starRating: 0,
+                            ratingCount: 0
+                        };
+
+                        axios.post('http://localhost:4000/user/add', object)
                             .then(res => { console.log(res.data) });
                         console.log("Registered");
                         alert(`Succesfully Registered`);

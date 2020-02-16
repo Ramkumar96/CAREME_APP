@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
-
+import { VictoryBar, VictoryChart, VictoryPie, VictoryTheme, VictoryAxis } from 'victory';
 
 export default class Adminup extends Component {
   constructor(props) {
@@ -11,6 +11,25 @@ export default class Adminup extends Component {
 }
 
 componentDidMount(){
+      axios.get('http://localhost:4000/user/countNurses')
+      .then(response => {
+          this.setState({
+              totalActiveNurses : response.data.nurseCount
+          })
+
+          console.log("The total active nurses now : ", this.state.totalActiveNurses)
+      })
+
+    //total number of clients in the system
+    axios.get('http://localhost:4000/user/countClients')
+      .then(response => {
+          this.setState({
+              totalActiveClients : response.data.clientCount
+          })
+
+          console.log("The total active clients now : ", this.state.totalActiveClients)
+      })
+
     axios.get('http://localhost:4000/user/countNurses')
         .then(response => {
             this.setState({
@@ -24,10 +43,28 @@ componentDidMount(){
     .then(response => {
         this.setState({
             clientCount : response.data.clientCount,
-            visibleUserCount : true
         })
 
         console.log(this.state.clientCount)
+    })
+
+    axios.get('http://localhost:4000/request/countRequests')
+    .then(response => {
+        this.setState({
+            requestCount : response.data.requestCount
+        })
+
+        console.log(this.state.requestCount)
+    })
+
+    axios.get('http://localhost:4000/complaint/countComplaints')
+    .then(response => {
+        this.setState({
+            complaintCount : response.data.complaintCount,
+            visibleUserCount: true
+        })
+
+        console.log(this.state.complaintCount)
     })
 }
     render() {
@@ -63,8 +100,8 @@ componentDidMount(){
                   <div className="info-box">
                     <span className="info-box-icon bg-info elevation-1"><i class="far fa-envelope" /></span>
                     <div className="info-box-content">
-                      <span className="info-box-text">Messages</span>
-                      <span className="info-box-number">102</span>
+                      <span className="info-box-text">Requests</span>
+                      <span className="info-box-number">{this.state.requestCount}</span>
                     </div>
                     {/* /.info-box-content */}
                   </div>
@@ -76,7 +113,7 @@ componentDidMount(){
                     <span className="info-box-icon bg-danger elevation-1"><i className="fa fa-exclamation-triangle" /></span>
                     <div className="info-box-content">
                       <span className="info-box-text">Complaints</span>
-                      <span className="info-box-number">41,410</span>
+                      <span className="info-box-number">{this.state.complaintCount}</span>
                     </div>
                     {/* /.info-box-content */}
                   </div>
@@ -121,7 +158,7 @@ componentDidMount(){
          {/* TABLE: LATEST ORDERS */}
           <div className="card">
             <div className="card-header border-transparent">
-              <h3 className="card-title">Latest Orders</h3>
+              <h3 className="card-title">Latest User Statistics</h3>
               <div className="card-tools">
                 <button type="button" className="btn btn-tool" data-card-widget="collapse">
                   <i className="fas fa-minus" />
@@ -134,50 +171,22 @@ componentDidMount(){
             {/* /.card-header */}
             <div className="card-body p-0">
               <div className="table-responsive">
-                <table className="table m-0">
-                  <thead>
-                    <tr>
-                      <th>Nurse ID</th>
-                      <th>Nurse Name</th>
-                      <th>Status</th>
-                      <th>Rating</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Sumayya Ziyad</td>
-                      <td><span className="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div className="sparkbar" data-color="#00a65a" data-height={20}>4.5</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Ram Kumar</td>
-                      <td><span className="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div className="sparkbar" data-color="#f39c12" data-height={20}>5.0</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>Lahiruka Wijesinghe</td>
-                      <td><span className="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div className="sparkbar" data-color="#f56954" data-height={20}>3.5</div>
-                      </td>
-                    </tr>
-                    
-                  </tbody>
-                </table>
+                  <VictoryPie 
+                      radius = {30}
+                      colorScale = {["blue", "silver"]}
+                      innerRadius = {15}
+                      outerRadius = {30}
+                      height = {100}
+                      data = {[
+                          {x: "Nurses\n"+this.state.totalActiveNurses, y:this.state.totalActiveNurses},
+                          {x: "Clients\n"+this.state.totalActiveClients, y:this.state.totalActiveClients}
+                      ]}
+                      style={{ labels: { fontSize: 7}}}
+                  />       
               </div>
               {/* /.table-responsive */}
             </div>
             {/* /.card-body */}
-            <div className="card-footer clearfix">
-              <a href="javascript:void(0)" className="btn btn-sm btn-info float-right">View the List</a>
-            </div>
             {/* /.card-footer */}
           </div>
           {/* /.card */}

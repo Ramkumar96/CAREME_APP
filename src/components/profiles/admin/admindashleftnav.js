@@ -88,11 +88,18 @@ class Admindashleftnav extends Component {
           </ul>
         </li>        
         
-        <li className="nav-header">Reports</li>        
+        <li className="nav-header">Reports</li> 
+        <li className="nav-item">
+          <a href="totalUserReport" className="nav-link">
+            <i className="fas fa-circle nav-icon" />
+            <p>Total Users</p>
+          </a>
+        </li>
+
         <li className="nav-item">
           <a href="userReport" className="nav-link">
             <i className="fas fa-circle nav-icon" />
-            <p>User Details</p>
+            <p>System Reports</p>
           </a>
         </li>
 
