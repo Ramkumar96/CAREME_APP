@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 import Modal from 'react-awesome-modal';
 import { Button, Form } from 'react-bootstrap';
 import axios from "../../../../backend/node_modules/axios";
+import md5 from 'md5';
 
 function validate (Email, Password){
     return {
@@ -108,10 +109,19 @@ class Navigationbar extends Component {
             'Content-Type': 'application/json'
           }
 
+        var hashedPW = md5(this.state.Password);
+
         axios.post('http://localhost:4000/user/validEmail', data, {headers:headers})
         .then(res => {
             if(res.data.success){
-                axios.post('http://localhost:4000/user/login', data,{headers:headers})
+                const obj = {
+                    Email: this.state.Email,
+                    Password: hashedPW
+                };
+
+                console.log(obj);
+
+                axios.post('http://localhost:4000/user/login', obj,{headers:headers})
                     .then(response => {
                         console.log(response.data)
                         if (response.data.success) {
@@ -142,7 +152,12 @@ class Navigationbar extends Component {
             }
 
             else if (!res.data.success){
-                axios.post('http://localhost:4000/userDeac/validEmail', data,{headers:headers})
+                const obj = {
+                    Email: this.state.Email,
+                    Password: hashedPW
+                };
+
+                axios.post('http://localhost:4000/userDeac/validEmail', obj,{headers:headers})
                     .then(response => {
                         if (response.data.success){
                             //console.log(response.data)

@@ -14,7 +14,6 @@ class UserReport extends Component {
         this.onSubmitRequest = this.onSubmitRequest.bind(this);
 
         this.state = {
-            visibleMonthTotalUsers : false,
             visibleMonthActDeac: false,
             visibleYearActDeac: false,
             visibleMonthRateComps : false,
@@ -82,73 +81,7 @@ class UserReport extends Component {
 
             console.log(data);
 
-            if (this.state.reportType==0){
-                //total number of nurses in the system
-                axios.get('http://localhost:4000/user/countNurses')
-                    .then(response => {
-                        this.setState({
-                            totalActiveNurses : response.data.nurseCount
-                        })
-
-                        console.log("The total active nurses now : ", this.state.totalActiveNurses)
-                    })
-
-                //total number of clients in the system
-                axios.get('http://localhost:4000/user/countClients')
-                    .then(response => {
-                        this.setState({
-                            totalActiveClients : response.data.clientCount
-                        })
-
-                        console.log("The total active clients now : ", this.state.totalActiveClients)
-                    })
-
-                //all users based on their location
-                axios.post('http://localhost:4000/user/countTotalUsersDistrict', data, {headers: headers})
-                    .then(response => {
-                        this.setState({
-                            resBody: response.data.userCountDistrict
-                        })
-    
-                        let j=1;
-                        for (let i=0; i<4; i++){
-                            this.state.userCountDistrict[j] = this.state.resBody[i];
-                            j++;
-                        }
-    
-                        console.log("The total users according to districts : ", this.state.userCountDistrict)
-    
-                        this.setState({
-                            userCountDistrict: this.state.userCountDistrict
-                        })
-                    })
-
-                //all nurses based on their type
-                axios.post('http://localhost:4000/user/countTotalNursesType', data, {headers: headers})
-                    .then(response => {
-                        this.setState({
-                            resBody: response.data.nurseTypeCount
-                        })
-
-                        let j=1;
-                        for (let i=0; i<4; i++){
-                            this.state.nurseTypeCount[j] = this.state.resBody[i];
-                            j++;
-                        }
-
-                        console.log("The total nurses according to type : ", this.state.nurseTypeCount)
-
-                        this.setState({
-                            nurseTypeCount : this.state.nurseTypeCount
-                        })
-                    })    
-                    
-                this.setState({
-                    visibleMonthTotalUsers: true
-                })
-            }
-
-            else if (this.state.reportType == 1){
+            if (this.state.reportType == 0){
                 if (this.state.month!=0){
                     //new clients registered in the month
                     axios.post('http://localhost:4000/user/countClientsMonth', data, {headers: headers})
@@ -197,7 +130,7 @@ class UserReport extends Component {
                         })
     
                         let j=1;
-                        for (let i=0; i<4; i++){
+                        for (let i=0; i<6; i++){
                             this.state.nurseTypeCount[j] = this.state.resBody[i];
                             j++;
                         }
@@ -301,7 +234,7 @@ class UserReport extends Component {
                         })
     
                         let j=1;
-                        for (let i=0; i<4; i++){
+                        for (let i=0; i<6; i++){
                             this.state.nurseTypeCount[j] = this.state.resBody[i];
                             j++;
                         }
@@ -359,7 +292,7 @@ class UserReport extends Component {
                 }
             }
 
-            else if (this.state.reportType==2){
+            else if (this.state.reportType==1){
                 if (this.state.month!=0){
                     axios.post('http://localhost:4000/rating/countRatings', data, {headers: headers})
                     .then(response=> {
@@ -450,7 +383,7 @@ class UserReport extends Component {
                 }
             }
 
-            else if (this.state.reportType==3){
+            else if (this.state.reportType==2){
                 if (this.state.month!=0){
                     axios.post('http://localhost:4000/request/countRequestsMonth', data, {headers: headers})
                     .then(response=> {
@@ -651,93 +584,6 @@ class UserReport extends Component {
             userRequests = <h5>No accepted or deleted requests this month</h5>
         }
 
-        if(this.state.visibleMonthTotalUsers){
-            return (
-                <div>
-                    <Admindashleftnav />
-                    
-                    <div>
-                        <ProfileNavbar />
-
-                        <div className="content-wrapper"> 
-                            <h2>CareMe Total User Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
-                            <br/>
-                                <div className="box-left">
-                                <h3> User Classification </h3>
-                                <VictoryPie 
-                                    radius = {30}
-                                    colorScale = {["orange", "gold"]}
-                                    innerRadius = {15}
-                                    outerRadius = {30}
-                                    height = {100}
-                                    data = {[
-                                        {x: "Nurses\n"+this.state.totalActiveNurses, y:this.state.totalActiveNurses},
-                                        {x: "Clients\n"+this.state.totalActiveClients, y:this.state.totalActiveClients}
-                                    ]}
-                                    style={{ labels: { fontSize: 7}}}
-                                />     
-                                <br/> 
-                                </div>
-                            
-                                <h3 style= {{paddingLeft:15}}>Total users based on location as of the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h3>
-                                <VictoryChart 
-                                    maxDomain ={{y:20}}
-                                    height = {125}
-                                    width = {400}
-                                    theme={VictoryTheme.material}
-                                    padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
-                                    domainPadding={{x:15}}
-                                    >
-
-                                    <VictoryAxis dependentAxis
-                                        style = {{ tickLabels: {fontSize: 6}}}
-                                    />
-
-                                    <VictoryAxis crossAxis
-                                        style = {{ tickLabels : {fontSize: 6}}}
-                                    />
-                                        
-                                    <VictoryBar
-                                        alignment="middle"
-                                        style = {{ data : {fill: "#c43a31"}}}
-                                        cornerRadius={{topLeft: 5}}
-                                        data={this.state.userCountDistrict}
-                                        categories={{ x: this.state.districts }}
-                                    />
-                                </VictoryChart>
-                                    
-                                <h3 style= {{paddingLeft:15}}>Total number of nurses based on type as the month of {this.state.monthLabels[this.state.month-1]} -  {this.state.year}</h3>
-                                <VictoryChart 
-                                    maxDomain ={{y:20}}
-                                    height = {125}
-                                    width = {400}
-                                    theme={VictoryTheme.material}
-                                    padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
-                                    domainPadding={{x:8}}
-                                    >
-
-                                    <VictoryAxis dependentAxis
-                                        style = {{ tickLabels: {fontSize: 6}}}
-                                    />
-
-                                    <VictoryAxis crossAxis
-                                        style = {{ tickLabels : {fontSize: 6}}}
-                                    />
-                                        
-                                    <VictoryBar
-                                        alignment="middle"
-                                        style = {{ data : {fill: "#c43a31"}}}
-                                        cornerRadius={{topLeft: 5}}
-                                        data={this.state.nurseTypeCount}
-                                        categories={{ x: this.state.nurseTypes }}
-                                    />
-                                </VictoryChart>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
         if(this.state.visibleMonthRequests){
             return (
                 <div>
@@ -749,10 +595,6 @@ class UserReport extends Component {
                         <div className="content-wrapper"> 
                             <h2>CareMe Requests Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
                             <br/>
-                                <h3>Total requests</h3> 
-                                <h5>Total requests sent this month: {this.state.requestCount}</h5>
-                                <br/> <br/>
-
                                 <h3> Total requests accepted and deleted this month </h3>
                                 {userRequests}
                                 <br/>
@@ -771,11 +613,13 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h3> New user registrations for the month </h3>
+                            <h2>CareMe user accounts activation and deactivation for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
+
+                            <h3> New User Registrations </h3>
                             {newUsers}
                             <br/>
 
-                            <h3 style= {{paddingLeft:15}}>User registrations based on location in the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h3>
+                            <h3 style= {{paddingLeft:15}}>User Registrations based on Location</h3>
                             <VictoryChart 
                                 maxDomain ={{y:20}}
                                 height = {125}
@@ -802,7 +646,7 @@ class UserReport extends Component {
                                 />
                             </VictoryChart>
 
-                            <h3 style= {{paddingLeft:15}}>Nurse registrations based on type in the month of {this.state.monthLabels[this.state.month-1]} -  {this.state.year}</h3>
+                            <h3 style= {{paddingLeft:15}}>Nurse Registrations based on type</h3>
                             <VictoryChart 
                                 maxDomain ={{y:20}}
                                 height = {125}
@@ -829,7 +673,7 @@ class UserReport extends Component {
                                 />
                             </VictoryChart>
 
-                            <h3> User deactivations for the month </h3>
+                            <h3> User Deactivations </h3>
                             {deacUsers}
                             <br/>
                         </div>
@@ -847,7 +691,7 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h2> Usage statistics for the year of {this.state.year}</h2>
+                            <h2>CareMe user accounts activation and deactivation</h2>
                             <br/>
 
                             <h3 style= {{paddingLeft:15}}>Nurse registrations in {this.state.year}</h3>
@@ -1031,34 +875,6 @@ class UserReport extends Component {
                         <div className="content-wrapper"> 
                             <h2> User requests statistics for the year of {this.state.year}</h2>
                             <br/>
-
-                            <h3 style= {{paddingLeft:15}}>User requests in {this.state.year}</h3>
-                            <VictoryChart 
-                                maxDomain ={{y:20}}
-                                height = {125}
-                                width = {400}
-                                theme={VictoryTheme.material}
-                                padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
-                                domainPadding={{x:8}}
-                                >
-
-                                <VictoryAxis dependentAxis
-                                    style = {{ tickLabels: {fontSize: 6}}}
-                                />
-
-                                <VictoryAxis crossAxis
-                                    style = {{ tickLabels : {fontSize: 6}}}
-                                />
-                                    
-                                <VictoryBar
-                                    alignment="middle"
-                                    style = {{ data : {fill: "#c43a31"}}}
-                                    cornerRadius={{topLeft: 5}}
-                                    data={this.state.requestCountYear}
-                                    categories={{ x: this.state.monthLabels }}
-                                />
-                            </VictoryChart>
-
                             <h3 style= {{paddingLeft:15}}>Accepted requests in {this.state.year}</h3>
                             <VictoryChart 
                                 maxDomain ={{y:20}}
@@ -1153,7 +969,9 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper">
-                            <h3 style= {{paddingLeft:15}}>User ratings in {this.state.year}</h3>
+                            <h2>CareMe user ratings, reviews and complaints for the year of {this.state.year}</h2>
+
+                            <h3 style= {{paddingLeft:15}}>User Ratings</h3>
 
                             <VictoryChart
                                 maxDomain ={{y:20}}
@@ -1181,7 +999,7 @@ class UserReport extends Component {
                                 />
                             </VictoryChart>
 
-                            <h3 style= {{paddingLeft:15}}>User reviews in {this.state.year}</h3>
+                            <h3 style= {{paddingLeft:15}}>User Reviews</h3>
 
                             <VictoryChart
                                 maxDomain ={{y:20}}
@@ -1255,10 +1073,9 @@ class UserReport extends Component {
                                 <Form.Group as={Col}>
                                     <select class="form-control" onChange={(event)=>this.onChangeReportType(event)} placeholder="Select Required Report">
                                         <option value={-1} selected>Select Type</option>
-                                        <option value={0}>Total Users</option>
-                                        <option value={1}>Activations and Deactivations</option>
-                                        <option value={2}>Ratings, Reviews, Complaints</option>
-                                        <option value={3}>Requests </option>
+                                        <option value={0}>Activations and Deactivations</option>
+                                        <option value={1}>Ratings, Reviews, Complaints</option>
+                                        <option value={2}>Requests </option>
                                     </select>
                                 </Form.Group>
 

@@ -28,6 +28,7 @@
     "jwt-decode": "^2.2.0",
     "material-design-icons": "^3.0.1",
     "material-ui-popup-state": "^1.4.1",
+    "md5": "^2.2.1",
     "mongoose": "^5.7.1",
     "pusher-js": "^5.0.3",
     "react": "^16.12.0",
