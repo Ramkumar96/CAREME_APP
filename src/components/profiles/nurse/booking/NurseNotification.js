@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from '../../../../../backend/node_modules/axios';
 
-
 const NotifyBox = props => (
     <div>
         {/* The timeline */}
@@ -13,30 +12,22 @@ const NotifyBox = props => (
             <div>
                 <i className="fas fa-bell bg-primary" />
                 <div className="timeline-item">
-                {/* {'/nurseviewclientprofile/'+props.clientID} */}
-                    <span className="time"><i className="far fa-clock" /> 12:05</span>
-                    <h3 className="timeline-header"><a href={'/nurseviewclientprofile/'+props.clientID}>{props.clientName}</a> sent you a booking Request</h3>
+                    <h3 className="timeline-header"><a href={'/nurseviewclientprofile/'+props.clientID}>{props.clientName}</a> sent you a booking request</h3>
                     <div className="timeline-body">
                         <div >
-                            <h6> <strong>Client Name:</strong>{props.clientName}</h6>
+                            <h6> <strong>Client Name : </strong>{props.clientName}</h6>
                         </div>
                         <div >
-                            <h6> <strong>Client ID :</strong>{props.clientID}</h6>
+                            <h6> <strong>Client Location : </strong>{props.clientLocation}</h6>
                         </div>
                         <div >
-                            <h6> <strong>Client Location :</strong>{props.clientLocation}</h6>
-                        </div>
-                        <div >
-                            <h6> <strong>Requested Date:</strong>{props.date} </h6>
-                        </div>
-                        <div >
-                            <h6> <strong>Requested Notification ID:</strong>{props.NoficationID} </h6>
+                            <h6> <strong>Requested Date : </strong>{props.date} </h6>
                         </div>
                     </div>
 
                     <div className="timeline-footer">
-                        <a href="#" className="btn btn-primary btn-sm" onClick={() => NurseNotification.confirmRequest(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Confirm</a>
-                        <a href="#" className="btn btn-danger btn-sm" onClick={() => NurseNotification.deleteNotification(props.NoficationID)}>Delete</a>
+                        <span className="mr-2"><a href="#" className="btn btn-primary btn-sm" onClick={() => NurseNotification.confirmRequest(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Confirm</a></span>
+                        <a href="#" className="btn btn-danger btn-sm" onClick={() => NurseNotification.deleteNotification(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Delete</a>
                     </div>
                 </div>
             </div>
@@ -51,6 +42,10 @@ class NurseNotification extends Component {
         super(props);
         this.state = { NotificationData: [] };
         this.NotificationID = null;
+    }
+
+    onShowDeleteRequest(){
+        this.dialog.showAlert("Request deleted successfully");
     }
 
     componentDidMount = () => {
@@ -88,27 +83,30 @@ class NurseNotification extends Component {
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    alert("Details successfully updates");
-
-                    this.deleteNotification(notification_ID)
-
+                    alert("Request successfully accepted.");
                 }
             });
     };
 
     //Delete Button Deleting Notification
-    static deleteNotification = (ID) => {
-        const obj = {
-            NotificationID: ID
+
+    static deleteNotification = (deleted_Client_name,deleted_Client_id, deleted_date,deleted_notification_ID, deleted_nurse_name,deleted_nurse_ID) => {
+        
+        const deleteobj = {
+            DeletedRequestedClient: deleted_Client_name,
+            DeletedRequestedByClientID: deleted_Client_id,
+            DeletedRequestedDate:deleted_date,
+            DeletedRequestedNurse:deleted_nurse_name,
+            DeletedRequestedNurseID:deleted_nurse_ID
         };
 
-        axios.post('http://localhost:4000/request/delete', obj)
+        axios.post('http://localhost:4000/requestDeleted/add', deleteobj)
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data);
-                    alert("Details successfully deleted");
+                    alert("Request successfully deleted");
                 }
-            });
+            });  
     }
 
     //Mapping the Notification Data
@@ -130,7 +128,6 @@ class NurseNotification extends Component {
         return (
             <div>
                 {this.notificationData()}
-
             </div>
         )
     }

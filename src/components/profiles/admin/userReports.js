@@ -14,13 +14,13 @@ class UserReport extends Component {
         this.onSubmitRequest = this.onSubmitRequest.bind(this);
 
         this.state = {
-            visibleMonthReport : false,
-            visibleYearReport : false,
             visibleMonthTotalUsers : false,
             visibleMonthActDeac: false,
             visibleYearActDeac: false,
             visibleMonthRateComps : false,
             visibleYearRateComps : false,
+            visibleMonthRequests: false,
+            visibleYearRequests: false,
             activeNursesYear : [],
             activeClientsYear : [],
             deacClientsYear : [],
@@ -29,6 +29,9 @@ class UserReport extends Component {
             reviewCountYear : [],
             userCountDistrict: [],
             nurseTypeCount: [],
+            acceptedCountYear: [],
+            requestCountYear: [],
+            deletedCountYear: [],
             monthLabels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             districts: ["Colombo", "Galle", "Gampaha", "Kurunegala"],
             nurseTypes: ["Emergency", "Surgical", "Geriatric", "Midwife", "Pediatric", "Psychiatric"],
@@ -446,11 +449,112 @@ class UserReport extends Component {
                     })
                 }
             }
+
+            else if (this.state.reportType==3){
+                if (this.state.month!=0){
+                    axios.post('http://localhost:4000/request/countRequestsMonth', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            requestCount: response.data.requestCount
+                        })
+
+                        console.log("Number of requests this month : ", this.state.requestCount);
+                    })
+            
+                    axios.post('http://localhost:4000/accept/countRequestsMonth', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            acceptedCount : response.data.acceptedCount
+                        })
+
+                        console.log("Number of requests accepted this month : ", this.state.acceptedCount);
+                    })
+
+                    axios.post('http://localhost:4000/requestDeleted/countRequestsMonth', data, {headers: headers})
+                    .then(response=> {
+                        this.setState({
+                            deletedCount : response.data.deletedCount
+                        })
+
+                        console.log("Number of requests deleted this month : ", this.state.deletedCount);
+                    })
+
+                    this.setState({
+                        visibleMonthRequests : true
+                    })
+                }
+
+                else if (this.state.month==0){
+                    axios.post('http://localhost:4000/request/countRequestsYear', data, {headers: headers})
+                    .then(response => {
+                        this.setState({
+                            resBody: response.data.requestCount
+                        })
+    
+                        this.state.requestCountYear[0]=0;
+                        let j=1;
+                        for (let i=0; i<12; i++){
+                            this.state.requestCountYear[j] = this.state.resBody[i];
+                            j++;
+                        }
+    
+                        console.log("The total requests this year : ", this.state.requestCountYear)
+    
+                        this.setState({
+                            requestCountYear: this.state.requestCountYear
+                        })
+                    })
+    
+                    axios.post('http://localhost:4000/accept/countRequestsYear', data, {headers: headers})
+                    .then(response => {
+                        this.setState({
+                            resBody: response.data.acceptedCount
+                        })
+    
+                        this.state.acceptedCountYear[0]=0;
+                        let j=1;
+                        for (let i=0; i<12; i++){
+                            this.state.acceptedCountYear[j] = this.state.resBody[i];
+                            j++;
+                        }
+    
+                        console.log("The total accepted requests this year : ", this.state.acceptedCountYear)
+    
+                        this.setState({
+                            acceptedCountYear: this.state.acceptedCountYear
+                        })
+                    })
+
+                    axios.post('http://localhost:4000/requestDeleted/countRequestsYear', data, {headers: headers})
+                    .then(response => {
+                        this.setState({
+                            resBody: response.data.deletedCount
+                        })
+    
+                        this.state.deletedCountYear[0]=0;
+                        let j=1;
+                        for (let i=0; i<12; i++){
+                            this.state.deletedCountYear[j] = this.state.resBody[i];
+                            j++;
+                        }
+    
+                        console.log("The total deleted requests this year : ", this.state.deletedCountYear)
+    
+                        this.setState({
+                            deletedCountYear: this.state.deletedCountYear
+                        })
+                    })
+
+                    this.setState({
+                        visibleYearRequests: true
+                    })
+                }
+            }
         }
     }
     
     render() {
-        var newUsers, deacUsers, userRatesRevs, userComplaints;
+        var newUsers, deacUsers, userRatesRevs, userComplaints, userRequests;
 
         if (this.state.activeNurses!=0 || this.state.activeClients!=0){
             newUsers = <VictoryPie 
@@ -526,6 +630,25 @@ class UserReport extends Component {
         
         else {
             userComplaints = <h5>No user complaints this month</h5>
+        }
+
+        if (this.state.acceptedCount!=0 || this.state.deletedCount!=0){
+            userRequests = <VictoryPie 
+                radius = {30}
+                colorScale = {["orange", "gold"]}
+                innerRadius = {15}
+                outerRadius = {30}
+                height = {150}
+                data = {[
+                    {x: "Accepted requests\n"+this.state.acceptedCount, y:this.state.acceptedCount},
+                    {x: "Deleted requests\n"+this.state.deletedCount, y:this.state.deletedCount}
+                ]}
+                style={{ labels: { fontSize: 7}}}
+            />
+        }
+
+        else {
+            userRequests = <h5>No accepted or deleted requests this month</h5>
         }
 
         if(this.state.visibleMonthTotalUsers){
@@ -609,6 +732,30 @@ class UserReport extends Component {
                                         categories={{ x: this.state.nurseTypes }}
                                     />
                                 </VictoryChart>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        if(this.state.visibleMonthRequests){
+            return (
+                <div>
+                    <Admindashleftnav />
+                    
+                    <div>
+                        <ProfileNavbar />
+
+                        <div className="content-wrapper"> 
+                            <h2>CareMe Requests Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
+                            <br/>
+                                <h3>Total requests</h3> 
+                                <h5>Total requests sent this month: {this.state.requestCount}</h5>
+                                <br/> <br/>
+
+                                <h3> Total requests accepted and deleted this month </h3>
+                                {userRequests}
+                                <br/>
                         </div>
                     </div>
                 </div>
@@ -873,6 +1020,105 @@ class UserReport extends Component {
             );
         }
 
+        if (this.state.visibleYearRequests){
+            return (
+                <div>
+                    <Admindashleftnav />
+                    
+                    <div>
+                        <ProfileNavbar />
+
+                        <div className="content-wrapper"> 
+                            <h2> User requests statistics for the year of {this.state.year}</h2>
+                            <br/>
+
+                            <h3 style= {{paddingLeft:15}}>User requests in {this.state.year}</h3>
+                            <VictoryChart 
+                                maxDomain ={{y:20}}
+                                height = {125}
+                                width = {400}
+                                theme={VictoryTheme.material}
+                                padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
+                                domainPadding={{x:8}}
+                                >
+
+                                <VictoryAxis dependentAxis
+                                    style = {{ tickLabels: {fontSize: 6}}}
+                                />
+
+                                <VictoryAxis crossAxis
+                                    style = {{ tickLabels : {fontSize: 6}}}
+                                />
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31"}}}
+                                    cornerRadius={{topLeft: 5}}
+                                    data={this.state.requestCountYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+
+                            <h3 style= {{paddingLeft:15}}>Accepted requests in {this.state.year}</h3>
+                            <VictoryChart 
+                                maxDomain ={{y:20}}
+                                height = {125}
+                                width = {400}
+                                theme={VictoryTheme.material}
+                                padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
+                                domainPadding={{x:8}}
+                                >
+
+                                <VictoryAxis dependentAxis
+                                    style = {{ tickLabels: {fontSize: 6}}}
+                                />
+
+                                <VictoryAxis crossAxis
+                                    style = {{ tickLabels : {fontSize: 6}}}
+                                />
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31"}}}
+                                    cornerRadius={{topLeft: 5}}
+                                    data={this.state.acceptedCountYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+
+                            <h3 style= {{paddingLeft:15}}>Deleted requests in {this.state.year}</h3>
+
+                            <VictoryChart
+                                maxDomain ={{y:20}}
+                                height = {125}
+                                width = {400}
+                                theme={VictoryTheme.material}
+                                padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
+                                domainPadding={{x:8}}
+                                >
+
+                                <VictoryAxis dependentAxis
+                                    style = {{ tickLabels: {fontSize: 6}}}
+                                />
+
+                                <VictoryAxis crossAxis
+                                    style = {{ tickLabels : {fontSize: 6}}}
+                                />
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31" }}}
+                                    cornerRadius={{topLeft: 5}}
+                                    data={this.state.deletedCountYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
         if (this.state.visibleMonthRateComps){
             return (
                 <div>
@@ -1012,6 +1258,7 @@ class UserReport extends Component {
                                         <option value={0}>Total Users</option>
                                         <option value={1}>Activations and Deactivations</option>
                                         <option value={2}>Ratings, Reviews, Complaints</option>
+                                        <option value={3}>Requests </option>
                                     </select>
                                 </Form.Group>
 

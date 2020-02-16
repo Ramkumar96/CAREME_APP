@@ -4,42 +4,21 @@ import Modal from 'react-awesome-modal';
 import { Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
 
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ForumIcon from '@material-ui/icons/Forum';
-import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
-import MenuIcon from '@material-ui/icons/Menu';
-
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-
-
 class ProfileNavbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
             visible: false,
-            visible1: false,
-            visible2: false,
             redirect_home: false,
+            token: '',
+            nurseprofile: false,
+            clientprofile: false
         }
     }
 
     openModal() {
         this.setState({
             visible: true
-        });
-    }
-
-    openDeacModal() {
-        this.setState({
-            visible1: true
-        });
-    }
-
-    closeDeacModal() {
-        this.setState({
-            visible1: false
         });
     }
 
@@ -56,23 +35,24 @@ class ProfileNavbar extends Component {
         })
     }
 
-    closePopup = () => {
-        this.setstate({
-            close: true
-        });
-    };
-
-    openMsgModal() {
-        this.setState({
-            visible2: true
-        });
+    viewProfile = () => {
+        console.log('hheyy')
+        var id = localStorage.getItem('id');
+        var userID = localStorage.getItem("user_id");
+        if (userID == 0) {
+            this.setState({
+                nurseprofile: true,
+                token: id
+            });
+        }
+        else {
+            this.setState({
+                clientprofile: true,
+                token: id
+            });
+        }
     }
 
-    closeMsgModal() {
-        this.setState({
-            visible2: false
-        });
-    }
 
     render() {
 
@@ -82,84 +62,43 @@ class ProfileNavbar extends Component {
             )
         }
 
+        if (this.state.nurseprofile) {
+            return (
+                <Redirect to={'/nurseprofile/' + this.state.token} />
+            )
+        }
+        if (this.state.clientprofile) {
+            return (
+                <Redirect to={'/clientprofile/' + this.state.token} />
+            )
+        }
+
         return (
+            <div>
+                <nav className="navbar navbar-expand navbar-light">
+                    <div className="navbar-brand">
+                        <img src="/images/careme.png" width="120" height="30" className="d-inline-block align-top" alt="mainlogo" />
+                    </div>
+                    <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li className="nav-item active">
 
-            <React.Fragment>
-                <nav class="navbar navbar-expand navbar-light">
-
-                    <a class="navbar-brand" href="#">
-                        {/* <img src="/images/logo.jpeg" width="30" height="30" class="d-inline-block align-top" alt="mainlogo"/> */}
-                        <img src="/images/careme.png" width="120" height="30" class="d-inline-block align-top" alt="mainlogo" />
-                    </a>
-
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item active">
-                            {/* <a class="nav-link" href="#"> Help </a> */}
                         </li>
                     </ul>
+                    {/* View Profile Button */}
+                    <button className="btn btn-outline-info my-2 my-sm-0" type="submit" onClick={() => this.viewProfile()}><i className="far fa-user-circle" /></button>
+                    {/* Log out Button */}
+                    <button className="btn btn-outline-info my-2 my-sm-0" type="submit" onClick={() => this.openModal()}>LOG OUT</button>
 
-                    <AccountCircleIcon fontSize="large" type="button"/>
-
-                    {/* <ForumIcon fontSize="large" type="button" onClick={() => this.openModal()}/> */}
-
-                    {/* <NotificationsActiveIcon fontSize="large" /> */}
-
-                    <PopupState variant="popover" popupId="demo-popup-menu">
-                        {popupState => (
-                            <React.Fragment>
-                                <NotificationsActiveIcon type="button" fontSize="large" {...bindTrigger(popupState)} />
-
-                                <Menu {...bindMenu(popupState)} onClickAway={() => this.closePopup()}>
-                                <MenuItem onClick={popupState.close}>Notifications</MenuItem>
-                                    <MenuItem onClick={popupState.close}>Requests</MenuItem>
-
-                                    <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
-                                    <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                        <h1 align="center">Logout</h1>
-                                        <p align="center">Do you really want to Logout?</p>
-                                        <center>
-                                            <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button>
-                                            <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
-                                        </center>
-                                    </Modal>
-                                  
-
-                                
-                                    
-                                </Menu>
-                            </React.Fragment>
-                        )}
-                    </PopupState>
-
-
-                    {/* //Menu Icon */}
-                    <PopupState variant="popover" popupId="demo-popup-menu">
-                        {popupState => (
-                            <React.Fragment>
-                                <MenuIcon type="button" fontSize="large" {...bindTrigger(popupState)} />
-
-                                <Menu {...bindMenu(popupState)} onClickAway={() => this.closePopup()}>
-
-                                        
-                                    <MenuItem onClick={popupState.close}>Settings</MenuItem>
-                                    <MenuItem onClick={popupState.close}>Calender</MenuItem>
-
-                                    <MenuItem onClick={() => this.openModal()}>Logout</MenuItem>
-                                    <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
-                                        <h1 align="center">Logout</h1>
-                                        <p align="center">Do you really want to Logout?</p>
-                                        <center>
-                                            <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button>
-                                            <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeModal()} />
-                                        </center>
-                                    </Modal>
-                                
-                                </Menu>
-                            </React.Fragment>
-                        )}
-                    </PopupState>
+                    {/* Logout modal */}
+                    <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                        <div class="modal-content">
+                            <div class="modal-header"><h4 align="center">Logout <i class="fa fa-lock"></i></h4></div>
+                            <div class="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to log out?</div>
+                            <div class="modal-footer"> <Button className="btn btn-primary btn-block" type="submit" onClick={() => this.logout()}>Logout</Button></div>
+                        </div>
+                    </Modal>
                 </nav>
-            </React.Fragment>
+            </div>
         );
     }
 }
