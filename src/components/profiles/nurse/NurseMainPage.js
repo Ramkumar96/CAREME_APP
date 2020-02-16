@@ -393,7 +393,6 @@ class NurseMainPage extends Component {
 
                                             {/* Deactivate Modal */}
                                             <Modal visible={this.state.visible1} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
-
                                                 <div class="modal-content">
                                                     <div className="modal-header"><h4 align="center">Deactivate <i class="fa fa-user-times"></i></h4></div>
                                                     <div className="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to Deactivate?</div>

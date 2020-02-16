@@ -268,7 +268,7 @@ class NurseAdminMainPage extends Component {
                                         <div className="card-header p-2">
                                             <ul className="nav nav-pills">
                                                 <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
-                                                <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
+                                                {/* <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li> */}
                                                 <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                                             </ul>
                                         </div>{/* /.card-header */}

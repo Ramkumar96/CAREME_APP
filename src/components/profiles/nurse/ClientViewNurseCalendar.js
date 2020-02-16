@@ -6,12 +6,13 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 // import listPlugin from 'fullcalendar/ListView'
 import interactionPlugin from "@fullcalendar/interaction";
 // import bootstrapPlugin from '@fullcalendar/bootstrap'
-
+import { Button } from 'react-bootstrap';
 
 import Modal from 'react-awesome-modal';
 import ProfileNavbar from '../ProfileNavbar'
 import axios from '../../../../backend/node_modules/axios';
 import Dialog from "react-bootstrap-dialog";
+import Footer from '../../homepage/footer/Footer';
 
 
 class ClientViewNurseCalendar extends Component {
@@ -22,7 +23,7 @@ class ClientViewNurseCalendar extends Component {
             visible: false,
             date: null,
             unavailableDates: [],
-            loading: true, 
+            loading: true,
             response_dates: [],
         }
     }
@@ -32,7 +33,7 @@ class ClientViewNurseCalendar extends Component {
 
     }
 
-   
+
 
     getClientData = () => {
         var token = localStorage.getItem('id');
@@ -41,10 +42,10 @@ class ClientViewNurseCalendar extends Component {
                 console.log(response.data.profile_data)
                 this.setState({
                     Client_profile_data: response.data.profile_data,
-                    client_name:response.data.profile_data.FirstName,
-                    client_Location:response.data.profile_data.Location,
-                    client_id:response.data.profile_data._id
-                    
+                    client_name: response.data.profile_data.FirstName,
+                    client_Location: response.data.profile_data.Location,
+                    client_id: response.data.profile_data._id
+
                 })
             })
     }
@@ -53,15 +54,15 @@ class ClientViewNurseCalendar extends Component {
     getUnavailableDates = () => {
         //console.log("----------------dedde")
         //console.log(this.props.match.params.id)
-        
-       //Get Data of Nurse
+
+        //Get Data of Nurse
         axios.get('http://localhost:4000/user/userdata/unavailableDates/' + this.props.match.params.id)
             .then(response => {
                 console.log(response.data.profile_data.UnavailableDates)
                 this.setState({
-                    profile_data:response.data.profile_data,
-                    nurse_name:response.data.profile_data.FirstName,
-                    nurse_id:response.data.profile_data._id,
+                    profile_data: response.data.profile_data,
+                    nurse_name: response.data.profile_data.FirstName,
+                    nurse_id: response.data.profile_data._id,
 
                     response_dates: response.data.profile_data.UnavailableDates
                 })
@@ -94,7 +95,7 @@ class ClientViewNurseCalendar extends Component {
 
     }
 
-    onShowDialog(){
+    onShowDialog() {
         this.dialog.showAlert("Booking request sent successfully");
     }
 
@@ -106,11 +107,11 @@ class ClientViewNurseCalendar extends Component {
         console.log(date.dateStr)
 
 
-        if ((this.state.response_dates.includes(date.dateStr)===false) && (new Date(date.dateStr).getTime() >= Date.now())) {
-            
+        if ((this.state.response_dates.includes(date.dateStr) === false) && (new Date(date.dateStr).getTime() >= Date.now())) {
+
             this.setState({
                 requesteddate: date.dateStr
-    
+
             })
 
             this.openDateModal();
@@ -118,10 +119,10 @@ class ClientViewNurseCalendar extends Component {
             console.log(this.state.profile_data)
             console.log(this.state.nurse_name)
             console.log(this.state.nurse_id)
-           
-          
+
+
         }
-       console.log(this.state.requesteddate)
+        console.log(this.state.requesteddate)
     }
 
     openDateModal = () => {
@@ -141,35 +142,35 @@ class ClientViewNurseCalendar extends Component {
         console.log('event--------------')
         console.log(event.data)
     }
-    
-    requestNurse =() => {
+
+    requestNurse = () => {
 
         const RequestObj = {
-            RequestedClient : this.state.client_name,
-            RequestedByClientID : this.state.client_id,
+            RequestedClient: this.state.client_name,
+            RequestedByClientID: this.state.client_id,
             RequestedClientLocation: this.state.client_Location,
-            RequestedNurse : this.state.nurse_name,
-            RequestedNurseID:this.state.nurse_id,
+            RequestedNurse: this.state.nurse_name,
+            RequestedNurseID: this.state.nurse_id,
             RequestedDate: this.state.requesteddate
         }
         console.log(this.state.requesteddate)
         const headers = {
             'Content-Type': 'application/json'
-          }
+        }
 
-        axios.post('http://localhost:4000/request/add', RequestObj, {headers:headers})
-          .then (res => {
-              if (res.data.success){
-               console.log(res.data);
-               this.onShowDialog();
-                
-              }
-          })
-          
-          this.closeDateModal();
+        axios.post('http://localhost:4000/request/add', RequestObj, { headers: headers })
+            .then(res => {
+                if (res.data.success) {
+                    console.log(res.data);
+                    this.onShowDialog();
+
+                }
+            })
+
+        this.closeDateModal();
         console.log("request Nurse")
         console.log(this.state.profile_data)
-        
+
     }
 
     render() {
@@ -185,34 +186,55 @@ class ClientViewNurseCalendar extends Component {
             <div>
                 <ProfileNavbar />
 
-                <div className="container">
-                    <FullCalendar
-                        defaultView="dayGridMonth"
-                        plugins={[dayGridPlugin, interactionPlugin]}
-                        // themeSystem={{bootstrap}}
-                        header={{
-                            left: "prev,next today",
-                            center: "title",
-                        }}
-                        events={this.state.unavailableDates}
-                        dateClick={this.dateClick}
-                        eventClick={this.eventClick}
-                        defaultAllDayEventDuration={{ 'days': 1 }}
-                    />
+                <div class="container-fluid">
+                    <div className="row">
+                        <div className="col-4 calendarback calendarbacktext">
+                            <div class="row">
+                                <div class="mx-auto banner text-center">
+                                    <h1 class="text-capitalize">
+                                        <strong class="banner-title">Change</strong>
+                                    </h1>
+                                    <h1 class="text-capitalize">
+                                        <strong class="banner-title">Your</strong>
+                                    </h1>
+                                    <h1 class="text-capitalize">
+                                        <strong class="banner-title">Availability</strong>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-7 ">
+                            <FullCalendar
+                                defaultView="dayGridMonth"
+                                plugins={[dayGridPlugin, interactionPlugin]}
+                                // themeSystem={{bootstrap}}
+                                header={{
+                                    left: "prev,next today",
+                                    center: "title",
+                                }}
+                                events={this.state.unavailableDates}
+                                dateClick={this.dateClick}
+                                eventClick={this.eventClick}
+                                defaultAllDayEventDuration={{ 'days': 1 }}
+                            />
+                            {/* Deactivate Modal */}
+                            <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDateModal()}>
+                                <div class="modal-content">
+                                    <div className="modal-header"><h4 align="center"><i className="fa fa-user-md mr-2"></i>Request Nurse {this.state.requesteddate}</h4></div>
+                                    <div className="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to Request?</div>
+                                    <div className="modal-footer"> <Button className="btn btn-info btn-block" type="submit"onClick={() => this.requestNurse()} >Request the Nurse</Button></div>
+                                </div>
+                            </Modal>
 
+                        </div>
+                        <div className="col-1 calendarback"  >
 
-
-                    <Modal visible={this.state.visible} width="25%" height="20%" effect="fadeInUp" onClickAway={() => this.closeDateModal()}>
-                        <h5 align="center">Book Nurse {this.state.date}</h5>
-                        <center>
-                            {/* <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button> */} 
-                            <input type="button" class="btn btn-danger" value="Request the Nurse" onClick={() => this.requestNurse()} />
-                            <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDateModal()} />
-                        </center>
-                    </Modal>
-                    
+                        </div>
+                    </div>
                     <Dialog ref={(component) => { this.dialog = component }} />
+
                 </div>
+                <Footer/>
             </div>
         )
     }

@@ -3,16 +3,17 @@ import ProfileNavbar from '../ProfileNavbar';
 import Modal from 'react-awesome-modal';
 import { Button, ProgressBar } from 'react-bootstrap';
 import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
-import ClientEdit from "../edit/clientedit";
+// import ClientEdit from "../edit/clientedit";
 import axios from "../../../../backend/node_modules/axios";
 import StarRatingComponent from "react-star-rating-component";
 import Progress from "react-progressbar";
 import ChatComponent from "../messaging/ChatComponent";
-import ClientNotification from "../nurse/booking/ClientNotification";
+// import ClientNotification from "../nurse/booking/ClientNotification";
 import { StreamChat } from 'stream-chat';
+import Adminclientlist from "../admin/adminclientlist";
 
 
-class ClientMainPage extends Component {
+class AdminClientViewProfile extends Component {
 
     constructor(props) {
         super(props);
@@ -92,15 +93,19 @@ class ClientMainPage extends Component {
     }
 
     getData = () => {
-        var token = localStorage.getItem('id');
-        axios.get('http://localhost:4000/user/userdata/' + token)
+        // var token = localStorage.getItem('id');
+        var token = this.props.match.params.id;
+        axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
             .then(response => {
                 console.log(response.data.profile_data)
                 this.setState({
-                    profile_data: response.data.profile_data
+                    profile_data: response.data.profile_data,
+                    client_id: response.data.profile_data._id
                 })
                 this.progressBar();
             })
+
+            console.log(this.state.client_id)
     }
 
     progressBar() {
@@ -264,7 +269,7 @@ class ClientMainPage extends Component {
                                     <div className="card-header p-2">
                                         <ul className="nav nav-pills">
                                             <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile Details</a></li>
-                                            <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
+                                            {/* <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li> */}
                                             <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Update Profile</a></li>
                                         </ul>
                                     </div>{/* /.card-header */}
@@ -307,16 +312,12 @@ class ClientMainPage extends Component {
                                                 </div>
                                                 {/* /.tab-pane */}
                                             </div>
-
-                                            <div className="tab-pane" id="notification">
-                                                <ClientNotification />
-                                            </div>
-
                                             {/* Update Profile Form container */}
                                             <div className="tab-pane" id="settings">
-
-                                                <ClientEdit
-                                                    loadData={this.getData} />
+                                                <Adminclientlist 
+                                                    loadData={this.getData}
+                                                    clientID={this.state.client_id} 
+                                                    />
                                             </div>
                                             {/* /.tab-pane */}
                                         </div>
@@ -391,4 +392,4 @@ class ClientMainPage extends Component {
     }
 }
 
-export default ClientMainPage;
+export default AdminClientViewProfile;

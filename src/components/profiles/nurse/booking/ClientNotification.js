@@ -13,24 +13,16 @@ const NotifyBox = props => (
             <div>
                 <i className="fas fa-bell bg-primary" />
                 <div className="timeline-item">
-                {/* {'/nurseviewclientprofile/'+props.clientID} */}
-                    <span className="time"><i className="far fa-clock" /> 12:05</span>
-                    <h3 className="timeline-header"><a href={'/viewnurseprofile/'+props.AcceptednurseID}>{props.AcceptednurseName}</a> Accepted your booking Request</h3>
+                    <h3 className="timeline-header"><a href={'/viewnurseprofile/'+props.AcceptednurseID}>{props.AcceptednurseName}</a> Accepted your booking request</h3>
                     <div className="timeline-body">
                         <div >
-                            <h6> <strong>Nurse Name:</strong>{props.AcceptednurseName}</h6>
+                            <h6> <strong>Nurse Name : </strong>{props.AcceptednurseName}</h6>
                         </div>
                         <div >
-                            <h6> <strong>Booked Date:</strong>{props.Accepteddate}</h6>
+                            <h6> <strong>Booked Date : </strong>{props.Accepteddate}</h6>
                         </div>
-                        {/* <div >
-                            <h6> <strong>Booking ID:</strong>{props.NoficationID} </h6>
-                        </div> */}
                     </div>
-                    {/* <div className="timeline-footer">
-                        <a href="#" className="btn btn btn-secondary btn-sm">Message to Nurse</a>
-                        {/* <a href="#" className="btn btn-danger btn-sm" onClick={() => NurseNotification.deleteNotification(props.NoficationID)}>Delete</a> */}
-                    {/* </div> */} 
+                   
                 </div>
             </div>
             {/* END timeline item */}

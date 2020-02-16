@@ -14,7 +14,7 @@ const UserReg = props => (
         <td>{props.clientlist.Location}</td>
      
         <td>
-            <Link to={"/edit/"+props.clientlist._id}>View</Link>
+            <Link to={"/adminviewclientprofile/"+props.clientlist._id}>View</Link>
         </td>
     </tr>
 )
@@ -49,30 +49,14 @@ export default class Adminclientlist extends Component {
                <div >
                 <Admindashleftnav/>
              </div>
-  <div className="content-wrapper">
-    {/* Content Header (Page header) */}
-    <section className="content-header">
-      <div className="container-fluid">
-        <div className="row mb-2">
-          <div className="col-sm-6">
-            <h1>Client Data List</h1>
-          </div>
-          <div className="col-sm-6">
-            <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a href="#">Home</a></li>
-              <li className="breadcrumb-item active">Client Data List</li>
-            </ol>
-          </div>
-        </div>
-      </div>{/* /.container-fluid */}
-    </section>
+  <div className="content-wrapper mt-3">
     {/* Main content */}
     <section className="content">
       <div className="row">
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Details of registered Clients of CAREME</h3>
+              <h3>Details of registered Clients of CAREME</h3>
             </div>
             {/* /.card-header */}
             <div className="card-body">
@@ -93,21 +77,6 @@ export default class Adminclientlist extends Component {
                 <tbody className="table-striped">
                         { this.Clients() }
                     </tbody>
-                {/* <tfoot>
-                  <tr>
-                  <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Home</th>
-                    <th>NurseID</th>
-                    <th>Tel</th>
-                    <th>Location</th>
-                    <th>Age</th>
-                    <th>Exp</th>
-                    <th>Type</th>
-                    <th>Gender</th>
-                  </tr>
-                </tfoot> */}
               </table>
               </div>
             </div>
