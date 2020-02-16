@@ -1,6 +1,39 @@
 import React, { Component } from 'react'
 import Admindashleftnav from './admindashleftnav'
 import axios from './../../../../backend/node_modules/axios';
+import md5 from 'md5';
+
+//email syntax
+function validateEmail(email) {
+    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regexp.test(email);
+}
+
+//NIC syntax
+function validateNIC(nic) {
+    const regex = /^([0-9]{9})(V|v)$/;
+    const regex2 = /^([0-9]{12})$/;
+
+    if (regex.test(nic)) {
+        return regex.test(nic);
+    }
+
+    else if (regex2.test(nic)) {
+        return regex2.test(nic);
+    }
+}
+
+//validate tel
+function validateTel(tel) {
+    const reg = /^(0)(7)([0-9]{8})$/;
+    return reg.test(tel);
+}
+
+//validate password (minimum 6 characters, atleast one caps and one simple letter, one special character and one number)
+function validatePassword(password) {
+    const regpw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regpw.test(password);
+}
 
 export default class Addnurseadmin extends Component {
 
@@ -87,6 +120,8 @@ export default class Addnurseadmin extends Component {
     onSubmitNurse(e) {
         e.preventDefault();
 
+        const today = new Date();
+
         const obj = {
             FirstName: this.state.FirstName,
             LastName: this.state.LastName,
@@ -97,47 +132,117 @@ export default class Addnurseadmin extends Component {
             CPW: this.state.CPW,
             Home: this.state.Home,
             Tel: this.state.Tel,
+            profilePic: 'http://localhost:4000/public/sampleimage.jpg',
             userID: 0,
-            Location: null,
-            Age: null,
-            nurseExp: null,
-            nurseType: null,
-            nurseEdu: null,
-            nurseUni: null,
-            nurseGender: null,
-            profilePic: null
+            RegDate : today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+            starRating : 0,
+            ratingCount : 0
         };
-        //adding new user to the database
 
-        axios.post('http://localhost:4000/user/add', obj)
-            .then(res => { console.log(res.data) });
-        console.log("Registered");
-        alert(`Succesfully Registered`);
+        const { PW, CPW } = this.state;
 
-        this.setState({
-            FirstName: '',
-            LastName: '',
-            nurseID: '',
-            Email: '',
-            NIC: '',
-            PW: '',
-            CPW: '',
-            Home: '',
-            Tel: '',
-            visible: false,
+        //email syntax validation
+        if (!validateEmail(this.state.Email)) {
+            alert("Enter valid email address");
+        }
 
-            touched: {
-                Email: false,
-                FirstName: false,
-                LastName: false,
-                nurseID: false,
-                PW: false,
-                CPW: false,
-                Home: false,
-                Tel: false,
-                NIC: false
+        //Password regex validation
+        else if (!validatePassword(this.state.PW)) {
+            alert("Enter valid password");
+        }
+
+        //NIC regex validation
+        else if (!validateNIC(this.state.NIC)) {
+            alert("Enter valid NIC number");
+        }
+
+        //password and confirm password match verification
+        else if (PW != CPW) {
+            alert("Your passwords dont match");
+        }
+
+        //validate telephone number
+        else if (!validateTel(this.state.Tel)) {
+            alert("Enter valid telephone number");
+        }
+
+        else {
+            const headers = {
+                'Content-Type': 'application/json'
             }
-        });
+
+            //verifying nurseID
+            axios.post('http://localhost:4000/nurseCouncil/verify', obj, {headers: headers})
+                .then(res=> {
+                    if (!res.data.success){
+                        alert("Please enter registered Nurse Council ID and NIC");
+                    }
+
+                    else if (res.data.success){
+                        //verifying as unregistered email
+                        axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
+                            .then(res => {
+                                if (res.data.success) {
+                                    alert("Email already registered. Please use another Email Address");
+                                }        
+                                
+                                //verifying as unregistered nurse ID
+                                else if (!res.data.success) {
+                                    axios.post('http://localhost:4000/user/validNurseID', obj, { headers: headers })
+                                        .then(response => {
+                                            if (response.data.success) {
+                                                alert("Your Nurse Council ID is already registered");
+                                            }
+        
+                                            //adding new user to the database
+                                            else if (!response.data.success) {
+                                                var hashed = md5(this.state.PW);
+
+                                                const object = {
+                                                    FirstName: this.state.FirstName,
+                                                    LastName: this.state.LastName,
+                                                    nurseID: this.state.nurseID,
+                                                    Email: this.state.Email,
+                                                    NIC: this.state.NIC,
+                                                    PW: hashed,
+                                                    CPW: hashed,
+                                                    Home: this.state.Home,
+                                                    Tel: this.state.Tel,
+                                                    profilePic: 'http://localhost:4000/public/sampleimage.jpg',
+                                                    userID: 0,
+                                                    RegDate : today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate(),
+                                                    starRating : 0,
+                                                    ratingCount : 0
+                                                };
+
+                                                axios.post('http://localhost:4000/user/add', object)
+                                                    .then(res => { console.log(res.data) });
+                                                console.log("Registered");
+                                                alert(`Succesfully Registered`);
+        
+                                                this.setState({
+                                                    FirstName: '',
+                                                    LastName: '',
+                                                    nurseID: '',
+                                                    Email: '',
+                                                    NIC: '',
+                                                    PW: '',
+                                                    CPW: '',
+                                                    Home: '',
+                                                    Tel: '',
+                                                    profilePic: '',
+                                                });
+                                            }
+                                        });
+                                }
+                
+                
+                });
+            }
+                
+            });
+        
+        }
     }
 
     render() {

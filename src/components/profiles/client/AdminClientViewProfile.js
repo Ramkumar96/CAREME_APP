@@ -10,7 +10,7 @@ import Progress from "react-progressbar";
 import ChatComponent from "../messaging/ChatComponent";
 // import ClientNotification from "../nurse/booking/ClientNotification";
 import { StreamChat } from 'stream-chat';
-import Adminclientlist from "../admin/adminclientlist";
+import AdminClientEdit from '../edit/AdminClientEdit';
 
 
 class AdminClientViewProfile extends Component {
@@ -55,7 +55,6 @@ class AdminClientViewProfile extends Component {
 
     componentDidMount() {
         this.getData()
-        this.chatToken()
     }
 
     deactivate() {
@@ -140,17 +139,6 @@ class AdminClientViewProfile extends Component {
         }
     }
 
-    /** 
-    * @desc: function to check chatToken from localStorage
-    * @required: localStorage
-    */
-    chatToken = () => {
-        var chat_token = localStorage.getItem('chat_token');
-        console.log("chat_token:", chat_token)
-    }
-
-
-
     render() {
 
         if (!this.state.profile_data) {
@@ -170,22 +158,22 @@ class AdminClientViewProfile extends Component {
 
         const finalRating = ratingVal / rateCount;
 
-        /** 
-          * @desc: code snippets to start a chat-coversation - render an client in streachat cloud
-          * @required: stream-chat, stream-chat-react
-          */
-        const client = new StreamChat("jh66vkvun7x5");
-        const userToken = localStorage.getItem('chat_token');
+        // /** 
+        //   * @desc: code snippets to start a chat-coversation - render an client in streachat cloud
+        //   * @required: stream-chat, stream-chat-react
+        //   */
+        // const client = new StreamChat("jh66vkvun7x5");
+        // const userToken = localStorage.getItem('chat_token');
 
         //    const senderEmail = this.state.clientEmail;
         //    var n = senderEmail.indexOf("@");
         //    var senderName = senderEmail.slice(0, n);
         //    console.log(senderName);
 
-        const receiverEmail = this.state.profile_data.Email;
-        var m = receiverEmail.indexOf("@");
-        var receiverName = receiverEmail.slice(0, m);
-        console.log(receiverName);
+        // const receiverEmail = this.state.profile_data.Email;
+        // var m = receiverEmail.indexOf("@");
+        // var receiverName = receiverEmail.slice(0, m);
+        // console.log(receiverName);
 
         //    var channelName = senderName.concat('-',receiverName);
         //    console.log(channelName);
@@ -198,14 +186,14 @@ class AdminClientViewProfile extends Component {
         //        }, 
         //        userToken,
         //    );
-        client.setUser( //logged in user details
-            {
-                id: receiverName,
-                name: receiverName,
-                image: localStorage.getItem('user_pic'),
-            },
-            userToken,
-        );
+        // client.setUser( //logged in user details
+        //     {
+        //         id: receiverName,
+        //         name: receiverName,
+        //         image: localStorage.getItem('user_pic'),
+        //     },
+        //     userToken,
+        // );
 
         return (
             <div>
@@ -314,7 +302,7 @@ class AdminClientViewProfile extends Component {
                                             </div>
                                             {/* Update Profile Form container */}
                                             <div className="tab-pane" id="settings">
-                                                <Adminclientlist 
+                                                <AdminClientEdit
                                                     loadData={this.getData}
                                                     clientID={this.state.client_id} 
                                                     />
@@ -337,14 +325,6 @@ class AdminClientViewProfile extends Component {
                                     <div className="card-body text-center">
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
-                                        <hr />
-                                        <button class="btn btn-outline-success btn-block" onClick={() => this.openMsgModal()}> <i className="fa fa-envelope mr-2"></i>Messages</button>
-                                        {/* <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} /> */}
-                                        <div>
-                                            <Modal visible={this.state.visible3} width="80%" height="90%" align="center" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>
-                                                <ChatComponent />
-                                            </Modal>
-                                        </div>
                                         <hr />
                                         <a href="/nurselistclview" className="btn btn btn-info btn-block"><i className="fa fa-user-md mr-2"></i><b>Find A Nurse</b></a>
                                         {/* <a href="/nurselistclview" className="btn btn-warning btn-block"><b>Find A Nurse</b></a> */}
