@@ -196,9 +196,11 @@ class Navigationbar extends Component {
             'Content-Type': 'application/json'
         }
 
+        var hashedPW = md5(this.state.Password);
+
         const data = {
             Email: this.state.Email,
-            Password: this.state.Password
+            Password: hashedPW
         };
 
         axios.post('http://localhost:4000/userDeac/validEmail', data, {headers:headers})
@@ -222,7 +224,8 @@ class Navigationbar extends Component {
                             CPW : this.state.user_data.CPW,
                             RegDate : this.state.user_data.RegDate,
                             DeacDate : this.state.user_data.DeacDate,
-                            ReacDate : new Date ()
+                            ReacDate : new Date (),
+                            profilePic: 'http://localhost:4000/public/sampleimage.jpeg'
                         };
                     }
 
@@ -239,7 +242,8 @@ class Navigationbar extends Component {
                             CPW : this.state.user_data.CPW,
                             RegDate : this.state.user_data.RegDate,
                             DeacDate : this.state.user_data.DeacDate,
-                            ReacDate : new Date ()
+                            ReacDate : new Date (),
+                            profilePic: 'http://localhost:4000/public/sampleimage.jpeg'
                         };
                     }
 
@@ -250,6 +254,16 @@ class Navigationbar extends Component {
                             .then(res => {
                                 if (res.data.success) {
                                     alert("Email already registered. Please use another Email Address");
+
+                                    this.setState({
+                                        Email: '',
+                                        Password: '',
+                                        visible: false,
+                                        touched : {
+                                            Email : false,
+                                            Password : false
+                                        }
+                                    });
                                 }        
                                 
                                 //verifying as unregistered nurse ID
@@ -279,7 +293,11 @@ class Navigationbar extends Component {
                                                     this.setState({
                                                         Email: '',
                                                         Password: '',
-                                                        visible: false
+                                                        visible: false,
+                                                        touched : {
+                                                            Email : false,
+                                                            Password : false
+                                                        }
                                                     });
                                             }
                                         });
@@ -296,6 +314,16 @@ class Navigationbar extends Component {
                                                 if(response.data.success){
                                                     console.log("Account reactivated");
                                                     alert(`Succesfully Reactivated`);
+
+                                                    this.setState({
+                                                        Email: '',
+                                                        Password: '',
+                                                        visible: false,
+                                                        touched : {
+                                                            Email : false,
+                                                            Password : false
+                                                        }
+                                                    });
                                                 }
                                             });
                                         });
@@ -304,6 +332,10 @@ class Navigationbar extends Component {
                                             Email: '',
                                             Password: '',
                                             visible: false,
+                                            touched : {
+                                                Email : false,
+                                                Password : false
+                                            }
                                         });
                                 }
                             });
@@ -316,6 +348,10 @@ class Navigationbar extends Component {
                         Email: '',
                         Password: '',
                         visible: false,
+                        touched : {
+                            Email : false,
+                            Password : false
+                        }
                     });
                 }
             });
