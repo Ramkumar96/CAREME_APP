@@ -1,6 +1,39 @@
 import React, { Component } from 'react'
 import Admindashleftnav from './admindashleftnav'
 import axios from './../../../../backend/node_modules/axios';
+import md5 from "md5";
+
+//email syntax
+function validateEmail(email) {
+    const regexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regexp.test(email);
+}
+
+//NIC syntax
+function validateNIC(nic) {
+    const regex = /^([0-9]{9})(V|v)$/;
+    const regex2 = /^([0-9]{12})$/;
+
+    if (regex.test(nic)) {
+        return regex.test(nic);
+    }
+
+    else if (regex2.test(nic)) {
+        return regex2.test(nic);
+    }
+}
+
+//validate tel
+function validateTel(tel) {
+    const reg = /^(0)(7)([0-9]{8})$/;
+    return reg.test(tel);
+}
+
+//validate password (minimum 6 characters, atleast one caps and one simple letter, one special character and one number)
+function validatePassword(password) {
+    const regpw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regpw.test(password);
+}
 
 export default class Addclientadmin extends Component {
 
@@ -74,55 +107,110 @@ export default class Addclientadmin extends Component {
             FirstName: this.state.FirstName,
             LastName: this.state.LastName,
             Email: this.state.Email,
-            NIC: this.state.NIC,
             PW: this.state.PW,
             CPW: this.state.CPW,
             Home: this.state.Home,
             Tel: this.state.Tel,
+            NIC: this.state.NIC,
             userID: 1,
-            Location: null,
-            Age: null,
-            nurseExp: null,
-            nurseType: null,
-            nurseEdu: null,
-            nurseUni: null,
-            nurseGender: null,
-            profilePic: null
+            profilePic: 'http://localhost:4000/public/sampleimage.jpeg',
+            RegDate : new Date(),
+            starRating: 0,
+            ratingCount: 0
         };
 
-        //adding new user to the database
+        const { PW, CPW } = this.state;
 
-        axios.post('http://localhost:4000/user/add', obj)
-            .then(res => { console.log(res.data) });
-        console.log("Registered");
-        alert(`Succesfully Registered`);
+        //email syntax validation
+        if (!validateEmail(this.state.Email)) {
+            alert("Enter valid email address");
+        }
 
-        this.setState({
-            FirstName: '',
-            LastName: '',
-            Email: '',
-            NIC: '',
-            PW: '',
-            CPW: '',
-            Home: '',
-            Tel: '',
+        //Password regex validation
+        else if (!validatePassword(this.state.PW)) {
+            alert("Enter valid password");
+        }
 
+        //NIC regex validation
+        else if (!validateNIC(this.state.NIC)) {
+            alert("Enter valid NIC number");
+        }
 
-            touched: {
-                Email: false,
-                FirstName: false,
-                LastName: false,
-                PW: false,
-                CPW: false,
-                Home: false,
-                Tel: false,
-                NIC: false
+        //confirming both passwords
+        else if (PW != CPW) {
+            alert("Your passwords dont match");
+        }
+
+        //validate telephone number
+        else if (!validateTel(this.state.Tel)) {
+            alert("Enter valid telephone number");
+        }
+
+        else {
+            const headers = {
+                'Content-Type': 'application/json'
             }
-        });
 
+            //verifying whether email has been previously registered
+            axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
+                .then(res => {
+                    if (res.data.success) {
+                        console.log('hariii');
+                        alert("Email already registered. Please use another Email Address");
+                    }
+
+                    //adding new client to the database
+                    else if (!res.data.success) {
+                        var hashedPW = md5(this.state.PW);
+
+                        const object = {
+                            FirstName: this.state.FirstName,
+                            LastName: this.state.LastName,
+                            Email: this.state.Email,
+                            PW: hashedPW,
+                            CPW: hashedPW,
+                            Home: this.state.Home,
+                            Tel: this.state.Tel,
+                            NIC: this.state.NIC,
+                            userID: 1,
+                            profilePic: 'http://localhost:4000/public/sampleimage.jpeg',
+                            RegDate : new Date(),
+                            starRating: 0,
+                            ratingCount: 0
+                        };
+
+                        axios.post('http://localhost:4000/user/add', object)
+                            .then(res => { console.log(res.data) });
+                        console.log("Registered");
+                        alert(`Succesfully Registered`);
+
+                        this.setState({
+                            FirstName: '',
+                            LastName: '',
+                            Email: '',
+                            NIC: '',
+                            PW: '',
+                            CPW: '',
+                            Home: '',
+                            Tel: '',
+                            profilePic: '',
+                            visible1: false,
+                            touched: {
+                                Email: false,
+                                FirstName: false,
+                                LastName: false,
+                                nurseID: false,
+                                PW: false,
+                                CPW: false,
+                                Home: false,
+                                Tel: false,
+                                NIC: false
+                            }
+                        });
+                    }
+                });
+        }
     }
-
-
 
     render() {
         return (
@@ -177,7 +265,7 @@ export default class Addclientadmin extends Component {
                                                             <input type="email"
                                                                 className="form-control"
                                                                 id="exampleInputEmail1"
-                                                                placeholder="Enter email"
+                                                                placeholder="abc@example.come"
                                                                 value={this.state.Email}
                                                                 onChange={this.onChangeEmail} />
                                                         </div>
@@ -188,7 +276,7 @@ export default class Addclientadmin extends Component {
                                                                     <input type="text"
                                                                         className="form-control"
                                                                         id="nic"
-                                                                        placeholder="9#######v"
+                                                                        placeholder="Please enter valid NIC"
                                                                         value={this.state.NIC}
                                                                         onChange={this.onChangeNIC} />
                                                                 </div>
@@ -199,7 +287,7 @@ export default class Addclientadmin extends Component {
                                                                     <input type="text"
                                                                         className="form-control"
                                                                         id="mobile"
-                                                                        placeholder="07########"
+                                                                        placeholder="Enter mobile number"
                                                                         value={this.state.Tel}
                                                                         onChange={this.onChangeTel} />
                                                                 </div>
@@ -212,7 +300,7 @@ export default class Addclientadmin extends Component {
                                                                     <input type="password"
                                                                         className="form-control"
                                                                         id="pw"
-                                                                        placeholder="password"
+                                                                        placeholder="Password"
                                                                         value={this.state.PW}
                                                                         onChange={this.onChangePW} />
                                                                 </div>
@@ -223,7 +311,7 @@ export default class Addclientadmin extends Component {
                                                                     <input type="password"
                                                                         className="form-control"
                                                                         id="cpw"
-                                                                        placeholder="confirm password"
+                                                                        placeholder="Confirm Password"
                                                                         value={this.state.CPW}
                                                                         onChange={this.onChangeCPW} />
                                                                 </div>

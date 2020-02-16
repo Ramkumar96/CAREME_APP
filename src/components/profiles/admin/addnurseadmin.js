@@ -299,7 +299,7 @@ export default class Addnurseadmin extends Component {
                                                             <input type="email"
                                                                 className="form-control"
                                                                 id="exampleInputEmail1"
-                                                                placeholder="Enter email"
+                                                                placeholder="abc@example.com"
                                                                 value={this.state.Email}
                                                                 onChange={this.onChangeEmail} />
                                                         </div>
@@ -319,7 +319,7 @@ export default class Addnurseadmin extends Component {
                                                                     <input type="text"
                                                                         className="form-control"
                                                                         id="nic"
-                                                                        placeholder="9#######v"
+                                                                        placeholder="Enter valid NIC"
                                                                         value={this.state.NIC}
                                                                         onChange={this.onChangeNIC} />
                                                                 </div>
@@ -330,7 +330,7 @@ export default class Addnurseadmin extends Component {
                                                                     <input type="text"
                                                                         className="form-control"
                                                                         id="mobile"
-                                                                        placeholder="07########"
+                                                                        placeholder="Enter valid phone number"
                                                                         value={this.state.Tel}
                                                                         onChange={this.onChangeTel} />
                                                                 </div>
@@ -343,7 +343,7 @@ export default class Addnurseadmin extends Component {
                                                                     <input type="password"
                                                                         className="form-control"
                                                                         id="pw"
-                                                                        placeholder="password"
+                                                                        placeholder="Password"
                                                                         value={this.state.PW}
                                                                         onChange={this.onChangePW} />
                                                                 </div>
@@ -354,7 +354,7 @@ export default class Addnurseadmin extends Component {
                                                                     <input type="password"
                                                                         className="form-control"
                                                                         id="cpw"
-                                                                        placeholder="confirm password"
+                                                                        placeholder="Confirm Password"
                                                                         value={this.state.CPW}
                                                                         onChange={this.onChangeCPW} />
                                                                 </div>

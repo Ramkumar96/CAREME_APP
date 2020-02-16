@@ -3,26 +3,6 @@ import axios from '../../../../backend/node_modules/axios';
 import ProfilePicUpload from '../profilePicUpload';
 import Dialog from 'react-bootstrap-dialog';
 
-function validate(Tele, Address) {
-    return {
-        Tele: Tele.length === 0,
-        Address: Address.length === 0,
-    };
-}
-
-function validateTel(tel) {
-    const reg = /^(0)(7)([0-9]{8})$/;
-    const reg2 = /^(7)([0-9]{8})$/;
-
-    if (reg.test(tel)) {
-        return reg.test(tel);
-    }
-
-    else if (reg2.test(tel)) {
-        return reg2.test(tel);
-    }
-}
-
 class ClientEdit extends Component {
 
     constructor(props) {
@@ -94,12 +74,6 @@ class ClientEdit extends Component {
         this.dialog.showAlert("Your telephone number is invalid");
     }
 
-    handleBlur = field => e => {
-        this.setState({
-            touched: { ...this.state.touched, [field]: true }
-        });
-    };
-
     onUpdate = (e) => {
         e.preventDefault();
 
@@ -110,16 +84,6 @@ class ClientEdit extends Component {
             UpdateDate: new Date()
         };
 
-        if (!this.canBeSubmitted()) {
-            e.preventDefault();
-            return;
-        }
-
-        else if (!validateTel(this.state.Tel)) {
-            this.onShowTelephoneError();
-        }
-
-        else {
             const headers = {
                 'Content-Type': 'application/json'
             }
@@ -135,13 +99,6 @@ class ClientEdit extends Component {
                         this.props.loadData()
                     }
                 });
-        }
-    }
-
-    canBeSubmitted() {
-        const errors = validate(this.state.Tel, this.state.Home);
-        const isDisabled = Object.keys(errors).some(x => errors[x]);
-        return !isDisabled;
     }
 
     render() {
@@ -149,18 +106,6 @@ class ClientEdit extends Component {
             return (
                 <div> <text>Loading</text> </div>
             );
-        }
-
-        //validating the fields in update form whether filled or not
-        const errors = validate(this.state.Tel, this.state.Home);
-        const isDisabled = Object.keys(errors).some(x => errors[x]);
-
-        //marking the touched but unfilled fields in red
-        const shouldMarkError = field => {
-            const hasError = errors[field];
-            const shouldShow = this.state.touched[field];
-
-            return hasError ? shouldShow : false;
         }
 
         return (
@@ -175,8 +120,6 @@ class ClientEdit extends Component {
                             <input type="text" className="form-control"
                                 value={this.state.Tel}
                                 onChange={this.onChangeTel}
-                                className={shouldMarkError("Tel") ? "error" : ""}
-                                onBlur={this.handleBlur("Tel")}
                                 placeholder="Enter Telephone" />
                         </div>
 
@@ -188,8 +131,6 @@ class ClientEdit extends Component {
                             <input type="text" className="form-control"
                                 value={this.state.Home}
                                 onChange={this.onChangeAddress}
-                                className={shouldMarkError("Home") ? "error" : ""}
-                                onBlur={this.handleBlur("Home")}
                                 placeholder="Address" />
                         </div>
                         <div className="form-group">
@@ -200,8 +141,6 @@ class ClientEdit extends Component {
                                 value={this.state.Location}
                                 className="form-control"
                                 onChange={this.onChangeLocation}
-                                className={shouldMarkError("Location") ? "error" : ""}
-                                onBlur={this.handleBlur("Location")}
                             >
                                 <option default>Update District</option>
                                 <option value="Colombo">Colombo</option>
@@ -216,7 +155,6 @@ class ClientEdit extends Component {
                     <div className="card-footer">
                         <button type="submit"
                             className="btn btn-primary btn-block"
-                            disabled={isDisabled}
                             onClick={this.onUpdate}>
                             Submit</button>
                     </div>

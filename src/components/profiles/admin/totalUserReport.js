@@ -89,10 +89,10 @@ class TotalUserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h2>CareMe Total User Statistics</h2>
+                            <h2 style= {{paddingLeft:15}}>CareMe Total User Statistics</h2>
                             <br/>
                                 <div className="box-left">
-                                <h3> Total users upto date </h3>
+                                <h3 style= {{paddingLeft:15}}> Total users upto date </h3>
                                 <VictoryPie 
                                     radius = {30}
                                     colorScale = {["orange", "gold"]}

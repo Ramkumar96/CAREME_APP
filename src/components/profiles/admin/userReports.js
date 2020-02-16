@@ -593,9 +593,9 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h2>CareMe Requests Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
+                            <h2 style= {{paddingLeft:15}}> CareMe Requests Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
                             <br/>
-                                <h3> Total requests accepted and deleted this month </h3>
+                                <h3 style= {{paddingLeft:15}}> Total requests accepted and deleted this month </h3>
                                 {userRequests}
                                 <br/>
                         </div>
@@ -613,9 +613,9 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h2>CareMe user accounts activation and deactivation for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
+                            <h2 style= {{paddingLeft:15}}>CareMe user accounts activation and deactivation for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
 
-                            <h3> New User Registrations </h3>
+                            <h3 style= {{paddingLeft:15}}> New User Registrations </h3>
                             {newUsers}
                             <br/>
 
@@ -673,7 +673,7 @@ class UserReport extends Component {
                                 />
                             </VictoryChart>
 
-                            <h3> User Deactivations </h3>
+                            <h3 style= {{paddingLeft:15}}> User Deactivations </h3>
                             {deacUsers}
                             <br/>
                         </div>
@@ -691,7 +691,7 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h2>CareMe user accounts activation and deactivation</h2>
+                            <h2 style= {{paddingLeft:15}}>CareMe user accounts activation and deactivation</h2>
                             <br/>
 
                             <h3 style= {{paddingLeft:15}}>Nurse registrations in {this.state.year}</h3>
@@ -873,7 +873,7 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h2> User requests statistics for the year of {this.state.year}</h2>
+                            <h2 style= {{paddingLeft:15}}> User requests statistics for the year of {this.state.year}</h2>
                             <br/>
                             <h3 style= {{paddingLeft:15}}>Accepted requests in {this.state.year}</h3>
                             <VictoryChart 
@@ -944,14 +944,14 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper"> 
-                            <h2>CareMe Review, Rating and Complaints Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
+                            <h2 style= {{paddingLeft:15}}>CareMe Review, Rating and Complaints Statistics for the month of {this.state.monthLabels[this.state.month-1]} - {this.state.year}</h2>
                             <br/>
                             
-                            <h3> User ratings and reviews for the month </h3>
+                            <h3 style= {{paddingLeft:15}}> User ratings and reviews for the month </h3>
                             {userRatesRevs}
                             <br/>
 
-                            <h3> User complaints for the month </h3>
+                            <h3 style= {{paddingLeft:15}}> User complaints for the month </h3>
                             {userComplaints}
                             <br/>
                         </div>
@@ -969,7 +969,7 @@ class UserReport extends Component {
                         <ProfileNavbar />
 
                         <div className="content-wrapper">
-                            <h2>CareMe user ratings, reviews and complaints for the year of {this.state.year}</h2>
+                            <h2 style= {{paddingLeft:15}}>CareMe user ratings, reviews and complaints for the year of {this.state.year}</h2>
 
                             <h3 style= {{paddingLeft:15}}>User Ratings</h3>
 
@@ -1039,7 +1039,7 @@ class UserReport extends Component {
                 <div>
                     <ProfileNavbar />
                     <div className="content-wrapper">
-                        <h2>User Reports</h2>
+                        <h2 style= {{paddingLeft:15}}>User Reports</h2>
 
                         <Form>
                             <Form.Row>
