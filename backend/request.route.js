@@ -146,5 +146,15 @@ UserRequestRoute.route('/countRequestsYear').post(function (req,res){
   })
 })
 
+//count total requests
+UserRequestRoute.route('/countRequests').get(function (req,res){
+  UserRequesting.find().countDocuments()
+    .then(response=>{
+      res.status(200).send({
+        requestCount: response
+      })
+    })
+})
+
 
 module.exports = UserRequestRoute;

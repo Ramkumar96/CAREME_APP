@@ -3,7 +3,7 @@ const UserReviewRoutes = express.Router();
 
 let UserReview = require('./review.model');
 
-// //Adding rating
+// //Adding review
 UserReviewRoutes.route('/add').post(function (req, res) {
     console.log(req.body)
     let userReview = new UserReview(req.body);
@@ -16,6 +16,25 @@ UserReviewRoutes.route('/add').post(function (req, res) {
       res.status(400).send("unable to save to database");
     });
   });
+
+//retrieve a review for the user profile
+UserReviewRoutes.route('/retrieveReview').post(function (req,res){
+  var emailToFind = req.body.Email;
+
+  UserReview.findOne({ReviewedUser: emailToFind})
+    .then(response=>{
+        res.status(200).send({
+          reviewBody: response
+       })
+
+       console.log("Successfully retrieved");
+    })
+
+    .catch(err=>{
+        console.log("Error while retrieving review");
+    })
+})  
+
 
 //count number of reviews in a month
 UserReviewRoutes.route('/countReviews').post(function (req,res){

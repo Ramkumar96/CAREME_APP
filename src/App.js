@@ -27,8 +27,7 @@ import { Row } from "react-bootstrap";
 import NurseViewClientProfile from "./components/profiles/client/NurseViewClientProfile";
 import NurseAdminMainPage from "./components/profiles/nurse/Nurseadminprofile";
 import AdminClientViewProfile from "./components/profiles/client/AdminClientViewProfile";
-
-
+import TotalUserReport from "./components/profiles/admin/totalUserReport";
 
 class App extends Component {
   render() {
@@ -61,6 +60,7 @@ class App extends Component {
         <Route path="/adminviewnurseprofile/:id" exact component={NurseAdminMainPage}/>
         <Route path="/adminviewclientprofile/:id" exact component={AdminClientViewProfile}/>
         <Route path="/nurselistclview" exact component={NurseListCLview}/>
+        <Route path="/totalUserReport" exact component={TotalUserReport}/>
 
       </Router>
     );

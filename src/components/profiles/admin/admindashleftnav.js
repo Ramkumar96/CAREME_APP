@@ -25,7 +25,7 @@ class Admindashleftnav extends Component {
             <nav className="mt-2">
               <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 {/* Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library */}
+             with font-awesome or any other icon font library */}
                 <li className="nav-item has-treeview">
                   <a href="#" className="nav-link active">
                     <i className="fa fa-user-md" />
@@ -57,6 +57,7 @@ class Admindashleftnav extends Component {
                     <p>
                       Clients
               <i className="right fas fa-angle-left" />
+
                     </p>
                   </a>
                   <ul className="nav nav-treeview">
@@ -73,15 +74,22 @@ class Admindashleftnav extends Component {
                       </a>
                     </li>
                   </ul>
-                </li>
+                </li>    
+        
+        <li className="nav-header">Reports</li> 
+        <li className="nav-item">
+          <a href="totalUserReport" className="nav-link">
+            <i className="fas fa-circle nav-icon" />
+            <p>Total Users</p>
+          </a>
+        </li>
 
-                <li className="nav-header">  <i className="fa fa-file mr-2" />Reports</li>
-                <li className="nav-item">
-                  <a href="userReport" className="nav-link">
-                    <i className="fas fa-circle nav-icon" />
-                    <p>User Details</p>
-                  </a>
-                </li>
+        <li className="nav-item">
+          <a href="userReport" className="nav-link">
+            <i className="fas fa-circle nav-icon" />
+            <p>System Reports</p>
+          </a>
+        </li>
 
                 <li className="nav-item">
                   <a href="complaintsReview" className="nav-link">

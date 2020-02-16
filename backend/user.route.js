@@ -16,6 +16,22 @@ UserRegRoutes.route('/add').post(function (req, res) {
   userReg.save()
     .then(userReg => {
       res.status(200).json({ 'UserReg': 'User added successfully' });
+      var n = req.body.Email.indexOf("@");
+        var name = req.body.Email.slice(0, n);
+        console.log(name);
+        const client = new StreamChat('', 'yet5qpqxuh9p98r94vcvndd5rr82t2x2cb9m3dgaq4yx46ua8r4ckpuu7fvpyews');
+        const chatToken = client.createToken(name);
+        console.log(chatToken);
+        client.setUser(
+          {
+              id: name,
+              name: name,
+              //image: 'http://bit.ly/2O35mws',
+          },
+          userToken,
+        );
+
+
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
@@ -151,6 +167,8 @@ UserRegRoutes.route('/countClients').get(function (req,res){
 UserRegRoutes.route('/countNursesMonth').post(function (req,res){
   const yearToFind = req.body.year;
   const monthToFind = req.body.month;
+
+  console.log("testingg");
   UserReg.find({"userID" : "0"})
     .then(response=>{
       nurseCount=0;
@@ -310,13 +328,10 @@ UserRegRoutes.route('/countUsersDistrict').post(function (req,res){
 //count total active users according to that month
 UserRegRoutes.route('/countTotalUsersDistrict').post(function (req,res){
   const userCountDistrict = [0,0,0,0];
-  const yearToFind = req.body.year;
-  const monthToFind = req.body.month;
 
   UserReg.find({$or: [{"userID" : 0}, {"userID" : 1}]})
     .then(response=>{
       for (let i=0; i<response.length; i++){
-        if (response[i].RegDate.getFullYear()<=yearToFind && response[i].RegDate.getMonth()<=monthToFind-1){
           switch(response[i].Location){
             case("Colombo"):
               userCountDistrict[0]++;
@@ -334,10 +349,9 @@ UserRegRoutes.route('/countTotalUsersDistrict').post(function (req,res){
               userCountDistrict[3]++;
               break;
           }
-        }
     }
 
-    console.log(userCountDistrict);
+    console.log("Total users according to the district",userCountDistrict);
 
     res.status(200).send({
       userCountDistrict: userCountDistrict
@@ -476,15 +490,14 @@ UserRegRoutes.route('/countNursesTypeMonth').post(function (req,res){
 })
 
 
-//count all nurses type wise until a month  
+//count all nurses types in the system 
 UserRegRoutes.route('/countTotalNursesType').post(function (req,res){
   const nurseTypeCount = [0,0,0,0,0,0];
 
   UserReg.find({"userID" : 0})
     .then(response=>{
       for (let i=0; i<response.length; i++){
-        if (response[i].RegDate.getFullYear()<=yearToFind && response[i].RegDate.getMonth()<=monthToFind-1){
-         switch(response[i].nurseType){
+          switch(response[i].nurseType){
             case("Emergency"):
               nurseTypeCount[0]++;
               break;
@@ -509,10 +522,9 @@ UserRegRoutes.route('/countTotalNursesType').post(function (req,res){
               nurseTypeCount[5]++;
               break;
           }
-        }
     }
 
-    console.log(nurseTypeCount);
+    console.log("nurse type",nurseTypeCount);
 
     res.status(200).send({
      nurseTypeCount: nurseTypeCount
