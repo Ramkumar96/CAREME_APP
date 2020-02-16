@@ -20,7 +20,7 @@ class AdminClientViewProfile extends Component {
         this.state = {
             profile_data: null,
             visible: false,
-            redirect_home: false,
+            redirect_admin: false,
             completion: 75,
             chat_token: null,
             visible3: null
@@ -85,7 +85,7 @@ class AdminClientViewProfile extends Component {
                     console.log("To prove that deactivated properly");
                     this.setState({
                         visible: false,
-                        redirect_home: true
+                        redirect_admin: true
                     });
                 }
             });
@@ -146,9 +146,9 @@ class AdminClientViewProfile extends Component {
             );
         }
 
-        if (this.state.redirect_home) {
+        if (this.state.redirect_admin) {
             return (
-                <Redirect to='/' />
+                <Redirect to='/adminmaindash' />
             );
         }
 
