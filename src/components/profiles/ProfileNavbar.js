@@ -12,7 +12,8 @@ class ProfileNavbar extends Component {
             redirect_home: false,
             token: '',
             nurseprofile: false,
-            clientprofile: false
+            clientprofile: false,
+            adminprofile: false
         }
     }
 
@@ -45,9 +46,16 @@ class ProfileNavbar extends Component {
                 token: id
             });
         }
-        else {
+        else if(userID == 1) {
             this.setState({
                 clientprofile: true,
+                token: id
+            });
+        }
+
+        else{
+            this.setState({
+                adminprofile: true,
                 token: id
             });
         }
@@ -70,6 +78,11 @@ class ProfileNavbar extends Component {
         if (this.state.clientprofile) {
             return (
                 <Redirect to={'/clientprofile/' + this.state.token} />
+            )
+        }
+        if (this.state.adminprofile) {
+            return (
+                <Redirect to={'/adminmaindash'}/>
             )
         }
 

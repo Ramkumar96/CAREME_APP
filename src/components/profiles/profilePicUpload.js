@@ -40,13 +40,14 @@ export default class ProfilePicUpload extends Component {
             <div className="container">
                 <div className="row">
                     <form onSubmit={this.onSubmit}>
-                    <label htmlFor="exampleInputFile">Update your Profile Picture</label>
+                        <span className="mr-2">
+                        <label htmlFor="exampleInputFile">Profile Picture : </label>
+                        </span>
+                       
+                        <input type="file" onChange={this.onFileChange} />
                         <div className="form-group">
-                            <input type="file" onChange={this.onFileChange} />
-                        </div>
-                        <div className="form-group">
-                            <button className="btn btn-primary" type="submit" >Upload</button>
-                        </div>
+                        <button className="btn btn-secondary btn-sm "type="submit" >Upload</button>
+                        </div>     
                     </form>
                 </div>
             </div>

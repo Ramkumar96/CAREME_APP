@@ -8,14 +8,14 @@ const UserReg = props => (
         <td>{props.nurselist.FirstName}</td>
         <td>{props.nurselist.LastName}</td>
         <td>{props.nurselist.Email}</td>
-        <td>{props.nurselist.Home}</td>
+        {/* <td>{props.nurselist.Home}</td> */}
         <td>{props.nurselist.nurseID}</td>
         <td>{props.nurselist.Tel}</td>
         <td>{props.nurselist.Location}</td>
-        <td>{props.nurselist.Age}</td>
+        {/* <td>{props.nurselist.Age}</td> */}
         <td>{props.nurselist.nurseExp}</td>
         <td>{props.nurselist.nurseType}</td>
-        <td>{props.nurselist.nurseGender}</td>
+        {/* <td>{props.nurselist.nurseGender}</td> */}
         <td>
             <Link to={"/adminviewnurseprofile/"+props.nurselist._id}>View</Link>
         </td>
@@ -39,6 +39,8 @@ export default class Adminnurselist extends Component {
             .catch(function (error){
                 console.log(error);
             })
+
+          
     }
 
     Nurses() {
@@ -56,30 +58,14 @@ export default class Adminnurselist extends Component {
                <div >
                 <Admindashleftnav/>
              </div>
-  <div className="content-wrapper">
-    {/* Content Header (Page header) */}
-    <section className="content-header">
-      <div className="container-fluid">
-        <div className="row mb-2">
-          <div className="col-sm-6">
-            <h1>Nurse Data List</h1>
-          </div>
-          <div className="col-sm-6">
-            <ol className="breadcrumb float-sm-right">
-              <li className="breadcrumb-item"><a href="#">Home</a></li>
-              <li className="breadcrumb-item active">Nurse Data List</li>
-            </ol>
-          </div>
-        </div>
-      </div>{/* /.container-fluid */}
-    </section>
+  <div className="content-wrapper mt-3">
     {/* Main content */}
     <section className="content">
       <div className="row">
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Details of registered nurses of CAREME</h3>
+              <h3>Details of registered nurses of CareMe</h3>
             </div>
             {/* /.card-header */}
             <div className="card-body">
@@ -90,14 +76,14 @@ export default class Adminnurselist extends Component {
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
-                    <th>Home</th>
+                    {/* <th>Home</th> */}
                     <th>NurseID</th>
-                    <th>Tel</th>
+                    <th>Telephone</th>
                     <th>Location</th>
-                    <th>Age</th>
-                    <th>Exp</th>
-                    <th>Type</th>
-                    <th>Gender</th>
+                    {/* <th>Age</th> */}
+                    <th>Experience</th>
+                    <th>Nurse Type</th>
+                    {/* <th>Gender</th> */}
                     <th>Profile</th>
                   </tr>
                 </thead>

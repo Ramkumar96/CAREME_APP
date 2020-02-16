@@ -7,7 +7,7 @@ let UserRequesting = require('./request.model');
 
 // //Adding  request
 UserRequestRoute.route('/add').post(function (req, res) {
-    console.log(req.body)
+    //console.log(req.body)
     userRequesting = new UserRequesting(req.body);
     userRequesting.save()
     .then(userRequesting=> {
@@ -25,7 +25,7 @@ UserRequestRoute.route('/add').post(function (req, res) {
 
   // Deleting Notification Data
   UserRequestRoute.route('/delete').post(function (req, res) {
-  console.log(req.body);
+  console.log(req.body.NotificationID );
   UserRequesting.deleteOne({_id: req.body.NotificationID })
     .then(response=>{
       console.log(res.body);

@@ -5,11 +5,13 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 // import listPlugin from 'fullcalendar/ListView'
 import interactionPlugin from "@fullcalendar/interaction";
 // import bootstrapPlugin from '@fullcalendar/bootstrap'
+import { Button } from 'react-bootstrap';
 
 
 import Modal from 'react-awesome-modal';
 import ProfileNavbar from '../ProfileNavbar'
 import axios from '../../../../backend/node_modules/axios'
+import Footer from '../../homepage/footer/Footer';
 
 
 class NurseCalendar extends Component {
@@ -21,47 +23,47 @@ class NurseCalendar extends Component {
         this.state = {
             visible: false,
             date: null,
-            unavailableDates:[],
-            loading:true
+            unavailableDates: [],
+            loading: true
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getUnavailableDates();
 
     }
 
-    getUnavailableDates=()=>{
+    getUnavailableDates = () => {
         console.log("----------------dedde")
         var token = localStorage.getItem('id');
-        axios.get('http://localhost:4000/user/userdata/unavailableDates/'+token)
-        .then(response => {
-            console.log(response.data.profile_data.UnavailableDates)
-            this.setUnavailableDates(response.data.profile_data.UnavailableDates)
-        })
+        axios.get('http://localhost:4000/user/userdata/unavailableDates/' + token)
+            .then(response => {
+                console.log(response.data.profile_data.UnavailableDates)
+                this.setUnavailableDates(response.data.profile_data.UnavailableDates)
+            })
     }
 
-    setUnavailableDates=(dates)=>{
-        dates.map(date=>{
-           
+    setUnavailableDates = (dates) => {
+        dates.map(date => {
+
             this.state.unavailableDates.push({
-                id:dates.indexOf(date),
+                id: dates.indexOf(date),
                 title: 'Unavailable', // a property!
                 start: date, // a property!
                 allDay: true,
                 color: 'red'// a property! ** see important note below about 'end' **
-                
+
             })
-                console.log(this.state.unavailableDates)
+            console.log(this.state.unavailableDates)
         })
 
-        
+
         this.setState({
-            loading:false
+            loading: false
         })
 
         console.log(this.state.unavailableDates)
-        
+
     }
 
     openDateModal = () => {
@@ -117,14 +119,14 @@ class NurseCalendar extends Component {
                 // console.log(response.data.profile_data.UnavailableDates[response.data.profile_data.UnavailableDates.length-1])
                 this.closeDateModal();
                 window.location.reload();
-                })
+            })
 
     }
 
     render() {
 
-        if (this.state.loading){
-            return(
+        if (this.state.loading) {
+            return (
                 <p>Loading</p>
             )
         }
@@ -132,30 +134,53 @@ class NurseCalendar extends Component {
             <div>
                 <ProfileNavbar />
 
-                <div className="container">
-                    <FullCalendar
-                        defaultView="dayGridMonth"
-                        plugins={[dayGridPlugin, interactionPlugin]}
-                        // themeSystem={{bootstrap}}
-                        header={{
-                            left: "prev,next today",
-                            center: "title",
-                        }}
-                        events={this.state.unavailableDates}
-                        dateClick={this.dateClick}
-                        defaultAllDayEventDuration={{'days':1}}
-                    />
+                <div class="container-fluid">
+                    <div className="row">
+                        <div className="col-4 calendarback calendarbacktext">
+                            <div class="row">
+                                <div class="mx-auto banner text-center">
+                                    <h1 class="text-capitalize">
+                                        <strong class="banner-title">Change</strong>
+                                    </h1>
+                                    <h1 class="text-capitalize">
+                                        <strong class="banner-title">Your</strong>
+                                    </h1>
+                                    <h1 class="text-capitalize">
+                                        <strong class="banner-title">Availability</strong>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-7 ">
+                            <FullCalendar
+                                defaultView="dayGridMonth"
+                                plugins={[dayGridPlugin, interactionPlugin]}
+                                // themeSystem={{bootstrap}}
+                                header={{
+                                    left: "prev,next today",
+                                    center: "title",
+                                }}
+                                events={this.state.unavailableDates}
+                                dateClick={this.dateClick}
+                                defaultAllDayEventDuration={{ 'days': 1 }}
+                            />
+                            {/* Deactivate Modal */}
+                            <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDateModal()}>
+                                <div class="modal-content">
+                                    <div className="modal-header"><h4 align="center"><i className="fa fa-calendar-alt mr-2"></i>Change availabilty on {this.state.date}</h4></div>
+                                    {/* <div className="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to Deactivate?</div> */}
+                                    <div className="modal-footer"> <Button className="btn btn-danger btn-block" type="submit"onClick={() => this.addUnavailableDates()} >Make it Unavailable</Button></div>
+                                </div>
+                            </Modal>
+                            
+                        </div>
+                        <div className="col-1 calendarback"  >
 
-
-                    <Modal visible={this.state.visible} width="25%" height="20%" effect="fadeInUp" onClickAway={() => this.closeDateModal()}>
-                        <h5 align="center">Change availabilty on {this.state.date}</h5>
-                        <center>
-                            {/* <Button variant="btn btn-danger" type="submit" onClick={() => this.logout()}>LogOut</Button> */}
-                            <input type="button" class="btn btn-danger" value="Unavailable" onClick={() => this.addUnavailableDates()} />
-                            <input type="button" class="btn btn-info" value="Cancel" onClick={() => this.closeDateModal()} />
-                        </center>
-                    </Modal>
+                        </div>
+                    </div>
+                
                 </div>
+                <Footer/>
             </div>
         )
     }

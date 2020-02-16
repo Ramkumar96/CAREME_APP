@@ -17,7 +17,7 @@ export default class Addnurseadmin extends Component {
         this.onChangeTel = this.onChangeTel.bind(this);
         this.onChangeNIC = this.onChangeNIC.bind(this);
         this.onSubmitNurse = this.onSubmitNurse.bind(this);
-    
+
 
         this.state = {
             Email: '',
@@ -38,25 +38,25 @@ export default class Addnurseadmin extends Component {
             Email: e.target.value
         });
     }
-    onChangeFirstName(e){
+    onChangeFirstName(e) {
         this.setState({
             FirstName: e.target.value
         });
     }
 
-    onChangeLastName(e){
+    onChangeLastName(e) {
         this.setState({
             LastName: e.target.value
         });
     }
 
-    onChangeNurseID(e){
+    onChangeNurseID(e) {
         this.setState({
             nurseID: e.target.value
         });
     }
 
-    onChangeEmail(e){
+    onChangeEmail(e) {
         this.setState({
             Email: e.target.value
         });
@@ -67,7 +67,7 @@ export default class Addnurseadmin extends Component {
         });
     }
 
-    onChangeTel(e){
+    onChangeTel(e) {
         this.setState({
             Tel: e.target.value
         });
@@ -107,178 +107,179 @@ export default class Addnurseadmin extends Component {
             nurseGender: null,
             profilePic: null
         };
-       //adding new user to the database
-       
-            axios.post('http://localhost:4000/user/add', obj)
-                .then(res => { console.log(res.data) });
-            console.log("Registered");
-            alert(`Succesfully Registered`);
+        //adding new user to the database
 
-            this.setState({
-                FirstName: '',
-                LastName: '',
-                nurseID: '',
-                Email: '',
-                NIC: '',
-                PW: '',
-                CPW: '',
-                Home: '',
-                Tel: '',
-                visible: false,
+        axios.post('http://localhost:4000/user/add', obj)
+            .then(res => { console.log(res.data) });
+        console.log("Registered");
+        alert(`Succesfully Registered`);
 
-                touched: {
-                    Email: false,
-                    FirstName: false,
-                    LastName: false,
-                    nurseID: false,
-                    PW: false,
-                    CPW: false,
-                    Home: false,
-                    Tel: false,
-                    NIC: false
-                }
-            });
+        this.setState({
+            FirstName: '',
+            LastName: '',
+            nurseID: '',
+            Email: '',
+            NIC: '',
+            PW: '',
+            CPW: '',
+            Home: '',
+            Tel: '',
+            visible: false,
+
+            touched: {
+                Email: false,
+                FirstName: false,
+                LastName: false,
+                nurseID: false,
+                PW: false,
+                CPW: false,
+                Home: false,
+                Tel: false,
+                NIC: false
+            }
+        });
     }
 
     render() {
         return (
             <div>
-            <div >
-                <Admindashleftnav/>
-             </div>
-            <div className="col-12">
-              <section className="content">
-  <div className="container-fluid">
-  <div class="row max-height justify-content-center align-items-center">
-     <div class="col-8 mx-auto">
-    <div className="row">
-      {/* left column */}
-      <div className="col-md-6">
-        {/* general form elements */}
-        <div className="card card-primary">
-          <div className="card-header">
-            <h3 className="card-title">Add Nurses Here</h3>
-          </div>
-          {/* /.card-header */}
-          {/* form start */}
-          <form role="form">
-              
-            <div className="card-body">
-                <div className="row">
-                    <div className="col-6">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">First Name</label>
-                            <input type="text"
-                             className="form-control" 
-                             id="fname" 
-                             placeholder="Enter First Name"
-                             value={this.state.FirstName}
-                             onChange={this.onChangeFirstName} />
-                         </div>
-                    </div>
-                    <div className="col-6">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Last Name</label>
-                            <input type="text" 
-                            className="form-control" 
-                            id="lname" 
-                            placeholder="Enter Last Name" 
-                            value={this.state.LastName}
-                            onChange={this.onChangeLastName}/>
-                         </div>
-                    </div>
+                <div >
+                    <Admindashleftnav />
                 </div>
-            
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input type="email"
-                className="form-control" 
-                id="exampleInputEmail1"
-                placeholder="Enter email"
-                value={this.state.Email}
-                onChange={this.onChangeEmail} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Nurse Council Number</label>
-                <input type="text" 
-                className="form-control" 
-                id="NCnumber" 
-                placeholder="Nurse Council Number" 
-                value={this.state.nurseID}
-                onChange={this.onChangeNurseID}/>
-              </div>
-              <div className="row">
-                    <div className="col-6">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">NIC</label>
-                            <input type="text" 
-                            className="form-control" 
-                            id="nic" 
-                            placeholder="9#######v" 
-                            value={this.state.NIC}
-                            onChange={this.onChangeNIC}/>
-                         </div>
-                    </div>
-                    <div className="col-6">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Mobile Number</label>
-                            <input type="text" 
-                            className="form-control" 
-                            id="mobile" 
-                            placeholder="07########"
-                            value={this.state.Tel}
-                            onChange={this.onChangeTel} />
-                         </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-6">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">PASSWORD</label>
-                            <input type="password" 
-                            className="form-control" 
-                            id="pw" 
-                            placeholder="password"
-                            value={this.state.PW}
-                            onChange={this.onChangePW} />
-                         </div>
-                    </div>
-                    <div className="col-6">
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Confirm PASSWORD</label>
-                            <input type="password" 
-                            className="form-control" 
-                            id="cpw" 
-                            placeholder="confirm password"
-                            value={this.state.CPW}
-                            onChange={this.onChangeCPW} />
-                         </div>
-                    </div>
-                </div>
-            </div>
-            {/* /.card-body */}
-            <div className="card-footer">
-              <button type="submit" className="btn btn-primary" onClick={this.onSubmitNurse.bind(this)}>Submit</button>
-            </div>
-          </form>
-        </div>
-        {/* /.card */}
-        {/* Form Element sizes */}
-      
-              
-          </div>
-          {/* /.card-body */}
-        </div>
-        {/* /.card */}
-      </div>
-      {/*/.col (right) */}
-    
-    </div></div>
-  
-</section>
-{/* /.content */}
+                <div className="col-12">
+                    <section className="content">
+                        <div className="container-fluid">
+                            <div class="row max-height justify-content-center align-items-center">
+                                <div class="col-8 mx-auto">
+                                    <div className="row">
+                                        {/* left column */}
+                                        <div className="col-md-6 ml-5 mt-5">
+                                            {/* general form elements */}
+                                            <div className="card card-primary">
+                                                <div className="card-header">
+                                                    <h3 className="card-title">Add Nurses Here</h3>
+                                                </div>
+                                                {/* /.card-header */}
+                                                {/* form start */}
+                                                <form role="form">
 
-            </div>
+                                                    <div className="card-body">
+                                                        <div className="row">
+                                                            <div className="col-6">
+                                                                <div className="form-group">
+                                                                    <label htmlFor="exampleInputEmail1">First Name</label>
+                                                                    <input type="text"
+                                                                        className="form-control"
+                                                                        id="fname"
+                                                                        placeholder="Enter First Name"
+                                                                        value={this.state.FirstName}
+                                                                        onChange={this.onChangeFirstName} />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-6">
+                                                                <div className="form-group">
+                                                                    <label htmlFor="exampleInputEmail1">Last Name</label>
+                                                                    <input type="text"
+                                                                        className="form-control"
+                                                                        id="lname"
+                                                                        placeholder="Enter Last Name"
+                                                                        value={this.state.LastName}
+                                                                        onChange={this.onChangeLastName} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="form-group">
+                                                            <label htmlFor="exampleInputEmail1">Email address</label>
+                                                            <input type="email"
+                                                                className="form-control"
+                                                                id="exampleInputEmail1"
+                                                                placeholder="Enter email"
+                                                                value={this.state.Email}
+                                                                onChange={this.onChangeEmail} />
+                                                        </div>
+                                                        <div className="form-group">
+                                                            <label htmlFor="exampleInputPassword1">Nurse Council Number</label>
+                                                            <input type="text"
+                                                                className="form-control"
+                                                                id="NCnumber"
+                                                                placeholder="Nurse Council Number"
+                                                                value={this.state.nurseID}
+                                                                onChange={this.onChangeNurseID} />
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-6">
+                                                                <div className="form-group">
+                                                                    <label htmlFor="exampleInputEmail1">NIC</label>
+                                                                    <input type="text"
+                                                                        className="form-control"
+                                                                        id="nic"
+                                                                        placeholder="9#######v"
+                                                                        value={this.state.NIC}
+                                                                        onChange={this.onChangeNIC} />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-6">
+                                                                <div className="form-group">
+                                                                    <label htmlFor="exampleInputEmail1">Mobile Number</label>
+                                                                    <input type="text"
+                                                                        className="form-control"
+                                                                        id="mobile"
+                                                                        placeholder="07########"
+                                                                        value={this.state.Tel}
+                                                                        onChange={this.onChangeTel} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-6">
+                                                                <div className="form-group">
+                                                                    <label htmlFor="exampleInputEmail1">password</label>
+                                                                    <input type="password"
+                                                                        className="form-control"
+                                                                        id="pw"
+                                                                        placeholder="password"
+                                                                        value={this.state.PW}
+                                                                        onChange={this.onChangePW} />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-6">
+                                                                <div className="form-group">
+                                                                    <label htmlFor="exampleInputEmail1">Confirm pasword</label>
+                                                                    <input type="password"
+                                                                        className="form-control"
+                                                                        id="cpw"
+                                                                        placeholder="confirm password"
+                                                                        value={this.state.CPW}
+                                                                        onChange={this.onChangeCPW} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {/* /.card-body */}
+                                                    <div className="card-footer">
+                                                        <button type="submit" className="btn btn-primary" onClick={this.onSubmitNurse.bind(this)}>Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            {/* /.card */}
+                                            {/* Form Element sizes */}
+
+
+                                        </div>
+                                        {/* /.card-body */}
+                                    </div>
+                                    {/* /.card */}
+                                </div>
+                                {/*/.col (right) */}
+
+                            </div>
+                        </div>
+
+                    </section>
+                    {/* /.content */}
+
+                </div>
             </div>
         )
     }

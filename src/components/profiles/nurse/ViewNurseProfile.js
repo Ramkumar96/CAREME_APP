@@ -55,7 +55,7 @@ class ViewNurseProfile extends Component {
             })
     }
 
-    onShowReviewSuccess(){
+    onShowReviewSuccess() {
         this.dialog.showAlert("Successfully reviewed! Thank you for taking a moment.");
     }
 
@@ -90,14 +90,14 @@ class ViewNurseProfile extends Component {
             .then(res => {
                 if (res.data.success) {
                     this.setState({
-                        toDeleteRating : res.data.response_body.Rating
+                        toDeleteRating: res.data.response_body.Rating
                     })
 
                     const toReduce = {
                         Rating: this.state.toDeleteRating,
                         RatedUser: this.state.profile_data.Email
                     }
-                    
+
                     axios.put('http://localhost:4000/user/deductRating', toReduce)
                         .then(response => {
                             //console.log(response.data);
@@ -153,13 +153,13 @@ class ViewNurseProfile extends Component {
         })
     }
 
-    openMsgModal(){
+    openMsgModal() {
         this.setState({
             visible3: true
         })
     }
 
-    closeMsgModal(){
+    closeMsgModal() {
         this.setState({
             visible3: false
         })
@@ -187,7 +187,7 @@ class ViewNurseProfile extends Component {
             visible1: false
         })
     }
-    
+
 
     render() {
         if (!this.state.profile_data) {
@@ -246,7 +246,6 @@ class ViewNurseProfile extends Component {
             //     image: 'http://bit.ly/2O35mws',
             //     members: [receiverName, senderName]
             // });
-
 
         return (
             <div>
@@ -377,30 +376,40 @@ class ViewNurseProfile extends Component {
                                                 />
                                                 <hr />
                                             </div>
-                                            <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
+                                            {/* <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                             <p className="text-muted text-center">{this.state.profile_data.Location}</p>
-                                            <hr />
-                                            <input type="button" class="btn btn-warning btn-block" value="Leave a Review" onClick={() => this.openReviewModal()} />
-                                            <Modal visible={this.state.visible1} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeReviewModal()}>
+                                            <hr /> */}
+                                            <button class="btn btn-outline-secondary btn-block" onClick={() => this.openReviewModal()}><i className="fa fa-comment mr-2"></i>Leave a Review</button>
+                                            {/* <input type="button" class="btn btn-outline-secondary btn-block" value="Leave a Review" onClick={() => this.openReviewModal()} /> */}
+                                            {/* <Modal visible={this.state.visible1} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeReviewModal()}>
                                                 <h3>Leave a Review</h3>
 
-                                                <Form>
-                                                    <Form.Group>
-                                                        <Form.Control
-                                                            required
-                                                            type="textarea"
-                                                            value={this.state.Review}
-                                                            onChange={this.onChangeReview}
-                                                            placeholder="Leave a review"
-                                                        />
-                                                    </Form.Group>
+                                            </Modal> */}
 
-                                                    <Button type="submit" variant="primary" onClick={this.onSubmitReview.bind(this)}>Submit</Button>
-                                                </Form>
+                                            <Modal visible={this.state.visible1} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeReviewModal()}>
+                                                <div class="modal-content">
+                                                    <div className="modal-header"><h4 align="center">Leave a Review <i class="fa fa-comment"></i></h4></div>
+                                                    <div className="modal-body">
+                                                        <Form>
+                                                            <Form.Group>
+                                                                <Form.Control
+                                                                    required
+                                                                    type="textarea"
+                                                                    value={this.state.Review}
+                                                                    onChange={this.onChangeReview}
+                                                                    placeholder="Leave a review"
+                                                                />
+                                                            </Form.Group>
+                                                            <hr />
+                                                            <Button className="btn btn-primary btn-block" type="submit" onClick={this.onSubmitReview.bind(this)}>Submit</Button>
+                                                        </Form>
+                                                    </div>
+                                                    {/* <div className="modal-footer"> <Button className="btn btn-danger btn-block" type="submit" onClick={() => this.deactivate()}>Deactivate</Button></div> */}
+                                                </div>
                                             </Modal>
                                             <hr />
 
-                                            <a href={`/clientviewnursecalendar/${this.props.match.params.id}`} className="btn btn-danger btn-block"><b>Check Calendar</b></a>
+                                            <a href={`/clientviewnursecalendar/${this.props.match.params.id}`} className="btn btn-info btn-block"><i className="fa fa-calendar-alt mr-2"></i><b>Check Calendar</b></a>
                                             {/* <input type="button" class="btn btn-danger btn-block" value="Check Calender" onClick={() => this.openLoginModal()} /> */}
 
                                             <hr />
@@ -409,10 +418,13 @@ class ViewNurseProfile extends Component {
 
                                             <div>
                                             {/* complaint management*/}
-                                            <input type="button" class="btn btn-success" value="Add a complaint" onClick={() => this.openComplaintModal()} />
-                                            <Modal visible={this.state.visible2} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
-                                                <div>
-                                                    <Complaint />
+                                            <button class="btn btn-secondary btn-block" onClick={() => this.openComplaintModal()}><i className="fa fa-exclamation-triangle mr-2"></i>Add a complaint</button>
+                                            <Modal visible={this.state.visible2} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
+                                                <div class="modal-content">
+                                                    <div className="modal-header"><h4 align="center">Leave a complaint <i class="fa fa-exclamation-triangle"></i></h4></div>
+                                                    <div className="modal-body">
+                                                        <Complaint />
+                                                    </div>
                                                 </div>
                                             </Modal>
                                         </div>
@@ -456,5 +468,4 @@ class ViewNurseProfile extends Component {
         
     }
 }
-
 export default ViewNurseProfile;

@@ -22,7 +22,7 @@ class Complaint extends Component {
   render() {
 	return (
   	<form className="test-mailing">
-    	<h1>Generate a complaint</h1>
+    	{/* <h1>Generate a complaint</h1> */}
     	<div>
       	<textarea
         	id="test-mailing"
@@ -34,7 +34,8 @@ class Complaint extends Component {
         	style={{width: '100%', height: '150px'}}
       	/>
     	</div>
-    	<input type="button" value="Send" className="btn btn-success" onClick={this.handleSubmit} />
+		<hr/>
+    	<input type="button" value="Send" className="btn btn-secondary btn-block" onClick={this.handleSubmit} />
 		{/* <input type="button" value="Home" className="btn btn-primary" onClick={event =>  window.location.href='/nursemainlist'} /> */}
 		<Dialog ref={(component) => { this.dialog = component }} />
 	</form>

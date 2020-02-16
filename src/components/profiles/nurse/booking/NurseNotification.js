@@ -12,7 +12,7 @@ const NotifyBox = props => (
             <div>
                 <i className="fas fa-bell bg-primary" />
                 <div className="timeline-item">
-                    <h3 className="timeline-header"><a href={'/nurseviewclientprofile/'+props.clientID}>{props.clientName}</a> sent you a booking request</h3>
+                    <h3 className="timeline-header"><a href={'/nurseviewclientprofile/' + props.clientID}>{props.clientName}</a> sent you a booking request</h3>
                     <div className="timeline-body">
                         <div >
                             <h6> <strong>Client Name : </strong>{props.clientName}</h6>
@@ -27,7 +27,7 @@ const NotifyBox = props => (
 
                     <div className="timeline-footer">
                         <span className="mr-2"><a href="#" className="btn btn-primary btn-sm" onClick={() => NurseNotification.confirmRequest(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Confirm</a></span>
-                        <a href="#" className="btn btn-danger btn-sm" onClick={() => NurseNotification.deleteNotification(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Delete</a>
+                        <a className="btn btn-danger btn-sm" onClick={() => NurseNotification.deleteNotification(props.clientName, props.clientID, props.date, props.NoficationID, props.nurseName, props.nurseID)}>Delete</a>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@ class NurseNotification extends Component {
         this.NotificationID = null;
     }
 
-    onShowDeleteRequest(){
+    onShowDeleteRequest() {
         this.dialog.showAlert("Request deleted successfully");
     }
 
@@ -72,7 +72,7 @@ class NurseNotification extends Component {
             AcceptedClient: accepted_Client_name,
             AcceptedClientID: accepted_Client_id,
             AcceptedDate: accepted_date,
-            //NotificationID : notification_ID,
+            NotificationID : notification_ID,
             AcceptedByNurse: nurse_name,
             AcceptedByNurseID: nurse_ID
         };
@@ -84,20 +84,31 @@ class NurseNotification extends Component {
                 if (response.data.success) {
                     console.log(response.data);
                     alert("Request successfully accepted.");
+
+
+                    axios.post('http://localhost:4000/request/delete', obj)
+                    .then(response => {
+                        if (response.data.success) {
+                            console.log(response.data);
+                            alert("Request successfully deleted");
+                            }
+                        });
+
                 }
             });
     };
 
     //Delete Button Deleting Notification
 
-    static deleteNotification = (deleted_Client_name,deleted_Client_id, deleted_date,deleted_notification_ID, deleted_nurse_name,deleted_nurse_ID) => {
-        
+    static deleteNotification = (deleted_Client_name, deleted_Client_id, deleted_date, deleted_notification_ID, deleted_nurse_name, deleted_nurse_ID) => {
+
         const deleteobj = {
             DeletedRequestedClient: deleted_Client_name,
             DeletedRequestedByClientID: deleted_Client_id,
-            DeletedRequestedDate:deleted_date,
-            DeletedRequestedNurse:deleted_nurse_name,
-            DeletedRequestedNurseID:deleted_nurse_ID
+            DeletedRequestedDate: deleted_date,
+            NotificationID : deleted_notification_ID,
+            DeletedRequestedNurse: deleted_nurse_name,
+            DeletedRequestedNurseID: deleted_nurse_ID
         };
 
         axios.post('http://localhost:4000/requestDeleted/add', deleteobj)
@@ -105,33 +116,43 @@ class NurseNotification extends Component {
                 if (response.data.success) {
                     console.log(response.data);
                     alert("Request successfully deleted");
+                    
+                    axios.post('http://localhost:4000/request/delete', deleteobj)
+                    .then(response => {
+                        if (response.data.success) {
+                            console.log(response.data);
+                            alert("Request successfully deleted");
+                            }
+                        });
+                    
                 }
-            });  
-    }
+            });
+        }
+                
 
-    //Mapping the Notification Data
-    notificationData() {
-        return this.state.NotificationData.map(function (currentNotify, i) {
-            return <NotifyBox clientName={currentNotify.RequestedClient}
-                clientLocation={currentNotify.RequestedClientLocation}
-                clientID={currentNotify.RequestedByClientID}
-                NoficationID={currentNotify._id}
-                date={new Date(currentNotify.RequestedDate).toDateString()}
-                nurseName={currentNotify.RequestedNurse}
-                nurseID={currentNotify.RequestedNurseID} key={i}
-            />;
-        })
-    }
+                //Mapping the Notification Data
+                notificationData() {
+                    return this.state.NotificationData.map(function (currentNotify, i) {
+                        return <NotifyBox clientName={currentNotify.RequestedClient}
+                            clientLocation={currentNotify.RequestedClientLocation}
+                            clientID={currentNotify.RequestedByClientID}
+                            NoficationID={currentNotify._id}
+                            date={new Date(currentNotify.RequestedDate).toDateString()}
+                            nurseName={currentNotify.RequestedNurse}
+                            nurseID={currentNotify.RequestedNurseID} key={i}
+                        />;
+                    })
+                }
 
-    render() {
+                render() {
 
-        return (
-            <div>
-                {this.notificationData()}
-            </div>
-        )
-    }
+                    return (
+                        <div>
+                            {this.notificationData()}
+                        </div>
+                    )
+                }
 
-}
+            }
 
 export default NurseNotification;
