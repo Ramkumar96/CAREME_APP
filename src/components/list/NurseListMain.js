@@ -489,6 +489,8 @@ class NurseListMain extends Component{
 
 
     render(){
+
+       
         const {term, CAREME_APP} = this.state;
         let nurse = this.state.CAREME_APP.filter(searchingFor(this.state.term)).map(nurse => {
             if(!nurse.Age)
@@ -583,8 +585,10 @@ class NurseListMain extends Component{
         
             <div class="container" style={{width: 960}}>
                 <div class="row">
+                    
                         {nurse}
                 </div>
+         
             </div>
 
 
