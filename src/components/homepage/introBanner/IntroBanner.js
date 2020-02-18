@@ -119,21 +119,21 @@ class IntroBanner extends Component {
 
     onChangeFirstName(e) {
         const re = /^[A-Za-z\b]+$/;
-        if (re.test(e.target.value)) {
+        if (e.target.value === '' || re.test(e.target.value)) {
             this.setState({ FirstName: e.target.value })
         }
     }
 
     onChangeLastName(e) {
         const re = /^[A-Za-z\b]+$/;
-        if (re.test(e.target.value)) {
+        if (e.target.value === '' || re.test(e.target.value)) {
             this.setState({ LastName: e.target.value })
         }
     }
 
     onChangeNurseID(e) {
         const re = /^[0-9\b]+$/;
-        if (re.test(e.target.value)) {
+        if (e.target.value === '' || re.test(e.target.value)) {
             this.setState({ nurseID: e.target.value })
         }
     }
@@ -170,7 +170,7 @@ class IntroBanner extends Component {
 
     onChangeTel(e) {
         const re = /^[0-9\b]+$/;
-        if (re.test(e.target.value)) {
+        if (e.target.value === '' || re.test(e.target.value)) {
             this.setState({ Tel: e.target.value })
         }
     }

@@ -191,13 +191,21 @@ UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
 /** 
 * @desc: Reduces particular rating from the user, if the user was rated by the same person again
 */
-UserRegRoutes.route('/deductRating').put(function(req,res){
-  console.log(req.body)
-  UserReg.updateOne({Email: req.body.RatedUser}, {$inc: {starRating: -req.body.Rating, ratingCount: -1}})
+UserRegRoutes.route('/deductRating').post(function(req,res){
+  const toReduceCount = req.body.Rating;
+  
+  UserReg.updateOne({Email: req.body.RatedUser}, {$inc: {starRating: -toReduceCount, ratingCount: -1}})
   .then(response=>{
+    console.log("Previous rating reduced");
     res.status(200).send({
       success:true,
       message:"User Data Update success",
+    })
+  })
+
+  .catch(err=>{
+    res.status(400).send({
+      message : 'Something happened while reducing rating'
     })
   })
 })

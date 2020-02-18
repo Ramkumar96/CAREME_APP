@@ -34,7 +34,7 @@ class NurseViewClientProfile extends Component {
             visible1: false,
             Review: '',
             visible2: false,
-            visible3: false
+            visible3: false,
         }
     }
 
@@ -112,10 +112,8 @@ class NurseViewClientProfile extends Component {
             RatedDate: new Date()
         }
 
-        console.log(obj);
-
         const checkObj = {
-            RatesUser: this.state.profile_data.Email,
+            RatedUser: this.state.profile_data.Email,
             RatedBy: this.state.nurseEmail
         }
 
@@ -132,6 +130,7 @@ class NurseViewClientProfile extends Component {
         axios.post('http://localhost:4000/rating/checkPresence', checkObj, { headers: headers })
             .then(res => {
                 if (res.data.success) {
+                    console.log(res.data.response_body);
                     this.setState({
                         toDeleteRating: res.data.response_body.Rating
                     })
@@ -142,20 +141,20 @@ class NurseViewClientProfile extends Component {
                     }
 
                     //if rated before, reduces that particular rating from the user rating
-                    axios.put('http://localhost:4000/user/deductRating', toReduce)
+                    axios.post('http://localhost:4000/user/deductRating', toReduce, { headers: headers })
                         .then(response => {
                             //console.log(response.data);
                         });
 
                     //deletes that particular rating from the ratings table
-                    axios.post('http://localhost:4000/rating/delete', obj)
+                    axios.post('http://localhost:4000/rating/delete', obj, { headers: headers })
                         .then(response => {
                             //console.log(response.data);
                         });
                 }
 
                 //adds the new rating
-                axios.post('http://localhost:4000/rating/add', obj)
+                axios.post('http://localhost:4000/rating/add', obj, { headers: headers })
                     .then(res => {
                         //console.log(res.data) 
                     });

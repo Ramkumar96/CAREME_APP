@@ -5,7 +5,7 @@ let UserRating = require('./rating.model');
 
 // check whether already rated
 UserRatingRoutes.route('/checkPresence').post(function (req, res) {
-    UserRating.findOne({RatedBy: req.body.RatedBy, RatedUser: req.body.RatedUser })
+    UserRating.findOne({$and : [{RatedBy: req.body.RatedBy}, {RatedUser: req.body.RatedUser }]})
       .then(response => {
         if (response) {
           console.log("already rated")
@@ -21,6 +21,12 @@ UserRatingRoutes.route('/checkPresence').post(function (req, res) {
                 success: false
           })
         }
+      })
+
+      .catch(err=>{
+        res.status(400).send({
+          message : 'Something happened in rating'
+        })
       })
   });
 

@@ -84,7 +84,7 @@ class ViewNurseProfile extends Component {
         }
 
         const checkObj = {
-            RatesUser: this.state.profile_data.Email,
+            RatedUser: this.state.profile_data.Email,
             RatedBy: this.state.clientEmail
         }
 
@@ -110,18 +110,18 @@ class ViewNurseProfile extends Component {
                         RatedUser: this.state.profile_data.Email
                     }
 
-                    axios.put('http://localhost:4000/user/deductRating', toReduce)
+                    axios.post('http://localhost:4000/user/deductRating', toReduce, { headers: headers })
                         .then(response => {
                             //console.log(response.data);
                         });
 
-                    axios.post('http://localhost:4000/rating/delete', obj)
+                    axios.post('http://localhost:4000/rating/delete', obj, { headers: headers })
                         .then(response => {
                             //console.log(response.data);
                         });
                 }
 
-                axios.post('http://localhost:4000/rating/add', obj)
+                axios.post('http://localhost:4000/rating/add', obj, { headers: headers })
                     .then(res => {
                         //console.log(res.data) 
                     });
