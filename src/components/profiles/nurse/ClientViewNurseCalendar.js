@@ -5,7 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction";
 // import bootstrapPlugin from '@fullcalendar/bootstrap'
 import { Button } from 'react-bootstrap';
-import emailjs from 'emailjs-com';
+////import emailjs from 'emailjs-com';
 import Modal from 'react-awesome-modal';
 import ProfileNavbar from '../ProfileNavbar'
 import axios from '../../../../backend/node_modules/axios';

@@ -5,7 +5,7 @@
 
 import React, { Component } from "react";
 import axios from "./../../../backend/node_modules/axios";
-import emailjs from "emailjs-com";
+//import emailjs from "emailjs-com";
 import Dialog from "react-bootstrap-dialog";
 
 class Complaint extends Component {
@@ -62,7 +62,7 @@ class Complaint extends Component {
   }
 
   handleSubmit(event) {
-    const templateId = "template_id";
+    //const templateId = "template_id";
 
     const data = {
       accusedBy: localStorage.getItem("user_Email"),

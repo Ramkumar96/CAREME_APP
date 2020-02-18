@@ -22,25 +22,25 @@ const ChatComponent = props => {
   var name = email.slice(0, n);
   console.log(name);
 
-  //client.disconnect();
+  ////client.disconnect();
   client.setUser(
     {
       id: name,
       name: name,
-      //image: "http://bit.ly/2O35mws"
+      ////image: "http://bit.ly/2O35mws"
     },
     userToken
   );
 
   console.log(client);
-  //   const conversation = client.channel('messaging', 'new-chat3', {
-  //     name: 'Chat',
-  //     image: 'http://bit.ly/2O35mws',
-  // });
+  ////   const conversation = client.channel('messaging', 'new-chat3', {
+  ////     name: 'Chat',
+  ////     image: 'http://bit.ly/2O35mws',
+  //// });
 
   const filters = { type: "messaging", members: { $in: [name] } };
   const sort = { last_message_at: -1 };
-  const channels = client.queryChannels(filters, sort);
+  ////const channels = client.queryChannels(filters, sort);
 
   return (
     <div style={{ marginLeft: "0px", marginTop: "0px" }}>
