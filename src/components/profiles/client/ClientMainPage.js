@@ -26,37 +26,66 @@ class ClientMainPage extends Component {
         }
     }
 
-    // Deactivation Modal Visibility
+    /** 
+    * @desc: Functions to change visible variable for deactivation modals
+    */
     openDeacModal() {
         this.setState({
             visible: true
         });
     }
-
     closeDeacModal() {
         this.setState({
             visible: false
         });
     }
 
-    // Messaging Modals Visibility
+    /** 
+   * @desc: Functions to change visible variable for Message modals
+   */
     openMsgModal() {
         this.setState({
             visible3: true
         })
     }
-
     closeMsgModal() {
         this.setState({
             visible3: false
         })
     }
 
+
     componentDidMount() {
         this.getData()
         this.chatToken()
     }
 
+    /** 
+    * @desc: Function to retrive the user data from the backed of a 
+    * particular user using the id retrived from the local storage
+    * @output : User data retrived from the backend
+    */
+    getData = () => {
+        var token = localStorage.getItem('id');
+        /** 
+        * @desc: sending request using get method to backend
+        * @output : user data according to the id from the backend
+        */
+        axios.get('http://localhost:4000/user/userdata/' + token)
+            .then(response => {
+                console.log(response.data.profile_data)
+                this.setState({
+                    profile_data: response.data.profile_data
+                })
+                this.progressBar();
+            })
+    }
+
+
+    /** 
+   * @desc: Function for profile Deactivation
+   * @output :user profile will be deactivated and redirected to homepage
+   */
     deactivate() {
         this.setState({
             visible: false
@@ -89,18 +118,6 @@ class ClientMainPage extends Component {
                     });
                 }
             });
-    }
-
-    getData = () => {
-        var token = localStorage.getItem('id');
-        axios.get('http://localhost:4000/user/userdata/' + token)
-            .then(response => {
-                console.log(response.data.profile_data)
-                this.setState({
-                    profile_data: response.data.profile_data
-                })
-                this.progressBar();
-            })
     }
 
     progressBar() {
@@ -154,6 +171,7 @@ class ClientMainPage extends Component {
             );
         }
 
+        // Redirect after Deactivation
         if (this.state.redirect_home) {
             return (
                 <Redirect to='/' />
@@ -239,40 +257,36 @@ class ClientMainPage extends Component {
                                     {/* /.card-body */}
                                 </div>
 
-
                                 {/* About Me Box */}
                                 <div className="card card-primary">
                                     <div className="card-header">
                                         <h3 className="card-title">About Me</h3>
                                     </div>
-                                    {/* /.card-header */}
+                                    {/* /.card-body */}
                                     <div className="card-body text-center">
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
-
                                     </div>
-                                    {/* /.card-body */}
                                 </div>
-                                {/* /.card */}
-
                             </div>
 
                             {/* client user information container */}
                             <div className="col-lg-6">
                                 {/*Proffile Info */}
                                 <div className="card">
+                                    {/* Card Header */}
                                     <div className="card-header p-2">
                                         <ul className="nav nav-pills">
                                             <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile Details</a></li>
                                             <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
                                             <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Update Profile</a></li>
                                         </ul>
-                                    </div>{/* /.card-header */}
+                                    </div>
 
-
-                                    {/* Profile Details Container */}
+                                    {/* card body */}
                                     <div className="card-body">
                                         <div className="tab-content">
+                                            {/* Profile Details Tab pane */}
                                             <div className="active tab-pane" id="profile">
                                                 <div className="timeline timeline-inverse">
                                                     {/* timeline item */}
@@ -301,31 +315,27 @@ class ClientMainPage extends Component {
                                                             <h3 className="timeline-header border-0"> <strong>Telephone:  </strong>{this.state.profile_data.Tel}</h3>
                                                         </div>
                                                     </div>
-
                                                     {/* END timeline item */}
-
                                                 </div>
-                                                {/* /.tab-pane */}
                                             </div>
 
+                                            {/* Notification  tab pane */}
                                             <div className="tab-pane" id="notification">
                                                 <ClientNotification />
                                             </div>
 
-                                            {/* Update Profile Form container */}
+                                            
+                                            {/* Update profile Tab, Calling the child component Clientedit and 
+                                            passing the getData function from parent component ClientMainPage */}
                                             <div className="tab-pane" id="settings">
-
                                                 <ClientEdit
                                                     loadData={this.getData} />
                                             </div>
-                                            {/* /.tab-pane */}
                                         </div>
                                         {/* /.tab-content */}
-
-
-                                    </div>{/* /.card-body */}
+                                    </div>
+                                    {/* /.card-body */}
                                 </div>
-                                {/* /.nav-tabs-custom */}
                             </div>
 
                             {/* client Right side container */}
@@ -337,23 +347,23 @@ class ClientMainPage extends Component {
                                         <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
                                         <p className="text-muted text-center">{this.state.profile_data.Location}</p>
                                         <hr />
+
+                                        {/* Message Button and Model */}
                                         <button class="btn btn-outline-success btn-block" onClick={() => this.openMsgModal()}> <i className="fa fa-envelope mr-2"></i>Messages</button>
-                                        {/* <input type="button" class="btn btn-success" value="Messages" onClick={() => this.openMsgModal()} /> */}
                                         <div>
                                             <Modal visible={this.state.visible3} width="80%" height="90%" align="center" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>
                                                 <ChatComponent />
                                             </Modal>
                                         </div>
                                         <hr />
-                                        <a href="/nurselistclview" className="btn btn btn-info btn-block"><i className="fa fa-user-md mr-2"></i><b>Find A Nurse</b></a>
-                                        {/* <a href="/nurselistclview" className="btn btn-warning btn-block"><b>Find A Nurse</b></a> */}
+
+                                        {/* Find Nurse button */}
+                                        <a href="/nurselistclview" className="btn btn btn-info btn-block"><i className="fa fa-user-md mr-2"></i><b>Find A Nurse</b></a>{/* <a href="/nurselistclview" className="btn btn-warning btn-block"><b>Find A Nurse</b></a> */}
                                         <hr />
 
+                                        {/* Deactivation Button and Model */}
                                         <Button className="btn btn-danger btn-block" onClick={() => this.openDeacModal()}><i className="fa fa-user-times mr-2"></i>Deactivate</Button>
-
-                                        {/* Deactivate Modal */}
                                         <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDeacModal()}>
-
                                             <div class="modal-content">
                                                 <div className="modal-header"><h4 align="center">Deactivate <i class="fa fa-user-times"></i></h4></div>
                                                 <div className="modal-body"><i class="fa fa-question-circle"></i> Are you sure you want to Deactivate?</div>
@@ -363,15 +373,12 @@ class ClientMainPage extends Component {
                                     </div>
                                     {/* /.card-body */}
                                 </div>
-                                {/* /.card */}
-
 
                                 {/*Seoond Card in Right Side*/}
                                 <div className="card card-primary">
                                     <div className="card-header text-center">
                                         <h3 className="card-title text-center"><strong>Profile Status</strong></h3>
                                     </div>
-                                    {/* /.card-header */}
                                     <div className="card-body">
                                         <strong><i className="far fa-file-alt mr-1" />Profile completed : {this.state.completion}% </strong>
                                         <hr />
@@ -379,9 +386,7 @@ class ClientMainPage extends Component {
                                             completed={this.state.completion}
                                         />
                                     </div>
-                                    {/* /.card-body */}
                                 </div>
-                                {/* /.card */}
                             </div>
                         </div>
                     </div>

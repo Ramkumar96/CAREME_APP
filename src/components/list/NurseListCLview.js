@@ -499,7 +499,8 @@ class NurseListCLview extends Component{
             nurse_id={nurse.nurseID}
             age= {nurse.Age}
             exp= {nurse.nurseExp}
-           id={nurse._id}
+            // Nurse unique id used as props in NurseListProfileClient for view profile
+            id={nurse._id}
             loc= {nurse.Location}
             nType= {nurse.nurseType}
             key={nurse._id}

@@ -38,6 +38,11 @@ class ViewNurseProfile extends Component {
         //console.log(this.props.match.params)
     }
 
+     /** 
+    * @desc: Function to retrive the user data from the backed of a 
+    * particular user using the id retrived from the from the link
+    * @output : User data retrived from the backend
+    */
     getData = () => {
         //var token = localStorage.getItem('id');
         axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
@@ -158,7 +163,6 @@ class ViewNurseProfile extends Component {
             visible3: true
         })
     }
-
     closeMsgModal() {
         this.setState({
             visible3: false
@@ -190,6 +194,7 @@ class ViewNurseProfile extends Component {
 
 
     render() {
+
         if (!this.state.profile_data) {
             return (
                 <div> <text>Loading</text> </div>
@@ -252,14 +257,15 @@ class ViewNurseProfile extends Component {
           <div>
             <div class="wrapper">
               <ProfileNavbar />
-              <br></br>
+              <br>
               <div className="backg">
                 <div className="container-fluid">
                   <div className="row">
-                    {/* Nurse Profile Pic container */}
+          
+                    {/* Nurse Left side Profile card */}
                     <div className="col-lg-3">
                       <div>
-                        {/* Profile Image */}
+                        {/* Profile Pic Card */}
                         <div className="card card-primary card-outline">
                           <div className="card-body box-profile">
                             <div className="text-center">
@@ -315,7 +321,6 @@ class ViewNurseProfile extends Component {
                         </div>
                       </div>
                     </div>
-
                     {/* Nurse Prfoile Info middle container */}
                     <div className="col-lg-6">
                       {/*Proffile Info */}
@@ -334,7 +339,8 @@ class ViewNurseProfile extends Component {
                           </ul>
                         </div>
                         {/* /.card-header */}
-
+                        
+                      {/* Card Body profile details */}
                         <div className="card-body">
                           <div className="tab-content">
                             <div className="active tab-pane" id="profile">
@@ -405,7 +411,6 @@ class ViewNurseProfile extends Component {
                                 </div>
                                 {/* END timeline item */}
                               </div>
-                              {/* /.tab-pane */}
                             </div>
                           </div>
                           {/* /.tab-content */}
@@ -414,7 +419,7 @@ class ViewNurseProfile extends Component {
                       </div>
                       {/* /.nav-tabs-custom */}
                     </div>
-
+          
                     {/* Nurse Profile Right side conatiner */}
                     <div className="col-lg-3">
                       {/*First Card in Right Side*/}
@@ -434,21 +439,12 @@ class ViewNurseProfile extends Component {
                             />
                             <hr />
                           </div>
-                          {/* <strong><i className="fas fa-map-marker-alt mr-1" /> Location</strong>
-                                            <p className="text-muted text-center">{this.state.profile_data.Location}</p>
-                                            <hr /> */}
                           <button
                             class="btn btn-outline-secondary btn-block"
                             onClick={() => this.openReviewModal()}
                           >
                             <i className="fa fa-comment mr-2"></i>Leave a Review
                           </button>
-                          {/* <input type="button" class="btn btn-outline-secondary btn-block" value="Leave a Review" onClick={() => this.openReviewModal()} /> */}
-                          {/* <Modal visible={this.state.visible1} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeReviewModal()}>
-                                                <h3>Leave a Review</h3>
-
-                                            </Modal> */}
-
                           <Modal
                             visible={this.state.visible1}
                             width="50%"

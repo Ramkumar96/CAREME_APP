@@ -17,18 +17,23 @@ class ProfileNavbar extends Component {
         }
     }
 
-    openModal() {
+    openModal=()=>{
         this.setState({
             visible: true
         });
     }
 
-    closeModal() {
+    closeModal=()=>{
         this.setState({
             visible: false
         });
     }
 
+    
+    /** 
+     * @desc: Function for logout Where User datas in the local storage is cleared
+     * @output :It will redirected to Homepage 
+     */
     logout = () => {
         localStorage.clear()
         this.setState({
@@ -36,8 +41,12 @@ class ProfileNavbar extends Component {
         })
     }
 
+    /** 
+     * @desc: Function to set variables for redirecting profiles according to usertypes 
+     * @output :It will redirected to Homepage 
+     */
     viewProfile = () => {
-        console.log('hheyy')
+        // console.log('hheyy')
         var id = localStorage.getItem('id');
         var userID = localStorage.getItem("user_id");
         if (userID == 0) {
@@ -64,12 +73,18 @@ class ProfileNavbar extends Component {
 
     render() {
 
+        /** 
+        * @desc: Redirecting after logout
+        */
         if (this.state.redirect_home) {
             return (
                 <Redirect to='/' />
             )
         }
 
+        /** 
+        * @desc: Redirecting other profiles according to usertypes
+        */
         if (this.state.nurseprofile) {
             return (
                 <Redirect to={'/nurseprofile/' + this.state.token} />
@@ -85,6 +100,7 @@ class ProfileNavbar extends Component {
                 <Redirect to={'/adminmaindash'}/>
             )
         }
+
 
         return (
             <div>
