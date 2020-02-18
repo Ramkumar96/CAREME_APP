@@ -11,6 +11,13 @@ import Complaint from "../complaint";
 import ChatComponent from "../messaging/ChatComponent";
 import Dialog from 'react-bootstrap-dialog';
 
+//validating empty review model
+function validateReview(review) {
+	return {
+		review: review.length === 0
+	};
+}
+
 class NurseViewClientProfile extends Component {
 
     constructor(props) {
@@ -93,6 +100,7 @@ class NurseViewClientProfile extends Component {
     }
 
     onStarClick(nextValue) {
+        //Assigns the new rating to be displayed
         this.setState({
             Rating: nextValue
         })
@@ -120,7 +128,7 @@ class NurseViewClientProfile extends Component {
             'Content-Type': 'application/json'
         }
 
-
+        //Checks whether the user has rated the same client before
         axios.post('http://localhost:4000/rating/checkPresence', checkObj, { headers: headers })
             .then(res => {
                 if (res.data.success) {
@@ -133,23 +141,27 @@ class NurseViewClientProfile extends Component {
                         RatedUser: this.state.profile_data.Email
                     }
 
+                    //if rated before, reduces that particular rating from the user rating
                     axios.put('http://localhost:4000/user/deductRating', toReduce)
                         .then(response => {
                             //console.log(response.data);
                         });
 
+                    //deletes that particular rating from the ratings table
                     axios.post('http://localhost:4000/rating/delete', obj)
                         .then(response => {
                             //console.log(response.data);
                         });
                 }
 
+                //adds the new rating
                 axios.post('http://localhost:4000/rating/add', obj)
                     .then(res => {
                         //console.log(res.data) 
                     });
             })
 
+        //updates the new ratings in the user table
         axios.put('http://localhost:4000/user/userdata/updateRating/', userObj, { headers: headers })
             .then(response => {
                 if (response.data.success) {
@@ -214,15 +226,20 @@ class NurseViewClientProfile extends Component {
             );
         }
 
+        //validating the fields in the review model to check whether it is empty
+        const errors = validateReview(this.state.Review);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+
+        //to display the current ratings of the project owner
         const ratingVal = this.state.profile_data.starRating;
         const rateCount = this.state.profile_data.ratingCount;
 
         const finalRating = ratingVal / rateCount;
 
-    /** 
-      * @desc: code snippets to start a private chat-coversation
-      * @required: stream-chat, stream-chat-react
-      */
+        /** 
+         * @desc: code snippets to start a private chat-coversation
+         * @required: stream-chat, stream-chat-react
+        */
         // const client = new StreamChat("jh66vkvun7x5");
         // const userToken = localStorage.getItem('chat_token');
 
@@ -390,12 +407,12 @@ class NurseViewClientProfile extends Component {
                                                                 required
                                                                 type="textarea"
                                                                 value={this.state.Review}
-                                                                onChange={this.onChangeReview}
+                                                                onChange={this.onChangeReview} 
                                                                 placeholder="Leave a review"
                                                             />
                                                         </Form.Group>
                                                         <hr />
-                                                        <Button className="btn btn-secondary btn-block" type="submit" onClick={this.onSubmitReview.bind(this)}>Submit</Button>
+                                                        <Button disabled={isDisabled} className="btn btn-secondary btn-block" type="submit" onClick={this.onSubmitReview.bind(this)}>Submit</Button>
                                                     </Form>
                                                 </div>
                                                 {/* <div className="modal-footer"> <Button className="btn btn-danger btn-block" type="submit" onClick={() => this.deactivate()}>Deactivate</Button></div> */}

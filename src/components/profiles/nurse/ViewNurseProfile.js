@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ProfileNavbar from '../ProfileNavbar';
 import axios from "axios";
 import Modal from 'react-awesome-modal';
-
 import StarRatingComponent from 'react-star-rating-component';
 import { Button, Form } from 'react-bootstrap';
 import Complaint from "../complaint";
@@ -10,6 +9,14 @@ import Complaint from "../complaint";
 // import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput , Conversation} from 'stream-chat-react';
 import ChatComponent from "../messaging/ChatComponent";
 import Dialog from 'react-bootstrap-dialog';
+
+//validating empty review model
+function validateReview(review) {
+	return {
+		review: review.length === 0
+	};
+}
+
 
 class ViewNurseProfile extends Component {
 
@@ -90,7 +97,7 @@ class ViewNurseProfile extends Component {
             'Content-Type': 'application/json'
         }
 
-
+        //checks whether the client has rated the particular nurse before
         axios.post('http://localhost:4000/rating/checkPresence', checkObj, { headers: headers })
             .then(res => {
                 if (res.data.success) {
@@ -201,6 +208,11 @@ class ViewNurseProfile extends Component {
             );
         }
 
+        //validating the fields in the review model to check whether it is empty
+        const errors = validateReview(this.state.Review);
+        const isDisabled = Object.keys(errors).some(x => errors[x]);
+
+        //calculating total average rating of the profile owner
         const totalRating = this.state.profile_data.starRating;
         const ratingCount = this.state.profile_data.ratingCount;
 
@@ -473,6 +485,7 @@ class ViewNurseProfile extends Component {
                                   <Button
                                     className="btn btn-primary btn-block"
                                     type="submit"
+                                    disabled={isDisabled}
                                     onClick={this.onSubmitReview.bind(this)}
                                   >
                                     Submit
