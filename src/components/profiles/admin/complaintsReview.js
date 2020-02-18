@@ -17,6 +17,9 @@ class ComplaintsReview extends Component {
     temp=[];
 
     componentDidMount(){
+        /**
+            * @desc : Retrieves all the complaint records from the backend for the admin to view and filter through
+        */
         axios.get('http://localhost:4000/complaint/complaintDetails')
           .then(response => {
             console.log(response.data);
@@ -45,7 +48,11 @@ class ComplaintsReview extends Component {
             <div>
               <ProfileNavbar/>
               <div className="content-wrapper">
-                <h3 align="center">Complaints over the period of a month</h3>
+                <h3 align="center">Complaints Lodged</h3>
+                {/*
+                  * @desc : Displays the data retrieved from the backend to the table
+                  * @requires : The InteractiveTable from react-interactive-table
+                */}
                 <InteractiveTable
                     tableStyles={'responsive'}
                     dataList={this.tabRow()} 
@@ -75,6 +82,12 @@ class ComplaintsReview extends Component {
                                 active: false,
                                 sortingKey: 'accusedByLName'
                             },
+                            complaint: {
+                              alias: 'Accusation',
+                              sortable: false,
+                              active: false,
+                              sortingKey: 'complaint'
+                            },
                             complainedDate: {
                                 alias: 'Date of Complaint',
                                 sortable: true,
@@ -86,7 +99,7 @@ class ComplaintsReview extends Component {
                     searching={{
                         active: true,
                         searchPlaceholder: 'Search...',
-                        searchKeys: ['Location']
+                        searchKeys: ['accusedByFName', 'accusedByLName', 'accusedUserFName', 'accusedUserLName']
                     }}
                     paging={{
                         maxRows: 7,

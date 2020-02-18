@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from '../../../../backend/node_modules/axios';
-import { VictoryBar, VictoryChart, VictoryPie, VictoryTheme, VictoryAxis } from 'victory';
+import {  VictoryPie } from 'victory';
 
 export default class Adminup extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ export default class Adminup extends Component {
 }
 
 componentDidMount(){
+      //total number of nurses in the system
       axios.get('http://localhost:4000/user/countNurses')
       .then(response => {
           this.setState({
@@ -30,24 +31,7 @@ componentDidMount(){
           console.log("The total active clients now : ", this.state.totalActiveClients)
       })
 
-    axios.get('http://localhost:4000/user/countNurses')
-        .then(response => {
-            this.setState({
-                nurseCount : response.data.nurseCount
-            })
-
-            console.log(this.state.nurseCount)
-        })
-
-    axios.get('http://localhost:4000/user/countClients')
-    .then(response => {
-        this.setState({
-            clientCount : response.data.clientCount,
-        })
-
-        console.log(this.state.clientCount)
-    })
-
+    //total number of requests unattended to in the system
     axios.get('http://localhost:4000/request/countRequests')
     .then(response => {
         this.setState({
@@ -57,6 +41,7 @@ componentDidMount(){
         console.log(this.state.requestCount)
     })
 
+    //total number of complaints in the system
     axios.get('http://localhost:4000/complaint/countComplaints')
     .then(response => {
         this.setState({
@@ -128,7 +113,7 @@ componentDidMount(){
           </span>
               <div class="info-box-content">
                           <span class="info-box-text">Nurses</span>
-                          <span class="info-box-number">{this.state.nurseCount}</span>
+                          <span class="info-box-number">{this.state.totalActiveNurses}</span>
                         </div>
               {/* /.info-box-content */}
             </div>
@@ -141,7 +126,7 @@ componentDidMount(){
               <span className="info-box-icon bg-warning elevation-1"><i className="fas fa-users" /></span>
               <div className="info-box-content">
                 <span className="info-box-text">Clients</span>
-                <span className="info-box-number">{this.state.clientCount}</span>
+                <span className="info-box-number">{this.state.totalActiveClients}</span>
               </div>
               {/* /.info-box-content */}
             </div>
