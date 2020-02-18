@@ -81,6 +81,87 @@ ComplaintRoutes.route('/countComplaints').get(function (req,res){
         complaintCount: response
       })
     })
+
+    .catch(err=>{
+      res.status(400).send({
+        complaintCount: 0
+      })
+    })
+})
+
+//count number of user complaints throughout a year
+ComplaintRoutes.route('/countComplaintsYear').post(function (req,res){
+  const yearToFind = req.body.year;
+  const complaintCount = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+  Complaint.find()
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+        if (response[i].complainedDate.getFullYear() == yearToFind){
+          switch(response[i].complainedDate.getMonth()){
+            case(0):
+              complaintCount[0]++;
+              break;
+
+            case(1):
+              complaintCount[1]++;
+              break;
+
+            case(2):
+              complaintCount[2]++;
+              break;
+
+            case(3):
+              complaintCount[3]++;
+              break;
+
+            case(4):
+              complaintCount[4]++;
+              break;
+
+            case(5):
+              complaintCount[5]++;
+              break;
+
+            case(6):
+              complaintCount[6]++;
+              break;
+
+            case(7):
+              complaintCount[7]++;
+              break;
+
+            case(8):
+              complaintCount[8]++;
+              break;
+
+            case(9):
+              complaintCount[9]++;
+              break;
+
+            case(10):
+              complaintCount[10]++;
+              break;
+
+            case(11):
+              complaintCount[11]++;
+              break;
+          }
+        }
+    }
+
+    console.log("The total number of complaints this year "+complaintCount);
+
+    res.status(200).send({
+      complaintCount : complaintCount
+    })
+  })
+
+  .catch(err=>{
+    res.status(400).send({
+      complaintCount: 0
+    })
+  })
 })
 
 //retrieve complaint data for admin purposes

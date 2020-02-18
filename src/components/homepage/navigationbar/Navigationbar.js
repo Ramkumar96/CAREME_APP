@@ -7,6 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import axios from "../../../../backend/node_modules/axios";
 import md5 from 'md5';
 
+//checks whether both fields have been filled before submitting
 function validate (Email, Password){
     return {
         Email: Email.length==0,
@@ -76,7 +77,6 @@ class Navigationbar extends Component {
         });
     };
 
-
     onLogin = (e) => {
         e.preventDefault();
         console.log(this.state)
@@ -86,6 +86,7 @@ class Navigationbar extends Component {
             return;
         }
 
+        //validates the email address syntax through the validateEmail function
         if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
             this.setState({
@@ -111,6 +112,7 @@ class Navigationbar extends Component {
 
         var hashedPW = md5(this.state.Password);
 
+        //checks whether the email is a registered email address in the database
         axios.post('http://localhost:4000/user/validEmail', data, {headers:headers})
         .then(res => {
             if(res.data.success){
@@ -121,6 +123,7 @@ class Navigationbar extends Component {
 
                 console.log(obj);
 
+                //compares the registered email with the corresponding password to check accuracy
                 axios.post('http://localhost:4000/user/login', obj,{headers:headers})
                     .then(response => {
                         console.log(response.data)
@@ -139,6 +142,7 @@ class Navigationbar extends Component {
                             })
                         }
 
+                        //if not matched, displays an error alert
                         else if (!response.data.success) {
                             alert("Email or password is invalid");
                             this.setState ({
@@ -151,12 +155,14 @@ class Navigationbar extends Component {
                     })
             }
 
+            //This loop is executed if the email address is not registered in the user database
             else if (!res.data.success){
                 const obj = {
                     Email: this.state.Email,
                     Password: hashedPW
                 };
 
+                //checks whether the exact same email and corresponding password are available in the deactivated collection
                 axios.post('http://localhost:4000/userDeac/validEmail', obj,{headers:headers})
                     .then(response => {
                         if (response.data.success){
@@ -173,6 +179,7 @@ class Navigationbar extends Component {
                             });
                         }
 
+                        //else it displays the not registered alert and prompts the guest to register in the system
                         else {
                             alert("Email address not registered");
                             this.setState({
@@ -203,6 +210,7 @@ class Navigationbar extends Component {
             Password: hashedPW
         };
 
+        //checks whether the entered email and password match one document in the deactivated user collection
         axios.post('http://localhost:4000/userDeac/validEmail', data, {headers:headers})
             .then(response => {
                 if (response.data.success){
@@ -250,6 +258,7 @@ class Navigationbar extends Component {
                     const obj = object;
                     console.log(this.state.user_data.userID);
 
+                    //checks whether another email has been registered in the system while the account was deactivated
                     axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
                             .then(res => {
                                 if (res.data.success) {
@@ -341,6 +350,7 @@ class Navigationbar extends Component {
                             });
                 }
 
+                //urges the user to login or register, since no details are available in the deactivated user collection
                 else if (!response.data.success){
                     alert("Try logging into your account if youre registered. If not please register yourself");
 

@@ -4,7 +4,7 @@ import axios from "axios";
 import Modal from 'react-awesome-modal';
 
 import StarRatingComponent from 'react-star-rating-component';
-import { Button, Form, Col } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import Complaint from "../complaint";
 // import { StreamChat } from 'stream-chat';
 // import { Chat, Channel, ChannelHeader, Thread, Window, MessageList, MessageInput , Conversation} from 'stream-chat-react';
@@ -39,7 +39,7 @@ class ViewNurseProfile extends Component {
     }
 
     getData = () => {
-        var token = localStorage.getItem('id');
+        //var token = localStorage.getItem('id');
         axios.get('http://localhost:4000/user/userdata/' + this.props.match.params.id)
             .then(response => {
                 console.log(response.data.profile_data)

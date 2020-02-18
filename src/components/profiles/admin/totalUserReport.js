@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import axios from '../../../../backend/node_modules/axios';
 import Admindashleftnav from "./admindashleftnav";
 import ProfileNavbar from "../ProfileNavbar";
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import Dialog from 'react-bootstrap-dialog';
 
 class TotalUserReport extends Component {
     constructor (props){
@@ -20,6 +18,10 @@ class TotalUserReport extends Component {
     }
 
     componentDidMount(){
+         /**
+         * @desc : Calls query at the backend to count the total number of nurses in the system
+         * @output : Returns the response of the total number as a number
+         */
         axios.get('http://localhost:4000/user/countNurses')
             .then(response => {
                 this.setState({
@@ -29,7 +31,10 @@ class TotalUserReport extends Component {
                 console.log("The total active nurses now : ", this.state.totalActiveNurses)
             })
 
-        //total number of clients in the system
+        /**
+         * @desc : Calls query at the backend to count the total number of clients in the system
+         * @output : Returns the response of the total number as a number
+         */
         axios.get('http://localhost:4000/user/countClients')
             .then(response => {
                 this.setState({
@@ -39,7 +44,10 @@ class TotalUserReport extends Component {
                 console.log("The total active clients now : ", this.state.totalActiveClients)
             })
 
-        //all users based on their location
+         /**
+         * @desc : Calls query at the backend to count the total number of users in the system, according to their location
+         * @output : Returns an array of elements with the user counts for each district in order
+         */
         axios.post('http://localhost:4000/user/countTotalUsersDistrict')
             .then(response => {
                 this.setState({
@@ -59,7 +67,11 @@ class TotalUserReport extends Component {
                 })
             })
 
-        //all nurses based on their type
+        /**
+         * @desc : Calls query at the backend to count the total number of nurses, according to their type
+         * eg : Pediatric, Geriatric
+         * @output : Returns an array of elements with the nurse counts for each type in order
+         */
         axios.post('http://localhost:4000/user/countTotalNursesType')
             .then(response => {
                 this.setState({
@@ -87,6 +99,11 @@ class TotalUserReport extends Component {
                     
                     <div>
                         <ProfileNavbar />
+
+                        {/* 
+                            @desc: Renders the specified charts using the assigned numbers extracted from the database
+                            @req : Victory package to draw the victory pie chart and bar chart
+                        */}
 
                         <div className="content-wrapper"> 
                             <h2 style= {{paddingLeft:15}}>CareMe Total User Statistics</h2>
