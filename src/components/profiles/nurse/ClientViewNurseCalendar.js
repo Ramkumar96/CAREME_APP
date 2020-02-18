@@ -31,8 +31,9 @@ class ClientViewNurseCalendar extends Component {
 
     }
 
-
-
+    /** 
+     * @desc: Functions to retrive client data from the backend
+     */
     getClientData = () => {
         var token = localStorage.getItem('id');
         axios.get('http://localhost:4000/user/userdata/' + token)
@@ -48,12 +49,12 @@ class ClientViewNurseCalendar extends Component {
             })
     }
 
-
+    
+    /** 
+    * @desc: Functions to retrive nurse details from the backend 
+    * which also contains unvailablke dates
+    */
     getUnavailableDates = () => {
-        //console.log("----------------dedde")
-        //console.log(this.props.match.params.id)
-
-        //Get Data of Nurse
         axios.get('http://localhost:4000/user/userdata/unavailableDates/' + this.props.match.params.id)
             .then(response => {
                 console.log(response.data.profile_data.UnavailableDates)
@@ -80,8 +81,8 @@ class ClientViewNurseCalendar extends Component {
                 allDay: true,
                 color: 'red',// a property! ** see important note below about 'end' **
                 rendering: 'background',
-                unselectAuto: true,
-                editable: false
+                //unselectAuto: true,
+                //editable: false
             })
             console.log(this.state.unavailableDates)
         })
@@ -89,25 +90,27 @@ class ClientViewNurseCalendar extends Component {
         this.setState({
             loading: false
         })
-
         console.log(this.state.unavailableDates)
-
     }
 
     onShowDialog() {
         this.dialog.showAlert("Booking request sent successfully");
     }
 
+    /** 
+     * @desc: Function / Full calendar event to get the date in onclick events
+     */
     dateClick = (date) => {
-        //console.log(new Date(date.dateStr).getTime(), '-----------------------')
-        //console.log(this.state.response_dates.includes(date.dateStr))
-        //console.log(this.state.unavailableDates.includes(date)) 
-        //console.log(Date.now())
         console.log(date.dateStr)
 
-
+        /** 
+        * @desc: Comparing the clicked dates
+        * with unavailable dates
+        * with todays dates
+        * and with past dates and allowing to open model for future dates and available dates 
+        */
         if ((this.state.response_dates.includes(date.dateStr) === false) && (new Date(date.dateStr).getTime() >= Date.now())) {
-
+            
             this.setState({
                 requesteddate: date.dateStr
 
@@ -118,18 +121,20 @@ class ClientViewNurseCalendar extends Component {
             console.log(this.state.profile_data)
             console.log(this.state.nurse_name)
             console.log(this.state.nurse_id)
-
-
         }
         console.log(this.state.requesteddate)
     }
 
+
+    /** 
+    * @desc: Functions to open and close modals by 
+    * changing visible varibale
+    */
     openDateModal = () => {
         this.setState({
             visible: true
         });
     }
-
     closeDateModal = () => {
         this.setState({
             visible: false,
@@ -137,10 +142,6 @@ class ClientViewNurseCalendar extends Component {
         });
     }
 
-    eventClick = (event) => {
-        console.log('event--------------')
-        console.log(event.data)
-    }
 
     requestNurse = () => {
 
@@ -153,10 +154,13 @@ class ClientViewNurseCalendar extends Component {
             RequestedDate: this.state.requesteddate
         }
         console.log(this.state.requesteddate)
+
         const headers = {
             'Content-Type': 'application/json'
         }
-
+        /** 
+        * @desc: axios posting the request data to backend
+        */
         axios.post('http://localhost:4000/request/add', RequestObj, {headers:headers})
           .then (res => {
               if (res.data.success){
@@ -179,8 +183,7 @@ class ClientViewNurseCalendar extends Component {
           
           this.closeDateModal();
         console.log("requested Nurse")
-        console.log(this.state.profile_data)
-        
+        console.log(this.state.profile_data)     
     }
 
     sendFeedback (serviceID,templateId, variables) {
@@ -208,6 +211,7 @@ class ClientViewNurseCalendar extends Component {
 
                 <div class="container-fluid">
                     <div className="row">
+                        {/* Left colunm and calendar background */}
                         <div className="col-4 calendarback calendarbacktext">
                             <div class="row">
                                 <div class="mx-auto banner text-center">
@@ -224,6 +228,7 @@ class ClientViewNurseCalendar extends Component {
                             </div>
                         </div>
                         <div className="col-7 ">
+                            {/* Rendering the Full Calendar Component */}
                             <FullCalendar
                                 defaultView="dayGridMonth"
                                 plugins={[dayGridPlugin, interactionPlugin]}
@@ -237,7 +242,7 @@ class ClientViewNurseCalendar extends Component {
                                 eventClick={this.eventClick}
                                 defaultAllDayEventDuration={{ 'days': 1 }}
                             />
-                            {/* Deactivate Modal */}
+                            {/* Set unavailable Date Modal */}
                             <Modal visible={this.state.visible} width="25%" height="25%" effect="fadeInUp" onClickAway={() => this.closeDateModal()}>
                                 <div class="modal-content">
                                     <div className="modal-header"><h4 align="center"><i className="fa fa-user-md mr-2"></i>Request Nurse {this.state.requesteddate}</h4></div>
@@ -248,7 +253,6 @@ class ClientViewNurseCalendar extends Component {
 
                         </div>
                         <div className="col-1 calendarback"  >
-
                         </div>
                     </div>
                     <Dialog ref={(component) => { this.dialog = component }} />
