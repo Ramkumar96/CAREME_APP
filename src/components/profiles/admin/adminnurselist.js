@@ -46,7 +46,9 @@ export default class Adminnurselist extends Component {
         })
     }
 
-
+    /**
+     * @desc Viewing the nurse list of the system by the CARE ME Admin  and can redirect to their profiles
+     */
 
     render() {
         return (
@@ -73,21 +75,18 @@ export default class Adminnurselist extends Component {
                                   <th>First Name</th>
                                   <th>Last Name</th>
                                   <th>Email</th>
-                                  {/* <th>Home</th> */}
                                   <th>NurseID</th>
                                   <th>Telephone</th>
                                   <th>Location</th>
-                                  {/* <th>Age</th> */}
                                   <th>Experience</th>
                                   <th>Nurse Type</th>
-                                  {/* <th>Gender</th> */}
                                   <th>Profile</th>
                                 </tr>
                               </thead>
-                              <div className="table-striped"></div>
+                    
                               <tbody className="table-striped">
                                       { this.Nurses() }
-                                  </tbody>
+                              </tbody>
                             </table>
                             </div>
                           </div>
