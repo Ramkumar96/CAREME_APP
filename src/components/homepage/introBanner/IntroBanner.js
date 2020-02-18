@@ -119,21 +119,21 @@ class IntroBanner extends Component {
 
     onChangeFirstName(e) {
         const re = /^[A-Za-z\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
+        if (re.test(e.target.value)) {
             this.setState({ FirstName: e.target.value })
         }
     }
 
     onChangeLastName(e) {
         const re = /^[A-Za-z\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
+        if (re.test(e.target.value)) {
             this.setState({ LastName: e.target.value })
         }
     }
 
     onChangeNurseID(e) {
         const re = /^[0-9\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
+        if (re.test(e.target.value)) {
             this.setState({ nurseID: e.target.value })
         }
     }
@@ -170,7 +170,7 @@ class IntroBanner extends Component {
 
     onChangeTel(e) {
         const re = /^[0-9\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
+        if (re.test(e.target.value)) {
             this.setState({ Tel: e.target.value })
         }
     }
@@ -435,14 +435,6 @@ class IntroBanner extends Component {
         }
     }
 
-    onClickNurse() {
-        this.closeModal();
-    }
-
-    onClickClient() {
-        this.closeModal1();
-    }
-
     openModal() {
         this.setState({
             visible: true
@@ -696,7 +688,7 @@ class IntroBanner extends Component {
                                                     </Form.Row>
 
                                                     <Button type="submit" variant="primary" disabled={isDisabled} onClick={this.onSubmitNurse.bind(this)}>Submit</Button>
-                                                    <a href="#" class="text-center" onClick={() => this.onClickNurse()}>I already have membership</a>
+                                                    <a href="#" class="text-center" onClick={() => this.closeModal()}>I already have membership</a>
                                                 </Form>
                                             </div>
                                         </Modal>
@@ -823,7 +815,7 @@ class IntroBanner extends Component {
                                                         </Form.Row>
 
                                                         <Button type="submit" variant="primary" disabled={isDisabled1} onClick={this.onSubmitClient.bind(this)}>Submit</Button>
-                                                        <a href="#" class="text-center" onClick={() => this.onClickClient()}>I already have a membership</a>
+                                                        <a href="#" class="text-center" onClick={() => this.closeModal1()}>I already have a membership</a>
                                                     </Form>
                                                 </div>
                                             </Modal>
