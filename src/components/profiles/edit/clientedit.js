@@ -3,13 +3,6 @@ import axios from '../../../../backend/node_modules/axios';
 import ProfilePicUpload from '../profilePicUpload';
 import Dialog from 'react-bootstrap-dialog';
 
-function validate(Tele, Address) {
-    return {
-        Tele: Tele.length === 0,
-        Address: Address.length === 0,
-    };
-}
-
 function validateTel(tel) {
     const reg = /^(0)(7)([0-9]{8})$/;
     const reg2 = /^(7)([0-9]{8})$/;
@@ -48,6 +41,11 @@ class ClientEdit extends Component {
         this.getData()
     }
 
+    /** 
+   * @desc: Function to retrive the user data from the backed of a 
+   * particular user using the id retrived from the local storage
+   * @output : User data retrived from the backend
+   */
 
     getData = () => {
         var token = localStorage.getItem('id');
@@ -94,11 +92,12 @@ class ClientEdit extends Component {
         this.dialog.showAlert("Your telephone number is invalid");
     }
 
-    handleBlur = field => e => {
-        this.setState({
-            touched: { ...this.state.touched, [field]: true }
-        });
-    };
+
+    /** 
+    * @desc: Function to triggered while clicking the submit button
+    * will send put request with nurseobj object to backend for updating
+    *  the fields in the databse
+    */
 
     onUpdate = (e) => {
         e.preventDefault();
@@ -110,12 +109,7 @@ class ClientEdit extends Component {
             UpdateDate: new Date()
         };
 
-        if (!this.canBeSubmitted()) {
-            e.preventDefault();
-            return;
-        }
-
-        else if (!validateTel(this.state.Tel)) {
+        if (!validateTel(this.state.Tel)) {
             this.onShowTelephoneError();
         }
 
@@ -137,29 +131,13 @@ class ClientEdit extends Component {
         }
     }
 
-    canBeSubmitted() {
-        const errors = validate(this.state.Tel, this.state.Home);
-        const isDisabled = Object.keys(errors).some(x => errors[x]);
-        return !isDisabled;
-    }
-
     render() {
+
+
         if (!this.state.profile_data) {
             return (
                 <div> <text>Loading</text> </div>
             );
-        }
-
-        //validating the fields in update form whether filled or not
-        const errors = validate(this.state.Tel, this.state.Home);
-        const isDisabled = Object.keys(errors).some(x => errors[x]);
-
-        //marking the touched but unfilled fields in red
-        const shouldMarkError = field => {
-            const hasError = errors[field];
-            const shouldShow = this.state.touched[field];
-
-            return hasError ? shouldShow : false;
         }
 
         return (
@@ -168,39 +146,33 @@ class ClientEdit extends Component {
                     <div className="card-body">
                         {/* Edit Telephone Number */}
                         <div className="form-group">
-                        <span className="mr-2">
-                            <label htmlFor="exampleInputEmail1">Telephone :</label>
-                        </span>
+                            <span className="mr-2">
+                                <label htmlFor="exampleInputEmail1">Telephone :</label>
+                            </span>
                             <input type="text" className="form-control"
                                 value={this.state.Tel}
                                 onChange={this.onChangeTel}
-                                className={shouldMarkError("Tel") ? "error" : ""}
-                                onBlur={this.handleBlur("Tel")}
                                 placeholder="Enter Telephone" />
                         </div>
 
+                        {/* Edit the Address */}
                         <div className="form-group">
-                        <span className="mr-2">
-                            <label htmlFor="inputlocation">Address :</label>
-                        </span>
-                            
+                            <span className="mr-2">
+                                <label htmlFor="inputlocation">Address :</label>
+                            </span>
                             <input type="text" className="form-control"
                                 value={this.state.Home}
                                 onChange={this.onChangeAddress}
-                                className={shouldMarkError("Home") ? "error" : ""}
-                                onBlur={this.handleBlur("Home")}
                                 placeholder="Address" />
                         </div>
                         <div className="form-group">
-                        <span className="mr-2">
-                            <label htmlFor="inputlocation">District : </label>
+                            <span className="mr-2">
+                                <label htmlFor="inputlocation">District : </label>
                             </span>
                             <select id="inputState"
                                 value={this.state.Location}
                                 className="form-control"
                                 onChange={this.onChangeLocation}
-                                className={shouldMarkError("Location") ? "error" : ""}
-                                onBlur={this.handleBlur("Location")}
                             >
                                 <option default>Update District</option>
                                 <option value="Colombo">Colombo</option>
@@ -210,6 +182,8 @@ class ClientEdit extends Component {
                             </select>
                         </div>
 
+
+                        {/* Edit Profile Picture */}
                         <div><ProfilePicUpload /></div>
                     </div>
 
@@ -217,7 +191,6 @@ class ClientEdit extends Component {
                     <div className="card-footer">
                         <button type="submit"
                             className="btn btn-primary btn-block"
-                            disabled={isDisabled}
                             onClick={this.onUpdate}>
                             Submit</button>
                     </div>

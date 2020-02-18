@@ -70,6 +70,10 @@ function validatePassword(password) {
     return regpw.test(password);
 }
 
+ /** 
+ * @desc: IntroBanner class consiting of User reigistration 
+ */
+       
 class IntroBanner extends Component {
     constructor(props) {
         super(props);
@@ -577,7 +581,6 @@ class IntroBanner extends Component {
                         <h1 class="text-capitalize">
                             <strong class="banner-title">Book an Appointment with an Expert Nurse in your Area</strong>
                         </h1>
-
                         <div >
                             <table align="center">
                                 <tr><td>

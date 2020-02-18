@@ -40,15 +40,10 @@ export default class NurseListProfileClient extends Component {
                     </ul>
                     <center>
                       <div className="text-right">
-                       
-                        {/* navbar fin nurse button */}
-                        {/* <button class="btn btn-sm btn-primary" type="submit" href={'/viewnurseprofile/'+this.props.id}>
-                          View Profile
-                        </button> */}
+
+                       {/* Link redirecting to ViewNurseProfile */}
                         <a href={'/viewnurseprofile/'+this.props.id} className="btn btn-sm btn-primary"><i className="fas fa-user mr-2" /><b>View Profile</b></a>
-                        {/* <button class="btn btn-sm btn-primary" type="submit" >
-                          <a href={'/viewnurseprofile/'+this.props.id}><i className="fas fa-user" /> View Profile</a>
-                        </button> */}
+                       
 
 
                       </div></center>

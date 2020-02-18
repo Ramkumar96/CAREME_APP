@@ -30,8 +30,6 @@ UserRegRoutes.route('/add').post(function (req, res) {
           },
           userToken,
         );
-
-
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
@@ -39,7 +37,9 @@ UserRegRoutes.route('/add').post(function (req, res) {
 });
 
 
-//Login
+/** 
+* @desc: Code snippets of Route for Login
+*/
 UserRegRoutes.route('/login').post(function (req, res) {
   console.log(req.body)
   var req_password = req.body.Password;
@@ -72,8 +72,9 @@ UserRegRoutes.route('/login').post(function (req, res) {
     })
 });
 
-
-//userdata
+/** 
+* @desc: route code snippet for retriving the user data  
+*/
 UserRegRoutes.route('/userdata/:id').get(function (req, res) {
   //console.log(req.params.id)
   UserReg.findById(req.params.id)
@@ -87,9 +88,9 @@ UserRegRoutes.route('/userdata/:id').get(function (req, res) {
     })
 });
 
-
-
-//userUpdate
+/** 
+* @desc: route code snippet for userdata Update  
+*/
 UserRegRoutes.route('/userdata/update/:id').put(function (req, res) {
   //console.log(req.body)
   UserReg.findOneAndUpdate({ _id: req.params.id }, req.body)
@@ -625,7 +626,9 @@ UserRegRoutes.route('/clientlist').get(function (req, res) {
 });
 
 
-//validate email
+/** 
+* @desc: Validation of Email and handling blur
+*/
 UserRegRoutes.route('/validEmail').post(function (req, res) {
   console.log(req.body);
   UserReg.findOne({ Email: req.body.Email })
