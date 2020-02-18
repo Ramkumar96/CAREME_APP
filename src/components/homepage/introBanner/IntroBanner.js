@@ -4,7 +4,6 @@ import Modal from 'react-awesome-modal';
 import { Button, Form, Col } from 'react-bootstrap';
 import axios from './../../../../backend/node_modules/axios';
 import md5 from 'md5';
-import { constants } from "fs";
 // import { Chat, Channel, ChannelHeader, Thread, Window, ChannelList } from 'stream-chat-react';
 // import { MessageList, MessageInput } from 'stream-chat-react';
 // import { StreamChat } from 'stream-chat';
@@ -200,11 +199,6 @@ class IntroBanner extends Component {
             ratingCount : 0
         };
 
-        if (!this.canBeSubmitted()) {
-            e.preventDefault();
-            return;
-        }
-
         const { PW, CPW } = this.state;
 
         //email syntax validation
@@ -324,12 +318,6 @@ class IntroBanner extends Component {
         }
     }
 
-    canBeSubmitted() {
-        const errors = validate(this.state.Email, this.state.FirstName, this.state.LastName, this.state.nurseID, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
-        const isDisabled = Object.keys(errors).some(x => errors[x]);
-        return !isDisabled;
-    }
-
     //client details
     onSubmitClient(e) {
         e.preventDefault();
@@ -349,11 +337,6 @@ class IntroBanner extends Component {
             starRating: 0,
             ratingCount: 0
         };
-
-        if (!this.canBeSubmitted1()) {
-            e.preventDefault();
-            return;
-        }
 
         const { PW, CPW } = this.state;
 
@@ -446,12 +429,6 @@ class IntroBanner extends Component {
                     }
                 });
         }
-    }
-
-    canBeSubmitted1() {
-        const errors1 = validate1(this.state.Email, this.state.FirstName, this.state.LastName, this.state.PW, this.state.CPW, this.state.Home, this.state.Tel, this.state.NIC);
-        const isDisabled1 = Object.keys(errors1).some(x => errors1[x]);
-        return !isDisabled1;
     }
 
     onClickNurse() {
