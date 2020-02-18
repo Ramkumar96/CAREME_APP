@@ -35,6 +35,11 @@ function validatePassword(password) {
     return regpw.test(password);
 }
 
+/**
+ * @desc Adding a client by the CareMe Admin
+ * 
+ */
+
 export default class Addclientadmin extends Component {
 
     constructor(props) {
@@ -137,7 +142,7 @@ export default class Addclientadmin extends Component {
         }
 
         //confirming both passwords
-        else if (PW != CPW) {
+        else if (PW !== CPW) {
             alert("Your passwords dont match");
         }
 
@@ -159,7 +164,10 @@ export default class Addclientadmin extends Component {
                         alert("Email already registered. Please use another Email Address");
                     }
 
-                    //adding new client to the database
+                    /**
+                     * @desc new client to the database
+                     */
+                    
                     else if (!res.data.success) {
                         var hashedPW = md5(this.state.PW);
 
