@@ -257,7 +257,7 @@ class ViewNurseProfile extends Component {
           <div>
             <div class="wrapper">
               <ProfileNavbar />
-              <br>
+              <br></br>
               <div className="backg">
                 <div className="container-fluid">
                   <div className="row">

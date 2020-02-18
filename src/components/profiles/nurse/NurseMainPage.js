@@ -218,7 +218,7 @@ class NurseMainPage extends Component {
             <div>
                 <div class="wrapper">
                     <ProfileNavbar />
-                    <br/>
+                    <br></br>
                     <div className="backg">
                         <div className="container-fluid">
                             <div className="row">
@@ -248,21 +248,6 @@ class NurseMainPage extends Component {
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
-
-
-                                            <ul className="list-group list-group-unbordered mb-3 text-center">
-                                                <li className="list-group-item">
-                                                    <h6 className="text-center">Gender : {this.state.profile_data.nurseGender}</h6>
-                                                </li>
-                                                <li className="list-group-item">
-                                                    <h6 className="text-center">Age : {this.state.profile_data.Age}</h6>
-                                                </li>
-                                                <li className="list-group-item">
-                                                    <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
-                                                </li>
-                                            </ul>
-                                        </div>
                                         {/* /.card-body */}
                                     </div>
 
@@ -370,7 +355,7 @@ class NurseMainPage extends Component {
                                 <div className="card card-primary">
                                     <div className="card-body text-center">
                                         {/* Ratings */}
-                                        <strong>Ratings </strong> <br />
+                                        <strong>Ratings </strong> 
                                         <div style={{ fontSize: 28 }}>
                                             <StarRatingComponent
                                                 name="rate1"
@@ -431,6 +416,7 @@ class NurseMainPage extends Component {
                         </div>
                     </div>
                 </div>
+            
                 <div>
                     <Footer />
                 </div>
