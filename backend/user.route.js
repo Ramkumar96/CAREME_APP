@@ -8,7 +8,9 @@ let multer = require('multer'),
 
 const StreamChat = require('stream-chat').StreamChat;
 
-// User Registration
+/** 
+* @desc: Adds new collection to the database upon registration 
+*/
 UserRegRoutes.route('/add').post(function (req, res) {
   console.log(req.body)
   let userReg = new UserReg(req.body);
@@ -120,8 +122,60 @@ UserRegRoutes.route('/userdata/update/:id').put(function (req, res) {
     })
 })
 
+//NurseprofileRetrieve
+UserRegRoutes.route('/').get(function (req, res) {
+  UserReg.find({ userID: 0 }, function (err, CAREME_APP) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(CAREME_APP);
+    }
+  });
+});
 
-//update Rating
+
+  //unavailable dates
+  UserRegRoutes.route('/userdata/unavailableDates/:id').post(function (req, res) {
+    console.log(req.body.date);
+    // pusher.trigger(req.params.id, 'my-event', {
+    //   "message": "hello world"
+    // });
+    UserReg.findByIdAndUpdate(req.params.id, { $push: { "UnavailableDates": req.body.date } }, (err, doc) => {
+  
+      if (err) {
+        console.log(err)
+        res.send(err)
+      }
+  
+      console.log(doc)
+  
+      res.status(200).send({
+        success: true,
+        message: "User Data Update success",
+        profile_data: doc
+      });
+    })
+  });
+  
+  
+  //get unavailable dates
+  UserRegRoutes.route('/userdata/unavailableDates/:id').get(function (req, res) {
+    //console.log(req.params.id)
+    UserReg.findById(req.params.id)
+      .then(response => {
+        console.log(response)
+        res.status(200).send({
+          success: true,
+          message: "User Data success",
+          profile_data: response
+        })
+      })
+  });
+
+
+/** 
+* @desc: Updates the user rating and count upon new rating
+*/
 UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
   console.log(req.body)
   UserReg.updateOne({Email: req.body.RatedUser}, {$inc: {starRating: req.body.Rating, ratingCount: 1}})
@@ -134,7 +188,9 @@ UserRegRoutes.route('/userdata/updateRating').put(function(req,res){
 })
 
 
-//Deduct Rating
+/** 
+* @desc: Reduces particular rating from the user, if the user was rated by the same person again
+*/
 UserRegRoutes.route('/deductRating').put(function(req,res){
   console.log(req.body)
   UserReg.updateOne({Email: req.body.RatedUser}, {$inc: {starRating: -req.body.Rating, ratingCount: -1}})
@@ -146,7 +202,10 @@ UserRegRoutes.route('/deductRating').put(function(req,res){
   })
 })
 
-// Removing user upon deactivation
+
+/** 
+* @desc: Removes particular data from the collection upon deactivation
+*/
 UserRegRoutes.route('/delete').post(function (req, res) {
   console.log(req.body);
   UserReg.deleteOne({Email: req.body.Email })
@@ -159,8 +218,9 @@ UserRegRoutes.route('/delete').post(function (req, res) {
     })
 })
 
-
-//count number of nurses in the system
+/** 
+* @desc: Counting the total number of nurses in the system
+*/
 UserRegRoutes.route('/countNurses').get(function (req,res){
   UserReg.find({"userID" : "0"}).countDocuments()
     .then(response=>{
@@ -171,7 +231,9 @@ UserRegRoutes.route('/countNurses').get(function (req,res){
 })
 
 
-//count number of clients in the system
+/** 
+* @desc: Counting the total number of clients in the system
+*/
 UserRegRoutes.route('/countClients').get(function (req,res){
   UserReg.find({"userID" : "1"}).countDocuments()
     .then(response=>{
@@ -181,8 +243,9 @@ UserRegRoutes.route('/countClients').get(function (req,res){
     })
 })
 
-
-//count number of nurses registered in a month
+/** 
+* @desc: Counting the number of the nurses registered in the system within a month
+*/
 UserRegRoutes.route('/countNursesMonth').post(function (req,res){
   const yearToFind = req.body.year;
   const monthToFind = req.body.month;
@@ -210,7 +273,9 @@ UserRegRoutes.route('/countNursesMonth').post(function (req,res){
 })
 
 
-//count number of clients registered in a month
+/** 
+* @desc: Counting the number of the clients registered within a month
+*/
 UserRegRoutes.route('/countClientsMonth').post(function (req,res){
   const yearToFind = req.body.year;
   const monthToFind = req.body.month;
@@ -237,7 +302,9 @@ UserRegRoutes.route('/countClientsMonth').post(function (req,res){
 })
 
 
-//count number of clients registered throughout a year
+/** 
+* @desc: Counting the total number of clients registered within a year
+*/
 UserRegRoutes.route('/countClientsYear').post(function (req,res){
   const yearToFind = req.body.year;
   const clientCount = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -307,7 +374,9 @@ UserRegRoutes.route('/countClientsYear').post(function (req,res){
 })
 
 
-//count number of new users district wise per year
+/** 
+* @desc: Counting the number of the users registered in a year - based on the location
+*/
 UserRegRoutes.route('/countUsersDistrict').post(function (req,res){
   const yearToFind = req.body.year;
   const userCountDistrict = [0,0,0,0];
@@ -344,41 +413,9 @@ UserRegRoutes.route('/countUsersDistrict').post(function (req,res){
   })
 })
 
-//count total active users according to that month
-UserRegRoutes.route('/countTotalUsersDistrict').post(function (req,res){
-  const userCountDistrict = [0,0,0,0];
-
-  UserReg.find({$or: [{"userID" : 0}, {"userID" : 1}]})
-    .then(response=>{
-      for (let i=0; i<response.length; i++){
-          switch(response[i].Location){
-            case("Colombo"):
-              userCountDistrict[0]++;
-              break;
-
-            case("Galle"):
-              userCountDistrict[1]++;
-              break;
-
-            case("Gampaha"):
-              userCountDistrict[2]++;
-              break;
-
-            case("Kurunegala"):
-              userCountDistrict[3]++;
-              break;
-          }
-    }
-
-    console.log("Total users according to the district",userCountDistrict);
-
-    res.status(200).send({
-      userCountDistrict: userCountDistrict
-    })
-  })
-})
-
-//count number of registered users district wise per month
+/** 
+* @desc: Counting the number of the users registered within a month - based on the location
+*/
 UserRegRoutes.route('/countUsersDistrictMonth').post(function (req,res){
   const yearToFind = req.body.year;
   const monthToFind = req.body.month;
@@ -416,7 +453,9 @@ UserRegRoutes.route('/countUsersDistrictMonth').post(function (req,res){
   })
 })
 
-//count number of registered nurses based on type for a whole year
+/** 
+* @desc: Counting the number of the nurses registered within a year - based on the type
+*/
 UserRegRoutes.route('/countNursesType').post(function (req,res){
   const yearToFind = req.body.year;
   const nurseTypeCount = [0,0,0,0,0,0];
@@ -462,7 +501,9 @@ UserRegRoutes.route('/countNursesType').post(function (req,res){
 })
 
 
-//count number of registered nurses type wise per month
+/** 
+* @desc: Counting the number of the nurses registered in the month - based on the type
+*/
 UserRegRoutes.route('/countNursesTypeMonth').post(function (req,res){
   const yearToFind = req.body.year;
   const monthToFind = req.body.month;
@@ -509,7 +550,9 @@ UserRegRoutes.route('/countNursesTypeMonth').post(function (req,res){
 })
 
 
-//count all nurses types in the system 
+/** 
+* @desc: Counting the number of the nurses in the system since development - based on the type
+*/
 UserRegRoutes.route('/countTotalNursesType').post(function (req,res){
   const nurseTypeCount = [0,0,0,0,0,0];
 
@@ -551,7 +594,45 @@ UserRegRoutes.route('/countTotalNursesType').post(function (req,res){
   })
 })
 
-//count number of nurses registered throughout a year
+/** 
+* @desc: Counting the number of the users in the system - location wise
+*/
+UserRegRoutes.route('/countTotalUsersDistrict').post(function (req,res){
+  const userCountDistrict = [0,0,0,0];
+
+  UserReg.find({$or: [{"userID" : 0}, {"userID" : 1}]})
+    .then(response=>{
+      for (let i=0; i<response.length; i++){
+          switch(response[i].Location){
+            case("Colombo"):
+              userCountDistrict[0]++;
+              break;
+
+            case("Galle"):
+              userCountDistrict[1]++;
+              break;
+
+            case("Gampaha"):
+              userCountDistrict[2]++;
+              break;
+
+            case("Kurunegala"):
+              userCountDistrict[3]++;
+              break;
+          }
+    }
+
+    console.log("Total users according to the district", userCountDistrict);
+
+    res.status(200).send({
+      userCountDistrict: userCountDistrict
+    })
+  })
+})
+
+/** 
+* @desc: Counting the number of the nurses registered in a year - month wise
+*/
 UserRegRoutes.route('/countNursesYear').post(function (req,res){
   const yearToFind = req.body.year;
   const nurseCount = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -620,18 +701,6 @@ UserRegRoutes.route('/countNursesYear').post(function (req,res){
   })
 })
 
-//NurseprofileRetrieve
-UserRegRoutes.route('/').get(function (req, res) {
-  UserReg.find({ userID: 0 }, function (err, CAREME_APP) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(CAREME_APP);
-    }
-  });
-});
-
-
 //clientListRetrieve
 UserRegRoutes.route('/clientlist').get(function (req, res) {
   UserReg.find({ userID: 1 }, function (err, CAREME_APP) {
@@ -645,7 +714,7 @@ UserRegRoutes.route('/clientlist').get(function (req, res) {
 
 
 /** 
-* @desc: Validation of Email and handling blur
+* @desc: Checking whether the email is already registered in the system
 */
 UserRegRoutes.route('/validEmail').post(function (req, res) {
   console.log(req.body);
@@ -667,18 +736,20 @@ UserRegRoutes.route('/validEmail').post(function (req, res) {
 });
 
 
-//validate nurseID
+/** 
+* @desc: Checking whether the nurse ID is already registered in the system
+*/
 UserRegRoutes.route('/validNurseID').post(function (req, res) {
   UserReg.findOne({ nurseID: req.body.nurseID })
     .then(response => {
       if (response) {
-        console.log("Email exists in user collection");
+        console.log("Nurse ID already registered");
         res.status(200).send({
           success: true,
           message: "Registered nurse ID. try another.",
         });
       } else {
-        console.log('Email not there in user collection');
+        console.log('Nurse ID not registered');
         res.status(200).send({
           success: false,
         });
@@ -724,66 +795,6 @@ UserRegRoutes.route('/validNurseID').post(function (req, res) {
       res.send(doc)
     })
   })
-
-
-// UserRegRoutes.get("/", (req, res, next) => {
-//   UserReg.find().then(data => {
-//     res.status(200).json({
-//       message: "Profile Pic retrieved successfully!",
-//       users: data
-//     });
-//   });
-// });
-
-
-//unavailable dates
-UserRegRoutes.route('/userdata/unavailableDates/:id').post(function (req, res) {
-  console.log(req.body.date);
-  // pusher.trigger(req.params.id, 'my-event', {
-  //   "message": "hello world"
-  // });
-  UserReg.findByIdAndUpdate(req.params.id, { $push: { "UnavailableDates": req.body.date } }, (err, doc) => {
-
-    if (err) {
-      console.log(err)
-      res.send(err)
-    }
-
-    console.log(doc)
-
-    res.status(200).send({
-      success: true,
-      message: "User Data Update success",
-      profile_data: doc
-    });
-  })
-  // UserReg.update({_id:req.params.id},
-  //   // {$push:{date:req.body.UnavailableDates}})
-  //   )
-  // .then(response=>{
-  //   console.log(response)
-  //   res.status(200).send({    
-  //     success:true,
-  //     message:"User Data Update success",
-  //   });
-  // });
-});
-
-
-//get unavailable dates
-UserRegRoutes.route('/userdata/unavailableDates/:id').get(function (req, res) {
-  //console.log(req.params.id)
-  UserReg.findById(req.params.id)
-    .then(response => {
-      console.log(response)
-      res.status(200).send({
-        success: true,
-        message: "User Data success",
-        profile_data: response
-      })
-    })
-});
-
 
 //retrieve user data for admin purposes
 UserRegRoutes.route('/userDetails').get(function (req, res) {

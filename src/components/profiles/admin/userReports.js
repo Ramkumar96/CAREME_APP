@@ -100,12 +100,12 @@ class UserReport extends Component {
                 *         Based on the period for which the report is requested, passes and receives data 
                 *         from the backend to be displayed
             */
-            if (this.state.reportType === 0){
+            if (this.state.reportType == 0){
                 /**
                     * @desc : If the activation and deactivation report is requested for a particular month
                     *         this loop executes
                 */
-                if (this.state.month!==0){
+                if (this.state.month!=0){
                     /**
                         * @desc : Passes the data object inclusive of the year and particular month to the backend
                         *         to extract data on the clients registered this month
@@ -1261,7 +1261,7 @@ class UserReport extends Component {
                     <div className="content-wrapper">
                         <h2 style= {{paddingLeft:15}}>User Reports</h2>
 
-                        <Form>
+                        <Form style={{marginLeft: 20}}>
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <select class="form-control" onChange={(event)=>this.onChangeYear(event)}>

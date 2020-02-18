@@ -258,7 +258,7 @@ export default class Addnurseadmin extends Component {
                                 <div class="col-8 mx-auto">
                                     <div className="row">
                                         {/* left column */}
-                                        <div className="col-md-6 ml-5 mt-5">
+                                        <div className="col-md-6 ml-5 mt-4">
                                             {/* general form elements */}
                                             <div className="card card-primary">
                                                 <div className="card-header">

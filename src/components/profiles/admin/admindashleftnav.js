@@ -5,7 +5,7 @@ class Admindashleftnav extends Component {
   render() {
     return (
       <div className="position:fixed">
-        <aside className="main-sidebar sidebar-dark-primary elevation-4 ">  
+        <aside className="main-sidebar sidebar-dark-primary elevation-4 " style={{position: "fixed"}}>  
             {/* <a href="/adminmaindash" className="brand-link">
             <img src="/images/careme.png" alt="careme Logo" className="brand-image img-circle elevation-5" style={{ opacity: '.8' }} />
             <span className="brand-text font-weight-light">CareMe</span>
