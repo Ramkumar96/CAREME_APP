@@ -219,10 +219,10 @@ class NurseViewClientProfile extends Component {
 
         const finalRating = ratingVal / rateCount;
 
-        /** 
-          * @desc: code snippets to start a private chat-coversation
-          * @required: stream-chat, stream-chat-react
-          */
+    /** 
+      * @desc: code snippets to start a private chat-coversation
+      * @required: stream-chat, stream-chat-react
+      */
         // const client = new StreamChat("jh66vkvun7x5");
         // const userToken = localStorage.getItem('chat_token');
 
@@ -253,6 +253,9 @@ class NurseViewClientProfile extends Component {
         //     image: localStorage.getItem('user_pic'),
         //     members: [senderName, receiverName]
         // });
+        /**
+         * END of private chat component
+         */
 
         return (
             <div>
@@ -263,13 +266,12 @@ class NurseViewClientProfile extends Component {
                         <div className="row">
 
                             {/* client profile picture container */}
-                            <div className="col-lg-3">
-                                {/* Profile Image */}
+                            <div className="col-lg-3">                                
                                 <div className="card card-primary card-outline">
                                     <div className="card-body box-profile">
                                         <div className="text-center">
-                                            <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile pic" />
-                                            {/* <div><ProfilePicUpload/></div> */}
+                                            {/* Profile Image */}
+                                            <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile pic" />            
                                         </div>
                                         <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
 
@@ -401,6 +403,11 @@ class NurseViewClientProfile extends Component {
                                         </Modal>
 
                                         <hr />
+                                        
+                                    { /** 
+                                        * @desc: complaint component.
+                                        * @required: Complaint
+                                        */ }
                                         <button class="btn btn-secondary btn-block" onClick={() => this.openComplaintModal()}><i className="fa fa-exclamation-triangle mr-2"></i>Add a complaint</button>
                                             <Modal visible={this.state.visible2} width="50%" height="30%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
                                                 <div class="modal-content">
@@ -410,25 +417,23 @@ class NurseViewClientProfile extends Component {
                                                     </div>
                                                 </div>
                                             </Modal>
+                                    { /** 
+                                        * END of code for complaint
+                                        */  }
 
-                                        {/* <input type="button" class="btn btn-success" value="Add a complaint" onClick={() => this.openComplaintModal()} />
-                                        <Modal visible={this.state.visible2} width="75%" height="75%" effect="fadeInUp" onClickAway={() => this.closeComplaintModal()}>
-                                            <div>
-                                                <Complaint />
-                                            </div>
-                                        </Modal> */}
-
-                                        { /** 
-                                            * @desc: chatting component.
-                                            * @required: ChatComponent
-                                            */ }
+                                    { /** 
+                                        * @desc: chatting component.
+                                        * @required: ChatComponent
+                                        */ }
                                         <input type="button" class="btn btn-success" value="Send Message to Client" onClick={() => this.openMsgModal()} />
                                         <div>
                                             <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>
                                                 <ChatComponent />
                                             </Modal>
                                         </div>
-                                        {/* END of code for chat */}
+                                    { /** 
+                                        * END of code for chat
+                                        */  }
 
                                     </div>
                                     {/* /.card-body */}

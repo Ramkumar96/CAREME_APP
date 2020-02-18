@@ -16,7 +16,12 @@ UserRegRoutes.route('/add').post(function (req, res) {
   userReg.save()
     .then(userReg => {
       res.status(200).json({ 'UserReg': 'User added successfully' });
-      var n = req.body.Email.indexOf("@");
+
+      /**
+        * @desc: Initializing chat token and creating a client in StreamChat when a new user registers
+        * @requires:StreamChat
+        */
+        var n = req.body.Email.indexOf("@");
         var name = req.body.Email.slice(0, n);
         console.log(name);
         const client = new StreamChat('', 'yet5qpqxuh9p98r94vcvndd5rr82t2x2cb9m3dgaq4yx46ua8r4ckpuu7fvpyews');
@@ -30,7 +35,9 @@ UserRegRoutes.route('/add').post(function (req, res) {
           },
           userToken,
         );
-
+      /**
+        * End of initializing chat token and creating client
+        */
 
     })
     .catch(err => {
@@ -50,12 +57,19 @@ UserRegRoutes.route('/login').post(function (req, res) {
       console.log(req_password == res_password)
       if (req_password == res_password) {
         
+      /**
+        * @desc: Initializing chat token when logging in
+        * @requires:StreamChat
+        */
         var n = req.body.Email.indexOf("@");
         var name = req.body.Email.slice(0, n);
         console.log(name);
         const client = new StreamChat('', 'yet5qpqxuh9p98r94vcvndd5rr82t2x2cb9m3dgaq4yx46ua8r4ckpuu7fvpyews');
         const chatToken = client.createToken(name);
         console.log(chatToken);
+      /**
+        * End of initializing chat token
+        */
 
         console.log("login sucess")
         res.status(200).send({
@@ -666,52 +680,53 @@ UserRegRoutes.route('/validNurseID').post(function (req, res) {
 });
 
 
-//Profile picture upload and retrieve
-const DIR = './public/';
+/**
+ * @desc:route for Profile picture upload
+ * @requires:multer, uuidv4,
+ */
+  const DIR = './public/';
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
-  filename: (req, file, cb) => {
-    const fileName = file.originalname.toLowerCase().split(' ').join('-');
-    cb(null, uuidv4() + '-' + fileName)
-  }
-});
-
-var upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-      cb(null, true);
-    } else {
-      cb(null, false);
-      return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, DIR);
+    },
+    filename: (req, file, cb) => {
+      const fileName = file.originalname.toLowerCase().split(' ').join('-');
+      cb(null, uuidv4() + '-' + fileName)
     }
-  }
-});
-
-
-// User model for prfile pic upload
-UserRegRoutes.post('/user-profile/', upload.single('profilePic'), async (req, res, next) => {
-  const url = req.protocol + '://' + req.get('host')
-  await UserReg.findOneAndUpdate({ "_id": req.body.id }, { profilePic: url + '/public/' + req.file.filename }, (err, doc) => {
-    if (err) {
-      res.send(err)
-    }
-    res.send(doc)
-  })
-})
-
-
-UserRegRoutes.get("/", (req, res, next) => {
-  UserReg.find().then(data => {
-    res.status(200).json({
-      message: "Profile Pic retrieved successfully!",
-      users: data
-    });
   });
-});
+
+  var upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+      if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+        cb(null, true);
+      } else {
+        cb(null, false);
+        return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+      }
+    }
+  });
+
+  UserRegRoutes.post('/user-profile/', upload.single('profilePic'), async (req, res, next) => {
+    const url = req.protocol + '://' + req.get('host')
+    await UserReg.findOneAndUpdate({ "_id": req.body.id }, { profilePic: url + '/public/' + req.file.filename }, (err, doc) => {
+      if (err) {
+        res.send(err)
+      }
+      res.send(doc)
+    })
+  })
+
+
+// UserRegRoutes.get("/", (req, res, next) => {
+//   UserReg.find().then(data => {
+//     res.status(200).json({
+//       message: "Profile Pic retrieved successfully!",
+//       users: data
+//     });
+//   });
+// });
 
 
 //unavailable dates
