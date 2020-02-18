@@ -1,18 +1,19 @@
 import React, {Component} from "react";
 import Navigationbar from '../homepage/navigationbar/Navigationbar';
-//import NurseListProfile from './NurseListProfile';
 import axios from 'axios';
-//import { NONAME } from "dns";
 import TestList from "./TestList";
 
-/*import NurseProfilePage from './NursePofilePage';
-*/
+
 function searchingFor(term){
-    //Edited coding start
+    
     var names = term.trim().split(" ");
     console.log(term);
     console.log(names);
-    //Edited coding end
+   
+    /**
+     * @desc Searching the nurse by first name or Last Name
+     * @required Names that user enter
+     */
     if(names.length>1){
         return function(x){
             return (x.FirstName.toLowerCase().includes(names[0].toLowerCase()) && x.LastName.toLowerCase().includes(names[1].toLowerCase()))  || !term;
@@ -56,7 +57,9 @@ class NurseListMain extends Component{
             })
     }
 
-    //sorting age
+    /**
+     * @desc Sorting the Nurse by Age
+     */
 
     nursesortage = (event) => {
         let fil = this.state.CAREME_APP;
@@ -70,8 +73,12 @@ class NurseListMain extends Component{
         fil.sort((a,b) => (a.Age < b.Age) ? 1: -1);
         this.setState({CAREME_APP: fil});
     }
-
     }
+
+
+    /**
+     * @desc Filtering by Nurse experience year
+    */
 
     nursesortexp = (event) => {
         let fil = this.state.CAREME_APP;
@@ -83,40 +90,41 @@ class NurseListMain extends Component{
         var onetwo = document.getElementsByClassName('1-2');
         var zero = document.getElementsByClassName('null');
 
+        var i;
         if(selector ==="0"){
             //alert('Hello 01');
-            for (var i=0;i<tenplus.length;i+=1){
+            for ( i=0;i<tenplus.length;i+=1){
                 tenplus[i].style.display = 'block';
             }
-            for (var i=0;i<fiveten.length;i+=1){
+            for (i=0;i<fiveten.length;i+=1){
                 fiveten[i].style.display = 'block';
             }
-            for (var i=0;i<threefive.length;i+=1){
+            for (i=0;i<threefive.length;i+=1){
                 threefive[i].style.display = 'block';
             }
-            for (var i=0;i<onetwo.length;i+=1){
+            for (i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'block';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for (i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
         }
         
         if(selector ==="1"){
             // alert('Hello 01');
-            for (var i=0;i<tenplus.length;i+=1){
+            for (i=0;i<tenplus.length;i+=1){
                 tenplus[i].style.display = 'none';
             }
-            for (var i=0;i<fiveten.length;i+=1){
+            for (i=0;i<fiveten.length;i+=1){
                 fiveten[i].style.display = 'none';
             }
-            for (var i=0;i<threefive.length;i+=1){
+            for (i=0;i<threefive.length;i+=1){
                 threefive[i].style.display = 'none';
             }
-            for (var i=0;i<onetwo.length;i+=1){
+            for (i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'block';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for (i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
@@ -124,60 +132,63 @@ class NurseListMain extends Component{
         else if(selector ==="2"){
             // alert('Hello 02');
             
-            for (var i=0;i<tenplus.length;i+=1){
+            for (i=0;i<tenplus.length;i+=1){
                 tenplus[i].style.display = 'none';
             }
-            for (var i=0;i<fiveten.length;i+=1){
+            for (i=0;i<fiveten.length;i+=1){
                 fiveten[i].style.display = 'none';
             }
-            for (var i=0;i<threefive.length;i+=1){
+            for (i=0;i<threefive.length;i+=1){
                 threefive[i].style.display = 'block';
             }
-            for (var i=0;i<onetwo.length;i+=1){
+            for (i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for (i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
         }
         else if(selector ==="3"){
             // alert('Hello 03');
-            for (var i=0;i<tenplus.length;i+=1){
+            for (i=0;i<tenplus.length;i+=1){
                 tenplus[i].style.display = 'none';
             }
-            for (var i=0;i<fiveten.length;i+=1){
+            for (i=0;i<fiveten.length;i+=1){
                 fiveten[i].style.display = 'block';
             }
-            for (var i=0;i<threefive.length;i+=1){
+            for (i=0;i<threefive.length;i+=1){
                 threefive[i].style.display = 'none';
             }
-            for (var i=0;i<onetwo.length;i+=1){
+            for (i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for (i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
         }
         else if(selector ==="4"){
             // alert('Hello 04');
-            for (var i=0;i<tenplus.length;i+=1){
+            for ( i=0;i<tenplus.length;i+=1){
                 tenplus[i].style.display = 'block';
             }
-            for (var i=0;i<fiveten.length;i+=1){
+            for (i=0;i<fiveten.length;i+=1){
                 fiveten[i].style.display = 'none';
             }
-            for (var i=0;i<threefive.length;i+=1){
+            for (i=0;i<threefive.length;i+=1){
                 threefive[i].style.display = 'none';
             }
-            for (var i=0;i<onetwo.length;i+=1){
+            for (i=0;i<onetwo.length;i+=1){
                 onetwo[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for (i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
         }
     }
 
+    /**
+     * @desc Filter the nurses by Location
+     */
 
 
     nursesortloc = (event) => {
@@ -190,22 +201,23 @@ class NurseListMain extends Component{
         var kurunegala = document.getElementsByClassName('Kurunegala');
         var zero = document.getElementsByClassName('null');
 
+        
+
         if(selector ==="0"){
-            // alert('Hello 01');
             
-            for (var i=0;i<colombo.length;i+=1){
+            for ( i=0;i<colombo.length;i+=1){
                 colombo[i].style.display = 'block';
             }
-            for (var i=0;i<gampaha.length;i+=1){
+            for ( i=0;i<gampaha.length;i+=1){
                 gampaha[i].style.display = 'block';
             }
-            for (var i=0;i<galle.length;i+=1){
+            for ( i=0;i<galle.length;i+=1){
                 galle[i].style.display = 'block';
             }
-            for (var i=0;i<kurunegala.length;i+=1){
+            for (i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'block';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
@@ -215,19 +227,19 @@ class NurseListMain extends Component{
         if(selector ==="1"){
             // alert('Hello 01');
 
-            for (var i=0;i<colombo.length;i+=1){
+            for (i=0;i<colombo.length;i+=1){
                 colombo[i].style.display = 'block';
             }
-            for (var i=0;i<gampaha.length;i+=1){
+            for (i=0;i<gampaha.length;i+=1){
                 gampaha[i].style.display = 'none';
             }
-            for (var i=0;i<galle.length;i+=1){
+            for (i=0;i<galle.length;i+=1){
                 galle[i].style.display = 'none';
             }
-            for (var i=0;i<kurunegala.length;i+=1){
+            for (i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for (i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
@@ -235,52 +247,52 @@ class NurseListMain extends Component{
         else if(selector ==="2"){
             // alert('Hello 02');
             var elems1 = document.getElementById('colombo');
-            for (var i=0;i<colombo.length;i+=1){
+            for ( i=0;i<colombo.length;i+=1){
                 colombo[i].style.display = 'none';
             }
-            for (var i=0;i<gampaha.length;i+=1){
+            for (i=0;i<gampaha.length;i+=1){
                 gampaha[i].style.display = 'block';
             }
-            for (var i=0;i<galle.length;i+=1){
+            for (i=0;i<galle.length;i+=1){
                 galle[i].style.display = 'none';
             }
-            for (var i=0;i<kurunegala.length;i+=1){
+            for ( i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
         }
         else if(selector ==="3"){
             // alert('Hello 03');
-            for (var i=0;i<colombo.length;i+=1){
+            for (i=0;i<colombo.length;i+=1){
                 colombo[i].style.display = 'none';
             }
-            for (var i=0;i<gampaha.length;i+=1){
+            for ( i=0;i<gampaha.length;i+=1){
                 gampaha[i].style.display = 'none';
             }
-            for (var i=0;i<galle.length;i+=1){
+            for ( i=0;i<galle.length;i+=1){
                 galle[i].style.display = 'block';
             }
-            for (var i=0;i<kurunegala.length;i+=1){
+            for ( i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
         }
         else if(selector ==="4"){
             // alert('Hello 04');
-            for (var i=0;i<colombo.length;i+=1){
+            for ( i=0;i<colombo.length;i+=1){
                 colombo[i].style.display = 'none';
             }
-            for (var i=0;i<gampaha.length;i+=1){
+            for ( i=0;i<gampaha.length;i+=1){
                 gampaha[i].style.display = 'none';
             }
-            for (var i=0;i<galle.length;i+=1){
+            for ( i=0;i<galle.length;i+=1){
                 galle[i].style.display = 'none';
             }
-            for (var i=0;i<kurunegala.length;i+=1){
+            for ( i=0;i<kurunegala.length;i+=1){
                 kurunegala[i].style.display = 'block';
             }
             for (var i=0;i<zero.length;i+=1){
@@ -289,6 +301,10 @@ class NurseListMain extends Component{
         }
     }
 
+
+    /**
+     * @desc Filter the nurses by Nurse Type
+     */
 
     nursesorttype = (event) => {
         let fil = this.state.CAREME_APP;
@@ -302,27 +318,29 @@ class NurseListMain extends Component{
         var ment = document.getElementsByClassName('Psychiatric');
         var zero = document.getElementsByClassName('null');
         
+        var i;
+
         if(selector ==="0"){
             // alert('Hello 01');
-            for (var i=0;i<emerg.length;i+=1){
+            for ( i=0;i<emerg.length;i+=1){
                 emerg[i].style.display = 'block';
             }
-            for (var i=0;i<surg.length;i+=1){
+            for ( i=0;i<surg.length;i+=1){
                 surg[i].style.display = 'block';
             }
-            for (var i=0;i<geri.length;i+=1){
+            for ( i=0;i<geri.length;i+=1){
                 geri[i].style.display = 'block';
             }
-            for (var i=0;i<mid.length;i+=1){
+            for ( i=0;i<mid.length;i+=1){
                 mid[i].style.display = 'block';
             }    
-            for (var i=0;i<peri.length;i+=1){
+            for ( i=0;i<peri.length;i+=1){
                 peri[i].style.display = 'block';
             }        
-            for (var i=0;i<ment.length;i+=1){
+            for ( i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'block';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
@@ -331,25 +349,25 @@ class NurseListMain extends Component{
         
         if(selector ==="1"){
             // alert('Hello 01');
-            for (var i=0;i<emerg.length;i+=1){
+            for ( i=0;i<emerg.length;i+=1){
                 emerg[i].style.display = 'block';
             }
-            for (var i=0;i<surg.length;i+=1){
+            for ( i=0;i<surg.length;i+=1){
                 surg[i].style.display = 'none';
             }
-            for (var i=0;i<geri.length;i+=1){
+            for ( i=0;i<geri.length;i+=1){
                 geri[i].style.display = 'none';
             }
-            for (var i=0;i<mid.length;i+=1){
+            for ( i=0;i<mid.length;i+=1){
                 mid[i].style.display = 'none';
             }    
-            for (var i=0;i<peri.length;i+=1){
+            for ( i=0;i<peri.length;i+=1){
                 peri[i].style.display = 'none';
             }        
-            for (var i=0;i<ment.length;i+=1){
+            for ( i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
@@ -357,125 +375,125 @@ class NurseListMain extends Component{
         else if(selector ==="2"){
             // alert('Hello 02');
             var elems1 = document.getElementById('colombo');
-            for (var i=0;i<emerg.length;i+=1){
+            for ( i=0;i<emerg.length;i+=1){
                 emerg[i].style.display = 'none';
             }
-            for (var i=0;i<surg.length;i+=1){
+            for ( i=0;i<surg.length;i+=1){
                 surg[i].style.display = 'block';
             }
-            for (var i=0;i<geri.length;i+=1){
+            for ( i=0;i<geri.length;i+=1){
                 geri[i].style.display = 'none';
             }
-            for (var i=0;i<mid.length;i+=1){
+            for ( i=0;i<mid.length;i+=1){
                 mid[i].style.display = 'none';
             }    
-            for (var i=0;i<peri.length;i+=1){
+            for ( i=0;i<peri.length;i+=1){
                 peri[i].style.display = 'none';
             }        
-            for (var i=0;i<ment.length;i+=1){
+            for ( i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
         }
         else if(selector ==="3"){
             // alert('Hello 03');
-            for (var i=0;i<emerg.length;i+=1){
+            for ( i=0;i<emerg.length;i+=1){
                 emerg[i].style.display = 'none';
             }
-            for (var i=0;i<surg.length;i+=1){
+            for ( i=0;i<surg.length;i+=1){
                 surg[i].style.display = 'none';
             }
-            for (var i=0;i<geri.length;i+=1){
+            for ( i=0;i<geri.length;i+=1){
                 geri[i].style.display = 'block';
             }
-            for (var i=0;i<mid.length;i+=1){
+            for ( i=0;i<mid.length;i+=1){
                 mid[i].style.display = 'none';
             }    
-            for (var i=0;i<peri.length;i+=1){
+            for ( i=0;i<peri.length;i+=1){
                 peri[i].style.display = 'none';
             }        
-            for (var i=0;i<ment.length;i+=1){
+            for ( i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
         }
         else if(selector ==="4"){
             // alert('Hello 04');
-            for (var i=0;i<emerg.length;i+=1){
+            for ( i=0;i<emerg.length;i+=1){
                 emerg[i].style.display = 'none';
             }
-            for (var i=0;i<surg.length;i+=1){
+            for ( i=0;i<surg.length;i+=1){
                 surg[i].style.display = 'none';
             }
-            for (var i=0;i<geri.length;i+=1){
+            for ( i=0;i<geri.length;i+=1){
                 geri[i].style.display = 'none';
             }
-            for (var i=0;i<mid.length;i+=1){
+            for ( i=0;i<mid.length;i+=1){
                 mid[i].style.display = 'block';
             }    
-            for (var i=0;i<peri.length;i+=1){
+            for ( i=0;i<peri.length;i+=1){
                 peri[i].style.display = 'none';
             }        
-            for (var i=0;i<ment.length;i+=1){
+            for ( i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
 
         }
         else if(selector ==="5"){
             // alert('Hello 04');
-            for (var i=0;i<emerg.length;i+=1){
+            for ( i=0;i<emerg.length;i+=1){
                 emerg[i].style.display = 'none';
             }
-            for (var i=0;i<surg.length;i+=1){
+            for ( i=0;i<surg.length;i+=1){
                 surg[i].style.display = 'none';
             }
-            for (var i=0;i<geri.length;i+=1){
+            for ( i=0;i<geri.length;i+=1){
                 geri[i].style.display = 'none';
             }
-            for (var i=0;i<mid.length;i+=1){
+            for ( i=0;i<mid.length;i+=1){
                 mid[i].style.display = 'none';
             }    
-            for (var i=0;i<peri.length;i+=1){
+            for ( i=0;i<peri.length;i+=1){
                 peri[i].style.display = 'block';
             }        
-            for (var i=0;i<ment.length;i+=1){
+            for ( i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'none';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
             
         }
         else if(selector ==="6"){
             // alert('Hello 04');
-            for (var i=0;i<emerg.length;i+=1){
+            for ( i=0;i<emerg.length;i+=1){
                 emerg[i].style.display = 'none';
             }
-            for (var i=0;i<surg.length;i+=1){
+            for ( i=0;i<surg.length;i+=1){
                 surg[i].style.display = 'none';
             }
-            for (var i=0;i<geri.length;i+=1){
+            for ( i=0;i<geri.length;i+=1){
                 geri[i].style.display = 'none';
             }
-            for (var i=0;i<mid.length;i+=1){
+            for ( i=0;i<mid.length;i+=1){
                 mid[i].style.display = 'none';
             }    
-            for (var i=0;i<peri.length;i+=1){
+            for ( i=0;i<peri.length;i+=1){
                 peri[i].style.display = 'none';
             }        
-            for (var i=0;i<ment.length;i+=1){
+            for ( i=0;i<ment.length;i+=1){
                 ment[i].style.display = 'block';
             }
-            for (var i=0;i<zero.length;i+=1){
+            for ( i=0;i<zero.length;i+=1){
                 zero[i].style.display = 'none';
             }
             
@@ -512,71 +530,71 @@ class NurseListMain extends Component{
             <div>
                 <Navigationbar/>
                 <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                         <center>
+                             <form>
+                                <input placeholder="Search by Name" class="form-control text-center" width="100%" type="text" onChange={this.searchHandler} value={term}/>
+                             </form>
+                         </center>
+                        </div>
+                    </div>
+
                     <center>
-                <form>
-                    <input placeholder="Search by Name" class="form-control text-center" width="100%" type="text" onChange={this.searchHandler} value={term}/>
-                </form>
-                </center>
-                </div>
-                </div>
+                     <br></br>
+                    <div class="row">   
 
-                <center>
-    <br></br>
-            <div class="row">   
+                        <div class="col">
+                            <div className="form-group">
+                                <label>Sort by </label>
+                                <select class="form-control" onChange={(event)=>this.nursesortage(event)}>
+                                    <option>Select by Age</option>
+                                    <option value={1}>Age: Low To High</option>
+                                    <option value={2}>Age: High - Low</option>
+                                </select>
+                            </div>
+                        </div>
 
-            <div class="col">
-                <div className="form-group">
-                    <label>Sort by </label>
-                    <select class="form-control" onChange={(event)=>this.nursesortage(event)}>
-                        <option>Select by Age</option>
-                        <option value={1}>Age: Low To High</option>
-                        <option value={2}>Age: High - Low</option>
-                    </select>
-                </div>
-            </div>
+                        <div class="col">
+                            <div className="form-group">
+                                <label>Filter by years in experience </label>
+                                <select class="form-control" onChange={(event)=>this.nursesortexp(event)}>
+                                    <option value={0}>Select number of years</option>
+                                    <option value={1}>1-2</option>
+                                    <option value={2}>3-5</option>
+                                    <option value={3}>5-10</option>
+                                    <option value={4}>10+</option>
+                                </select>
+                            </div>
+                        </div>
 
-            <div class="col">
-                <div className="form-group">
-                    <label>Filter by years in experience </label>
-                    <select class="form-control" onChange={(event)=>this.nursesortexp(event)}>
-                        <option value={0}>Select number of years</option>
-                        <option value={1}>1-2</option>
-                        <option value={2}>3-5</option>
-                        <option value={3}>5-10</option>
-                        <option value={4}>10+</option>
-                    </select>
+                        <div class="col">
+                            <div className="form-group">
+                                <label>Filter by Location </label>
+                                <select class="form-control" onChange={(event)=>this.nursesortloc(event)}>
+                                    <option value={0}>Select district</option>
+                                    <option value={1}>Colombo</option>
+                                    <option value={2}>Gampaha</option>
+                                    <option value={3}>Galle</option>
+                                    <option value={4}>Kurunegala</option>
+                                </select>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col">
-                <div className="form-group">
-                    <label>Filter by Location </label>
-                    <select class="form-control" onChange={(event)=>this.nursesortloc(event)}>
-                        <option value={0}>Select district</option>
-                        <option value={1}>Colombo</option>
-                        <option value={2}>Gampaha</option>
-                        <option value={3}>Galle</option>
-                        <option value={4}>Kurunegala</option>
-                    </select>
-                </div>
-            </div>
               
-            <div class="col">
-                <div className="form-group">
-                    <label>Filter by Nurse Type </label>
-                    <select class="form-control" onChange={(event)=>this.nursesorttype(event)}>
-                        <option value={0}>Select Type</option>
-                        <option value={1}>Emergency Nurse</option>
-                        <option value={2}>Surgical Nurse</option>
-                        <option value={3}>Geriatric Nurse</option>
-                        <option value={4}>Midwife Nurse</option>
-                        <option value={5}>Pediatric Nurse</option>
-                        <option value={6}>Psychiatric Nurse</option>
-                    </select>
-                </div>
-            </div>
+                        <div class="col">
+                            <div className="form-group">
+                                <label>Filter by Nurse Type </label>
+                                <select class="form-control" onChange={(event)=>this.nursesorttype(event)}>
+                                    <option value={0}>Select Type</option>
+                                    <option value={1}>Emergency Nurse</option>
+                                    <option value={2}>Surgical Nurse</option>
+                                    <option value={3}>Geriatric Nurse</option>
+                                    <option value={4}>Midwife Nurse</option>
+                                    <option value={5}>Pediatric Nurse</option>
+                                    <option value={6}>Psychiatric Nurse</option>
+                                </select>
+                            </div>
+                        </div>
 
             </div>
             </center>
@@ -585,20 +603,10 @@ class NurseListMain extends Component{
         
             <div class="container" style={{width: 960}}>
                 <div class="row">
-                    
-                        {nurse}
+                    {nurse}
                 </div>
-         
             </div>
-
-
-
-
-   
-
-       
-            
-    </div>
+ </div>
             
 
         );

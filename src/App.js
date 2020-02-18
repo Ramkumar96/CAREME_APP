@@ -23,7 +23,6 @@ import Complaint from "./components/profiles/complaint";
 import ClientViewNurseCalendar from "./components/profiles/nurse/ClientViewNurseCalendar";
 import ChatComponent from "./components/profiles/messaging/ChatComponent"
 import ComplaintsReview from "./components/profiles/admin/complaintsReview";
-import { Row } from "react-bootstrap";
 import NurseViewClientProfile from "./components/profiles/client/NurseViewClientProfile";
 import NurseAdminMainPage from "./components/profiles/nurse/Nurseadminprofile";
 import AdminClientViewProfile from "./components/profiles/client/AdminClientViewProfile";

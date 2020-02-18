@@ -218,18 +218,35 @@ class NurseMainPage extends Component {
             <div>
                 <div class="wrapper">
                     <ProfileNavbar />
-                    <br />
-                    <div className="container-fluid">
-                        <div className="row">
+                    <br/>
+                    <div className="backg">
+                        <div className="container-fluid">
+                            <div className="row">
 
-                            {/* Nurse Left side profile cards */}
-                            <div className="col-lg-3">
-                                <div>
-                                    {/* Profile pic card*/}
-                                    <div className="card card-primary card-outline">
-                                        <div className="card-body box-profile">
-                                            <div className="text-center">
-                                                <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile picture" />
+                                {/* Nurse Left side profile cards */}
+                                <div className="col-lg-3">
+                                    <div>
+                                        {/* Profile pic card*/}
+                                        <div className="card card-primary card-outline">
+                                            <div className="card-body box-profile">
+                                                <div className="text-center">
+                                                    {/* Profile Image */}
+                                                    <img className="profile-user-img img-fluid img-circle" src={this.state.profile_data.profilePic} alt="User profile picture" />
+                                                </div>
+                                                <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
+
+
+                                                <ul className="list-group list-group-unbordered mb-3 text-center">
+                                                    <li className="list-group-item">
+                                                        <h6 className="text-center">Gender : {this.state.profile_data.nurseGender}</h6>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        <h6 className="text-center">Age : {this.state.profile_data.Age}</h6>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        <h6 className="text-center">Experience : {this.state.profile_data.nurseExp}</h6>
+                                                    </li>
+                                                </ul>
                                             </div>
                                             <h3 className="profile-username text-center">{this.state.profile_data.FirstName}</h3>
 
@@ -281,28 +298,28 @@ class NurseMainPage extends Component {
                                 </div>
                             </div>
 
-                            {/* Nurse Prfoile Info middle container */}
-                            <div className="col-lg-6">
-                                {/*Proffile Info */}
-                                <div className="card">
-                                    <div className="card-header p-2">
-                                        <ul className="nav nav-pills">
-                                            <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
-                                            <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
-                                            <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
-                                        </ul>
-                                    </div>{/* /.card-header */}
+                                {/* Nurse Prfile Info middle container */}
+                                <div className="col-lg-6">
+                                    {/*Profile Info */}
+                                    <div className="card">
+                                        <div className="card-header p-2">
+                                            <ul className="nav nav-pills">
+                                                <li className="nav-item"><a className="nav-link active" href="#profile" data-toggle="tab">Profile</a></li>
+                                                <li className="nav-item"><a className="nav-link" href="#notification" data-toggle="tab">Notification</a></li>
+                                                <li className="nav-item"><a className="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                                            </ul>
+                                        </div>{/* /.card-header */}
 
-                                    {/* Card Body */}
-                                    <div className="card-body">
-                                        <div className="tab-content">
-                                            {/* Profile details Tab */}
-                                            <div className="active tab-pane" id="profile">
-                                                <div className="timeline timeline-inverse">
-                                                    {/* timeline item */}
-                                                    <div>
-                                                        <div className="timeline-item">
-                                                            <h3 className="timeline-header border-0"> <strong>First Name:  </strong>{this.state.profile_data.FirstName}</h3>
+                                        <div className="card-body">
+                                            <div className="tab-content">
+                                                  {/* Profile details Tab */}
+                                                <div className="active tab-pane" id="profile">
+                                                    <div className="timeline timeline-inverse">
+                                                        {/* timeline item */}
+                                                        <div>
+                                                            <div className="timeline-item">
+                                                                <h3 className="timeline-header border-0"> <strong>First Name:  </strong>{this.state.profile_data.FirstName}</h3>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div>

@@ -46,52 +46,52 @@ export default class Adminclientlist extends Component {
     render() {
         return (
             <div>
-               <div >
+              <div >
                 <Admindashleftnav/>
-             </div>
-  <div className="content-wrapper mt-3">
-    {/* Main content */}
-    <section className="content">
-      <div className="row">
-        <div className="col-12">
-          <div className="card">
-            <div className="card-header">
-              <h3>Details of registered Clients of CAREME</h3>
-            </div>
-            {/* /.card-header */}
-            <div className="card-body">
-            <div className="table-striped">
-              <table id="example2" className="table table-bordered table-hover">
-                <thead className="thead-dark">
-                  <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Home</th>
-                    <th>Tel</th>
-                    <th>Location</th>
-                    <th>Profile</th>
-                  </tr>
-                </thead>
-                <div className="table-striped"></div>
-                <tbody className="table-striped">
-                        { this.Clients() }
-                    </tbody>
-              </table>
               </div>
+            <div className="content-wrapper mt-3">
+              {/* Main content */}
+              <section className="content">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="card">
+                      <div className="card-header">
+                        <h3>Details of registered Clients of CAREME</h3>
+                      </div>
+                      {/* /.card-header */}
+                      <div className="card-body">
+                      <div className="table-striped">
+                        <table id="example2" className="table table-bordered table-hover">
+                          <thead className="thead-dark">
+                            <tr>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Email</th>
+                              <th>Home</th>
+                              <th>Tel</th>
+                              <th>Location</th>
+                              <th>Profile</th>
+                            </tr>
+                          </thead>
+                          <div className="table-striped"></div>
+                          <tbody className="table-striped">
+                                  { this.Clients() }
+                              </tbody>
+                        </table>
+                        </div>
+                      </div>
+                      {/* /.card-body */}
+                    </div>
+                    {/* /.card */}
+                  </div>
+                  {/* /.col */}
+                </div>
+                {/* /.row */}
+              </section>
+              {/* /.content */}
             </div>
-            {/* /.card-body */}
-          </div>
-          {/* /.card */}
-        </div>
-        {/* /.col */}
-      </div>
-      {/* /.row */}
-    </section>
-    {/* /.content */}
-  </div>
-  {/* /.content-wrapper */}
-</div>
+           {/* /.content-wrapper */}
+            </div>
 
         )
     }

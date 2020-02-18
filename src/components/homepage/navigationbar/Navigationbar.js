@@ -7,7 +7,8 @@ import { Button, Form } from 'react-bootstrap';
 import axios from "../../../../backend/node_modules/axios";
 import md5 from 'md5';
 
-function validate(Email, Password) {
+//checks whether both fields have been filled before submitting
+function validate (Email, Password){
     return {
         Email: Email.length == 0,
         Password: Password.length === 0
@@ -88,10 +89,9 @@ class Navigationbar extends Component {
         });
     };
 
-
     /**
      * * @desc :Login function getting the data from the login fileds and sending 
-     * to backend and cross check enmail and password for login
+     * to backend and cross check email and password for login
      * @output : Redirect pages will be set to according to User type also datas are stored in local storage
      */
     onLogin = (e) => {
@@ -103,7 +103,8 @@ class Navigationbar extends Component {
             return;
         }
 
-        if (!validateEmail(this.state.Email)) {
+        //validates the email address syntax through the validateEmail function
+        if (!validateEmail(this.state.Email)){
             alert("Enter valid email address");
             this.setState({
                 Email: '',
@@ -125,98 +126,100 @@ class Navigationbar extends Component {
         };
         // console.log(data
         
-
         const headers = {
             'Content-Type': 'application/json'
         }
         var hashedPW = md5(this.state.Password);
 
-        axios.post('http://localhost:4000/user/validEmail', data, { headers: headers })
-            .then(res => {
-                if (res.data.success) {
+        //checks whether the email is a registered email address in the database
+        axios.post('http://localhost:4000/user/validEmail', data, {headers:headers})
+        .then(res => {
+            if(res.data.success){
+                const obj = {
+                    Email: this.state.Email,
+                    Password: hashedPW
+                };
 
-                    const obj = {
-                        Email: this.state.Email,
-                        Password: hashedPW
-                    };
-                    console.log(obj);
-
-                    /**
+                console.log(obj);
+                 /**
                      * @desc :Passes obj object includes Email,password to backend to compare
                      * emails and passwords exists in the databse for login
                      * @output :captures the user details from the backend if Email and passwords are matched  
                      */
-                    axios.post('http://localhost:4000/user/login', obj, { headers: headers })
-                        .then(response => {
-                            console.log(response.data)
-                            if (response.data.success) {
-                                console.log(response.data.user_data)
-                                /** 
+                axios.post('http://localhost:4000/user/login', obj,{headers:headers})
+                    .then(response => {
+                        console.log(response.data)
+                        if (response.data.success) {
+                            console.log(response.data.user_data)
+                              /**
                                 * @desc:set the items received from backend to local storage
                                 */
-                                localStorage.setItem("id", response.data.user_data._id)
-                                localStorage.setItem("user_id", response.data.user_data.userID)
-                                localStorage.setItem("user_name", response.data.user_data.FirstName)
-                                localStorage.setItem("user_lname", response.data.user_data.LastName);
-                                localStorage.setItem("user_Email", response.data.user_data.Email)
-                                localStorage.setItem("user_pic", response.data.profilePic)
-                                localStorage.setItem("chat_token", response.data.chat_token)
+                            localStorage.setItem("id", response.data.user_data._id)
+                            localStorage.setItem("user_id", response.data.user_data.userID)
+                            localStorage.setItem("user_name", response.data.user_data.FirstName)
+                            localStorage.setItem("user_lname", response.data.user_data.LastName);
+                            localStorage.setItem("user_Email", response.data.user_data.Email)
+                            localStorage.setItem("user_pic", response.data.profilePic)
+                            localStorage.setItem("chat_token", response.data.chat_token)
+                            this.setState({
+                                redirect_profile: true,
+                                user_type:response.data.user_data.userID
+                            })
+                        }
 
+                        //if not matched, displays an error alert
+                        else if (!response.data.success) {
+                            alert("Email or password is invalid");
+                            this.setState ({
+                                Password: '',
+                                touched: {
+                                    Password:false
+                                }
+                            });
+                        }
+                    })
+            }
 
-                                this.setState({
-                                    redirect_profile: true,
-                                    user_type: response.data.user_data.userID
-                                })
-                            }
+            //This loop is executed if the email address is not registered in the user database
+            else if (!res.data.success){
+                const obj = {
+                    Email: this.state.Email,
+                    Password: hashedPW
+                };
 
-                            else if (!response.data.success) {
-                                alert("Email or password is invalid");
-                                this.setState({
-                                    Password: '',
-                                    touched: {
-                                        Password: false
-                                    }
-                                });
-                            }
-                        })
-                }
+                //checks whether the exact same email and corresponding password are available in the deactivated collection
+                axios.post('http://localhost:4000/userDeac/validEmail', obj,{headers:headers})
+                    .then(response => {
+                        if (response.data.success){
+                            //console.log(response.data)
+                            alert("Your account has been deactivated. Click on re-activate account to join back.");
 
-                else if (!res.data.success) {
-                    const obj = {
-                        Email: this.state.Email,
-                        Password: hashedPW
-                    };
+                            this.setState({
+                                Email: '',
+                                Password : '',
+                                touched : {
+                                    Email : false,
+                                    Password : false
+                                }
+                            });
+                        }
 
-                    axios.post('http://localhost:4000/userDeac/validEmail', obj, { headers: headers })
-                        .then(response => {
-                            if (response.data.success) {
-                                //console.log(response.data)
-                                alert("Your account has been deactivated. Click on re-activate account to join back.");
+                        //else it displays the not registered alert and prompts the guest to register in the system
+                        else {
+                            alert("Email address not registered");
+                            this.setState({
+                                Email: '',
+                                Password: '',
+                                touched: {
+                                    Email: false,
+                                    Password: false
+                                }
+                            });
+                        }
+                    })
+            }
+        });        
 
-                                this.setState({
-                                    Email: '',
-                                    Password: '',
-                                    touched: {
-                                        Email: false,
-                                        Password: false
-                                    }
-                                });
-                            }
-
-                            else {
-                                alert("Email address not registered");
-                                this.setState({
-                                    Email: '',
-                                    Password: '',
-                                    touched: {
-                                        Email: false,
-                                        Password: false
-                                    }
-                                });
-                            }
-                        })
-                }
-            });
     }
 
 
@@ -237,7 +240,9 @@ class Navigationbar extends Component {
             Password: hashedPW
         };
 
-        axios.post('http://localhost:4000/userDeac/validEmail', data, { headers: headers })
+        //checks whether the entered email and password match one document in the deactivated user collection
+        axios.post('http://localhost:4000/userDeac/validEmail', data, {headers:headers})
+
             .then(response => {
                 if (response.data.success) {
                     this.setState({
@@ -284,6 +289,7 @@ class Navigationbar extends Component {
                     const obj = object;
                     console.log(this.state.user_data.userID);
 
+                    //checks whether another email has been registered in the system while the account was deactivated
                     axios.post('http://localhost:4000/user/validEmail', obj, { headers: headers })
                         .then(res => {
                             if (res.data.success) {
@@ -375,7 +381,8 @@ class Navigationbar extends Component {
                         });
                 }
 
-                else if (!response.data.success) {
+                //urges the user to login or register, since no details are available in the deactivated user collection
+                else if (!response.data.success){
                     alert("Try logging into your account if youre registered. If not please register yourself");
 
                     this.setState({

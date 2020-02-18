@@ -31,6 +31,7 @@ class UserReport extends Component {
             acceptedCountYear: [],
             requestCountYear: [],
             deletedCountYear: [],
+            complaintCountYear: [],
             monthLabels : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
             districts: ["Colombo", "Galle", "Gampaha", "Kurunegala"],
             nurseTypes: ["Emergency", "Surgical", "Geriatric", "Midwife", "Pediatric", "Psychiatric"],
@@ -58,6 +59,11 @@ class UserReport extends Component {
         })
     }
 
+    /**
+        * @desc : This function calls the dialog box in case all the fields are not completed for report generation
+        * @req : react-bootstrap-dialog package
+        * @output : an alert dialog asking the user to complete all the fields
+    */
     onShowErrorDialog(){
         this.dialog.showAlert("Please complete request for report generation");
     }
@@ -65,10 +71,18 @@ class UserReport extends Component {
     onSubmitRequest(e){
         e.preventDefault();
 
-        if (this.state.month==-1 || this.state.year==-1 || this.state.reportType==-1){
+        /**
+            * @desc : Checks whether all the fields are completed for report generation. 
+            *         If not calls the alert box
+        */
+        if (this.state.month===-1 || this.state.year===-1 || this.state.reportType===-1){
             this.onShowErrorDialog();
         }
 
+        /**
+            * @desc : If all the fields are completed, checks for the report requested 
+            *         and passes data to the backend to extract information
+        */
         else {
             const data = {
                 month: this.state.month,
@@ -81,9 +95,22 @@ class UserReport extends Component {
 
             console.log(data);
 
-            if (this.state.reportType == 0){
-                if (this.state.month!=0){
-                    //new clients registered in the month
+            /**
+                * @desc : If the report type requested is activations and deactivations, this loop works.
+                *         Based on the period for which the report is requested, passes and receives data 
+                *         from the backend to be displayed
+            */
+            if (this.state.reportType === 0){
+                /**
+                    * @desc : If the activation and deactivation report is requested for a particular month
+                    *         this loop executes
+                */
+                if (this.state.month!==0){
+                    /**
+                        * @desc : Passes the data object inclusive of the year and particular month to the backend
+                        *         to extract data on the clients registered this month
+                        * @output : Captures the total count of clients registered this month sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countClientsMonth', data, {headers: headers})
                         .then(response=> {
                             this.setState({
@@ -93,7 +120,11 @@ class UserReport extends Component {
                             console.log("Number of clients registered this month : ", this.state.activeClients);
                         })
 
-                    //new nurses registered this month
+                    /**
+                        * @desc : Passes the data object inclusive of the year and particular month to the backend
+                        *         to extract data on the nurses registered this month
+                        * @output : Captures the total count of nurses registered this month sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countNursesMonth', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -103,7 +134,13 @@ class UserReport extends Component {
                         console.log("Number of nurses registered this month : ", this.state.activeNurses);
                     })
 
-                    //new users registered within the month based on location
+                    /**
+                        * @desc : Passes the data object inclusive of the year and particular month to the backend
+                        *         to extract data on the users(both clients and nurses) registered this month
+                        *         according to their location
+                        * @output : Captures the total count of users registered this month based on location as an array
+                        *           sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countUsersDistrictMonth', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -112,9 +149,12 @@ class UserReport extends Component {
 
                         let j=1;
                         for (let i=0; i<4; i++){
+                           
                             this.state.userCountDistrict[j] = this.state.resBody[i];
+                           
                             j++;
                         }
+    
 
                         console.log("The total users according to districts : ", this.state.userCountDistrict)
 
@@ -123,6 +163,13 @@ class UserReport extends Component {
                         })
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year and particular month to the backend
+                        *         to extract data on the nurses registered this month based on their type
+                        *         eg: Pediatric, Surgical Nurses
+                        * @output : Captures the total count of nurses registered this month based on their type, 
+                        *           as an array sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countNursesTypeMonth', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -142,7 +189,11 @@ class UserReport extends Component {
                         })
                     })
 
-                    //number of clients deactivated this month
+                    /**
+                        * @desc : Passes the data object inclusive of the year and particular month to the backend
+                        *         to extract data on the clients deactivated this month
+                        * @output : Captures the total count of clients deactivated this month sent from the backend
+                    */
                     axios.post('http://localhost:4000/userDeac/countClientsMonth', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -152,7 +203,11 @@ class UserReport extends Component {
                         console.log("Number of clients deactivated this month : ", this.state.deactivatedClients);
                     })
 
-                    //number of nurses deactivated this month
+                    /**
+                        * @desc : Passes the data object inclusive of the year and particular month to the backend
+                        *         to extract data on the nurses deactivated this month
+                        * @output : Captures the total count of nurses deactivated this month sent from the backend
+                    */
                     axios.post('http://localhost:4000/userDeac/countNursesMonth', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -167,7 +222,16 @@ class UserReport extends Component {
                     })
                 }
 
+                /**
+                    * @desc : If the report is requested for an entire year this loop is executed
+                */
                 else {
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the clients who registered in that particular year
+                        * @output : Captures the total count of clients registered this year
+                        *           categorized to months sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countClientsYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -181,13 +245,19 @@ class UserReport extends Component {
                             j++;
                         }
     
-                        console.log("The total active clients now : ", this.state.activeClientsYear)
+                        console.log("The client registrations this year : ", this.state.activeClientsYear)
     
                         this.setState({
                             activeClientsYear: this.state.activeClientsYear
                         })
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the nurses who registered in that particular year
+                        * @output : Captures the total count of nurses registered this year
+                        *           categorized to months sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countNursesYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -201,13 +271,20 @@ class UserReport extends Component {
                             j++;
                         }
 
-                        console.log("The total active nurses now : ", this.state.activeNursesYear)
+                        console.log("The nurse registrations this year : ", this.state.activeNursesYear)
 
                         this.setState({
                             activeNursesYear: this.state.activeNursesYear
                         })
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total users who registered in that particular year based on the location
+                        *         and categorized by month
+                        * @output : Captures the total count of users registered this year based on location and
+                        *           categorized to months sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countUsersDistrict', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -227,6 +304,13 @@ class UserReport extends Component {
                         })
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total nurses who registered in that particular year based on their type
+                        *         and categorized by month
+                        * @output : Captures the total count of nurses registered this year based on type and
+                        *           categorized to months sent from the backend
+                    */
                     axios.post('http://localhost:4000/user/countNursesType', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -246,6 +330,13 @@ class UserReport extends Component {
                         })
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total clients who deactivated accounts in that particular year
+                        *         categorized by month
+                        * @output : Captures the total count of clients who deactivated accounts this year,
+                        *           categorized to months sent from the backend
+                    */
                     axios.post('http://localhost:4000/userDeac/countClientsYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -266,6 +357,13 @@ class UserReport extends Component {
                         })
                     })
     
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total nurses who deactivated accounts in that particular year
+                        *         categorized by month
+                        * @output : Captures the total count of nurses who deactivated accounts this year,
+                        *           categorized to months sent from the backend
+                    */
                     axios.post('http://localhost:4000/userDeac/countNursesYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -292,8 +390,18 @@ class UserReport extends Component {
                 }
             }
 
+            /**
+                * @desc : This loop executes if the requested report type is rating, reviews and complaints
+            */
             else if (this.state.reportType==1){
+                /**
+                    * @desc : This loop is executed if the report is requested to a particular month
+                */
                 if (this.state.month!=0){
+                    /**
+                        * @desc : Passes the data object inclusive of the year and month to extract data 
+                        *         on the total number of ratings done within this month
+                    */
                     axios.post('http://localhost:4000/rating/countRatings', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -303,6 +411,10 @@ class UserReport extends Component {
                         console.log("Number of ratings this month : ", this.state.ratingCount);
                     })
             
+                    /**
+                        * @desc : Passes the data object inclusive of the year and month to extract data 
+                        *         on the total number of reviews done within this month
+                    */
                     axios.post('http://localhost:4000/review/countReviews', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -312,6 +424,10 @@ class UserReport extends Component {
                         console.log("Number of reviews this month : ", this.state.reviewCount);
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year and month to extract data 
+                        *         on the total number of complaints made against nurses this month
+                    */
                     axios.post('http://localhost:4000/complaint/countNurseComplaints', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -321,6 +437,10 @@ class UserReport extends Component {
                         console.log("Number of complaints against nurses this month : ", this.state.nurseComCount);
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year and month to extract data 
+                        *         on the total number of complaints made against clients this month
+                    */
                     axios.post('http://localhost:4000/complaint/countClientComplaints', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -336,7 +456,14 @@ class UserReport extends Component {
                     })
                 }
 
+                /**
+                    * @desc : This loop is executed if the requested report is for a whole year
+                */
                 else if (this.state.month==0){
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total number of ratings done throughout a year
+                    */
                     axios.post('http://localhost:4000/rating/countRatingsYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -357,6 +484,10 @@ class UserReport extends Component {
                         })
                     })
     
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total number of reviews done throughout a year
+                    */
                     axios.post('http://localhost:4000/review/countReviewsYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -377,14 +508,48 @@ class UserReport extends Component {
                         })
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total number of complaints made throughout a year
+                    */
+                    axios.post('http://localhost:4000/complaint/countComplaintsYear', data, {headers: headers})
+                    .then(response => {
+                        this.setState({
+                            resBody: response.data.complaintCount
+                        })
+    
+                        this.state.complaintCountYear[0]=0;
+                        let j=1;
+                        for (let i=0; i<12; i++){
+                            this.state.complaintCountYear[j] = this.state.resBody[i];
+                            j++;
+                        }
+    
+                        console.log("The total complaints this year : ", this.state.complaintCountYear)
+    
+                        this.setState({
+                            complaintCountYear: this.state.complaintCountYear
+                        })
+                    })
+
                     this.setState({
                         visibleYearRateComps: true
                     })
                 }
             }
 
+            /**
+                * @desc : This loop is executed if the requested report is based on the user requests
+            */
             else if (this.state.reportType==2){
+                /**
+                    * @desc : This loop is executed if the requested report is for a particular month
+                */
                 if (this.state.month!=0){
+                     /**
+                        * @desc : Passes the data object inclusive of the year and month to extract data 
+                        *         on the total number of requests made throughout this month
+                    */
                     axios.post('http://localhost:4000/request/countRequestsMonth', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -394,6 +559,10 @@ class UserReport extends Component {
                         console.log("Number of requests this month : ", this.state.requestCount);
                     })
             
+                    /**
+                        * @desc : Passes the data object inclusive of the year and month to extract data 
+                        *         on the total number of requests accepted by nurses this month
+                    */
                     axios.post('http://localhost:4000/accept/countRequestsMonth', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -403,6 +572,10 @@ class UserReport extends Component {
                         console.log("Number of requests accepted this month : ", this.state.acceptedCount);
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year and month to extract data 
+                        *         on the total number of requests deleted by nurses this month
+                    */
                     axios.post('http://localhost:4000/requestDeleted/countRequestsMonth', data, {headers: headers})
                     .then(response=> {
                         this.setState({
@@ -417,7 +590,14 @@ class UserReport extends Component {
                     })
                 }
 
+                /**
+                    * @desc : This report is generated if the report is requested for a whole year
+                */
                 else if (this.state.month==0){
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total number of requests made by clients throughout a year
+                    */
                     axios.post('http://localhost:4000/request/countRequestsYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -438,6 +618,10 @@ class UserReport extends Component {
                         })
                     })
     
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total number of requests accepted by nurses throughout a year
+                    */
                     axios.post('http://localhost:4000/accept/countRequestsYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -458,6 +642,10 @@ class UserReport extends Component {
                         })
                     })
 
+                    /**
+                        * @desc : Passes the data object inclusive of the year to extract data 
+                        *         on the total number of requests deleted by nurses throughout a year
+                    */
                     axios.post('http://localhost:4000/requestDeleted/countRequestsYear', data, {headers: headers})
                     .then(response => {
                         this.setState({
@@ -487,6 +675,10 @@ class UserReport extends Component {
     }
     
     render() {
+        /**
+            * @desc : These functions assign values to the charts based on the counts received. If
+            *         zero counts are received a "No accepts/ activations etc." message is displayed
+        */
         var newUsers, deacUsers, userRatesRevs, userComplaints, userRequests;
 
         if (this.state.activeNurses!=0 || this.state.activeClients!=0){
@@ -1023,6 +1215,34 @@ class UserReport extends Component {
                                     style = {{ data : {fill: "#c43a31" }}}
                                     cornerRadius={{topLeft: 5}}
                                     data={this.state.reviewCountYear}
+                                    categories={{ x: this.state.monthLabels }}
+                                />
+                            </VictoryChart>
+
+                            <h3 style= {{paddingLeft:15}}>User Complaints</h3>
+
+                            <VictoryChart
+                                maxDomain ={{y:20}}
+                                height = {125}
+                                width = {400}
+                                theme={VictoryTheme.material}
+                                padding={{ top: 10, bottom: 30, left: 80, right: 100 }}
+                                domainPadding={{x:8}}
+                                >
+
+                                <VictoryAxis dependentAxis
+                                    style = {{ tickLabels: {fontSize: 6}}}
+                                />
+
+                                <VictoryAxis crossAxis
+                                    style = {{ tickLabels : {fontSize: 6}}}
+                                />
+                                    
+                                <VictoryBar
+                                    alignment="middle"
+                                    style = {{ data : {fill: "#c43a31" }}}
+                                    cornerRadius={{topLeft: 5}}
+                                    data={this.state.complaintCountYear}
                                     categories={{ x: this.state.monthLabels }}
                                 />
                             </VictoryChart>
