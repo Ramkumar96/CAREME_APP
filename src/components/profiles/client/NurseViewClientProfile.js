@@ -425,7 +425,7 @@ class NurseViewClientProfile extends Component {
                                         * @desc: chatting component.
                                         * @required: ChatComponent
                                         */ }
-                                        <input type="button" class="btn btn-success" value="Send Message to Client" onClick={() => this.openMsgModal()} />
+                                        <input type="button" class="btn btn-outline-success btn-block" value="Send Message to Client" onClick={() => this.openMsgModal()} />
                                         <div>
                                             <Modal visible={this.state.visible3} width="80%" height="90%" effect="fadeInUp" onClickAway={() => this.closeMsgModal()}>
                                                 <ChatComponent />
