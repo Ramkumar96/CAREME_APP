@@ -161,7 +161,16 @@ class ClientViewNurseCalendar extends Component {
           .then (res => {
               if (res.data.success){
                console.log(res.data);
-               window.emailjs.send("gmail3","template_G2HWQa7Y", {"nurseEmail":this.state.nurse_email,"to_name":this.state.nurse_name}) 
+               //sending the notification to nurse
+               this.sendFeedback("gmail3", "acknowledgement", {
+                 to_email: this.state.nurse_email,
+                 from_name: "CareMe Requests Management",
+                 from_email: "requests.careme@gmail.com",
+                 subject: "New Request",
+                 to_name: this.state.nurse_name + " " + this.state.nurse_lname,
+                 body:
+                   "You've received a new appointment request. Please login to your CareMe account to accept/decline it."
+               }); 
 
                this.onShowDialog();
                 
@@ -169,20 +178,20 @@ class ClientViewNurseCalendar extends Component {
           })
           
           this.closeDateModal();
-        console.log("request Nurse")
+        console.log("requested Nurse")
         console.log(this.state.profile_data)
-        // this.sendFeedback('template_G2HWQa7Y', {"nurseEmail":this.state.nurse_email,"to_name":this.state.nurse_name+" "+this.state.nurse_lname})
+        
     }
 
-    // sendFeedback (templateId, variables) {
-    //     window.emailjs.send(
-    //       'gmail3',  templateId, variables
-    //       ).then(res => {
-    //         console.log('Notified Nurse!');
-    //       })        
-    //       // Handle errors here however you like, or use a React error boundary
-    //       .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
-    //   }
+    sendFeedback (serviceID,templateId, variables) {
+        window.emailjs.send(
+            serviceID,  templateId, variables
+          ).then(res => {
+            console.log('Notified Nurse!');
+          })        
+          // Handling errors
+      .catch(err => console.error("Email sending failed:",err ));
+    }
 
     render() {
 
